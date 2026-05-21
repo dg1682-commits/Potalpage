@@ -155,7 +155,7 @@
             <div class="viewer-box" id="viewerBox"><i class="fa-solid fa-eye"></i><span id="viewerCount">-</span>명</div>
         </div>
         <div class="player-wrap">
-            <!-- ✨ 메인 유튜브 스트림 URL 변경 완료 -->
+            <!-- 📺 메인 유튜브 스트림 URL -->
             <iframe id="youtubePlayer" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen src="https://www.youtube.com/embed/GvmVSQ26hpI?autoplay=1&mute=1&playsinline=1&rel=0&modestbranding=1&controls=1"></iframe>
         </div>
         <div class="product-section">
@@ -168,22 +168,22 @@
             
             <div class="product-grid">
                 <!-- 상품 1 -->
-                <a class="product-card" href="https://isvm.co.kr/front/shop/productDetail.do?productCode=569522" target="_blank">
+                <a class="product-card" href="https://isvm.co.kr/front/front/shop/productDetail.do?productCode=569522" target="_blank">
                     <div class="product-thumb"><div class="live-badge">LIVE 특가</div><img src="https://vitsonimg.co.kr/images/productsNew/569/569522.JPG" alt="실외기 받침대 이미지"></div>
                     <div class="product-info"><h4>실외기 받침대</h4><div class="product-code">상품코드: 569522</div><div class="product-spec">규격: 150*125*430 (1SET=2EA)</div><div class="product-price">5% 할인</div><button class="buy-btn">구매하기</button></div>
                 </a>
                 <!-- 상품 2 -->
-                <a class="product-card" href="https://isvm.co.kr/front/shop/productDetail.do?productCode=569523" target="_blank">
+                <a class="product-card" href="https://isvm.co.kr/front/front/shop/productDetail.do?productCode=569523" target="_blank">
                     <div class="product-thumb"><div class="live-badge">LIVE 특가</div><img src="https://vitsonimg.co.kr/images/productsNew/569/569523.JPG" alt="실외기 받침대 이미지"></div>
                     <div class="product-info"><h4>실외기 받침대</h4><div class="product-code">상품코드: 569523</div><div class="product-spec">규격: 150*125*520 (1SET=2EA)</div><div class="product-price">5% 할인</div><button class="buy-btn">구매하기</button></div>
                 </a>
                 <!-- 상품 3 -->
-                <a class="product-card" href="https://isvm.co.kr/front/shop/productDetail.do?productCode=569524" target="_blank">
+                <a class="product-card" href="https://isvm.co.kr/front/front/shop/productDetail.do?productCode=569524" target="_blank">
                     <div class="product-thumb"><div class="live-badge">LIVE 특가</div><img src="https://vitsonimg.co.kr/images/productsNew/569/569524.JPG" alt="실외기 받침대 이미지"></div>
                     <div class="product-info"><h4>실외기 받침대</h4><div class="product-code">상품코드: 569524</div><div class="product-spec">규격: 150*125*730 (1SET=2EA)</div><div class="product-price">5% 할인</div><button class="buy-btn">구매하기</button></div>
                 </a>
                 <!-- 상품 4 -->
-                <a class="product-card" href="https://isvm.co.kr/front/shop/productDetail.do?productCode=562066" target="_blank">
+                <a class="product-card" href="https://isvm.co.kr/front/front/shop/productDetail.do?productCode=562066" target="_blank">
                     <div class="product-thumb"><div class="live-badge">LIVE 특가</div><img src="https://vitsonimg.co.kr/images/productsNew/562/562066%20%EB%B9%84%EC%B8%A0%EC%98%A8%20%EC%95%95%EC%B6%95%EB%B6%84%EB%AC%B4%EA%B8%B0%20%ED%95%B8%EB%94%94%ED%98%95_7-1.jpg" alt="압축분무기 핸디형 이미지"></div>
                     <div class="product-info"><h4>압축분무기 핸디형</h4><div class="product-code">상품코드: 562066</div><div class="product-spec">규격: 2L 롱/숏/폼 노즐 포함</div><div class="product-price">11% 할인</div><button class="buy-btn">구매하기</button></div>
                 </a>
@@ -284,15 +284,29 @@
     });
 
     // ==========================================
-    // ✨ 출석 체크 자동 입력 및 수동 팝업 제어 기능
+    // ✨ 출석 체크 자동 입력 및 수동 팝업 제어 기능 (URL 연동형)
     // ==========================================
     const attendanceModal = document.getElementById('attendanceModal');
     const modalCloseBtn = document.getElementById('modalCloseBtn');
     const attendButtons = document.querySelectorAll('.attend-btn');
     const bannerSlider = document.getElementById('bannerSlider');
+    const youtubePlayer = document.getElementById('youtubePlayer');
 
-    // 페이지 최초 진입 시에만 자동으로 팝업 띄우기 (참여 완료 기록이 없으면 노출)
-    const hasParticipated = localStorage.getItem('araShow_attended');
+    // 💡 핵심 수정: iframe src에서 유튜브 비디오 ID를 추출하여 로컬스토리지 키값으로 활용합니다.
+    let videoId = "default";
+    try {
+        const srcUrl = youtubePlayer.getAttribute('src');
+        // '/embed/' 뒤에 나오는 고유 ID 코드를 추출합니다.
+        videoId = srcUrl.split('/embed/')[1].split('?')[0];
+    } catch(e) {
+        console.error("유튜브 ID 추출 실패:", e);
+    }
+    
+    // 비디오 ID가 붙은 고유 키 생성 (영상이 바뀔 때마다 자동으로 리셋됨)
+    const storageKey = `araShow_attended_${videoId}`;
+
+    // 페이지 최초 진입 시에만 자동으로 팝업 띄우기 (해당 영상ID에 참여 완료 기록이 없으면 노출)
+    const hasParticipated = localStorage.getItem(storageKey);
     if (!hasParticipated) {
         attendanceModal.style.display = 'flex';
     }
@@ -302,7 +316,7 @@
         attendanceModal.style.display = 'none';
     });
 
-    // 우측 배너 클릭 이벤트 (이미 참여했더라도 수동 클릭 시 무조건 팝업 오픈)
+    // 우측 배너 클릭 이벤트 (언제든지 팝업을 다시 띄울 수 있음)
     bannerSlider.addEventListener('click', (e) => {
         e.preventDefault(); 
         attendanceModal.style.display = 'flex';
@@ -319,8 +333,8 @@
                     createdAt: serverTimestamp()
                 });
                 
-                // 브라우저 저장소에 참여 완료 기록 저장 (재접속 시 자동 팝업만 안 뜨게 제어)
-                localStorage.setItem('araShow_attended', 'true');
+                // 해당 영상ID에 대해 참여 완료 상태를 저장 (이 영상은 다음 접속 시 자동 팝업 차단)
+                localStorage.setItem(storageKey, 'true');
                 
                 // 전송 후 팝업 자동 닫힘
                 attendanceModal.style.display = 'none';
