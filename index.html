@@ -333,7 +333,7 @@
     // ==========================================
     // 시청자 수 제어 및 메인 방송 상태 타이머 UI
     // ==========================================
-    let isLive = true;  // ✨ 라이브 스트리밍 상태 'ON'으로 변경 완료!
+    let isLive = true; 
     let viewerInterval;
     let timerInterval;
 
@@ -419,7 +419,8 @@
     // ✨ 특가 할인 마감 카운트다운 타이머
     // ==========================================
     function startDiscountTimer() {
-        const targetDate = new Date("2026-04-30T23:59:59").getTime(); 
+        // ⏰ 요청 사항 반영: 특가 마감 기한을 5/24 23:59:59로 변경 완료!
+        const targetDate = new Date("2026-05-24T23:59:59").getTime(); 
         const timerEl = document.getElementById("discountTimer");
         let discountInterval;
 
