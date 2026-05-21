@@ -155,7 +155,8 @@
             <div class="viewer-box" id="viewerBox"><i class="fa-solid fa-eye"></i><span id="viewerCount">-</span>명</div>
         </div>
         <div class="player-wrap">
-            <iframe id="youtubePlayer" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen src="https://www.youtube.com/embed/GedRIm9lG_M?autoplay=1&mute=1&playsinline=1&rel=0&modestbranding=1&controls=1"></iframe>
+            <!-- ✨ 메인 유튜브 스트림 URL 변경 완료 -->
+            <iframe id="youtubePlayer" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen src="https://www.youtube.com/embed/GvmVSQ26hpI?autoplay=1&mute=1&playsinline=1&rel=0&modestbranding=1&controls=1"></iframe>
         </div>
         <div class="product-section">
             <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 20px;">
@@ -301,7 +302,7 @@
         attendanceModal.style.display = 'none';
     });
 
-    // 우측 배너 클릭 이벤트 (★수정: 이미 참여했더라도 수동 클릭 시 무조건 팝업을 다시 띄워줍니다)
+    // 우측 배너 클릭 이벤트 (이미 참여했더라도 수동 클릭 시 무조건 팝업 오픈)
     bannerSlider.addEventListener('click', (e) => {
         e.preventDefault(); 
         attendanceModal.style.display = 'flex';
