@@ -40,13 +40,13 @@
     .live-dot.active { background: #ef4444; animation: blinkRed 1.5s infinite; }
     .live-dot.past { background: #94a3b8; animation: none; }
 
-    /* 📌 우측 하단 출석체크 모달 팝업 스타일 (크기 200% 확대 반영) */
+    /* 📌 우측 하단 출석체크 모달 팝업 스타일 */
     .attendance-modal {
         position: fixed;
         bottom: 20px;
         right: 20px;
-        width: 480px; /* 기존 280px에서 약 200% 수준으로 확대 */
-        max-width: 90vw; /* 화면을 벗어나지 않도록 방지 */
+        width: 480px; 
+        max-width: 90vw; 
         background: #ffffff;
         border-radius: 20px;
         box-shadow: 0 16px 48px rgba(15, 23, 42, 0.2);
@@ -54,7 +54,7 @@
         padding: 24px;
         display: flex;
         flex-direction: column;
-        gap: 16px;
+        gap: 14px;
         border: 1px solid #e2e8f0;
         animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     }
@@ -83,6 +83,16 @@
         object-fit: cover;
         display: block;
     }
+    /* ✨ 안내 문구 스타일 */
+    .modal-notice-text {
+        text-align: center;
+        font-size: 16px;
+        font-weight: 700;
+        color: #1e293b;
+        letter-spacing: -0.3px;
+        margin: 4px 0 2px 0;
+        font-family: 'Noto Sans KR', sans-serif;
+    }
     .modal-btn-group {
         display: flex;
         gap: 10px;
@@ -107,7 +117,6 @@
         transform: scale(0.96);
     }
 
-    /* 우측 배너 커서 포인터 스타일 추가 */
     #bannerSlider {
         cursor: pointer;
     }
@@ -203,6 +212,8 @@
 <div id="attendanceModal" class="attendance-modal">
     <button class="modal-close-btn" id="modalCloseBtn">&times;</button>
     <img src="우측배너.png" alt="출석 체크 배너" class="modal-banner-img">
+    <!-- ✨ 요청하신 안내 문구 영역 추가 -->
+    <div class="modal-notice-text">정답을 클릭하면 자동출석체크 됩니다!</div>
     <div class="modal-btn-group">
         <button class="attend-btn" data-num="1">1번</button>
         <button class="attend-btn" data-num="2">2번</button>
@@ -288,7 +299,7 @@
 
     // 우측 배너 클릭 시 팝업창을 다시 띄우는 기능
     bannerSlider.addEventListener('click', (e) => {
-        e.preventDefault(); // a 태그 기본 링크 이동 방지
+        e.preventDefault(); 
         attendanceModal.style.display = 'flex';
     });
 
@@ -297,7 +308,6 @@
         btn.addEventListener('click', async (e) => {
             const num = e.target.getAttribute('data-num');
             try {
-                // 요구사항 반영: text 포맷을 "정답 X번 / 출첵합니다!" 로 수정
                 await addDoc(collection(db, "chats"), {
                     user: "방문자",
                     text: `정답 ${num}번 / 출첵합니다!`,
