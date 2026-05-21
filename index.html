@@ -52,8 +52,7 @@
         box-shadow: 0 16px 48px rgba(15, 23, 42, 0.2);
         z-index: 9999;
         padding: 24px;
-        /* ✨ 처음 로드 시 깜빡임 방지를 위해 기본 hidden 처리 후 스크립트로 제어 */
-        display: none; 
+        display: none; /* 기본 숨김 처리 */
         flex-direction: column;
         gap: 14px;
         border: 1px solid #e2e8f0;
@@ -180,7 +179,7 @@
                 <!-- 상품 3 -->
                 <a class="product-card" href="https://isvm.co.kr/front/shop/productDetail.do?productCode=569524" target="_blank">
                     <div class="product-thumb"><div class="live-badge">LIVE 특가</div><img src="https://vitsonimg.co.kr/images/productsNew/569/569524.JPG" alt="실외기 받침대 이미지"></div>
-                    <div class="product-info"><h4>실외기 받침대</h4><div class="product-code">569524</div><div class="product-spec">규격: 150*125*730 (1SET=2EA)</div><div class="product-price">5% 할인</div><button class="buy-btn">구매하기</button></div>
+                    <div class="product-info"><h4>실외기 받침대</h4><div class="product-code">상품코드: 569524</div><div class="product-spec">규격: 150*125*730 (1SET=2EA)</div><div class="product-price">5% 할인</div><button class="buy-btn">구매하기</button></div>
                 </a>
                 <!-- 상품 4 -->
                 <a class="product-card" href="https://isvm.co.kr/front/shop/productDetail.do?productCode=562066" target="_blank">
@@ -284,14 +283,14 @@
     });
 
     // ==========================================
-    // ✨ 출석 체크 자동 입력 및 1회 제한 기능
+    // ✨ 출석 체크 자동 입력 및 수동 팝업 제어 기능
     // ==========================================
     const attendanceModal = document.getElementById('attendanceModal');
     const modalCloseBtn = document.getElementById('modalCloseBtn');
     const attendButtons = document.querySelectorAll('.attend-btn');
     const bannerSlider = document.getElementById('bannerSlider');
 
-    // 페이지 진입 시 참여 여부 체크 후 팝업 띄우기
+    // 페이지 최초 진입 시에만 자동으로 팝업 띄우기 (참여 완료 기록이 없으면 노출)
     const hasParticipated = localStorage.getItem('araShow_attended');
     if (!hasParticipated) {
         attendanceModal.style.display = 'flex';
@@ -302,27 +301,15 @@
         attendanceModal.style.display = 'none';
     });
 
-    // 우측 배너 클릭 이벤트
+    // 우측 배너 클릭 이벤트 (★수정: 이미 참여했더라도 수동 클릭 시 무조건 팝업을 다시 띄워줍니다)
     bannerSlider.addEventListener('click', (e) => {
         e.preventDefault(); 
-        // 참여 완료 상태면 팝업창을 열지 않고 경고창 표시
-        if (localStorage.getItem('araShow_attended')) {
-            alert('이미 참여하셨습니다!');
-            return;
-        }
         attendanceModal.style.display = 'flex';
     });
 
     // 정답 및 출첵 버튼 클릭 시 파이어베이스 연동
     attendButtons.forEach(btn => {
         btn.addEventListener('click', async (e) => {
-            // 중복 클릭 방지 안전 장치
-            if (localStorage.getItem('araShow_attended')) {
-                alert('이미 참여하셨습니다!');
-                attendanceModal.style.display = 'none';
-                return;
-            }
-
             const num = e.target.getAttribute('data-num');
             try {
                 await addDoc(collection(db, "chats"), {
@@ -331,7 +318,7 @@
                     createdAt: serverTimestamp()
                 });
                 
-                // ✨ 브라우저 저장소에 참여 완료 기록 저장 (재방문 시 팝업 제한)
+                // 브라우저 저장소에 참여 완료 기록 저장 (재접속 시 자동 팝업만 안 뜨게 제어)
                 localStorage.setItem('araShow_attended', 'true');
                 
                 // 전송 후 팝업 자동 닫힘
