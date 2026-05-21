@@ -153,7 +153,6 @@
             <div class="viewer-box" id="viewerBox"><i class="fa-solid fa-eye"></i><span id="viewerCount">-</span>명</div>
         </div>
         <div class="player-wrap">
-            <!-- 📺 메인 유튜브 스트림 요정 주소 (유튜브 스튜디오에서 '퍼가기 허용'을 꼭 켜주세요!) -->
             <iframe id="youtubePlayer" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen src="https://www.youtube.com/embed/GvmVSQ26hpI?autoplay=1&mute=1&playsinline=1&rel=0&modestbranding=1&controls=1"></iframe>
         </div>
         <div class="product-section">
@@ -334,7 +333,7 @@
     // ==========================================
     // 시청자 수 제어 및 메인 방송 상태 타이머 UI
     // ==========================================
-    let isLive = false; 
+    let isLive = true;  // ✨ 라이브 스트리밍 상태 'ON'으로 변경 완료!
     let viewerInterval;
     let timerInterval;
 
