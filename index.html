@@ -40,20 +40,21 @@
     .live-dot.active { background: #ef4444; animation: blinkRed 1.5s infinite; }
     .live-dot.past { background: #94a3b8; animation: none; }
 
-    /* 📌 우측 하단 출석체크 모달 팝업 스타일 */
+    /* 📌 우측 하단 출석체크 모달 팝업 스타일 (크기 200% 확대 반영) */
     .attendance-modal {
         position: fixed;
         bottom: 20px;
         right: 20px;
-        width: 280px;
+        width: 480px; /* 기존 280px에서 약 200% 수준으로 확대 */
+        max-width: 90vw; /* 화면을 벗어나지 않도록 방지 */
         background: #ffffff;
-        border-radius: 16px;
-        box-shadow: 0 12px 32px rgba(15, 23, 42, 0.15);
+        border-radius: 20px;
+        box-shadow: 0 16px 48px rgba(15, 23, 42, 0.2);
         z-index: 9999;
-        padding: 16px;
+        padding: 24px;
         display: flex;
         flex-direction: column;
-        gap: 12px;
+        gap: 16px;
         border: 1px solid #e2e8f0;
         animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     }
@@ -63,37 +64,38 @@
     }
     .modal-close-btn {
         position: absolute;
-        top: 8px;
-        right: 12px;
+        top: 12px;
+        right: 16px;
         background: none;
         border: none;
-        font-size: 20px;
+        font-size: 24px;
         cursor: pointer;
         color: #94a3b8;
         transition: color 0.2s;
+        line-height: 1;
     }
     .modal-close-btn:hover {
         color: #475569;
     }
     .modal-banner-img {
         width: 100%;
-        border-radius: 10px;
+        border-radius: 12px;
         object-fit: cover;
         display: block;
     }
     .modal-btn-group {
         display: flex;
-        gap: 8px;
+        gap: 10px;
     }
     .attend-btn {
         flex: 1;
-        padding: 10px 0;
+        padding: 12px 0;
         background: #2563eb;
         color: #ffffff;
         border: none;
-        border-radius: 8px;
+        border-radius: 10px;
         font-weight: 700;
-        font-size: 14px;
+        font-size: 16px;
         cursor: pointer;
         font-family: 'Poppins', 'Noto Sans KR', sans-serif;
         transition: background 0.2s, transform 0.1s;
@@ -103,6 +105,11 @@
     }
     .attend-btn:active {
         transform: scale(0.96);
+    }
+
+    /* 우측 배너 커서 포인터 스타일 추가 */
+    #bannerSlider {
+        cursor: pointer;
     }
 </style>
 </head>
@@ -192,7 +199,7 @@
     </div>
 </div>
 
-<!-- 📌 출석체크 팝업 모달 추가 -->
+<!-- 📌 출석체크 팝업 모달 -->
 <div id="attendanceModal" class="attendance-modal">
     <button class="modal-close-btn" id="modalCloseBtn">&times;</button>
     <img src="우측배너.png" alt="출석 체크 배너" class="modal-banner-img">
@@ -267,30 +274,37 @@
     });
 
     // ==========================================
-    // ✨ 출석 체크 자동 입력 기능
+    // ✨ 출석 체크 자동 입력 및 배너 연동 기능
     // ==========================================
     const attendanceModal = document.getElementById('attendanceModal');
     const modalCloseBtn = document.getElementById('modalCloseBtn');
     const attendButtons = document.querySelectorAll('.attend-btn');
+    const bannerSlider = document.getElementById('bannerSlider');
 
     // 팝업 닫기 기능
     modalCloseBtn.addEventListener('click', () => {
         attendanceModal.style.display = 'none';
     });
 
-    // 1번, 2번, 3번 버튼 클릭 시 파이어베이스 전송 연동
+    // 우측 배너 클릭 시 팝업창을 다시 띄우는 기능
+    bannerSlider.addEventListener('click', (e) => {
+        e.preventDefault(); // a 태그 기본 링크 이동 방지
+        attendanceModal.style.display = 'flex';
+    });
+
+    // 정답 및 출첵 버튼 클릭 시 파이어베이스 연동
     attendButtons.forEach(btn => {
         btn.addEventListener('click', async (e) => {
             const num = e.target.getAttribute('data-num');
             try {
-                // [방문자1번] 형태로 유저명을 다이나믹하게 조합하여 파이어베이스 전송
+                // 요구사항 반영: text 포맷을 "정답 X번 / 출첵합니다!" 로 수정
                 await addDoc(collection(db, "chats"), {
-                    user: `방문자 ${num}번`,
-                    text: "출첵합니다!",
+                    user: "방문자",
+                    text: `정답 ${num}번 / 출첵합니다!`,
                     createdAt: serverTimestamp()
                 });
                 
-                // 전송 성공 시 팝업 닫기 (원치 않을 경우 아래 한 줄을 지우시면 유지됩니다.)
+                // 전송 후 팝업 자동 닫힘
                 attendanceModal.style.display = 'none';
             } catch (error) {
                 console.error("출석체크 자동 전송 실패:", error);
@@ -387,7 +401,6 @@
     // ✨ 특가 할인 마감 카운트다운 타이머
     // ==========================================
     function startDiscountTimer() {
-        // 목표 시간: 2026년 4월 30일 23:59:59
         const targetDate = new Date("2026-04-30T23:59:59").getTime(); 
         const timerEl = document.getElementById("discountTimer");
         let discountInterval;
@@ -396,10 +409,9 @@
             const now = new Date().getTime();
             const dist = targetDate - now;
 
-            // 시간이 다 지났을 때
             if (dist <= 0) {
                 timerEl.innerHTML = '특가종료';
-                timerEl.classList.add('expired'); // 회색으로 변경
+                timerEl.classList.add('expired'); 
                 clearInterval(discountInterval);
                 return;
             }
@@ -408,7 +420,6 @@
             const minutes = Math.floor((dist % (1000 * 60 * 60)) / (1000 * 60));
             const seconds = Math.floor((dist % (1000 * 60)) / 1000);
 
-            // 두 자리 수로 포맷팅 (예: 09:05:02)
             const timeStr = `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
 
             timerEl.innerHTML = `<i class="fa-solid fa-hourglass-half"></i> 남은 시간 ${timeStr}`;
@@ -418,7 +429,6 @@
         updateTimer(); 
     }
 
-    // 타이머 시작!
     startDiscountTimer();
 
 </script>
