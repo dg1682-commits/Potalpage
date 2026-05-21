@@ -124,10 +124,8 @@
 <body>
 <div class="page-wrapper">
 <header class="header">
-    <!-- ✨ 로고 클릭 시 메인으로 이동 (넷리파이 호환) -->
     <div class="logo-wrap"><a href="/"><img class="logo-image" src="아라쇼로고.png" alt="아라쇼" /></a></div>
     <ul class="nav-menu">
-        <!-- ✨ LIVE 클릭 시 메인으로 이동 (넷리파이 호환) -->
         <li class="active"><a href="/"><i class="fa-solid fa-circle" style="font-size: 10px; color: #ef4444; margin-right: 4px;"></i>LIVE</a></li>
         <li><a href="schedule.html">방송 편성표</a></li>
         <li><a href="highlight.html">하이라이트</a></li>
@@ -155,8 +153,8 @@
             <div class="viewer-box" id="viewerBox"><i class="fa-solid fa-eye"></i><span id="viewerCount">-</span>명</div>
         </div>
         <div class="player-wrap">
-            <!-- 📺 메인 유튜브 스트림 URL -->
-            <iframe id="youtubePlayer" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen src="https://youtube.com/live/MpvCsnM45tM?autoplay=1&mute=1&playsinline=1&rel=0&modestbranding=1&controls=1"></iframe>
+            <!-- 📺 메인 유튜브 스트림 요정 주소 (유튜브 스튜디오에서 '퍼가기 허용'을 꼭 켜주세요!) -->
+            <iframe id="youtubePlayer" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen src="https://www.youtube.com/embed/GvmVSQ26hpI?autoplay=1&mute=1&playsinline=1&rel=0&modestbranding=1&controls=1"></iframe>
         </div>
         <div class="product-section">
             <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 20px;">
@@ -224,7 +222,6 @@
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
     import { getFirestore, collection, addDoc, onSnapshot, query, orderBy, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
 
-    // 본인의 API 키
     const firebaseConfig = {
         apiKey: "AIzaSyCFhPO1Ttt1mZJ2DWU5R6yuLx3r9_L7mPI",
         authDomain: "isvmlivepage.firebaseapp.com",
@@ -292,37 +289,30 @@
     const bannerSlider = document.getElementById('bannerSlider');
     const youtubePlayer = document.getElementById('youtubePlayer');
 
-    // 💡 핵심 수정: iframe src에서 유튜브 비디오 ID를 추출하여 로컬스토리지 키값으로 활용합니다.
     let videoId = "default";
     try {
         const srcUrl = youtubePlayer.getAttribute('src');
-        // '/embed/' 뒤에 나오는 고유 ID 코드를 추출합니다.
         videoId = srcUrl.split('/embed/')[1].split('?')[0];
     } catch(e) {
         console.error("유튜브 ID 추출 실패:", e);
     }
     
-    // 비디오 ID가 붙은 고유 키 생성 (영상이 바뀔 때마다 자동으로 리셋됨)
     const storageKey = `araShow_attended_${videoId}`;
 
-    // 페이지 최초 진입 시에만 자동으로 팝업 띄우기 (해당 영상ID에 참여 완료 기록이 없으면 노출)
     const hasParticipated = localStorage.getItem(storageKey);
     if (!hasParticipated) {
         attendanceModal.style.display = 'flex';
     }
 
-    // 팝업 닫기 기능
     modalCloseBtn.addEventListener('click', () => {
         attendanceModal.style.display = 'none';
     });
 
-    // 우측 배너 클릭 이벤트 (언제든지 팝업을 다시 띄울 수 있음)
     bannerSlider.addEventListener('click', (e) => {
         e.preventDefault(); 
         attendanceModal.style.display = 'flex';
     });
 
-    // 정답 및 출첵 버튼 클릭 시 파이어베이스 연동
     attendButtons.forEach(btn => {
         btn.addEventListener('click', async (e) => {
             const num = e.target.getAttribute('data-num');
@@ -333,10 +323,7 @@
                     createdAt: serverTimestamp()
                 });
                 
-                // 해당 영상ID에 대해 참여 완료 상태를 저장 (이 영상은 다음 접속 시 자동 팝업 차단)
                 localStorage.setItem(storageKey, 'true');
-                
-                // 전송 후 팝업 자동 닫힘
                 attendanceModal.style.display = 'none';
             } catch (error) {
                 console.error("출석체크 자동 전송 실패:", error);
