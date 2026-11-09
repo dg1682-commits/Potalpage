@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ko" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DG1682 Mixboard Portal</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- 상단 툴바 -->
+  <header class="toolbar">
+    <div class="toolbar-brand">
+      <span class="brand-dot"></span>
+      <h1>Mixboard Portal</h1>
+      <span class="badge">dg1682-commits</span>
+    </div>
+
+    <div class="toolbar-actions">
+      <button id="btnAddLink" class="tool-btn primary" title="새로운 링크 버튼 추가">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+        + 링크 버튼
+      </button>
+      <button id="btnAddBadge" class="tool-btn" title="소제목/카테고리 배지 도형 추가">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="6" width="18" height="12" rx="6"/></svg>
+        + 소제목 도형
+      </button>
+      <button id="btnAddShape" class="tool-btn" title="배경 구역용 도형 박스 추가">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="3" stroke-dasharray="4 2"/></svg>
+        + 구역 박스
+      </button>
+      <button id="btnAddText" class="tool-btn" title="자유 텍스트/메모 추가">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 7 4 4 20 4 20 7"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="4" x2="12" y2="20"/></svg>
+        + 텍스트
+      </button>
+
+      <div class="divider"></div>
+
+      <button id="btnSnapToggle" class="tool-btn active" title="그리드 자석 정렬 켜기/끄기">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+        그리드 스냅
+      </button>
+
+      <button id="btnGlobalLock" class="tool-btn" title="전체 레이아웃 고정/잠금 (클릭 전용 모드)">
+        <svg id="lockIcon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 9.9-1"/></svg>
+        <span id="lockLabel">편집 모드</span>
+      </button>
+
+      <div class="divider"></div>
+
+      <button id="btnExport" class="tool-btn icon-only" title="배치 데이터 JSON 백업 저장">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      </button>
+      <button id="btnImport" class="tool-btn icon-only" title="배치 데이터 JSON 불러오기">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+      </button>
+      <input type="file" id="fileImport" accept=".json" hidden />
+
+      <button id="btnReset" class="tool-btn icon-only" title="초기 10개 깃허브 보드로 리셋">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
+      </button>
+
+      <button id="btnTheme" class="tool-btn icon-only" title="화이트톤 / 다크모드 전환">
+        <svg id="themeIcon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- 안내 바 -->
+  <div class="hint-bar" id="hintBar">
+    <span>💡 <b>드래그</b>: 자유 이동 | <b>우측 하단 모서리</b>: 크기 조절 | <b>더블클릭 / ✏️</b>: 내용·색상 수정 | <b>📌</b>: 개별 위치 고정 | <b>링크 열기</b>: 카드 우측 상단 ↗ 버튼 (또는 전체 잠금 시 카드 클릭)</span>
+  </div>
+
+  <!-- 믹스보드 자유 캔버스 -->
+  <main id="board" class="board-canvas"></main>
+
+  <!-- 에셋 편집 모달 -->
+  <div id="editModal" class="modal-backdrop hidden">
+    <div class="modal">
+      <div class="modal-header">
+        <h2 id="modalTitle">에셋 수정</h2>
+        <button id="btnCloseModal" class="close-btn">&times;</button>
+      </div>
+      <form id="editForm">
+        <div class="form-group">
+          <label for="inputTitle">제목 / 텍스트</label>
+          <input type="text" id="inputTitle" required placeholder="표시할 이름을 입력하세요" />
+        </div>
+
+        <div class="form-group" id="groupSubtitle">
+          <label for="inputSubtitle">부제목 / 설명 (선택)</label>
+          <input type="text" id="inputSubtitle" placeholder="예: dg1682-commits/VCL 또는 간단한 메모" />
+        </div>
+
+        <div class="form-group" id="groupUrl">
+          <label for="inputUrl">이동할 URL 주소</label>
+          <input type="url" id="inputUrl" placeholder="https://github.com/..." />
+        </div>
+
+        <div class="form-group" id="groupPagesUrl">
+          <label for="inputPagesUrl">보조 링크 (GitHub Pages / 배포 사이트 등, 선택)</label>
+          <input type="url" id="inputPagesUrl" placeholder="https://dg1682-commits.github.io/..." />
+        </div>
+
+        <div class="form-group">
+          <label>포인트 컬러 / 테마</label>
+          <div class="color-palette" id="colorPalette">
+            <button type="button" class="color-swatch" data-color="default" title="기본 깔끔톤"></button>
+            <button type="button" class="color-swatch" data-color="blue" title="블루"></button>
+            <button type="button" class="color-swatch" data-color="indigo" title="인디고"></button>
+            <button type="button" class="color-swatch" data-color="emerald" title="에메랄드"></button>
+            <button type="button" class="color-swatch" data-color="amber" title="앰버"></button>
+            <button type="button" class="color-swatch" data-color="rose" title="로즈"></button>
+            <button type="button" class="color-swatch" data-color="violet" title="바이올렛"></button>
+            <button type="button" class="color-swatch" data-color="slate" title="슬레이트"></button>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" id="btnDeleteAsset" class="btn-danger">삭제</button>
+          <div class="modal-footer-right">
+            <button type="button" id="btnCancelModal" class="btn-secondary">취소</button>
+            <button type="submit" class="btn-primary">저장</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
