@@ -345,12 +345,12 @@
     "ghSha": "",
     "dataUrl": "",
     "folderId": null,
-    "x": 1000,
-    "y": 460,
+    "x": 600,
+    "y": 620,
     "w": 120,
     "h": 106,
     "color": "rose",
     "locked": false,
-    "z": 156
+    "z": 157
   }
 ]
