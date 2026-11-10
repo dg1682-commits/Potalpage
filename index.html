@@ -17,45 +17,66 @@
 
     <div class="toolbar-actions">
       <button id="btnAddLink" class="tool-btn primary" title="새로운 링크 버튼 추가">
-        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
-        + 링크 버튼
+        <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+        + 링크
       </button>
+      <button id="btnAddFolder" class="tool-btn folder-accent" title="MD 파일을 담을 수 있는 폴더 추가">
+        <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+        + 폴더
+      </button>
+      <button id="btnAddMd" class="tool-btn md-accent" title="새 마크다운(.md) 문서 추가">
+        <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        + MD 작성
+      </button>
+      <button id="btnUploadMd" class="tool-btn" title="내 PC의 .md 파일 불러오기">
+        <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+        MD 파일 넣기
+      </button>
+      <input type="file" id="fileMdUpload" accept=".md,.txt,.markdown" multiple hidden />
+
+      <div class="divider"></div>
+
       <button id="btnAddBadge" class="tool-btn" title="소제목/카테고리 배지 도형 추가">
-        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="6" width="18" height="12" rx="6"/></svg>
-        + 소제목 도형
+        <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="6" width="18" height="12" rx="6"/></svg>
+        + 소제목
       </button>
       <button id="btnAddShape" class="tool-btn" title="배경 구역용 도형 박스 추가">
-        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="3" stroke-dasharray="4 2"/></svg>
+        <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="3" stroke-dasharray="4 2"/></svg>
         + 구역 박스
       </button>
       <button id="btnAddText" class="tool-btn" title="자유 텍스트/메모 추가">
-        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 7 4 4 20 4 20 7"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="4" x2="12" y2="20"/></svg>
+        <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 7 4 4 20 4 20 7"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="4" x2="12" y2="20"/></svg>
         + 텍스트
       </button>
 
       <div class="divider"></div>
 
       <button id="btnSnapToggle" class="tool-btn active" title="그리드 자석 정렬 켜기/끄기">
-        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
-        그리드 스냅
+        <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+        스냅
       </button>
 
       <button id="btnGlobalLock" class="tool-btn" title="전체 레이아웃 고정/잠금 (클릭 전용 모드)">
-        <svg id="lockIcon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 9.9-1"/></svg>
+        <svg id="lockIcon" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 9.9-1"/></svg>
         <span id="lockLabel">편집 모드</span>
       </button>
 
       <div class="divider"></div>
 
-      <button id="btnExport" class="tool-btn icon-only" title="배치 데이터 JSON 백업 저장">
+      <button id="btnGithubSync" class="tool-btn gh-sync-btn" title="GitHub 자동 동기화 설정 (회사PC ↔ 집PC 연동)">
+        <span id="ghSyncDot" class="sync-dot offline"></span>
+        <span id="ghSyncLabel">☁️ GitHub 연동</span>
+      </button>
+
+      <button id="btnExport" class="tool-btn icon-only" title="전체 보드 + MD파일 통합 백업(.json) 다운로드">
         <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
       </button>
-      <button id="btnImport" class="tool-btn icon-only" title="배치 데이터 JSON 불러오기">
+      <button id="btnImport" class="tool-btn icon-only" title="통합 백업(.json) 불러오기">
         <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
       </button>
       <input type="file" id="fileImport" accept=".json" hidden />
 
-      <button id="btnReset" class="tool-btn icon-only" title="초기 10개 깃허브 보드로 리셋">
+      <button id="btnReset" class="tool-btn icon-only" title="초기 보드 레이아웃으로 리셋">
         <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
       </button>
 
@@ -67,13 +88,86 @@
 
   <!-- 안내 바 -->
   <div class="hint-bar" id="hintBar">
-    <span>💡 <b>드래그</b>: 자유 이동 | <b>우측 하단 모서리</b>: 크기 조절 | <b>더블클릭 / ✏️</b>: 내용·색상 수정 | <b>📌</b>: 개별 위치 고정 | <b>링크 열기</b>: 카드 우측 상단 ↗ 버튼 (또는 전체 잠금 시 카드 클릭)</span>
+    <span>💡 <b>폴더/MD 파일</b>: 더블클릭해 열기 | <b>MD → 폴더 드래그</b>: 폴더에 넣기 | <b>폴더 안 MD → 보드 밖 드래그</b>: 보드로 꺼내기 | <b>PC의 .md 파일</b>을 브라우저에 드래그 앤 드롭해도 바로 추가됩니다!</span>
   </div>
 
   <!-- 믹스보드 자유 캔버스 -->
   <main id="board" class="board-canvas"></main>
 
-  <!-- 에셋 편집 모달 -->
+  <!-- 1. 실제 OS 스타일 폴더 탐색기 팝업 창 -->
+  <div id="folderWindow" class="os-window hidden">
+    <div id="folderWindowHeader" class="os-window-header">
+      <div class="os-window-controls">
+        <button type="button" id="btnCloseFolderWin" class="traffic-btn close" title="닫기">✕</button>
+        <span class="traffic-btn minimize"></span>
+        <span class="traffic-btn maximize"></span>
+      </div>
+      <div class="os-window-title">
+        <span class="folder-win-icon">📂</span>
+        <span id="folderWinTitleText">안티그래비티 문서함</span>
+      </div>
+      <div class="os-window-actions">
+        <button type="button" id="btnFolderNewMd" class="win-action-btn primary">+ 새 MD 작성</button>
+        <button type="button" id="btnFolderUploadMd" class="win-action-btn">📥 PC에서 .md 넣기</button>
+        <button type="button" id="btnFolderEditInfo" class="win-action-btn" title="폴더 이름/색상 변경">⚙️</button>
+      </div>
+    </div>
+
+    <div class="os-window-pathbar">
+      <span id="folderPathText">📁 Mixboard / 안티그래비티 문서함</span>
+      <span id="folderCountText" class="folder-count-badge">0개 파일</span>
+    </div>
+
+    <div id="folderGrid" class="os-folder-grid">
+      <!-- 폴더 내부 MD 파일 아이콘들이 렌더링됨 -->
+    </div>
+
+    <div class="os-window-statusbar">
+      <span>💡 파일을 <b>더블클릭</b>하면 열립니다. 파일을 잡고 <b>창 바깥(믹스보드)으로 드래그</b>하면 보드로 꺼낼 수 있습니다.</span>
+    </div>
+  </div>
+
+  <!-- 2. MD 파일 뷰어 & 에디터 모달 (복사 / .md 다운로드 / 수정 저장) -->
+  <div id="mdViewerModal" class="modal-backdrop hidden">
+    <div class="md-modal">
+      <div class="md-modal-header">
+        <div class="md-modal-title-group">
+          <span class="md-doc-badge">MD</span>
+          <input type="text" id="mdInputTitle" class="md-title-input" placeholder="파일명.md" />
+        </div>
+        <div class="md-modal-toolbar">
+          <div class="md-tab-group">
+            <button type="button" id="btnMdTabPreview" class="md-tab active">👁️ 읽기 뷰</button>
+            <button type="button" id="btnMdTabEdit" class="md-tab">✏️ 원본/편집</button>
+          </div>
+          <button type="button" id="btnMdCopy" class="md-action-btn" title="마크다운 전체 내용 클립보드 복사">📋 전체 복사</button>
+          <button type="button" id="btnMdDownload" class="md-action-btn accent" title="실제 .md 파일로 PC에 내려받기">💾 .md 내려받기</button>
+          <button type="button" id="btnCloseMdModal" class="close-btn">&times;</button>
+        </div>
+      </div>
+
+      <div class="md-modal-body">
+        <!-- 렌더링된 마크다운 프리뷰 영역 -->
+        <div id="mdPreviewArea" class="md-preview-content"></div>
+        <!-- 마크다운 텍스트 에디터 영역 -->
+        <textarea id="mdEditorArea" class="md-editor-textarea hidden" placeholder="# 여기에 안티그래비티 프롬프트, 작업 내역, 컨텍스트를 마크다운으로 붙여넣으세요..."></textarea>
+      </div>
+
+      <div class="md-modal-footer">
+        <div class="md-footer-left">
+          <button type="button" id="btnMdDelete" class="btn-danger">삭제</button>
+          <span id="mdFolderStatus" class="md-location-tag">위치: 보드 위</span>
+          <button type="button" id="btnMdMoveOut" class="btn-secondary small hidden">📤 보드 밖으로 꺼내기</button>
+        </div>
+        <div class="md-footer-right">
+          <span id="mdToast" class="md-toast"></span>
+          <button type="button" id="btnMdSave" class="btn-primary">내용 저장</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. 일반 에셋 편집 모달 (링크 / 소제목 / 구역 / 텍스트 / 폴더 속성) -->
   <div id="editModal" class="modal-backdrop hidden">
     <div class="modal">
       <div class="modal-header">
@@ -82,13 +176,13 @@
       </div>
       <form id="editForm">
         <div class="form-group">
-          <label for="inputTitle">제목 / 텍스트</label>
+          <label for="inputTitle">제목 / 이름</label>
           <input type="text" id="inputTitle" required placeholder="표시할 이름을 입력하세요" />
         </div>
 
         <div class="form-group" id="groupSubtitle">
           <label for="inputSubtitle">부제목 / 설명 (선택)</label>
-          <input type="text" id="inputSubtitle" placeholder="예: dg1682-commits/VCL 또는 간단한 메모" />
+          <input type="text" id="inputSubtitle" placeholder="간단한 설명이나 메모" />
         </div>
 
         <div class="form-group" id="groupUrl">
@@ -120,6 +214,51 @@
           <div class="modal-footer-right">
             <button type="button" id="btnCancelModal" class="btn-secondary">취소</button>
             <button type="submit" class="btn-primary">저장</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 4. GitHub 자동 저장(토큰) 설정 모달 -->
+  <div id="ghSyncModal" class="modal-backdrop hidden">
+    <div class="modal gh-modal">
+      <div class="modal-header">
+        <h2>☁️ GitHub 실시간 자동 저장 설정</h2>
+        <button id="btnCloseGhModal" class="close-btn">&times;</button>
+      </div>
+
+      <div class="gh-guide-box">
+        <p><b>회사 PC ↔ 집 PC 자동 동기화 원리</b></p>
+        <p>토큰을 한 번만 등록해 두면, 카드를 옮기거나 <code>.md</code> 파일을 드래그해 넣을 때마다 <b>내 GitHub 저장소(<code>board-data.json</code>)에 자동으로 커밋·저장</b>되고 다른 PC에서 접속할 때 자동으로 최신 데이터를 불러옵니다.</p>
+        <a href="https://github.com/settings/tokens/new?scopes=repo&description=Mixboard_Portal_AutoSync" target="_blank" rel="noopener noreferrer" class="gh-token-link">
+          🔑 여기를 눌러 GitHub 토큰 바로 발급하기 (자동 체크됨) ↗
+        </a>
+      </div>
+
+      <form id="ghSyncForm">
+        <div class="form-group">
+          <label for="ghInputRepo">연동할 GitHub 저장소 (Owner/Repo)</label>
+          <input type="text" id="ghInputRepo" value="dg1682-commits/Potalpage" required placeholder="dg1682-commits/Potalpage" />
+        </div>
+
+        <div class="form-group">
+          <label for="ghInputBranch">브랜치 (Branch)</label>
+          <input type="text" id="ghInputBranch" value="main" required placeholder="main" />
+        </div>
+
+        <div class="form-group">
+          <label for="ghInputToken">GitHub Personal Access Token (<code>ghp_...</code> 또는 <code>github_pat_...</code>)</label>
+          <input type="password" id="ghInputToken" placeholder="발급받은 토큰을 붙여넣으세요 (이 PC 브라우저에만 안전하게 보관됨)" />
+        </div>
+
+        <div id="ghStatusMsg" class="gh-status-msg"></div>
+
+        <div class="modal-footer">
+          <button type="button" id="btnGhPullNow" class="btn-secondary" title="GitHub에서 최신 데이터 강제로 다시 불러오기">⬇️ 서버에서 불러오기</button>
+          <div class="modal-footer-right">
+            <button type="button" id="btnGhDisconnect" class="btn-danger">연동 해제</button>
+            <button type="submit" class="btn-primary">연결 및 즉시 동기화</button>
           </div>
         </div>
       </form>
