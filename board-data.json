@@ -219,13 +219,13 @@
     "type": "folder",
     "title": "안티그래비티 문서함",
     "subtitle": "회사PC ↔ 집PC 작업 연동 MD 보관함",
-    "x": 100,
-    "y": 540,
+    "x": 40,
+    "y": 620,
     "w": 130,
     "h": 100,
     "color": "amber",
     "locked": false,
-    "z": 113
+    "z": 117
   },
   {
     "id": "md-sample-inside",
