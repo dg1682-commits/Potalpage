@@ -135,13 +135,13 @@
     "subtitle": "dg1682-commits/isvmliveshow",
     "url": "https://github.com/dg1682-commits/isvmliveshow",
     "pagesUrl": "https://dg1682-commits.github.io/isvmliveshow/",
-    "x": 980,
+    "x": 60,
     "y": 460,
     "w": 380,
     "h": 80,
     "color": "violet",
     "locked": false,
-    "z": 104
+    "z": 139
   },
   {
     "id": "repo-gymmusic",
