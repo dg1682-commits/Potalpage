@@ -328,29 +328,5 @@
     "color": "blue",
     "locked": false,
     "z": 149
-  },
-  {
-    "id": "file-1794288069491-721",
-    "type": "file",
-    "fileCategory": "audio",
-    "ext": "mp3",
-    "fileSize": 3285356,
-    "mimeType": "audio/mpeg",
-    "title": "내 차가 없어 버스를 탔다.mp3",
-    "subtitle": "3.13 MB",
-    "fileUrl": "https://xgcgfmcwcrnanflbveup.supabase.co/storage/v1/object/public/Potal/uploads/1794288068532_99cjg_item.mp3",
-    "sbPath": "uploads/1794288068532_99cjg_item.mp3",
-    "sbBucket": "Potal",
-    "ghPath": "",
-    "ghSha": "",
-    "dataUrl": "",
-    "folderId": null,
-    "x": 600,
-    "y": 620,
-    "w": 120,
-    "h": 106,
-    "color": "rose",
-    "locked": false,
-    "z": 161
   }
 ]
