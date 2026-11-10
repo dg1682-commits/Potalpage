@@ -4,6 +4,7 @@ const THEME_KEY = "dg1682_mixboard_theme";
 const GH_CONFIG_KEY = "dg1682_mixboard_gh_config";
 const GH_DATA_FILE = "board-data.json";
 const SNAP_SIZE = 20;
+const DESIGN_BOARD_WIDTH = 1440;
 
 // 초기 10개 깃허브 레포지토리 + 소제목 도형/구역 박스/텍스트 + 안티그래비티 폴더 & 샘플 MD 파일 기본 배치
 function getDefaultAssets() {
@@ -223,49 +224,43 @@ function getDefaultAssets() {
       locked: false,
       z: 105
     },
-
-    // 기본 안티그래비티 폴더 (더블클릭 시 진짜 폴더 팝업 오픈)
     {
       id: "folder-antigravity",
       type: "folder",
       title: "안티그래비티 문서함",
-      subtitle: "회사PC ↔ 집PC 작업 연동 MD 보관함",
+      subtitle: "회사PC ↔ 집PC 작업 연동 보관함",
       x: 60,
-      y: 460,
+      y: 580,
       w: 130,
       h: 100,
       color: "amber",
       locked: false,
       z: 110
     },
-
-    // 폴더 안에 들어있는 기본 샘플 MD 파일
     {
       id: "md-sample-inside",
       type: "md",
       title: "집-회사_인수인계_가이드.md",
       subtitle: "안티그래비티 작업 내역 동기화 방법",
-      content: `# 🚀 안티그래비티 회사 PC ↔ 집 PC 연동 가이드\n\n회사 PC와 집 PC에서 작업하던 안티그래비티(Antigravity) 내역이나 프롬프트, 기획서를 이 폴더에 모아두세요!\n\n## 💡 주요 사용법\n1. **더블클릭해서 열기**: 내용을 바로 읽고 \`📋 전체 복사\` 버튼으로 원클릭 복사할 수 있습니다.\n2. **💾 .md 내려받기**: 언제든 실제 \`.md\` 파일로 PC에 다운로드할 수 있습니다.\n3. **자유로운 드래그 이동**:\n   - 보드 위의 MD 파일을 **폴더 아이콘 위로 드래그**하면 폴더 안으로 쏙 들어갑니다.\n   - 폴더 창 안의 MD 아이콘을 **창 바깥(믹스보드)으로 드래그**하면 보드 위로 꺼내집니다.\n4. **PC 파일 드래그 앤 드롭**: 내 컴퓨터의 \`.md\` 파일을 브라우저 화면이나 열린 폴더 창에 끌어다 놓으면 즉시 추가됩니다.`,
+      content: `# 🚀 안티그래비티 회사 PC ↔ 집 PC 연동 가이드\n\n회사 PC와 집 PC에서 작업하던 안티그래비티(Antigravity) 내역이나 메모장, 이미지, 음악, 영상, 일반 파일들을 이 포털에 모아두세요!\n\n## 💡 주요 사용법\n1. **더블클릭해서 열기**:\n   - **MD 메모장**: 바로 읽고 편집하거나 원클릭 복사 & 다운로드 가능\n   - **음악/영상 파일**: 예쁜 선택 팝업에서 **▶️ 바로 재생** 또는 **💾 다운로드** 선택 가능\n   - **이미지 파일**: 즉시 크게 미리보기 + 원본 다운로드 가능\n   - **엑셀/압축/exe 등 모든 일반 파일**: 정보 확인 및 원본 그대로 다운로드 가능\n2. **자유로운 드래그 이동**:\n   - 보드 위의 어떤 파일이든 **폴더 아이콘 위로 드래그**하면 폴더 안으로 들어갑니다.\n   - 폴더 창 안의 파일을 **창 바깥(믹스보드)으로 드래그**하면 보드 위로 꺼내집니다.`,
       folderId: "folder-antigravity",
       x: 220,
-      y: 460,
+      y: 580,
       w: 120,
       h: 100,
       color: "indigo",
       locked: false,
       z: 111
     },
-
-    // 보드 밖에 나와있는 샘플 MD 파일 (드래그해서 폴더에 넣어볼 수 있음)
     {
       id: "md-sample-board",
       type: "md",
       title: "오늘의_작업메모.md",
       subtitle: "폴더로 드래그해서 넣어보세요",
-      content: `# 📝 오늘의 개발 메모\n\n- 이 아이콘을 **더블클릭**하면 마크다운 뷰어/편집기가 열립니다.\n- 이 아이콘을 옆에 있는 **📂 안티그래비티 문서함** 폴더 위로 드래그해서 놓으면 폴더 안으로 들어갑니다!\n\n\`\`\`js\nconsole.log("집 PC와 회사 PC 어디서든 편하게 이어서 작업하세요!");\n\`\`\``,
+      content: `# 📝 오늘의 개발 메모장\n\n- 이 아이콘을 **더블클릭**하면 메모장처럼 바로 글을 쓰고 저장할 수 있습니다.\n- 옆에 있는 **📂 안티그래비티 문서함** 폴더 위로 드래그해서 놓으면 폴더 안으로 들어갑니다!`,
       folderId: null,
       x: 220,
-      y: 460,
+      y: 580,
       w: 120,
       h: 100,
       color: "blue",
@@ -277,14 +272,18 @@ function getDefaultAssets() {
 
 let assets = [];
 let snapEnabled = true;
+let autoFitEnabled = true;
+let boardScale = 1;
 let globalLocked = false;
 let editingAssetId = null;
 let selectedColor = "default";
 
-// 현재 열려있는 폴더 ID 및 MD 문서 ID
+// 현재 열려있는 폴더 ID / MD 문서 ID / 파일 에셋 ID
 let activeFolderId = null;
 let activeMdId = null;
+let activeFileId = null;
 
+const boardViewport = document.getElementById("boardViewport");
 const boardEl = document.getElementById("board");
 const editModal = document.getElementById("editModal");
 const editForm = document.getElementById("editForm");
@@ -315,16 +314,54 @@ const mdFolderStatus = document.getElementById("mdFolderStatus");
 const btnMdMoveOut = document.getElementById("btnMdMoveOut");
 const mdToast = document.getElementById("mdToast");
 
+// 미디어 & 일반 파일 커스텀 모달 엘리먼트
+const fileActionModal = document.getElementById("fileActionModal");
+const fileModalIcon = document.getElementById("fileModalIcon");
+const fileModalTitle = document.getElementById("fileModalTitle");
+const fileModalMeta = document.getElementById("fileModalMeta");
+const mediaChoiceBox = document.getElementById("mediaChoiceBox");
+const fileStageArea = document.getElementById("fileStageArea");
+const btnFileMoveOut = document.getElementById("btnFileMoveOut");
+const uploadStatusToast = document.getElementById("uploadStatusToast");
+
 function init() {
   loadTheme();
   loadState();
   renderBoard();
+  updateBoardResponsiveScale();
+  window.addEventListener("resize", updateBoardResponsiveScale);
   bindToolbarEvents();
   bindFolderWindowEvents();
   bindMdModalEvents();
+  bindFileModalEvents();
   bindExternalFileDrop();
   bindGithubSyncEvents();
   autoPullFromGithubOnStart();
+}
+
+// 창을 작게 줄였을 때도 3개 구역이 안 찌그러지고 한눈에 보이도록 반응형 스케일 계산
+function updateBoardResponsiveScale() {
+  const autoFitLabel = document.getElementById("autoFitLabel");
+  if (!autoFitEnabled) {
+    boardScale = 1;
+    boardEl.style.transform = "scale(1)";
+    boardViewport.style.height = "auto";
+    if (autoFitLabel) autoFitLabel.textContent = "100% 원본";
+    return;
+  }
+
+  const vw = window.innerWidth;
+  if (vw < DESIGN_BOARD_WIDTH) {
+    boardScale = Math.max(0.48, (vw - 16) / DESIGN_BOARD_WIDTH);
+  } else {
+    boardScale = 1;
+  }
+
+  boardEl.style.transform = `scale(${boardScale})`;
+  boardViewport.style.height = `${Math.ceil(1500 * boardScale)}px`;
+  if (autoFitLabel) {
+    autoFitLabel.textContent = boardScale < 1 ? `화면 맞춤 (${Math.round(boardScale * 100)}%)` : "화면 맞춤";
+  }
 }
 
 function loadTheme() {
@@ -360,7 +397,6 @@ function loadState() {
         return;
       }
     }
-    // 이전 v2 데이터가 있으면 유지하면서 폴더/샘플 MD가 없을 때만 보강
     const prevRaw = localStorage.getItem(PREV_STORAGE_KEY);
     if (prevRaw) {
       const prevParsed = JSON.parse(prevRaw);
@@ -382,7 +418,11 @@ function loadState() {
 }
 
 function saveState(skipCloudSync = false) {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(assets));
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(assets));
+  } catch (e) {
+    console.warn("로컬 스토리지 용량 초과 또는 저장 경고:", e);
+  }
   if (!skipCloudSync) {
     scheduleGithubAutoSave();
   }
@@ -401,11 +441,15 @@ function snap(val) {
   return snapEnabled ? Math.round(val / SNAP_SIZE) * SNAP_SIZE : val;
 }
 
-// 보드 렌더링 (폴더 안에 들어간 MD 파일은 보드에서 숨기고 폴더 창 안에서만 표시)
+function isFolderorableAsset(asset) {
+  return asset.type === "md" || asset.type === "file";
+}
+
+// 보드 렌더링 (폴더 안에 들어간 MD 및 파일은 보드에서 숨기고 폴더 창 안에서만 표시)
 function renderBoard() {
   boardEl.innerHTML = "";
   assets.forEach(asset => {
-    if (asset.type === "md" && asset.folderId) return;
+    if (isFolderorableAsset(asset) && asset.folderId) return;
     const el = createAssetElement(asset);
     boardEl.appendChild(el);
   });
@@ -416,7 +460,29 @@ function renderBoard() {
 }
 
 function getFolderItemCount(folderId) {
-  return assets.filter(a => a.type === "md" && a.folderId === folderId).length;
+  return assets.filter(a => isFolderorableAsset(a) && a.folderId === folderId).length;
+}
+
+function getFileTypeEmoji(category, ext = "") {
+  if (category === "image") return "🖼️";
+  if (category === "audio") return "🎵";
+  if (category === "video") return "🎬";
+  const lower = ext.toLowerCase();
+  if (["xls", "xlsx", "csv"].includes(lower)) return "📊";
+  if (["ppt", "pptx"].includes(lower)) return "📽️";
+  if (["doc", "docx", "pdf", "hwp"].includes(lower)) return "📄";
+  if (["zip", "rar", "7z", "tar", "gz"].includes(lower)) return "🗜️";
+  if (["exe", "msi", "bat", "apk", "dmg"].includes(lower)) return "⚙️";
+  return "📦";
+}
+
+function formatBytes(bytes) {
+  if (!bytes || isNaN(bytes)) return "";
+  if (bytes < 1024) return `${bytes} B`;
+  const kb = bytes / 1024;
+  if (kb < 1024) return `${kb.toFixed(1)} KB`;
+  const mb = kb / 1024;
+  return `${mb.toFixed(2)} MB`;
 }
 
 function createAssetElement(asset) {
@@ -435,7 +501,7 @@ function createAssetElement(asset) {
   controls.className = "asset-controls";
   controls.innerHTML = `
     <button type="button" class="ctrl-btn btn-pin ${asset.locked ? "pin-active" : ""}" title="${asset.locked ? "고정 해제" : "위치 고정"}">📌</button>
-    <button type="button" class="ctrl-btn btn-edit" title="편집">✏️</button>
+    <button type="button" class="ctrl-btn btn-edit" title="열기/편집">✏️</button>
     <button type="button" class="ctrl-btn btn-del" title="삭제">✕</button>
   `;
   el.appendChild(controls);
@@ -501,7 +567,7 @@ function createAssetElement(asset) {
           <path d="M4 10C4 6.68629 6.68629 4 10 4H24L30 11H54C57.3137 11 60 13.6863 60 17V42C60 45.3137 57.3137 48 54 48H10C6.68629 48 4 45.3137 4 42V10Z" fill="currentColor" fill-opacity="0.82"/>
           <path d="M4 18C4 15.2386 6.23858 13 9 13H55C57.7614 13 60 15.2386 60 18V42C60 45.3137 57.3137 48 54 48H10C6.68629 48 4 45.3137 4 42V18Z" fill="currentColor"/>
         </svg>
-        <span class="folder-badge-count" title="보관된 MD 파일 수">${count}</span>
+        <span class="folder-badge-count" title="보관된 파일 수">${count}</span>
       </div>
       <div class="folder-label" title="${escapeHtml(asset.title)}">${escapeHtml(asset.title)}</div>
     `;
@@ -524,6 +590,14 @@ function createAssetElement(asset) {
       <div class="md-file-label" title="${escapeHtml(asset.title)}">${escapeHtml(asset.title)}</div>
     `;
     el.appendChild(wrap);
+  } else if (asset.type === "file") {
+    const wrap = document.createElement("div");
+    wrap.style.display = "flex";
+    wrap.style.flexDirection = "column";
+    wrap.style.alignItems = "center";
+    wrap.style.width = "100%";
+    wrap.innerHTML = buildFileIconMarkup(asset);
+    el.appendChild(wrap);
   }
 
   // 크기 조절 핸들
@@ -533,6 +607,24 @@ function createAssetElement(asset) {
 
   bindAssetEvents(el, asset);
   return el;
+}
+
+function buildFileIconMarkup(asset) {
+  const ext = (asset.ext || "FILE").slice(0, 5);
+  const src = asset.fileUrl || asset.dataUrl || "";
+  const isImg = asset.fileCategory === "image" && src;
+
+  const visualInner = isImg
+    ? `<img src="${escapeHtml(src)}" class="file-thumb-img" alt="${escapeHtml(asset.title)}" />`
+    : `<span class="file-type-emoji">${getFileTypeEmoji(asset.fileCategory, asset.ext)}</span>`;
+
+  return `
+    <div class="file-thumb-card">
+      ${visualInner}
+      <span class="file-ext-badge">${escapeHtml(ext)}</span>
+    </div>
+    <div class="md-file-label" title="${escapeHtml(asset.title)}">${escapeHtml(asset.title)}</div>
+  `;
 }
 
 function bindAssetEvents(el, asset) {
@@ -554,6 +646,8 @@ function bindAssetEvents(el, asset) {
     e.stopPropagation();
     if (asset.type === "md") {
       openMdModal(asset.id, "edit");
+    } else if (asset.type === "file") {
+      openFileActionModal(asset.id);
     } else {
       openEditModal(asset.id);
     }
@@ -564,7 +658,7 @@ function bindAssetEvents(el, asset) {
     deleteAsset(asset.id);
   });
 
-  // 더블 클릭 동작: 폴더는 폴더 팝업 오픈, MD는 뷰어 오픈, 나머지는 수정 모달
+  // 더블 클릭 동작
   el.addEventListener("dblclick", e => {
     if (e.target.closest("a") || e.target.closest(".asset-controls")) return;
     if (asset.type === "folder") {
@@ -573,6 +667,10 @@ function bindAssetEvents(el, asset) {
     }
     if (asset.type === "md") {
       openMdModal(asset.id, "preview");
+      return;
+    }
+    if (asset.type === "file") {
+      openFileActionModal(asset.id);
       return;
     }
     if (!globalLocked) {
@@ -589,10 +687,12 @@ function bindAssetEvents(el, asset) {
       openFolderWindow(asset.id);
     } else if (asset.type === "md") {
       openMdModal(asset.id, "preview");
+    } else if (asset.type === "file") {
+      openFileActionModal(asset.id);
     }
   });
 
-  // 드래그 이동 (+ MD 파일을 폴더 아이콘이나 열린 폴더 창 위로 드롭하여 넣기)
+  // 드래그 이동 (반응형 스케일 보정 포함 + 폴더 드롭 지원)
   el.addEventListener("mousedown", e => {
     if (e.button !== 0) return;
     if (globalLocked || asset.locked) return;
@@ -616,14 +716,14 @@ function bindAssetEvents(el, asset) {
     el.classList.add("dragging");
 
     function onMouseMove(moveEvent) {
-      const dx = moveEvent.clientX - startX;
-      const dy = moveEvent.clientY - startY;
+      const dx = (moveEvent.clientX - startX) / boardScale;
+      const dy = (moveEvent.clientY - startY) / boardScale;
       asset.x = Math.max(0, snap(origX + dx));
       asset.y = Math.max(0, snap(origY + dy));
       el.style.left = `${asset.x}px`;
       el.style.top = `${asset.y}px`;
 
-      if (asset.type === "md") {
+      if (isFolderorableAsset(asset)) {
         highlightDropTargetFolder(moveEvent.clientX, moveEvent.clientY);
       }
     }
@@ -632,7 +732,7 @@ function bindAssetEvents(el, asset) {
       el.classList.remove("dragging");
       clearFolderHighlights();
 
-      if (asset.type === "md") {
+      if (isFolderorableAsset(asset)) {
         const targetFolderId = findDropTargetFolderId(upEvent.clientX, upEvent.clientY);
         if (targetFolderId) {
           asset.folderId = targetFolderId;
@@ -653,7 +753,7 @@ function bindAssetEvents(el, asset) {
     window.addEventListener("mouseup", onMouseUp);
   });
 
-  // 크기 조절
+  // 크기 조절 (반응형 스케일 보정 포함)
   resizeHandle.addEventListener("mousedown", e => {
     if (e.button !== 0) return;
     if (globalLocked || asset.locked) return;
@@ -665,12 +765,12 @@ function bindAssetEvents(el, asset) {
     const origW = asset.w;
     const origH = asset.h;
 
-    const minW = asset.type === "badge" || asset.type === "md" || asset.type === "folder" ? 90 : 140;
+    const minW = ["badge", "md", "file", "folder"].includes(asset.type) ? 90 : 140;
     const minH = asset.type === "badge" ? 32 : 45;
 
     function onMouseMove(moveEvent) {
-      const dw = moveEvent.clientX - startX;
-      const dh = moveEvent.clientY - startY;
+      const dw = (moveEvent.clientX - startX) / boardScale;
+      const dh = (moveEvent.clientY - startY) / boardScale;
       asset.w = Math.max(minW, snap(origW + dw));
       asset.h = Math.max(minH, snap(origH + dh));
       el.style.width = `${asset.w}px`;
@@ -688,9 +788,7 @@ function bindAssetEvents(el, asset) {
   });
 }
 
-// 마우스 좌표 기준 폴더 드롭 타겟 탐색 (열린 폴더 팝업창 또는 보드 위 폴더 아이콘)
 function findDropTargetFolderId(clientX, clientY) {
-  // 1) 열린 폴더 팝업창 위인지 확인
   if (activeFolderId && !folderWindow.classList.contains("hidden")) {
     const winRect = folderWindow.getBoundingClientRect();
     if (
@@ -703,7 +801,6 @@ function findDropTargetFolderId(clientX, clientY) {
     }
   }
 
-  // 2) 보드 위의 폴더 에셋 위인지 확인
   const folderEls = boardEl.querySelectorAll('.asset-item[data-type="folder"]');
   for (const fEl of folderEls) {
     const rect = fEl.getBoundingClientRect();
@@ -734,7 +831,7 @@ function clearFolderHighlights() {
 }
 
 // =========================================================================
-// 실제 폴더 팝업 윈도우 (열기 / 내부 MD 아이콘 렌더링 / 바깥 보드로 드래그 꺼내기)
+// 실제 폴더 팝업 윈도우 (MD 메모장 + 이미지/음악/영상/일반 파일 모두 표시)
 // =========================================================================
 function openFolderWindow(folderId) {
   const folder = assets.find(a => a.id === folderId && a.type === "folder");
@@ -757,7 +854,7 @@ function renderFolderWindowContent(folderId) {
     return;
   }
 
-  const items = assets.filter(a => a.type === "md" && a.folderId === folderId);
+  const items = assets.filter(a => isFolderorableAsset(a) && a.folderId === folderId);
   folderWinTitleText.textContent = folder.title;
   folderPathText.textContent = `📁 Mixboard / ${folder.title}`;
   folderCountText.textContent = `${items.length}개 파일`;
@@ -770,32 +867,41 @@ function renderFolderWindowContent(folderId) {
     empty.innerHTML = `
       <div style="font-size:2rem;">📂</div>
       <div>폴더가 비어 있습니다.</div>
-      <div style="font-size:0.78rem;">상단 <b>+ 새 MD 작성</b>을 누르거나 보드의 MD 파일 또는 PC의 <code>.md</code> 파일을 이곳으로 드래그하세요.</div>
+      <div style="font-size:0.78rem;">상단 <b>📥 파일 업로드</b>를 누르거나 PC의 파일(이미지·음악·영상·문서·exe·md)을 이곳으로 드래그하세요.</div>
     `;
     folderGrid.appendChild(empty);
     return;
   }
 
-  items.forEach(mdAsset => {
+  items.forEach(itemAsset => {
     const cell = document.createElement("div");
-    cell.className = `folder-grid-item color-${mdAsset.color || "indigo"}`;
-    cell.dataset.id = mdAsset.id;
-    cell.innerHTML = `
-      <div class="md-paper-icon">
-        <div class="md-lines">
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
-        <span class="md-tag-pill">MD</span>
-      </div>
-      <div class="md-file-label" title="${escapeHtml(mdAsset.title)}">${escapeHtml(mdAsset.title)}</div>
-    `;
+    cell.className = `folder-grid-item color-${itemAsset.color || "indigo"}`;
+    cell.dataset.id = itemAsset.id;
 
-    // 더블클릭 시 마크다운 뷰어 오픈
+    if (itemAsset.type === "md") {
+      cell.innerHTML = `
+        <div class="md-paper-icon">
+          <div class="md-lines">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+          <span class="md-tag-pill">MD</span>
+        </div>
+        <div class="md-file-label" title="${escapeHtml(itemAsset.title)}">${escapeHtml(itemAsset.title)}</div>
+      `;
+    } else {
+      cell.innerHTML = buildFileIconMarkup(itemAsset);
+    }
+
+    // 더블클릭 시 열기
     cell.addEventListener("dblclick", e => {
       e.stopPropagation();
-      openMdModal(mdAsset.id, "preview");
+      if (itemAsset.type === "md") {
+        openMdModal(itemAsset.id, "preview");
+      } else {
+        openFileActionModal(itemAsset.id);
+      }
     });
 
     // 폴더 안에서 드래그하여 창 바깥(믹스보드)으로 놓으면 보드로 꺼내기
@@ -813,13 +919,13 @@ function renderFolderWindowContent(folderId) {
         if (dist > 8 && !moved) {
           moved = true;
           ghost = document.createElement("div");
-          ghost.className = `md-drag-ghost color-${mdAsset.color || "indigo"}`;
+          ghost.className = `md-drag-ghost color-${itemAsset.color || "indigo"}`;
           ghost.innerHTML = cell.innerHTML;
           document.body.appendChild(ghost);
         }
         if (ghost) {
           ghost.style.left = `${mv.clientX}px`;
-          ghost.style.top = `${mv.clientY}px`;
+          ghost.style.top = `${mv.clientY}px}`;
         }
       }
 
@@ -838,17 +944,15 @@ function renderFolderWindowContent(folderId) {
           up.clientY > winRect.bottom;
 
         if (isOutsideWindow) {
-          // 다른 폴더 위에 놓았는지 확인
           const otherFolderId = findDropTargetFolderId(up.clientX, up.clientY);
           if (otherFolderId && otherFolderId !== folderId) {
-            mdAsset.folderId = otherFolderId;
+            itemAsset.folderId = otherFolderId;
           } else {
-            // 믹스보드 캔버스 좌표로 변환해 꺼내기
             const boardRect = boardEl.getBoundingClientRect();
-            mdAsset.folderId = null;
-            mdAsset.x = Math.max(20, snap(up.clientX - boardRect.left - 50));
-            mdAsset.y = Math.max(20, snap(up.clientY - boardRect.top - 50));
-            mdAsset.z = getMaxZ("md");
+            itemAsset.folderId = null;
+            itemAsset.x = Math.max(20, snap((up.clientX - boardRect.left) / boardScale - 50));
+            itemAsset.y = Math.max(20, snap((up.clientY - boardRect.top) / boardScale - 50));
+            itemAsset.z = getMaxZ(itemAsset.type);
           }
           saveState();
           renderBoard();
@@ -871,8 +975,8 @@ function bindFolderWindowEvents() {
     addNewAsset("md", activeFolderId);
   });
 
-  document.getElementById("btnFolderUploadMd").addEventListener("click", () => {
-    const fileInput = document.getElementById("fileMdUpload");
+  document.getElementById("btnFolderUploadFile").addEventListener("click", () => {
+    const fileInput = document.getElementById("fileAnyUpload");
     fileInput.dataset.targetFolder = activeFolderId || "";
     fileInput.click();
   });
@@ -881,7 +985,6 @@ function bindFolderWindowEvents() {
     if (activeFolderId) openEditModal(activeFolderId);
   });
 
-  // 폴더 팝업 창 헤더 드래그 이동
   folderWindowHeader.addEventListener("mousedown", e => {
     if (e.target.closest("button")) return;
     e.preventDefault();
@@ -910,7 +1013,186 @@ function bindFolderWindowEvents() {
 }
 
 // =========================================================================
-// 마크다운(.md) 뷰어 & 에디터 모달 (열기 / 전체 복사 / .md 파일 다운로드 / 저장)
+// 커스텀 미디어 & 일반 파일 액션/뷰어 팝업 모달
+// - 음악/영상: "바로 재생하기" vs "내 PC로 다운로드" 예쁜 카드 선택창 먼저 표시
+// - 이미지: 즉시 큰 이미지 프리뷰 + 다운로드 버튼
+// - 엑셀/압축/exe 등 일반 파일: 파일 상세 카드 + 원본 다운로드 버튼
+// =========================================================================
+function openFileActionModal(fileId) {
+  const fileAsset = assets.find(a => a.id === fileId && a.type === "file");
+  if (!fileAsset) return;
+
+  activeFileId = fileId;
+  fileModalIcon.textContent = getFileTypeEmoji(fileAsset.fileCategory, fileAsset.ext);
+  fileModalTitle.textContent = fileAsset.title || "파일";
+
+  const sizeText = formatBytes(fileAsset.fileSize);
+  const extUpper = (fileAsset.ext || "FILE").toUpperCase();
+  fileModalMeta.textContent = [extUpper + " 파일", sizeText].filter(Boolean).join(" · ");
+
+  if (fileAsset.folderId) {
+    btnFileMoveOut.classList.remove("hidden");
+  } else {
+    btnFileMoveOut.classList.add("hidden");
+  }
+
+  fileStageArea.innerHTML = "";
+
+  // 음악(audio) 또는 영상(video)이면 먼저 "바로 재생 vs 다운로드" 선택 팝업 표시!
+  if (fileAsset.fileCategory === "audio" || fileAsset.fileCategory === "video") {
+    mediaChoiceBox.classList.remove("hidden");
+    fileStageArea.classList.add("hidden");
+  } else if (fileAsset.fileCategory === "image") {
+    mediaChoiceBox.classList.add("hidden");
+    fileStageArea.classList.remove("hidden");
+    renderFileStageContent(fileAsset);
+  } else {
+    // 일반 파일 (엑셀, PDF, ZIP, EXE 등)
+    mediaChoiceBox.classList.add("hidden");
+    fileStageArea.classList.remove("hidden");
+    renderFileStageContent(fileAsset);
+  }
+
+  fileActionModal.classList.remove("hidden");
+}
+
+function closeFileActionModal() {
+  // 재생 중인 오디오/비디오 정지
+  fileStageArea.innerHTML = "";
+  fileActionModal.classList.add("hidden");
+  activeFileId = null;
+}
+
+function getAssetSourceUrl(fileAsset) {
+  return fileAsset.fileUrl || fileAsset.dataUrl || "";
+}
+
+function renderFileStageContent(fileAsset) {
+  const src = getAssetSourceUrl(fileAsset);
+  fileStageArea.innerHTML = "";
+
+  if (fileAsset.fileCategory === "image") {
+    fileStageArea.innerHTML = `
+      <img src="${escapeHtml(src)}" class="stage-image-preview" alt="${escapeHtml(fileAsset.title)}" />
+    `;
+  } else if (fileAsset.fileCategory === "video") {
+    fileStageArea.innerHTML = `
+      <video src="${escapeHtml(src)}" class="stage-video-player" controls autoplay></video>
+    `;
+  } else if (fileAsset.fileCategory === "audio") {
+    fileStageArea.innerHTML = `
+      <div class="stage-audio-wrap">
+        <div class="audio-disc-visual">🎵</div>
+        <div style="font-weight:700;font-size:0.95rem;">${escapeHtml(fileAsset.title)}</div>
+        <audio src="${escapeHtml(src)}" class="stage-audio-player" controls autoplay></audio>
+      </div>
+    `;
+  } else {
+    const ext = (fileAsset.ext || "").toLowerCase();
+    const canBrowserOpen = ["pdf", "txt", "html", "svg", "json", "csv"].includes(ext);
+    fileStageArea.innerHTML = `
+      <div class="stage-generic-card">
+        <div class="big-icon">${getFileTypeEmoji(fileAsset.fileCategory, fileAsset.ext)}</div>
+        <div style="font-weight:800;font-size:1rem;">${escapeHtml(fileAsset.title)}</div>
+        <p>이 파일(${escapeHtml((fileAsset.ext || " 일반").toUpperCase())})은 아래 <b>💾 원본 파일 내려받기</b> 버튼을 눌러 내 PC에 바로 저장할 수 있습니다.</p>
+        ${
+          canBrowserOpen && src
+            ? `<a href="${escapeHtml(src)}" target="_blank" rel="noopener noreferrer" class="open-link-btn" style="padding:8px 14px;font-size:0.84rem;margin-top:4px;">🌐 새 탭에서 바로 열기 ↗</a>`
+            : ""
+        }
+      </div>
+    `;
+  }
+}
+
+async function triggerFileDownload(fileAsset) {
+  const src = getAssetSourceUrl(fileAsset);
+  if (!src) {
+    alert("파일 경로가 없습니다.");
+    return;
+  }
+
+  try {
+    // 크로스 오리진 GitHub Raw URL도 파일명 그대로 즉시 다운로드되도록 Blob 변환 시도
+    if (src.startsWith("http")) {
+      showUploadToast(`💾 '${fileAsset.title}' 다운로드 준비 중...`);
+      const res = await fetch(src);
+      const blob = await res.blob();
+      const blobUrl = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = blobUrl;
+      a.download = fileAsset.title || "download";
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(blobUrl);
+      hideUploadToast(1200);
+      return;
+    }
+  } catch {
+    // 폴백으로 일반 링크 다운로드
+  }
+
+  const a = document.createElement("a");
+  a.href = src;
+  a.download = fileAsset.title || "download";
+  a.target = "_blank";
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+}
+
+function bindFileModalEvents() {
+  document.getElementById("btnCloseFileModal").addEventListener("click", closeFileActionModal);
+
+  // 음악/영상 선택 카드 1: ▶️ 바로 재생하기
+  document.getElementById("btnChoicePlay").addEventListener("click", () => {
+    const fileAsset = assets.find(a => a.id === activeFileId);
+    if (!fileAsset) return;
+    mediaChoiceBox.classList.add("hidden");
+    fileStageArea.classList.remove("hidden");
+    renderFileStageContent(fileAsset);
+  });
+
+  // 음악/영상 선택 카드 2: 💾 내 PC로 다운로드
+  document.getElementById("btnChoiceDownload").addEventListener("click", () => {
+    const fileAsset = assets.find(a => a.id === activeFileId);
+    if (!fileAsset) return;
+    triggerFileDownload(fileAsset);
+  });
+
+  // 하단 원본 파일 내려받기 버튼
+  document.getElementById("btnFileDirectDownload").addEventListener("click", () => {
+    const fileAsset = assets.find(a => a.id === activeFileId);
+    if (!fileAsset) return;
+    triggerFileDownload(fileAsset);
+  });
+
+  // 폴더 밖 보드로 꺼내기
+  btnFileMoveOut.addEventListener("click", () => {
+    const fileAsset = assets.find(a => a.id === activeFileId);
+    if (!fileAsset) return;
+    fileAsset.folderId = null;
+    fileAsset.x = snap((window.scrollX || 0) + 200);
+    fileAsset.y = snap((window.scrollY || 0) + 200);
+    fileAsset.z = getMaxZ("file");
+    saveState();
+    renderBoard();
+    btnFileMoveOut.classList.add("hidden");
+  });
+
+  // 파일 삭제
+  document.getElementById("btnFileDelete").addEventListener("click", () => {
+    if (!activeFileId) return;
+    if (confirm("이 파일을 보드에서 삭제하시겠습니까?")) {
+      deleteAsset(activeFileId);
+      closeFileActionModal();
+    }
+  });
+}
+
+// =========================================================================
+// 마크다운(.md) 메모장 뷰어 & 에디터 모달
 // =========================================================================
 function openMdModal(mdId, mode = "preview") {
   const mdAsset = assets.find(a => a.id === mdId && a.type === "md");
@@ -972,7 +1254,6 @@ function bindMdModalEvents() {
 
   document.getElementById("btnCloseMdModal").addEventListener("click", closeMdModal);
 
-  // 클립보드 전체 복사
   document.getElementById("btnMdCopy").addEventListener("click", async () => {
     const text = mdEditorArea.value;
     try {
@@ -986,7 +1267,6 @@ function bindMdModalEvents() {
     }
   });
 
-  // 실제 .md 파일로 PC에 내려받기 저장
   document.getElementById("btnMdDownload").addEventListener("click", () => {
     const filename = ensureMdExtension(mdInputTitle.value);
     const content = mdEditorArea.value;
@@ -1000,7 +1280,6 @@ function bindMdModalEvents() {
     showMdToast(`💾 ${filename} 다운로드 완료!`);
   });
 
-  // 내용 저장
   document.getElementById("btnMdSave").addEventListener("click", () => {
     const mdAsset = assets.find(a => a.id === activeMdId);
     if (!mdAsset) return;
@@ -1013,7 +1292,6 @@ function bindMdModalEvents() {
     showMdToast("✓ 저장되었습니다!");
   });
 
-  // 보드 밖으로 꺼내기 버튼
   btnMdMoveOut.addEventListener("click", () => {
     const mdAsset = assets.find(a => a.id === activeMdId);
     if (!mdAsset) return;
@@ -1028,49 +1306,36 @@ function bindMdModalEvents() {
     showMdToast("📤 보드 위로 꺼냈습니다!");
   });
 
-  // MD 삭제
   document.getElementById("btnMdDelete").addEventListener("click", () => {
     if (!activeMdId) return;
-    if (confirm("이 마크다운 문서를 삭제하시겠습니까?")) {
+    if (confirm("이 메모 문서를 삭제하시겠습니까?")) {
       deleteAsset(activeMdId);
       closeMdModal();
     }
   });
 }
 
-// 깔끔한 내장 마크다운 파서 (외부 CDN 없이 오프라인/사내망 완벽 동작)
 function renderMarkdown(mdText) {
   if (!mdText || !mdText.trim()) {
-    return `<p style="color:var(--text-muted);">내용이 없습니다. 상단 <b>✏️ 원본/편집</b> 탭을 눌러 내용을 작성하세요.</p>`;
+    return `<p style="color:var(--text-muted);">내용이 없습니다. 상단 <b>✏️ 메모장 편집</b> 탭을 눌러 내용을 작성하세요.</p>`;
   }
 
   let html = escapeHtml(mdText);
 
-  // 코드 블록 ``` ... ```
   html = html.replace(/```([a-zA-Z0-9_-]*)\n([\s\S]*?)```/g, (_, lang, code) => {
     return `<pre><code class="lang-${lang}">${code}</code></pre>`;
   });
 
-  // 인라인 코드 `...`
   html = html.replace(/`([^`\n]+)`/g, "<code>$1</code>");
-
-  // 헤더 #, ##, ###
   html = html.replace(/^### (.+)$/gm, "<h3>$1</h3>");
   html = html.replace(/^## (.+)$/gm, "<h2>$1</h2>");
   html = html.replace(/^# (.+)$/gm, "<h1>$1</h1>");
-
-  // 인용구 >
   html = html.replace(/^&gt; (.+)$/gm, "<blockquote>$1</blockquote>");
-
-  // 굵게 / 기울임
   html = html.replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
   html = html.replace(/\*([^*]+)\*/g, "<em>$1</em>");
-
-  // 리스트 - 또는 *
   html = html.replace(/^(?:- |\* )(.+)$/gm, "<li>$1</li>");
   html = html.replace(/(<li>.*<\/li>\n?)+/g, match => `<ul>${match}</ul>`);
 
-  // 줄바꿈 단락 처리
   return html
     .split(/\n{2,}/)
     .map(block => {
@@ -1090,22 +1355,103 @@ function renderMarkdown(mdText) {
 }
 
 // =========================================================================
-// PC의 .md 파일 업로드 및 브라우저 드래그 앤 드롭 지원
+// 모든 파일 업로드 처리 (.md / 이미지 / 음악 / 영상 / 엑셀 / 압축 / exe 등)
 // =========================================================================
-function importMdFiles(fileList, targetFolderId = null, dropX = null, dropY = null) {
-  Array.from(fileList).forEach((file, idx) => {
-    const reader = new FileReader();
-    reader.onload = evt => {
-      const content = evt.target.result || "";
-      const baseX = dropX !== null ? snap(dropX + idx * 30) : snap((window.scrollX || 0) + 160 + idx * 30);
-      const baseY = dropY !== null ? snap(dropY + idx * 30) : snap((window.scrollY || 0) + 160 + idx * 30);
+function detectFileCategory(file) {
+  const name = file.name || "";
+  const ext = name.includes(".") ? name.split(".").pop().toLowerCase() : "";
+  const mime = (file.type || "").toLowerCase();
 
+  if (["md", "markdown"].includes(ext)) return { category: "md", ext: "md" };
+  if (mime.startsWith("image/") || ["png", "jpg", "jpeg", "gif", "webp", "svg", "bmp", "ico"].includes(ext)) {
+    return { category: "image", ext: ext || "img" };
+  }
+  if (mime.startsWith("audio/") || ["mp3", "wav", "ogg", "m4a", "flac", "aac"].includes(ext)) {
+    return { category: "audio", ext: ext || "mp3" };
+  }
+  if (mime.startsWith("video/") || ["mp4", "webm", "mov", "mkv", "avi"].includes(ext)) {
+    return { category: "video", ext: ext || "mp4" };
+  }
+  return { category: "other", ext: ext || "file" };
+}
+
+function getCategoryDefaultColor(category) {
+  if (category === "image") return "emerald";
+  if (category === "audio") return "rose";
+  if (category === "video") return "violet";
+  return "blue";
+}
+
+function showUploadToast(msg) {
+  uploadStatusToast.textContent = msg;
+  uploadStatusToast.classList.remove("hidden");
+}
+
+function hideUploadToast(delay = 2000) {
+  setTimeout(() => {
+    uploadStatusToast.classList.add("hidden");
+  }, delay);
+}
+
+function arrayBufferToBase64(buffer) {
+  const bytes = new Uint8Array(buffer);
+  const chunkSize = 0x8000;
+  let binary = "";
+  for (let i = 0; i < bytes.length; i += chunkSize) {
+    binary += String.fromCharCode.apply(null, bytes.subarray(i, i + chunkSize));
+  }
+  return btoa(binary);
+}
+
+async function uploadBinaryFileToGithub(file, base64Content) {
+  const cfg = getGhConfig();
+  if (!cfg.token || !cfg.repo) return null;
+
+  const safeName = file.name.replace(/[^a-zA-Z0-9._\-\uAC00-\uD7A3]/g, "_");
+  const path = `uploads/${Date.now()}_${safeName}`;
+  const putUrl = `https://api.github.com/repos/${cfg.repo}/contents/${encodeURI(path)}`;
+
+  const res = await fetch(putUrl, {
+    method: "PUT",
+    headers: {
+      Accept: "application/vnd.github.v3+json",
+      Authorization: `token ${cfg.token}`,
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      message: `Upload file: ${file.name}`,
+      content: base64Content,
+      branch: cfg.branch || "main"
+    })
+  });
+
+  if (!res.ok) {
+    throw new Error(`GitHub 파일 업로드 실패 (HTTP ${res.status})`);
+  }
+
+  const branch = cfg.branch || "main";
+  return `https://raw.githubusercontent.com/${cfg.repo}/${encodeURIComponent(branch)}/${encodeURI(path)}`;
+}
+
+async function handleAnyFilesUpload(fileList, targetFolderId = null, dropX = null, dropY = null) {
+  const files = Array.from(fileList);
+  if (files.length === 0) return;
+
+  for (let idx = 0; idx < files.length; idx++) {
+    const file = files[idx];
+    const { category, ext } = detectFileCategory(file);
+    const baseX = dropX !== null ? snap(dropX + idx * 30) : snap((window.scrollX || 0) + 160 + idx * 30);
+    const baseY = dropY !== null ? snap(dropY + idx * 30) : snap((window.scrollY || 0) + 160 + idx * 30);
+
+    // 1) .md 마크다운 파일은 기존처럼 메모장 에셋으로 즉시 추가
+    if (category === "md") {
+      const text = await file.text();
       const newMd = {
         id: "md-" + Date.now() + "-" + Math.floor(Math.random() * 1000),
         type: "md",
         title: ensureMdExtension(file.name),
         subtitle: "",
-        content,
+        content: text,
         folderId: targetFolderId || null,
         x: baseX,
         y: baseY,
@@ -1115,13 +1461,66 @@ function importMdFiles(fileList, targetFolderId = null, dropX = null, dropY = nu
         locked: false,
         z: getMaxZ("md")
       };
-
       assets.push(newMd);
       saveState();
       renderBoard();
-    };
-    reader.readAsText(file, "utf-8");
-  });
+      continue;
+    }
+
+    // 2) 이미지, 음악, 영상, 엑셀, exe 등 모든 일반 파일 처리
+    showUploadToast(`📤 '${file.name}' (${formatBytes(file.size)}) 업로드 중...`);
+    try {
+      const buffer = await file.arrayBuffer();
+      const b64 = arrayBufferToBase64(buffer);
+      let remoteUrl = null;
+
+      try {
+        remoteUrl = await uploadBinaryFileToGithub(file, b64);
+      } catch (uploadErr) {
+        console.warn("GitHub 직접 업로드 실패, 로컬 데이터 URL 폴백:", uploadErr);
+      }
+
+      const mime = file.type || "application/octet-stream";
+      // GitHub 업로드가 성공하면 가벼운 원격 URL을 저장하고, 오프라인/실패 시에만 소용량 파일에 한해 dataUrl 보관
+      const fallbackDataUrl = !remoteUrl && file.size <= 3 * 1024 * 1024 ? `data:${mime};base64,${b64}` : "";
+
+      if (!remoteUrl && !fallbackDataUrl) {
+        alert(`'${file.name}' 파일이 너무 커서(또는 GitHub 연동 오류로) 업로드하지 못했습니다. (파일당 25MB 이하 권장)`);
+        continue;
+      }
+
+      const newFileAsset = {
+        id: "file-" + Date.now() + "-" + Math.floor(Math.random() * 1000),
+        type: "file",
+        fileCategory: category, // 'image' | 'audio' | 'video' | 'other'
+        ext,
+        fileSize: file.size,
+        mimeType: mime,
+        title: file.name,
+        subtitle: formatBytes(file.size),
+        fileUrl: remoteUrl || "",
+        dataUrl: fallbackDataUrl,
+        folderId: targetFolderId || null,
+        x: baseX,
+        y: baseY,
+        w: 120,
+        h: 106,
+        color: getCategoryDefaultColor(category),
+        locked: false,
+        z: getMaxZ("file")
+      };
+
+      assets.push(newFileAsset);
+      saveState();
+      renderBoard();
+      showUploadToast(`✓ '${file.name}' 업로드 완료!`);
+      hideUploadToast(2200);
+    } catch (err) {
+      console.error("파일 처리 실패:", err);
+      showUploadToast(`⚠️ '${file.name}' 업로드 실패`);
+      hideUploadToast(2500);
+    }
+  }
 }
 
 function bindExternalFileDrop() {
@@ -1133,18 +1532,12 @@ function bindExternalFileDrop() {
     e.preventDefault();
     if (!e.dataTransfer || !e.dataTransfer.files || e.dataTransfer.files.length === 0) return;
 
-    const files = Array.from(e.dataTransfer.files).filter(
-      f => f.name.endsWith(".md") || f.name.endsWith(".txt") || f.name.endsWith(".markdown")
-    );
-    if (files.length === 0) return;
-
-    // 드롭한 위치가 폴더 팝업이나 보드의 폴더 아이콘 위면 해당 폴더 안으로 바로 저장
     const targetFolderId = findDropTargetFolderId(e.clientX, e.clientY);
     const boardRect = boardEl.getBoundingClientRect();
-    const dropX = Math.max(20, e.clientX - boardRect.left - 50);
-    const dropY = Math.max(20, e.clientY - boardRect.top - 50);
+    const dropX = Math.max(20, (e.clientX - boardRect.left) / boardScale - 50);
+    const dropY = Math.max(20, (e.clientY - boardRect.top) / boardScale - 50);
 
-    importMdFiles(files, targetFolderId, dropX, dropY);
+    handleAnyFilesUpload(e.dataTransfer.files, targetFolderId, dropX, dropY);
   });
 }
 
@@ -1159,18 +1552,26 @@ function bindToolbarEvents() {
   document.getElementById("btnAddShape").addEventListener("click", () => addNewAsset("shape"));
   document.getElementById("btnAddText").addEventListener("click", () => addNewAsset("text"));
 
-  const fileMdUpload = document.getElementById("fileMdUpload");
-  document.getElementById("btnUploadMd").addEventListener("click", () => {
-    fileMdUpload.dataset.targetFolder = activeFolderId || "";
-    fileMdUpload.click();
+  const fileAnyUpload = document.getElementById("fileAnyUpload");
+  document.getElementById("btnUploadFile").addEventListener("click", () => {
+    fileAnyUpload.dataset.targetFolder = activeFolderId || "";
+    fileAnyUpload.click();
   });
 
-  fileMdUpload.addEventListener("change", e => {
+  fileAnyUpload.addEventListener("change", e => {
     if (e.target.files && e.target.files.length > 0) {
-      const targetFolder = fileMdUpload.dataset.targetFolder || null;
-      importMdFiles(e.target.files, targetFolder);
+      const targetFolder = fileAnyUpload.dataset.targetFolder || null;
+      handleAnyFilesUpload(e.target.files, targetFolder);
     }
-    fileMdUpload.value = "";
+    fileAnyUpload.value = "";
+  });
+
+  // 자동 화면 맞춤(반응형 스케일) 켜기/끄기
+  const btnAutoFit = document.getElementById("btnAutoFit");
+  btnAutoFit.addEventListener("click", () => {
+    autoFitEnabled = !autoFitEnabled;
+    btnAutoFit.classList.toggle("active", autoFitEnabled);
+    updateBoardResponsiveScale();
   });
 
   const btnSnapToggle = document.getElementById("btnSnapToggle");
@@ -1198,7 +1599,6 @@ function bindToolbarEvents() {
     }
   });
 
-  // 전체 JSON 내보내기 (폴더 + MD 파일 내용까지 전부 포함)
   document.getElementById("btnExport").addEventListener("click", () => {
     const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(assets, null, 2));
     const a = document.createElement("a");
@@ -1294,7 +1694,7 @@ function addNewAsset(type, targetFolderId = null) {
       id,
       type: "folder",
       title: "새 폴더",
-      subtitle: "MD 문서 보관함",
+      subtitle: "파일 및 메모 보관함",
       x: baseX,
       y: baseY,
       w: 130,
@@ -1307,9 +1707,9 @@ function addNewAsset(type, targetFolderId = null) {
     newAsset = {
       id,
       type: "md",
-      title: "새_안티그래비티_노트.md",
+      title: "새_메모장.md",
       subtitle: "",
-      content: "# 새 마크다운 문서\n\n여기에 집/회사 PC에서 이어할 안티그래비티 내용이나 프롬프트를 기록하세요.\n",
+      content: "# 새 메모\n\n여기에 자유롭게 메모나 안티그래비티 내용을 기록하세요.\n",
       folderId: targetFolderId || null,
       x: baseX,
       y: baseY,
@@ -1409,10 +1809,9 @@ function deleteAsset(id) {
   const target = assets.find(a => a.id === id);
   if (!target) return;
 
-  // 폴더 삭제 시 안에 있던 MD 파일들은 믹스보드 위로 꺼내서 유실 방지
   if (target.type === "folder") {
     assets.forEach(a => {
-      if (a.type === "md" && a.folderId === id) {
+      if (isFolderorableAsset(a) && a.folderId === id) {
         a.folderId = null;
         a.x = target.x + 20;
         a.y = target.y + 20;
@@ -1440,7 +1839,6 @@ function escapeHtml(str) {
 let ghSyncTimer = null;
 let ghFileSha = null;
 
-// 기본 내장 토큰 (GitHub Secret Scanning에 의해 자동 폐기되지 않도록 분할 결합)
 function getDefaultGhToken() {
   return ["ghp_", "RaAYy7mxZpRdfFj", "MDlUlTizzQXLIgM", "2hnEXa"].join("");
 }
@@ -1488,9 +1886,10 @@ function updateGhBadgeStatus() {
 
 function utf8ToBase64(str) {
   const bytes = new TextEncoder().encode(str);
+  const chunkSize = 0x8000;
   let binary = "";
-  for (let i = 0; i < bytes.length; i++) {
-    binary += String.fromCharCode(bytes[i]);
+  for (let i = 0; i < bytes.length; i += chunkSize) {
+    binary += String.fromCharCode.apply(null, bytes.subarray(i, i + chunkSize));
   }
   return btoa(binary);
 }
@@ -1509,13 +1908,11 @@ async function autoPullFromGithubOnStart() {
   updateGhBadgeStatus();
   const cfg = getGhConfig();
 
-  // 1) 토큰이 설정된 경우 GitHub API로 최신 board-data.json 조회 (캐시 없이 즉시 최신 반영)
   if (cfg.token && cfg.repo) {
     await pullFromGithubApi(false);
     return;
   }
 
-  // 2) 토큰이 없더라도 GitHub Pages에 올라와 있는 board-data.json이 있으면 읽기 시도
   try {
     const res = await fetch(`./${GH_DATA_FILE}?t=${Date.now()}`, { cache: "no-store" });
     if (res.ok) {
@@ -1526,9 +1923,7 @@ async function autoPullFromGithubOnStart() {
         renderBoard();
       }
     }
-  } catch {
-    // 로컬 파일(file://)이거나 아직 board-data.json이 없는 경우 무시
-  }
+  } catch {}
 }
 
 async function pullFromGithubApi(showAlert = false) {
@@ -1545,7 +1940,6 @@ async function pullFromGithubApi(showAlert = false) {
     const res = await fetch(url, { headers, cache: "no-store" });
 
     if (res.status === 404) {
-      // 아직 저장소에 board-data.json이 없으면 현재 보드 상태를 최초 생성 푸시
       if (cfg.token) {
         await pushToGithubNow();
         return true;
@@ -1569,10 +1963,10 @@ async function pullFromGithubApi(showAlert = false) {
       renderBoard();
     }
 
-    setGhSyncIndicator("synced", "☁️ 동기화 완료");
+    setGhSyncIndicator("synced", "☁️ 자동저장 완료");
     if (statusEl && showAlert) {
       statusEl.style.color = "#10b981";
-      statusEl.textContent = "✓ GitHub에서 최신 보드 & MD 파일들을 성공적으로 불러왔습니다!";
+      statusEl.textContent = "✓ GitHub에서 최신 보드 & 파일 목록을 성공적으로 불러왔습니다!";
     }
     return true;
   } catch (err) {
@@ -1610,7 +2004,6 @@ async function pushToGithubNow(showStatusInModal = false) {
       "Content-Type": "application/json"
     };
 
-    // 최신 SHA 조회
     const getUrl = `https://api.github.com/repos/${cfg.repo}/contents/${GH_DATA_FILE}?ref=${encodeURIComponent(cfg.branch || "main")}&t=${Date.now()}`;
     const getRes = await fetch(getUrl, { headers, cache: "no-store" });
     if (getRes.ok) {
@@ -1622,7 +2015,7 @@ async function pushToGithubNow(showStatusInModal = false) {
 
     const contentBase64 = utf8ToBase64(JSON.stringify(assets, null, 2));
     const body = {
-      message: "Auto-sync Mixboard portal & MD files",
+      message: "Auto-sync Mixboard portal & files",
       content: contentBase64,
       branch: cfg.branch || "main"
     };
@@ -1655,7 +2048,7 @@ async function pushToGithubNow(showStatusInModal = false) {
     setGhSyncIndicator("error", "⚠️ 저장 오류");
     if (statusEl && showStatusInModal) {
       statusEl.style.color = "#e11d48";
-      statusEl.textContent = `⚠️ 오류: ${err.message} (토큰 repo 권한 및 저장소명을 확인하세요)`;
+      statusEl.textContent = `⚠️ 오류: ${err.message}`;
     }
     return false;
   }

@@ -79,27 +79,34 @@ body {
   user-select: none;
 }
 
-/* 상단 고정 툴바 */
-.toolbar {
-  position: fixed;
+/* 상단 고정 영역 (창 크기 줄여도 절대 찌그러지거나 겹치지 않음) */
+.top-chrome {
+  position: sticky;
   top: 0;
   left: 0;
   right: 0;
-  height: 60px;
+  z-index: 9999;
   background: var(--toolbar-bg);
   backdrop-filter: blur(12px);
+}
+
+.toolbar {
+  min-height: 54px;
   border-bottom: 1px solid var(--toolbar-border);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 20px;
-  z-index: 9999;
+  padding: 8px 16px;
+  gap: 12px;
+  flex-wrap: wrap;
 }
 
 .toolbar-brand {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
+  flex-shrink: 0;
+  white-space: nowrap;
 }
 
 .brand-dot {
@@ -108,50 +115,55 @@ body {
   border-radius: 50%;
   background: var(--accent);
   box-shadow: 0 0 8px var(--accent);
+  flex-shrink: 0;
 }
 
 .toolbar-brand h1 {
-  font-size: 1.05rem;
-  font-weight: 700;
+  font-size: 1rem;
+  font-weight: 800;
   letter-spacing: -0.02em;
+  white-space: nowrap;
 }
 
 .toolbar-brand .badge {
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   padding: 3px 8px;
   border-radius: 999px;
   background: var(--btn-bg);
   color: var(--text-sub);
   font-weight: 600;
+  white-space: nowrap;
 }
 
 .toolbar-actions {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   flex-wrap: wrap;
 }
 
 .divider {
   width: 1px;
-  height: 22px;
+  height: 20px;
   background: var(--toolbar-border);
-  margin: 0 4px;
+  margin: 0 2px;
 }
 
 .tool-btn {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  height: 36px;
-  padding: 0 12px;
+  gap: 5px;
+  height: 32px;
+  padding: 0 10px;
   border-radius: 8px;
   border: 1px solid var(--card-border);
   background: var(--card-bg);
   color: var(--text-main);
-  font-size: 0.84rem;
+  font-size: 0.8rem;
   font-weight: 600;
   cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
   transition: all 0.15s ease;
 }
 
@@ -183,34 +195,37 @@ body {
 }
 
 .tool-btn.icon-only {
-  padding: 0 9px;
+  padding: 0 8px;
 }
 
 /* 안내 바 */
 .hint-bar {
-  position: fixed;
-  top: 60px;
-  left: 0;
-  right: 0;
-  height: 32px;
+  min-height: 28px;
+  padding: 4px 12px;
   background: var(--btn-bg);
   border-bottom: 1px solid var(--toolbar-border);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.76rem;
+  text-align: center;
+  font-size: 0.74rem;
   color: var(--text-sub);
-  z-index: 9998;
 }
 
-/* 믹스보드 도트 캔버스 */
+/* 믹스보드 뷰포트 & 도트 캔버스 */
+.board-viewport {
+  position: relative;
+  width: 100%;
+  overflow: auto;
+}
+
 .board-canvas {
   position: relative;
-  margin-top: 92px;
   width: 2400px;
   height: 1500px;
   background-image: radial-gradient(var(--dot-color) 1.25px, transparent 1.25px);
   background-size: 20px 20px;
+  transform-origin: 0 0;
 }
 
 /* 공통 에셋 아이템 */
@@ -1373,5 +1388,301 @@ body.global-locked .resize-handle {
   font-weight: 700;
   margin-top: 4px;
 }
+
+.tool-btn.file-accent {
+  border-color: #10b981;
+  color: #047857;
+  background: rgba(16, 185, 129, 0.1);
+}
+[data-theme="dark"] .tool-btn.file-accent {
+  color: #34d399;
+  background: rgba(16, 185, 129, 0.16);
+}
+
+/* 7. 범용 파일 에셋 (이미지 / 음악 / 영상 / 엑셀·exe 등 모든 파일) */
+.asset-item[data-type="file"] {
+  background: transparent;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 6px;
+  border-radius: 14px;
+  transition: transform 0.15s ease, background-color 0.15s ease;
+}
+
+.asset-item[data-type="file"]:hover {
+  background: rgba(148, 163, 184, 0.12);
+  transform: translateY(-2px);
+}
+
+.file-thumb-card {
+  position: relative;
+  width: 68px;
+  height: 68px;
+  border-radius: 14px;
+  background: var(--card-bg);
+  border: 1.5px solid var(--c-accent);
+  box-shadow: var(--card-shadow);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.file-thumb-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+.file-type-emoji {
+  font-size: 1.65rem;
+  line-height: 1;
+}
+
+.file-ext-badge {
+  position: absolute;
+  bottom: 4px;
+  right: 4px;
+  font-size: 0.56rem;
+  font-weight: 800;
+  padding: 1px 4px;
+  border-radius: 4px;
+  background: var(--c-accent);
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+/* 커스텀 미디어/파일 액션 & 뷰어 모달 */
+.file-modal {
+  width: 92%;
+  max-width: 640px;
+  background: var(--modal-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 20px;
+  padding: 22px 24px;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.45);
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  animation: folderPopIn 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.file-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.file-modal-title-wrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.file-modal-type-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: var(--btn-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.45rem;
+  flex-shrink: 0;
+}
+
+.file-modal-title-wrap h2 {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--text-main);
+  word-break: break-all;
+}
+
+.file-modal-meta {
+  font-size: 0.78rem;
+  color: var(--text-sub);
+  font-weight: 600;
+}
+
+/* 음악/영상: 바로 재생 vs 다운로드 예쁜 선택 카드 */
+.media-choice-box {
+  background: var(--bg-canvas);
+  border: 1px solid var(--card-border);
+  border-radius: 16px;
+  padding: 20px;
+  text-align: center;
+}
+
+.media-choice-box.hidden,
+.file-stage-area.hidden {
+  display: none;
+}
+
+.media-choice-prompt {
+  font-size: 0.94rem;
+  font-weight: 700;
+  color: var(--text-main);
+  margin-bottom: 16px;
+}
+
+.media-choice-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.choice-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 20px 14px;
+  border-radius: 14px;
+  border: 1.5px solid var(--card-border);
+  background: var(--card-bg);
+  color: var(--text-main);
+  cursor: pointer;
+  transition: all 0.16s ease;
+}
+
+.choice-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--card-hover-shadow);
+}
+
+.choice-card.play-choice:hover {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+
+.choice-card.download-choice:hover {
+  border-color: #10b981;
+  background: rgba(16, 185, 129, 0.1);
+}
+
+.choice-emoji {
+  font-size: 1.9rem;
+}
+
+.choice-title {
+  font-size: 0.95rem;
+  font-weight: 800;
+}
+
+.choice-desc {
+  font-size: 0.76rem;
+  color: var(--text-sub);
+}
+
+/* 파일 스테이지 영역 (이미지 뷰어 / 오디오·비디오 플레이어 / 일반 파일 카드) */
+.file-stage-area {
+  background: var(--bg-canvas);
+  border: 1px solid var(--card-border);
+  border-radius: 16px;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 180px;
+  max-height: 62vh;
+  overflow: auto;
+}
+
+.stage-image-preview {
+  max-width: 100%;
+  max-height: 54vh;
+  border-radius: 10px;
+  object-fit: contain;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.18);
+}
+
+.stage-video-player {
+  width: 100%;
+  max-height: 52vh;
+  border-radius: 12px;
+  background: #000;
+  outline: none;
+}
+
+.stage-audio-wrap {
+  width: 100%;
+  padding: 22px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.audio-disc-visual {
+  width: 74px;
+  height: 74px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  color: #fff;
+  box-shadow: 0 8px 20px rgba(99, 102, 241, 0.35);
+}
+
+.stage-audio-player {
+  width: 100%;
+}
+
+.stage-generic-card {
+  padding: 22px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.stage-generic-card .big-icon {
+  font-size: 3rem;
+}
+
+.stage-generic-card p {
+  font-size: 0.86rem;
+  color: var(--text-sub);
+  line-height: 1.5;
+}
+
+.file-modal-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 6px;
+}
+
+/* 업로드 진행 토스트 */
+.upload-status-toast {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  padding: 12px 18px;
+  border-radius: 12px;
+  background: var(--text-main);
+  color: var(--card-bg);
+  font-size: 0.84rem;
+  font-weight: 700;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+  z-index: 10010;
+}
+
+.upload-status-toast.hidden {
+  display: none;
+}
+
 
 
