@@ -256,5 +256,20 @@
     "color": "blue",
     "locked": false,
     "z": 124
+  },
+  {
+    "id": "asset-1794283943546",
+    "type": "md",
+    "title": "새_안티그래비티_노트.md",
+    "subtitle": "",
+    "content": "# 새 마크다운 문서\n\n여기에 집/회사 PC에서 이어할 안티그래비티 내용이나 프롬프트를 기록하세요.\n",
+    "folderId": null,
+    "x": 140,
+    "y": 480,
+    "w": 120,
+    "h": 100,
+    "color": "indigo",
+    "locked": false,
+    "z": 125
   }
 ]
