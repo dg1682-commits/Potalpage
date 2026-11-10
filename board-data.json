@@ -256,5 +256,29 @@
     "color": "amber",
     "locked": false,
     "z": 144
+  },
+  {
+    "id": "file-1794287621412-451",
+    "type": "file",
+    "fileCategory": "image",
+    "ext": "jpg",
+    "fileSize": 9458535,
+    "mimeType": "image/jpeg",
+    "title": "Breakfast_table_with_colorful_bowls_4K_20261016170348.jpg",
+    "subtitle": "9.02 MB",
+    "fileUrl": "https://xgcgfmcwcrnanflbveup.supabase.co/storage/v1/object/public/Potal/uploads/1794287619764_8i7kd_Breakfast_table_with_colorful_bo.jpg",
+    "sbPath": "uploads/1794287619764_8i7kd_Breakfast_table_with_colorful_bo.jpg",
+    "sbBucket": "Potal",
+    "ghPath": "",
+    "ghSha": "",
+    "dataUrl": "",
+    "folderId": null,
+    "x": 480,
+    "y": 600,
+    "w": 120,
+    "h": 106,
+    "color": "emerald",
+    "locked": false,
+    "z": 147
   }
 ]
