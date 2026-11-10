@@ -243,5 +243,25 @@
     "color": "blue",
     "locked": false,
     "z": 136
+  },
+  {
+    "id": "file-1794285123840-51",
+    "type": "file",
+    "fileCategory": "image",
+    "ext": "jpg",
+    "fileSize": 9017335,
+    "mimeType": "image/jpeg",
+    "title": "Colorful_home_office_desk_arrang…_4K_20261016165845.jpg",
+    "subtitle": "8.60 MB",
+    "fileUrl": "https://raw.githubusercontent.com/dg1682-commits/Potalpage/main/uploads/1794285117848_Colorful_home_office_desk_arrang__4K_20261016165845.jpg",
+    "dataUrl": "",
+    "folderId": null,
+    "x": 580,
+    "y": 600,
+    "w": 120,
+    "h": 106,
+    "color": "emerald",
+    "locked": false,
+    "z": 141
   }
 ]
