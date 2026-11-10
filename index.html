@@ -33,7 +33,12 @@
           <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
           파일 업로드
         </button>
+        <button id="btnUploadDirectory" class="tool-btn folder-accent" title="PC의 폴더를 통째로 업로드 (하위 파일 전부 포함)">
+          <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/><line x1="12" y1="11" x2="12" y2="17"/><polyline points="9 14 12 11 15 14"/></svg>
+          폴더째 업로드
+        </button>
         <input type="file" id="fileAnyUpload" multiple hidden />
+        <input type="file" id="folderDirUpload" webkitdirectory directory multiple hidden />
 
         <div class="divider"></div>
 
@@ -69,9 +74,9 @@
 
         <div class="divider"></div>
 
-        <button id="btnGithubSync" class="tool-btn gh-sync-btn" title="GitHub 자동 동기화 설정 (회사PC ↔ 집PC 연동)">
-          <span id="ghSyncDot" class="sync-dot offline"></span>
-          <span id="ghSyncLabel">☁️ GitHub 연동</span>
+        <button id="btnGithubSync" class="tool-btn gh-sync-btn" title="클라우드 자동 동기화 설정 (GitHub / Supabase)">
+          <span id="ghSyncDot" class="sync-dot synced"></span>
+          <span id="ghSyncLabel">☁️ 자동저장 켜짐</span>
         </button>
 
         <button id="btnExport" class="tool-btn icon-only" title="전체 보드 + 파일 목록 통합 백업(.json) 다운로드">
@@ -273,25 +278,39 @@
     </div>
   </div>
 
-  <!-- 5. GitHub 자동 저장(토큰) 설정 모달 -->
+  <!-- 5. Supabase Storage & GitHub 클라우드 자동 저장 설정 모달 -->
   <div id="ghSyncModal" class="modal-backdrop hidden">
     <div class="modal gh-modal">
       <div class="modal-header">
-        <h2>☁️ GitHub 실시간 자동 저장 설정</h2>
+        <h2>☁️ 클라우드 스토리지 연동 설정 (Supabase / GitHub)</h2>
         <button id="btnCloseGhModal" class="close-btn">&times;</button>
       </div>
 
       <div class="gh-guide-box">
-        <p><b>회사 PC ↔ 집 PC 자동 동기화 원리</b></p>
-        <p>카드를 옮기거나 모든 파일(<code>.md</code>, 이미지, 음악, 영상, 엑셀, exe 등)을 드래그해 넣을 때마다 <b>내 GitHub 저장소(<code>uploads/</code> 및 <code>board-data.json</code>)에 자동으로 업로드·저장</b>됩니다.</p>
-        <a href="https://github.com/settings/tokens/new?scopes=repo&description=Mixboard_Portal_AutoSync" target="_blank" rel="noopener noreferrer" class="gh-token-link">
-          🔑 새 GitHub 토큰 발급하기 ↗
-        </a>
+        <p><b>⚡ Supabase Storage 연동 완료 (무료 1GB 파일 스토리지 기본 내장)</b></p>
+        <p>현재 <b>Supabase Storage(<code>Potal</code> 버킷)</b>와 <b>GitHub 자동 동기화</b>가 기본 내장되어 작동합니다.</p>
       </div>
 
       <form id="ghSyncForm">
         <div class="form-group">
-          <label for="ghInputRepo">연동할 GitHub 저장소 (Owner/Repo)</label>
+          <label for="sbInputUrl">Supabase Project URL</label>
+          <input type="url" id="sbInputUrl" value="https://xgcgfmcwcrnanflbveup.supabase.co" placeholder="https://xgcgfmcwcrnanflbveup.supabase.co" />
+        </div>
+
+        <div class="form-group">
+          <label for="sbInputKey">Supabase Publishable Key</label>
+          <input type="password" id="sbInputKey" placeholder="sb_publishable_..." />
+        </div>
+
+        <div class="form-group">
+          <label for="sbInputBucket">Supabase Storage 버킷 이름</label>
+          <input type="text" id="sbInputBucket" value="Potal" placeholder="Potal" />
+        </div>
+
+        <hr style="border:none;border-top:1px solid var(--toolbar-border);margin:14px 0;" />
+
+        <div class="form-group">
+          <label for="ghInputRepo">GitHub 보드 동기화 저장소 (Owner/Repo)</label>
           <input type="text" id="ghInputRepo" value="dg1682-commits/Potalpage" required placeholder="dg1682-commits/Potalpage" />
         </div>
 
@@ -302,16 +321,16 @@
 
         <div class="form-group">
           <label for="ghInputToken">GitHub Personal Access Token</label>
-          <input type="password" id="ghInputToken" placeholder="발급받은 토큰을 붙여넣으세요" />
+          <input type="password" id="ghInputToken" placeholder="기본 토큰이 내장되어 있습니다" />
         </div>
 
         <div id="ghStatusMsg" class="gh-status-msg"></div>
 
         <div class="modal-footer">
-          <button type="button" id="btnGhPullNow" class="btn-secondary" title="GitHub에서 최신 데이터 강제로 다시 불러오기">⬇️ 서버에서 불러오기</button>
+          <button type="button" id="btnGhPullNow" class="btn-secondary" title="클라우드에서 최신 보드 데이터 다시 불러오기">⬇️ 서버에서 불러오기</button>
           <div class="modal-footer-right">
-            <button type="button" id="btnGhDisconnect" class="btn-danger">연동 해제</button>
-            <button type="submit" class="btn-primary">연결 및 즉시 동기화</button>
+            <button type="button" id="btnGhDisconnect" class="btn-danger">초기화</button>
+            <button type="submit" class="btn-primary">저장 및 동기화</button>
           </div>
         </div>
       </form>

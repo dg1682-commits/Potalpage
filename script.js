@@ -33,7 +33,7 @@ function getDefaultAssets() {
       h: 480,
       color: "violet",
       locked: false,
-      z: 28
+      z: 29
     },
     {
       id: "text-welcome",
@@ -141,17 +141,17 @@ function getDefaultAssets() {
     {
       id: "repo-isvmliveshow",
       type: "link",
-      title: "아라쇼페이지",
-      subtitle: "dg1682-commits/isvmliveshow",
-      url: "https://github.com/dg1682-commits/isvmliveshow",
-      pagesUrl: "https://dg1682-commits.github.io/isvmliveshow/",
-      x: 980,
+      title: "포털 페이지",
+      subtitle: "",
+      url: "https://github.com/dg1682-commits/Potalpage",
+      pagesUrl: "https://dg1682-commits.github.io/Potalpage/",
+      x: 60,
       y: 460,
       w: 380,
       h: 80,
       color: "violet",
       locked: false,
-      z: 104
+      z: 139
     },
     {
       id: "repo-gymmusic",
@@ -212,40 +212,27 @@ function getDefaultAssets() {
       z: 26
     },
     {
-      id: "asset-1794267980976",
-      type: "text",
-      title: "자유 텍스트 메모",
-      subtitle: "더블클릭해서 내용을 수정하세요.",
-      x: 160,
-      y: 140,
-      w: 280,
-      h: 70,
-      color: "default",
-      locked: false,
-      z: 105
-    },
-    {
       id: "folder-antigravity",
       type: "folder",
       title: "안티그래비티 문서함",
-      subtitle: "회사PC ↔ 집PC 작업 연동 보관함",
-      x: 60,
-      y: 580,
+      subtitle: "회사PC ↔ 집PC 작업 연동 MD 보관함",
+      x: 39,
+      y: 598,
       w: 130,
       h: 100,
       color: "amber",
       locked: false,
-      z: 110
+      z: 135
     },
     {
       id: "md-sample-inside",
       type: "md",
       title: "집-회사_인수인계_가이드.md",
       subtitle: "안티그래비티 작업 내역 동기화 방법",
-      content: `# 🚀 안티그래비티 회사 PC ↔ 집 PC 연동 가이드\n\n회사 PC와 집 PC에서 작업하던 안티그래비티(Antigravity) 내역이나 메모장, 이미지, 음악, 영상, 일반 파일들을 이 포털에 모아두세요!\n\n## 💡 주요 사용법\n1. **더블클릭해서 열기**:\n   - **MD 메모장**: 바로 읽고 편집하거나 원클릭 복사 & 다운로드 가능\n   - **음악/영상 파일**: 예쁜 선택 팝업에서 **▶️ 바로 재생** 또는 **💾 다운로드** 선택 가능\n   - **이미지 파일**: 즉시 크게 미리보기 + 원본 다운로드 가능\n   - **엑셀/압축/exe 등 모든 일반 파일**: 정보 확인 및 원본 그대로 다운로드 가능\n2. **자유로운 드래그 이동**:\n   - 보드 위의 어떤 파일이든 **폴더 아이콘 위로 드래그**하면 폴더 안으로 들어갑니다.\n   - 폴더 창 안의 파일을 **창 바깥(믹스보드)으로 드래그**하면 보드 위로 꺼내집니다.`,
+      content: "# 🚀 안티그래비티 회사 PC ↔ 집 PC 연동 가이드\n\n회사 PC와 집 PC에서 작업하던 안티그래비티(Antigravity) 내역이나 프롬프트, 기획서를 이 폴더에 모아두세요!\n\n## 💡 주요 사용법\n1. **더블클릭해서 열기**: 내용을 바로 읽고 `📋 전체 복사` 버튼으로 원클릭 복사할 수 있습니다.\n2. **💾 .md 내려받기**: 언제든 실제 `.md` 파일로 PC에 다운로드할 수 있습니다.\n3. **자유로운 드래그 이동**:\n   - 보드 위의 MD 파일을 **폴더 아이콘 위로 드래그**하면 폴더 안으로 쏙 들어갑니다.\n   - 폴더 창 안의 MD 아이콘을 **창 바깥(믹스보드)으로 드래그**하면 보드 위로 꺼내집니다.\n4. **PC 파일 드래그 앤 드롭**: 내 컴퓨터의 `.md` 파일을 브라우저 화면이나 열린 폴더 창에 끌어다 놓으면 즉시 추가됩니다.",
       folderId: "folder-antigravity",
       x: 220,
-      y: 580,
+      y: 460,
       w: 120,
       h: 100,
       color: "indigo",
@@ -257,15 +244,15 @@ function getDefaultAssets() {
       type: "md",
       title: "오늘의_작업메모.md",
       subtitle: "폴더로 드래그해서 넣어보세요",
-      content: `# 📝 오늘의 개발 메모장\n\n- 이 아이콘을 **더블클릭**하면 메모장처럼 바로 글을 쓰고 저장할 수 있습니다.\n- 옆에 있는 **📂 안티그래비티 문서함** 폴더 위로 드래그해서 놓으면 폴더 안으로 들어갑니다!`,
+      content: "# 📝 오늘의 개발 메모\n\n- 이 아이콘을 **더블클릭**하면 마크다운 뷰어/편집기가 열립니다.\n- 이 아이콘을 옆에 있는 **📂 안티그래비티 문서함** 폴더 위로 드래그해서 놓으면 폴더 안으로 들어갑니다!\n\n```js\nconsole.log(\"집 PC와 회사 PC 어디서든 편하게 이어서 작업하세요!\");\n```",
       folderId: null,
-      x: 220,
-      y: 580,
+      x: 189,
+      y: 592,
       w: 120,
       h: 100,
       color: "blue",
       locked: false,
-      z: 112
+      z: 136
     }
   ];
 }
@@ -1403,12 +1390,180 @@ function arrayBufferToBase64(buffer) {
   return btoa(binary);
 }
 
-async function uploadBinaryFileToGithub(file, base64Content) {
+// =========================================================================
+// Supabase Storage 연동 (설정 시 우선 사용) + GitHub 저장소 자동 폴백
+// =========================================================================
+const SB_CONFIG_KEY = "dg1682_mixboard_sb_config";
+const DEFAULT_SB_URL = "https://xgcgfmcwcrnanflbveup.supabase.co";
+const DEFAULT_SB_KEY = "sb_publishable_t2bVUrmTMsYF7x8rWzc0bw_4DL0E6ft";
+const DEFAULT_SB_BUCKET = "Potal";
+
+function normalizeSbUrl(rawUrl) {
+  return String(rawUrl || "")
+    .trim()
+    .replace(/\/rest\/v1\/?$/i, "")
+    .replace(/\/+$/, "");
+}
+
+function getSbConfig() {
+  try {
+    const raw = localStorage.getItem(SB_CONFIG_KEY);
+    if (raw) {
+      const parsed = JSON.parse(raw);
+      return {
+        url: normalizeSbUrl(parsed.url || DEFAULT_SB_URL),
+        key: parsed.key || parsed.anonKey || DEFAULT_SB_KEY,
+        bucket: parsed.bucket || DEFAULT_SB_BUCKET
+      };
+    }
+  } catch {}
+  return {
+    url: DEFAULT_SB_URL,
+    key: DEFAULT_SB_KEY,
+    bucket: DEFAULT_SB_BUCKET
+  };
+}
+
+function isSupabaseConfigured() {
+  const sb = getSbConfig();
+  return Boolean(sb.url && sb.key);
+}
+
+function saveSbConfig(cfg) {
+  localStorage.setItem(
+    SB_CONFIG_KEY,
+    JSON.stringify({
+      url: normalizeSbUrl(cfg.url || DEFAULT_SB_URL),
+      key: cfg.key !== undefined ? cfg.key : cfg.anonKey !== undefined ? cfg.anonKey : DEFAULT_SB_KEY,
+      bucket: cfg.bucket || DEFAULT_SB_BUCKET
+    })
+  );
+  updateGhBadgeStatus();
+}
+
+function buildSbHeaders(key, extra = {}) {
+  const headers = {
+    apikey: key,
+    ...extra
+  };
+  // Legacy JWT (eyJ...) 키인 경우에만 Authorization Bearer 헤더 추가
+  // (신형 sb_publishable_ 키는 JWT가 아니므로 apikey 헤더만 보내야 API Gateway가 자동 변환함)
+  if (String(key).startsWith("eyJ")) {
+    headers.Authorization = `Bearer ${key}`;
+  }
+  return headers;
+}
+
+function sanitizeSegment(str) {
+  return String(str || "file").replace(/[^a-zA-Z0-9._\-\uAC00-\uD7A3]/g, "_");
+}
+
+// Supabase Storage 객체 키는 한글 포함 시 InvalidKey(400)가 발생할 수 있으므로 안전한 ASCII 키로 변환
+// (포털 보드 화면과 다운로드 파일명은 원본 한글 이름을 그대로 유지합니다!)
+function toAsciiStorageSegment(str) {
+  const raw = String(str || "file");
+  const lastDot = raw.lastIndexOf(".");
+  const base = lastDot > 0 ? raw.slice(0, lastDot) : raw;
+  const ext = lastDot > 0 ? raw.slice(lastDot).replace(/[^a-zA-Z0-9.]/g, "") : "";
+  const asciiBase = base.replace(/[^a-zA-Z0-9_\-]/g, "").slice(0, 32) || "item";
+  return `${asciiBase}${ext}`;
+}
+
+function extractGhPathFromAsset(asset) {
+  if (asset.ghPath) return asset.ghPath;
+  if (asset.fileUrl && asset.fileUrl.includes("raw.githubusercontent.com/")) {
+    const idx = asset.fileUrl.indexOf("/uploads/");
+    if (idx !== -1) {
+      return decodeURI(asset.fileUrl.slice(idx + 1));
+    }
+  }
+  return null;
+}
+
+// 1) Supabase Storage로 파일 직접 업로드 (설정되어 있을 때 자동 작동)
+async function uploadFileToSupabaseStorage(file, folderSubPath = "") {
+  const sb = getSbConfig();
+  if (!sb.url || !sb.key) return null;
+
+  const safeAsciiName = toAsciiStorageSegment(file.name);
+  const subDir = folderSubPath
+    ? folderSubPath
+        .split("/")
+        .filter(Boolean)
+        .map(toAsciiStorageSegment)
+        .join("/") + "/"
+    : "";
+
+  const rand = Math.random().toString(36).slice(2, 7);
+  const objectPath = `uploads/${subDir}${Date.now()}_${rand}_${safeAsciiName}`;
+
+  const candidateBuckets = Array.from(
+    new Set([sb.bucket || DEFAULT_SB_BUCKET, "Potal", "PotalPage", "portal"])
+  );
+
+  let lastErr = null;
+  for (const bucketName of candidateBuckets) {
+    const bucket = encodeURIComponent(bucketName);
+    const uploadUrl = `${sb.url}/storage/v1/object/${bucket}/${objectPath}`;
+
+    const res = await fetch(uploadUrl, {
+      method: "POST",
+      headers: buildSbHeaders(sb.key, {
+        "Content-Type": file.type || "application/octet-stream",
+        "x-upsert": "true"
+      }),
+      body: file
+    });
+
+    if (res.ok) {
+      return {
+        downloadUrl: `${sb.url}/storage/v1/object/public/${bucket}/${objectPath}`,
+        sbPath: objectPath,
+        sbBucket: bucketName
+      };
+    }
+
+    lastErr = `HTTP ${res.status}`;
+  }
+
+  throw new Error(`Supabase 업로드 실패 (${lastErr})`);
+}
+
+// 2) Supabase Storage에서 파일 즉시 영구 삭제 (정크 0%)
+async function deleteFileFromSupabaseStorage(asset) {
+  if (!asset || !asset.sbPath) return false;
+  const sb = getSbConfig();
+  if (!sb.url || !sb.key) return false;
+
+  try {
+    const bucket = encodeURIComponent(asset.sbBucket || sb.bucket || DEFAULT_SB_BUCKET);
+    const delUrl = `${sb.url}/storage/v1/object/${bucket}/${encodeURI(asset.sbPath)}`;
+    const res = await fetch(delUrl, {
+      method: "DELETE",
+      headers: buildSbHeaders(sb.key)
+    });
+    return res.ok;
+  } catch (err) {
+    console.warn("Supabase 파일 삭제 경고:", err);
+    return false;
+  }
+}
+
+// 보조 GitHub 업로드
+async function uploadBinaryFileToGithub(file, base64Content, folderSubPath = "") {
   const cfg = getGhConfig();
   if (!cfg.token || !cfg.repo) return null;
 
-  const safeName = file.name.replace(/[^a-zA-Z0-9._\-\uAC00-\uD7A3]/g, "_");
-  const path = `uploads/${Date.now()}_${safeName}`;
+  const safeName = sanitizeSegment(file.name);
+  const subDir = folderSubPath
+    ? folderSubPath
+        .split("/")
+        .filter(Boolean)
+        .map(sanitizeSegment)
+        .join("/") + "/"
+    : "";
+
+  const path = `uploads/${subDir}${Date.now()}_${safeName}`;
   const putUrl = `https://api.github.com/repos/${cfg.repo}/contents/${encodeURI(path)}`;
 
   const res = await fetch(putUrl, {
@@ -1419,7 +1574,7 @@ async function uploadBinaryFileToGithub(file, base64Content) {
       "Content-Type": "application/json"
     },
     body: JSON.stringify({
-      message: `Upload file: ${file.name}`,
+      message: `Upload file: ${path}`,
       content: base64Content,
       branch: cfg.branch || "main"
     })
@@ -1429,13 +1584,86 @@ async function uploadBinaryFileToGithub(file, base64Content) {
     throw new Error(`GitHub 파일 업로드 실패 (HTTP ${res.status})`);
   }
 
+  const putData = await res.json();
   const branch = cfg.branch || "main";
-  return `https://raw.githubusercontent.com/${cfg.repo}/${encodeURIComponent(branch)}/${encodeURI(path)}`;
+  return {
+    rawUrl: `https://raw.githubusercontent.com/${cfg.repo}/${encodeURIComponent(branch)}/${encodeURI(path)}`,
+    ghPath: path,
+    ghSha: putData.content && putData.content.sha ? putData.content.sha : ""
+  };
 }
 
-async function handleAnyFilesUpload(fileList, targetFolderId = null, dropX = null, dropY = null) {
+async function deleteFileFromGithubRepo(asset) {
+  if (!asset) return false;
+  const ghPath = extractGhPathFromAsset(asset);
+  if (!ghPath) return false;
+
+  const cfg = getGhConfig();
+  if (!cfg.token || !cfg.repo) return false;
+
+  try {
+    const headers = {
+      Accept: "application/vnd.github.v3+json",
+      Authorization: `token ${cfg.token}`,
+      "Content-Type": "application/json"
+    };
+
+    let sha = asset.ghSha || "";
+    const apiUrl = `https://api.github.com/repos/${cfg.repo}/contents/${encodeURI(ghPath)}`;
+
+    if (!sha) {
+      const getRes = await fetch(`${apiUrl}?ref=${encodeURIComponent(cfg.branch || "main")}&t=${Date.now()}`, {
+        headers,
+        cache: "no-store"
+      });
+      if (getRes.ok) {
+        const meta = await getRes.json();
+        sha = meta.sha;
+      } else if (getRes.status === 404) {
+        return true;
+      }
+    }
+
+    if (!sha) return false;
+
+    const delRes = await fetch(apiUrl, {
+      method: "DELETE",
+      headers,
+      body: JSON.stringify({
+        message: `Delete file: ${ghPath}`,
+        sha,
+        branch: cfg.branch || "main"
+      })
+    });
+
+    return delRes.ok || delRes.status === 404;
+  } catch (err) {
+    console.warn("GitHub 원격 파일 삭제 실패:", err);
+    return false;
+  }
+}
+
+async function deleteRemoteFileEverywhere(asset) {
+  if (asset.sbPath) {
+    await deleteFileFromSupabaseStorage(asset);
+  }
+  if (extractGhPathFromAsset(asset)) {
+    await deleteFileFromGithubRepo(asset);
+  }
+}
+
+async function handleAnyFilesUpload(fileList, targetFolderId = null, dropX = null, dropY = null, folderNameOverride = "") {
   const files = Array.from(fileList);
   if (files.length === 0) return;
+
+  let folderSubPath = folderNameOverride;
+  if (!folderSubPath && targetFolderId) {
+    const fObj = assets.find(a => a.id === targetFolderId && a.type === "folder");
+    if (fObj) folderSubPath = fObj.title;
+  }
+
+  const sb = getSbConfig();
+  const useSupabase = Boolean(sb.url && sb.key);
 
   for (let idx = 0; idx < files.length; idx++) {
     const file = files[idx];
@@ -1443,15 +1671,33 @@ async function handleAnyFilesUpload(fileList, targetFolderId = null, dropX = nul
     const baseX = dropX !== null ? snap(dropX + idx * 30) : snap((window.scrollX || 0) + 160 + idx * 30);
     const baseY = dropY !== null ? snap(dropY + idx * 30) : snap((window.scrollY || 0) + 160 + idx * 30);
 
-    // 1) .md 마크다운 파일은 기존처럼 메모장 에셋으로 즉시 추가
+    // 1) .md 마크다운 파일
     if (category === "md") {
       const text = await file.text();
+      let sbRes = null;
+      let ghRes = null;
+      if (folderSubPath) {
+        if (useSupabase) {
+          try {
+            sbRes = await uploadFileToSupabaseStorage(file, folderSubPath);
+          } catch {}
+        } else {
+          try {
+            ghRes = await uploadBinaryFileToGithub(file, utf8ToBase64(text), folderSubPath);
+          } catch {}
+        }
+      }
       const newMd = {
         id: "md-" + Date.now() + "-" + Math.floor(Math.random() * 1000),
         type: "md",
         title: ensureMdExtension(file.name),
         subtitle: "",
         content: text,
+        sbPath: sbRes ? sbRes.sbPath : "",
+        sbBucket: sbRes ? sbRes.sbBucket : "",
+        ghPath: ghRes ? ghRes.ghPath : "",
+        ghSha: ghRes ? ghRes.ghSha : "",
+        fileUrl: sbRes ? sbRes.downloadUrl : ghRes ? ghRes.rawUrl : "",
         folderId: targetFolderId || null,
         x: baseX,
         y: baseY,
@@ -1467,38 +1713,69 @@ async function handleAnyFilesUpload(fileList, targetFolderId = null, dropX = nul
       continue;
     }
 
-    // 2) 이미지, 음악, 영상, 엑셀, exe 등 모든 일반 파일 처리
-    showUploadToast(`📤 '${file.name}' (${formatBytes(file.size)}) 업로드 중...`);
+    // 2) 이미지, 음악, 영상, 엑셀, 압축, exe 등 모든 파일 -> Supabase 설정 시 Supabase 우선, 아니면 GitHub 업로드!
+    showUploadToast(`📤 (${idx + 1}/${files.length}) '${file.name}' 업로드 중...`);
     try {
-      const buffer = await file.arrayBuffer();
-      const b64 = arrayBufferToBase64(buffer);
-      let remoteUrl = null;
+      let remoteUrl = "";
+      let sbPath = "";
+      let sbBucket = "";
+      let ghPath = "";
+      let ghSha = "";
 
-      try {
-        remoteUrl = await uploadBinaryFileToGithub(file, b64);
-      } catch (uploadErr) {
-        console.warn("GitHub 직접 업로드 실패, 로컬 데이터 URL 폴백:", uploadErr);
+      if (useSupabase) {
+        try {
+          const sbUploaded = await uploadFileToSupabaseStorage(file, folderSubPath);
+          if (sbUploaded) {
+            remoteUrl = sbUploaded.downloadUrl;
+            sbPath = sbUploaded.sbPath;
+            sbBucket = sbUploaded.sbBucket;
+          }
+        } catch (sbErr) {
+          console.warn("Supabase 업로드 실패, GitHub 폴백 시도:", sbErr);
+        }
       }
 
+      let fallbackDataUrl = "";
       const mime = file.type || "application/octet-stream";
-      // GitHub 업로드가 성공하면 가벼운 원격 URL을 저장하고, 오프라인/실패 시에만 소용량 파일에 한해 dataUrl 보관
-      const fallbackDataUrl = !remoteUrl && file.size <= 3 * 1024 * 1024 ? `data:${mime};base64,${b64}` : "";
+
+      if (!remoteUrl) {
+        const buffer = await file.arrayBuffer();
+        const b64 = arrayBufferToBase64(buffer);
+        try {
+          const ghUploaded = await uploadBinaryFileToGithub(file, b64, folderSubPath);
+          if (ghUploaded) {
+            remoteUrl = ghUploaded.rawUrl;
+            ghPath = ghUploaded.ghPath;
+            ghSha = ghUploaded.ghSha;
+          }
+        } catch (ghErr) {
+          console.warn("GitHub 업로드 폴백 실패:", ghErr);
+        }
+        if (!remoteUrl && file.size <= 3 * 1024 * 1024) {
+          fallbackDataUrl = `data:${mime};base64,${b64}`;
+        }
+      }
 
       if (!remoteUrl && !fallbackDataUrl) {
-        alert(`'${file.name}' 파일이 너무 커서(또는 GitHub 연동 오류로) 업로드하지 못했습니다. (파일당 25MB 이하 권장)`);
+        alert(`'${file.name}' 파일 업로드에 실패했습니다.`);
+        hideUploadToast(500);
         continue;
       }
 
       const newFileAsset = {
         id: "file-" + Date.now() + "-" + Math.floor(Math.random() * 1000),
         type: "file",
-        fileCategory: category, // 'image' | 'audio' | 'video' | 'other'
+        fileCategory: category,
         ext,
         fileSize: file.size,
         mimeType: mime,
         title: file.name,
         subtitle: formatBytes(file.size),
         fileUrl: remoteUrl || "",
+        sbPath,
+        sbBucket,
+        ghPath,
+        ghSha,
         dataUrl: fallbackDataUrl,
         folderId: targetFolderId || null,
         x: baseX,
@@ -1513,7 +1790,7 @@ async function handleAnyFilesUpload(fileList, targetFolderId = null, dropX = nul
       assets.push(newFileAsset);
       saveState();
       renderBoard();
-      showUploadToast(`✓ '${file.name}' 업로드 완료!`);
+      showUploadToast(`✓ '${file.name}' Firebase 업로드 완료!`);
       hideUploadToast(2200);
     } catch (err) {
       console.error("파일 처리 실패:", err);
@@ -1523,21 +1800,143 @@ async function handleAnyFilesUpload(fileList, targetFolderId = null, dropX = nul
   }
 }
 
+// 폴더 통째로 업로드 처리 (webkitRelativePath 또는 드래그 앤 드롭 디렉터리 엔트리)
+async function handleDirectoryBatchUpload(filesWithRelPath, dropX = null, dropY = null) {
+  if (!filesWithRelPath || filesWithRelPath.length === 0) return;
+
+  // 최상위 폴더 이름별로 그룹화
+  const groups = new Map();
+  for (const item of filesWithRelPath) {
+    const rel = item.relativePath || item.file.webkitRelativePath || item.file.name;
+    const parts = rel.split("/").filter(Boolean);
+    const rootFolderName = parts.length > 1 ? parts[0] : "업로드된_폴더";
+    const subPathInsideRoot = parts.length > 2 ? parts.slice(0, -1).join("/") : rootFolderName;
+
+    if (!groups.has(rootFolderName)) {
+      groups.set(rootFolderName, []);
+    }
+    groups.get(rootFolderName).push({
+      file: item.file,
+      ghSubPath: subPathInsideRoot
+    });
+  }
+
+  let folderOffset = 0;
+  for (const [folderName, entries] of groups.entries()) {
+    const fx = dropX !== null ? snap(dropX + folderOffset * 150) : snap((window.scrollX || 0) + 180 + folderOffset * 150);
+    const fy = dropY !== null ? snap(dropY) : snap((window.scrollY || 0) + 200);
+    folderOffset++;
+
+    // 보드에 해당 이름으로 새 폴더 에셋 생성
+    const folderId = "folder-" + Date.now() + "-" + Math.floor(Math.random() * 1000);
+    const newFolderAsset = {
+      id: folderId,
+      type: "folder",
+      title: folderName,
+      subtitle: `${entries.length}개 파일 업로드됨`,
+      x: fx,
+      y: fy,
+      w: 130,
+      h: 100,
+      color: "amber",
+      locked: false,
+      z: getMaxZ("folder")
+    };
+    assets.push(newFolderAsset);
+    saveState();
+    renderBoard();
+
+    // 폴더 내부의 파일들을 순차적으로 GitHub uploads/폴더명/... 에 업로드
+    for (let i = 0; i < entries.length; i++) {
+      const { file, ghSubPath } = entries[i];
+      await handleAnyFilesUpload([file], folderId, fx, fy, ghSubPath);
+    }
+  }
+
+  showUploadToast(`📂 폴더 업로드 완료!`);
+  hideUploadToast(2400);
+}
+
+// 드래그 앤 드롭 시 폴더(FileSystemDirectoryEntry) 재귀 탐색
+function readEntriesPromise(directoryReader) {
+  return new Promise((resolve, reject) => {
+    directoryReader.readEntries(resolve, reject);
+  });
+}
+
+async function traverseFileTreeEntry(entry, pathPrefix = "") {
+  if (!entry) return [];
+  if (entry.isFile) {
+    return new Promise(resolve => {
+      entry.file(
+        file => resolve([{ file, relativePath: pathPrefix + file.name }]),
+        () => resolve([])
+      );
+    });
+  }
+  if (entry.isDirectory) {
+    const reader = entry.createReader();
+    let allEntries = [];
+    while (true) {
+      const batch = await readEntriesPromise(reader);
+      if (!batch || batch.length === 0) break;
+      allEntries = allEntries.concat(batch);
+    }
+    const results = [];
+    for (const child of allEntries) {
+      const sub = await traverseFileTreeEntry(child, `${pathPrefix}${entry.name}/`);
+      results.push(...sub);
+    }
+    return results;
+  }
+  return [];
+}
+
 function bindExternalFileDrop() {
   window.addEventListener("dragover", e => {
     e.preventDefault();
   });
 
-  window.addEventListener("drop", e => {
+  window.addEventListener("drop", async e => {
     e.preventDefault();
-    if (!e.dataTransfer || !e.dataTransfer.files || e.dataTransfer.files.length === 0) return;
+    if (!e.dataTransfer) return;
 
     const targetFolderId = findDropTargetFolderId(e.clientX, e.clientY);
     const boardRect = boardEl.getBoundingClientRect();
     const dropX = Math.max(20, (e.clientX - boardRect.left) / boardScale - 50);
     const dropY = Math.max(20, (e.clientY - boardRect.top) / boardScale - 50);
 
-    handleAnyFilesUpload(e.dataTransfer.files, targetFolderId, dropX, dropY);
+    // 1) 폴더가 드래그 앤 드롭되었는지 확인 (webkitGetAsEntry 지원 브라우저)
+    if (e.dataTransfer.items && e.dataTransfer.items.length > 0) {
+      const entries = [];
+      let hasDirectory = false;
+      for (let i = 0; i < e.dataTransfer.items.length; i++) {
+        const item = e.dataTransfer.items[i];
+        if (item.webkitGetAsEntry) {
+          const entry = item.webkitGetAsEntry();
+          if (entry) {
+            if (entry.isDirectory) hasDirectory = true;
+            entries.push(entry);
+          }
+        }
+      }
+
+      if (hasDirectory) {
+        showUploadToast("📂 폴더 구조 스캔 중...");
+        const collected = [];
+        for (const entry of entries) {
+          const subFiles = await traverseFileTreeEntry(entry, "");
+          collected.push(...subFiles);
+        }
+        await handleDirectoryBatchUpload(collected, dropX, dropY);
+        return;
+      }
+    }
+
+    // 2) 일반 단일/다중 파일 드롭
+    if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
+      handleAnyFilesUpload(e.dataTransfer.files, targetFolderId, dropX, dropY);
+    }
   });
 }
 
@@ -1564,6 +1963,23 @@ function bindToolbarEvents() {
       handleAnyFilesUpload(e.target.files, targetFolder);
     }
     fileAnyUpload.value = "";
+  });
+
+  // 폴더 통째로 업로드 버튼
+  const folderDirUpload = document.getElementById("folderDirUpload");
+  document.getElementById("btnUploadDirectory").addEventListener("click", () => {
+    folderDirUpload.click();
+  });
+
+  folderDirUpload.addEventListener("change", async e => {
+    if (e.target.files && e.target.files.length > 0) {
+      const list = Array.from(e.target.files).map(f => ({
+        file: f,
+        relativePath: f.webkitRelativePath || f.name
+      }));
+      await handleDirectoryBatchUpload(list);
+    }
+    folderDirUpload.value = "";
   });
 
   // 자동 화면 맞춤(반응형 스케일) 켜기/끄기
@@ -1805,19 +2221,42 @@ function selectSwatch(color) {
   });
 }
 
-function deleteAsset(id) {
+async function deleteAsset(id) {
   const target = assets.find(a => a.id === id);
   if (!target) return;
 
+  // 1) 폴더를 삭제하는 경우: 안의 파일들까지 원격 스토리지(Supabase/GitHub)에서 함께 지울지, 보드로 꺼낼지 선택
   if (target.type === "folder") {
-    assets.forEach(a => {
-      if (isFolderorableAsset(a) && a.folderId === id) {
-        a.folderId = null;
-        a.x = target.x + 20;
-        a.y = target.y + 20;
+    const insideItems = assets.filter(a => isFolderorableAsset(a) && a.folderId === id);
+    if (insideItems.length > 0) {
+      const deleteInsideToo = confirm(
+        `'${target.title}' 폴더 안에 ${insideItems.length}개의 파일이 있습니다.\n\n[확인] = 폴더 안의 파일들도 클라우드(Supabase/GitHub)에서 모두 영구 삭제\n[취소] = 폴더만 지우고 안의 파일들은 보드 밖으로 꺼내기`
+      );
+      if (deleteInsideToo) {
+        showUploadToast(`🗑️ 클라우드 스토리지에서 폴더 내부 파일 ${insideItems.length}개 삭제 중...`);
+        for (const item of insideItems) {
+          await deleteRemoteFileEverywhere(item);
+        }
+        const insideIds = new Set(insideItems.map(i => i.id));
+        assets = assets.filter(a => !insideIds.has(a.id));
+        hideUploadToast(1800);
+      } else {
+        insideItems.forEach(a => {
+          a.folderId = null;
+          a.x = target.x + 20;
+          a.y = target.y + 20;
+        });
       }
-    });
+    }
     if (activeFolderId === id) closeFolderWindow();
+  } else if (target.type === "file" || target.type === "md") {
+    // 2) 개별 파일 삭제 시 Supabase Storage 또는 GitHub uploads/ 폴더에 올라간 실제 원격 파일도 즉시 삭제하여 정크 파일 방지!
+    if (target.sbPath || extractGhPathFromAsset(target)) {
+      showUploadToast(`🗑️ 클라우드 스토리지에서 '${target.title}' 실제 파일 삭제 중...`);
+      await deleteRemoteFileEverywhere(target);
+      showUploadToast(`✓ 클라우드 저장소에서도 완전히 삭제되었습니다.`);
+      hideUploadToast(1800);
+    }
   }
 
   assets = assets.filter(a => a.id !== id);
@@ -1877,10 +2316,12 @@ function setGhSyncIndicator(state, text) {
 
 function updateGhBadgeStatus() {
   const cfg = getGhConfig();
-  if (cfg.token) {
+  if (isSupabaseConfigured()) {
+    setGhSyncIndicator("synced", "⚡ Supabase + 자동저장");
+  } else if (cfg.token) {
     setGhSyncIndicator("synced", "☁️ 자동저장 켜짐");
   } else {
-    setGhSyncIndicator("offline", "☁️ GitHub 연동");
+    setGhSyncIndicator("offline", "☁️ 클라우드 연동");
   }
 }
 
@@ -2057,6 +2498,9 @@ async function pushToGithubNow(showStatusInModal = false) {
 function bindGithubSyncEvents() {
   const ghModal = document.getElementById("ghSyncModal");
   const ghForm = document.getElementById("ghSyncForm");
+  const sbInputUrl = document.getElementById("sbInputUrl");
+  const sbInputKey = document.getElementById("sbInputKey");
+  const sbInputBucket = document.getElementById("sbInputBucket");
   const ghInputRepo = document.getElementById("ghInputRepo");
   const ghInputBranch = document.getElementById("ghInputBranch");
   const ghInputToken = document.getElementById("ghInputToken");
@@ -2064,6 +2508,10 @@ function bindGithubSyncEvents() {
 
   document.getElementById("btnGithubSync").addEventListener("click", () => {
     const cfg = getGhConfig();
+    const sbCfg = getSbConfig();
+    if (sbInputUrl) sbInputUrl.value = sbCfg.url || DEFAULT_SB_URL;
+    if (sbInputKey) sbInputKey.value = sbCfg.key || DEFAULT_SB_KEY;
+    if (sbInputBucket) sbInputBucket.value = sbCfg.bucket || DEFAULT_SB_BUCKET;
     ghInputRepo.value = cfg.repo || "dg1682-commits/Potalpage";
     ghInputBranch.value = cfg.branch || "main";
     ghInputToken.value = cfg.token || "";
@@ -2076,42 +2524,67 @@ function bindGithubSyncEvents() {
   });
 
   document.getElementById("btnGhPullNow").addEventListener("click", async () => {
+    if (sbInputUrl && sbInputKey) {
+      saveSbConfig({
+        url: sbInputUrl.value.trim(),
+        key: sbInputKey.value.trim(),
+        bucket: (sbInputBucket && sbInputBucket.value.trim()) || DEFAULT_SB_BUCKET
+      });
+    }
     saveGhConfig({
       repo: ghInputRepo.value.trim() || "dg1682-commits/Potalpage",
       branch: ghInputBranch.value.trim() || "main",
       token: ghInputToken.value.trim()
     });
+    updateGhBadgeStatus();
     await pullFromGithubApi(true);
   });
 
   document.getElementById("btnGhDisconnect").addEventListener("click", () => {
+    saveSbConfig({ url: "", key: "", bucket: DEFAULT_SB_BUCKET });
+    if (sbInputUrl) sbInputUrl.value = "";
+    if (sbInputKey) sbInputKey.value = "";
     saveGhConfig({
       repo: ghInputRepo.value.trim() || "dg1682-commits/Potalpage",
       branch: ghInputBranch.value.trim() || "main",
       token: ""
     });
     ghInputToken.value = "";
+    updateGhBadgeStatus();
     statusEl.style.color = "#64748b";
-    statusEl.textContent = "GitHub 자동 저장 연동이 해제되었습니다.";
+    statusEl.textContent = "Supabase & GitHub 자동 저장 연동이 해제되었습니다.";
   });
 
   ghForm.addEventListener("submit", async e => {
     e.preventDefault();
+    const sbUrl = sbInputUrl ? sbInputUrl.value.trim() : "";
+    const sbKey = sbInputKey ? sbInputKey.value.trim() : "";
+    const sbBucket = (sbInputBucket && sbInputBucket.value.trim()) || DEFAULT_SB_BUCKET;
+    saveSbConfig({ url: sbUrl, key: sbKey, bucket: sbBucket });
+
     const repo = ghInputRepo.value.trim() || "dg1682-commits/Potalpage";
     const branch = ghInputBranch.value.trim() || "main";
     const token = ghInputToken.value.trim();
 
     saveGhConfig({ repo, branch, token });
-    if (!token) {
+    updateGhBadgeStatus();
+
+    if (!token && !sbUrl) {
       statusEl.style.color = "#e11d48";
-      statusEl.textContent = "토큰을 입력해 주세요.";
+      statusEl.textContent = "Supabase URL/Key 또는 GitHub 토큰을 입력해 주세요.";
       return;
     }
 
     statusEl.style.color = "#f59e0b";
-    statusEl.textContent = "GitHub 저장소와 연결 및 동기화 중...";
+    statusEl.textContent = sbUrl
+      ? "⚡ Supabase Storage + GitHub 동기화 설정 저장 중..."
+      : "GitHub 저장소와 연결 및 동기화 중...";
     const ok = await pushToGithubNow(true);
     if (ok) {
+      if (sbUrl && sbKey) {
+        statusEl.style.color = "#10b981";
+        statusEl.textContent = "✓ Supabase 대용량 스토리지 + GitHub 자동 동기화가 활성화되었습니다!";
+      }
       setTimeout(() => {
         ghModal.classList.add("hidden");
       }, 900);
