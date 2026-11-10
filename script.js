@@ -314,6 +314,7 @@ const uploadStatusToast = document.getElementById("uploadStatusToast");
 function init() {
   loadTheme();
   loadState();
+  initQuickSiteDock();
   renderBoard();
   updateBoardResponsiveScale();
   window.addEventListener("resize", updateBoardResponsiveScale);
@@ -323,6 +324,7 @@ function init() {
   bindFileModalEvents();
   bindExternalFileDrop();
   bindGithubSyncEvents();
+  bindStorageStatsEvents();
   autoPullFromGithubOnStart();
 }
 
@@ -435,7 +437,9 @@ function isFolderorableAsset(asset) {
 // 보드 렌더링 (폴더 안에 들어간 MD 및 파일은 보드에서 숨기고 폴더 창 안에서만 표시)
 function renderBoard() {
   boardEl.innerHTML = "";
+  syncQuickSitesFromBoardAssets();
   assets.forEach(asset => {
+    if (!asset || asset.type === "quickdock_config") return;
     if (isFolderorableAsset(asset) && asset.folderId) return;
     const el = createAssetElement(asset);
     boardEl.appendChild(el);
@@ -444,6 +448,7 @@ function renderBoard() {
   if (activeFolderId) {
     renderFolderWindowContent(activeFolderId);
   }
+  updateToolbarStorageMiniBadge();
 }
 
 function getFolderItemCount(folderId) {
@@ -1095,7 +1100,11 @@ function renderFileStageContent(fileAsset) {
 async function triggerFileDownload(fileAsset) {
   const src = getAssetSourceUrl(fileAsset);
   if (!src) {
-    alert("파일 경로가 없습니다.");
+    await showCustomAlert({
+      icon: "⚠️",
+      title: "파일 경로가 없습니다",
+      message: "다운로드할 수 있는 파일 URL이 존재하지 않습니다."
+    });
     return;
   }
 
@@ -1168,13 +1177,12 @@ function bindFileModalEvents() {
     btnFileMoveOut.classList.add("hidden");
   });
 
-  // 파일 삭제
-  document.getElementById("btnFileDelete").addEventListener("click", () => {
+  // 파일 삭제 (커스텀 삭제 모달 호출)
+  document.getElementById("btnFileDelete").addEventListener("click", async () => {
     if (!activeFileId) return;
-    if (confirm("이 파일을 보드에서 삭제하시겠습니까?")) {
-      deleteAsset(activeFileId);
-      closeFileActionModal();
-    }
+    const idToDelete = activeFileId;
+    const deleted = await deleteAsset(idToDelete);
+    if (deleted) closeFileActionModal();
   });
 }
 
@@ -1293,12 +1301,11 @@ function bindMdModalEvents() {
     showMdToast("📤 보드 위로 꺼냈습니다!");
   });
 
-  document.getElementById("btnMdDelete").addEventListener("click", () => {
+  document.getElementById("btnMdDelete").addEventListener("click", async () => {
     if (!activeMdId) return;
-    if (confirm("이 메모 문서를 삭제하시겠습니까?")) {
-      deleteAsset(activeMdId);
-      closeMdModal();
-    }
+    const idToDelete = activeMdId;
+    const deleted = await deleteAsset(idToDelete);
+    if (deleted) closeMdModal();
   });
 }
 
@@ -1707,6 +1714,7 @@ async function handleAnyFilesUpload(fileList, targetFolderId = null, dropX = nul
         locked: false,
         z: getMaxZ("md")
       };
+      recordDailyUploadBytes(file.size || new Blob([text]).size);
       assets.push(newMd);
       saveState();
       renderBoard();
@@ -1757,8 +1765,12 @@ async function handleAnyFilesUpload(fileList, targetFolderId = null, dropX = nul
       }
 
       if (!remoteUrl && !fallbackDataUrl) {
-        alert(`'${file.name}' 파일 업로드에 실패했습니다.`);
-        hideUploadToast(500);
+        hideUploadToast(300);
+        await showCustomAlert({
+          icon: "⚠️",
+          title: "파일 업로드 실패",
+          message: `'${file.name}' 파일을 클라우드에 업로드하지 못했습니다. (파일당 50MB 제한 또는 네트워크를 확인해 주세요.)`
+        });
         continue;
       }
 
@@ -1787,10 +1799,11 @@ async function handleAnyFilesUpload(fileList, targetFolderId = null, dropX = nul
         z: getMaxZ("file")
       };
 
+      recordDailyUploadBytes(file.size || 0);
       assets.push(newFileAsset);
       saveState();
       renderBoard();
-      showUploadToast(`✓ '${file.name}' Firebase 업로드 완료!`);
+      showUploadToast(`✓ '${file.name}' 클라우드 업로드 완료!`);
       hideUploadToast(2200);
     } catch (err) {
       console.error("파일 처리 실패:", err);
@@ -2007,8 +2020,15 @@ function bindToolbarEvents() {
 
   document.getElementById("btnTheme").addEventListener("click", toggleTheme);
 
-  document.getElementById("btnReset").addEventListener("click", () => {
-    if (confirm("초기 보드 레이아웃으로 초기화하시겠습니까?")) {
+  document.getElementById("btnReset").addEventListener("click", async () => {
+    const ok = await showCustomConfirm({
+      icon: "🔄",
+      title: "초기 보드 레이아웃으로 리셋할까요?",
+      message: "저장해 둔 백업 초기 레이아웃 상태로 보드를 되돌립니다.",
+      confirmText: "🔄 초기화 실행",
+      danger: true
+    });
+    if (ok) {
       assets = getDefaultAssets();
       saveState();
       renderBoard();
@@ -2029,16 +2049,22 @@ function bindToolbarEvents() {
     const file = e.target.files[0];
     if (!file) return;
     const reader = new FileReader();
-    reader.onload = evt => {
+    reader.onload = async evt => {
       try {
         const imported = JSON.parse(evt.target.result);
         if (Array.isArray(imported)) {
           assets = imported;
           saveState();
           renderBoard();
+          showUploadToast("✓ 백업 JSON을 성공적으로 불러왔습니다!");
+          hideUploadToast(1800);
         }
       } catch {
-        alert("유효한 JSON 파일이 아닙니다.");
+        await showCustomAlert({
+          icon: "⚠️",
+          title: "JSON 파일 형식 오류",
+          message: "유효한 포털 백업 JSON 파일이 아닙니다."
+        });
       }
     };
     reader.readAsText(file);
@@ -2054,10 +2080,11 @@ function bindToolbarEvents() {
   document.getElementById("btnCloseModal").addEventListener("click", closeEditModal);
   document.getElementById("btnCancelModal").addEventListener("click", closeEditModal);
 
-  document.getElementById("btnDeleteAsset").addEventListener("click", () => {
+  document.getElementById("btnDeleteAsset").addEventListener("click", async () => {
     if (editingAssetId) {
-      deleteAsset(editingAssetId);
+      const idToDel = editingAssetId;
       closeEditModal();
+      await deleteAsset(idToDel);
     }
   });
 
@@ -2223,16 +2250,16 @@ function selectSwatch(color) {
 
 async function deleteAsset(id) {
   const target = assets.find(a => a.id === id);
-  if (!target) return;
+  if (!target) return false;
 
-  // 1) 폴더를 삭제하는 경우: 안의 파일들까지 원격 스토리지(Supabase/GitHub)에서 함께 지울지, 보드로 꺼낼지 선택
+  // 1) 폴더를 삭제하는 경우: 커스텀 모달로 [안의 파일까지 영구 삭제] / [폴더만 삭제(파일 꺼내기)] / [취소] 선택
   if (target.type === "folder") {
     const insideItems = assets.filter(a => isFolderorableAsset(a) && a.folderId === id);
     if (insideItems.length > 0) {
-      const deleteInsideToo = confirm(
-        `'${target.title}' 폴더 안에 ${insideItems.length}개의 파일이 있습니다.\n\n[확인] = 폴더 안의 파일들도 클라우드(Supabase/GitHub)에서 모두 영구 삭제\n[취소] = 폴더만 지우고 안의 파일들은 보드 밖으로 꺼내기`
-      );
-      if (deleteInsideToo) {
+      const choice = await showCustomFolderDeleteDialog(target.title, insideItems.length);
+      if (choice === "cancel") return false;
+
+      if (choice === "delete_all") {
         showUploadToast(`🗑️ 클라우드 스토리지에서 폴더 내부 파일 ${insideItems.length}개 삭제 중...`);
         for (const item of insideItems) {
           await deleteRemoteFileEverywhere(item);
@@ -2240,28 +2267,60 @@ async function deleteAsset(id) {
         const insideIds = new Set(insideItems.map(i => i.id));
         assets = assets.filter(a => !insideIds.has(a.id));
         hideUploadToast(1800);
-      } else {
+      } else if (choice === "keep_files") {
         insideItems.forEach(a => {
           a.folderId = null;
           a.x = target.x + 20;
           a.y = target.y + 20;
         });
       }
+    } else {
+      const ok = await showCustomConfirm({
+        icon: "📁",
+        title: `'${target.title}' 폴더를 삭제할까요?`,
+        message: "비어 있는 폴더를 보드에서 제거합니다.",
+        confirmText: "🗑️ 폴더 삭제",
+        danger: true
+      });
+      if (!ok) return false;
     }
     if (activeFolderId === id) closeFolderWindow();
   } else if (target.type === "file" || target.type === "md") {
-    // 2) 개별 파일 삭제 시 Supabase Storage 또는 GitHub uploads/ 폴더에 올라간 실제 원격 파일도 즉시 삭제하여 정크 파일 방지!
-    if (target.sbPath || extractGhPathFromAsset(target)) {
+    // 2) 파일/MD 삭제 시 커스텀 모달로 먼저 물어보고 클라우드에서도 즉시 삭제
+    const isRemote = Boolean(target.sbPath || extractGhPathFromAsset(target));
+    const ok = await showCustomConfirm({
+      icon: "🗑️",
+      title: `'${target.title}' 파일을 삭제할까요?`,
+      message: isRemote
+        ? "포털 보드뿐만 아니라 클라우드 스토리지(Supabase/GitHub)에서도 실제 파일이 즉시 영구 삭제되어 정크 파일이 남지 않습니다."
+        : "포털 보드에서 이 문서를 삭제합니다.",
+      confirmText: "🗑️ 영구 삭제하기",
+      danger: true
+    });
+    if (!ok) return false;
+
+    if (isRemote) {
       showUploadToast(`🗑️ 클라우드 스토리지에서 '${target.title}' 실제 파일 삭제 중...`);
       await deleteRemoteFileEverywhere(target);
       showUploadToast(`✓ 클라우드 저장소에서도 완전히 삭제되었습니다.`);
       hideUploadToast(1800);
     }
+  } else {
+    // 3) 일반 링크/소제목/구역/텍스트 삭제 시 커스텀 모달 확인
+    const ok = await showCustomConfirm({
+      icon: "🗑️",
+      title: `'${target.title}' 항목을 삭제할까요?`,
+      message: "믹스보드에서 선택한 항목을 삭제합니다.",
+      confirmText: "🗑️ 삭제하기",
+      danger: true
+    });
+    if (!ok) return false;
   }
 
   assets = assets.filter(a => a.id !== id);
   saveState();
   renderBoard();
+  return true;
 }
 
 function escapeHtml(str) {
@@ -2590,6 +2649,775 @@ function bindGithubSyncEvents() {
       }, 900);
     }
   });
+}
+
+// =========================================================================
+// 9. 커스텀 확인/삭제/알림 모달 (시스템 기본 confirm / alert 완전 대체)
+// =========================================================================
+function showCustomConfirm({
+  icon = "🗑️",
+  title = "확인",
+  message = "",
+  confirmText = "확인",
+  cancelText = "취소",
+  danger = true
+}) {
+  return new Promise(resolve => {
+    const modal = document.getElementById("customDialogModal");
+    const iconEl = document.getElementById("customDialogIcon");
+    const titleEl = document.getElementById("customDialogTitle");
+    const msgEl = document.getElementById("customDialogMessage");
+    const actionsEl = document.getElementById("customDialogActions");
+
+    iconEl.textContent = icon;
+    iconEl.className = `custom-dialog-icon ${danger ? "" : "info"}`;
+    titleEl.textContent = title;
+    msgEl.textContent = message;
+    actionsEl.className = "custom-dialog-actions row";
+    actionsEl.innerHTML = `
+      <button type="button" id="cdBtnCancel" class="btn-secondary">${escapeHtml(cancelText)}</button>
+      <button type="button" id="cdBtnConfirm" class="${danger ? "btn-danger" : "btn-primary"}">${escapeHtml(confirmText)}</button>
+    `;
+
+    function cleanup(result) {
+      modal.classList.add("hidden");
+      resolve(result);
+    }
+
+    document.getElementById("cdBtnCancel").addEventListener("click", () => cleanup(false));
+    document.getElementById("cdBtnConfirm").addEventListener("click", () => cleanup(true));
+    modal.classList.remove("hidden");
+  });
+}
+
+function showCustomAlert({ icon = "💡", title = "알림", message = "", buttonText = "확인" }) {
+  return new Promise(resolve => {
+    const modal = document.getElementById("customDialogModal");
+    const iconEl = document.getElementById("customDialogIcon");
+    const titleEl = document.getElementById("customDialogTitle");
+    const msgEl = document.getElementById("customDialogMessage");
+    const actionsEl = document.getElementById("customDialogActions");
+
+    iconEl.textContent = icon;
+    iconEl.className = "custom-dialog-icon info";
+    titleEl.textContent = title;
+    msgEl.textContent = message;
+    actionsEl.className = "custom-dialog-actions row";
+    actionsEl.innerHTML = `
+      <button type="button" id="cdBtnOk" class="btn-primary">${escapeHtml(buttonText)}</button>
+    `;
+
+    document.getElementById("cdBtnOk").addEventListener("click", () => {
+      modal.classList.add("hidden");
+      resolve(true);
+    });
+    modal.classList.remove("hidden");
+  });
+}
+
+function showCustomFolderDeleteDialog(folderTitle, itemCount) {
+  return new Promise(resolve => {
+    const modal = document.getElementById("customDialogModal");
+    const iconEl = document.getElementById("customDialogIcon");
+    const titleEl = document.getElementById("customDialogTitle");
+    const msgEl = document.getElementById("customDialogMessage");
+    const actionsEl = document.getElementById("customDialogActions");
+
+    iconEl.textContent = "📂";
+    iconEl.className = "custom-dialog-icon";
+    titleEl.textContent = `'${folderTitle}' 폴더 삭제 옵션`;
+    msgEl.textContent = `이 폴더 안에 ${itemCount}개의 파일이 들어있습니다.\n안의 파일들을 어떻게 처리할까요?`;
+    actionsEl.className = "custom-dialog-actions";
+    actionsEl.innerHTML = `
+      <button type="button" id="cdFolderDeleteAll" class="btn-danger">🗑️ 내부 파일 ${itemCount}개도 클라우드에서 모두 영구 삭제</button>
+      <button type="button" id="cdFolderKeepFiles" class="btn-primary">📤 폴더만 지우고 안의 파일들은 보드로 꺼내기</button>
+      <button type="button" id="cdFolderCancel" class="btn-secondary">취소</button>
+    `;
+
+    function done(choice) {
+      modal.classList.add("hidden");
+      resolve(choice);
+    }
+
+    document.getElementById("cdFolderDeleteAll").addEventListener("click", () => done("delete_all"));
+    document.getElementById("cdFolderKeepFiles").addEventListener("click", () => done("keep_files"));
+    document.getElementById("cdFolderCancel").addEventListener("click", () => done("cancel"));
+    modal.classList.remove("hidden");
+  });
+}
+
+// =========================================================================
+// 10. 우측 플로팅 퀵 사이트 독 (토스트/플로팅 런처, 사이트 추가/수정/삭제 지원)
+// 기본 세팅: 깃허브, 파이어베이스, 수파베이스, 스윙투앱, 수노, 플로우(Flow), 어도비 익스프레스
+// =========================================================================
+const QUICK_SITES_KEY = "dg1682_mixboard_quick_sites_v1";
+const QUICK_DOCK_ASSET_ID = "__quick_dock_config__";
+
+function getDefaultQuickSites() {
+  return [
+    {
+      id: "qs-github",
+      name: "깃허브 (GitHub)",
+      url: "https://github.com/dg1682-commits",
+      icon: "🐙",
+      color: "slate"
+    },
+    {
+      id: "qs-firebase",
+      name: "파이어베이스",
+      url: "https://console.firebase.google.com/",
+      icon: "🔥",
+      color: "amber"
+    },
+    {
+      id: "qs-supabase",
+      name: "수파베이스",
+      url: "https://supabase.com/dashboard/project/xgcgfmcwcrnanflbveup",
+      icon: "⚡",
+      color: "emerald"
+    },
+    {
+      id: "qs-swing2app",
+      name: "스윙투앱",
+      url: "https://www.swing2app.co.kr/",
+      icon: "📱",
+      color: "blue"
+    },
+    {
+      id: "qs-suno",
+      name: "수노 (Suno)",
+      url: "https://suno.com/",
+      icon: "🎵",
+      color: "rose"
+    },
+    {
+      id: "qs-flow",
+      name: "플로우 (Flow)",
+      url: "https://labs.google/fx/ko/tools/flow",
+      icon: "🌊",
+      color: "indigo"
+    },
+    {
+      id: "qs-adobe",
+      name: "어도비 익스프레스",
+      url: "https://new.express.adobe.com/",
+      icon: "🎨",
+      color: "violet"
+    }
+  ];
+}
+
+let quickSites = [];
+let quickDockEditMode = false;
+let editingQuickSiteId = null;
+let selectedQuickColor = "indigo";
+
+function loadQuickSites() {
+  // 1) 보드 클라우드 데이터(assets)에 저장된 설정이 있으면 우선 사용
+  const embedded = assets.find(a => a && a.id === QUICK_DOCK_ASSET_ID && Array.isArray(a.sites));
+  if (embedded && embedded.sites.length > 0) {
+    quickSites = embedded.sites;
+    localStorage.setItem(QUICK_SITES_KEY, JSON.stringify(quickSites));
+    return;
+  }
+
+  // 2) 로컬 스토리지 확인
+  try {
+    const raw = localStorage.getItem(QUICK_SITES_KEY);
+    if (raw) {
+      const parsed = JSON.parse(raw);
+      if (Array.isArray(parsed) && parsed.length > 0) {
+        quickSites = parsed;
+        return;
+      }
+    }
+  } catch {}
+
+  quickSites = getDefaultQuickSites();
+  saveQuickSites(true);
+}
+
+function syncQuickSitesFromBoardAssets() {
+  const embedded = assets.find(a => a && a.id === QUICK_DOCK_ASSET_ID && Array.isArray(a.sites));
+  if (embedded && Array.isArray(embedded.sites)) {
+    quickSites = embedded.sites;
+    localStorage.setItem(QUICK_SITES_KEY, JSON.stringify(quickSites));
+    renderQuickSiteDock();
+  }
+}
+
+function saveQuickSites(skipCloud = false) {
+  localStorage.setItem(QUICK_SITES_KEY, JSON.stringify(quickSites));
+  const existingIdx = assets.findIndex(a => a && a.id === QUICK_DOCK_ASSET_ID);
+  const configObj = {
+    id: QUICK_DOCK_ASSET_ID,
+    type: "quickdock_config",
+    sites: quickSites
+  };
+  if (existingIdx >= 0) {
+    assets[existingIdx] = configObj;
+  } else {
+    assets.push(configObj);
+  }
+  if (!skipCloud) {
+    saveState();
+  }
+}
+
+function renderQuickSiteDock() {
+  const listEl = document.getElementById("quickDockList");
+  const countEl = document.getElementById("quickDockCount");
+  const miniCountEl = document.getElementById("quickDockMiniCount");
+  if (!listEl) return;
+
+  if (countEl) countEl.textContent = String(quickSites.length);
+  if (miniCountEl) miniCountEl.textContent = String(quickSites.length);
+
+  listEl.innerHTML = "";
+  quickSites.forEach(site => {
+    const item = document.createElement("a");
+    item.className = `quick-dock-item qcolor-${site.color || "indigo"}`;
+    item.href = site.url || "#";
+    item.target = "_blank";
+    item.rel = "noopener noreferrer";
+    item.title = `${site.name} (${site.url})`;
+
+    item.innerHTML = `
+      <div class="quick-dock-item-left">
+        <span class="qdock-icon">${escapeHtml(site.icon || "🌐")}</span>
+        <span class="qdock-name">${escapeHtml(site.name)}</span>
+      </div>
+      <span class="qdock-arrow">↗</span>
+      <div class="qdock-item-edit-btns">
+        <button type="button" class="qdock-mini-btn edit" title="수정">✏️</button>
+        <button type="button" class="qdock-mini-btn del" title="삭제">✕</button>
+      </div>
+    `;
+
+    // 편집 모드일 때는 클릭 시 바로 이동 대신 수정/삭제 버튼 동작
+    item.addEventListener("click", e => {
+      if (e.target.closest(".qdock-item-edit-btns")) {
+        e.preventDefault();
+        return;
+      }
+      if (quickDockEditMode) {
+        e.preventDefault();
+        openQuickSiteModal(site.id);
+      }
+    });
+
+    const btnEdit = item.querySelector(".qdock-mini-btn.edit");
+    const btnDel = item.querySelector(".qdock-mini-btn.del");
+
+    btnEdit.addEventListener("click", e => {
+      e.preventDefault();
+      e.stopPropagation();
+      openQuickSiteModal(site.id);
+    });
+
+    btnDel.addEventListener("click", async e => {
+      e.preventDefault();
+      e.stopPropagation();
+      const ok = await showCustomConfirm({
+        icon: "🗑️",
+        title: `'${site.name}' 바로가기를 삭제할까요?`,
+        message: "우측 빠른 바로가기 목록에서 제거됩니다.",
+        confirmText: "🗑️ 삭제",
+        danger: true
+      });
+      if (ok) {
+        quickSites = quickSites.filter(s => s.id !== site.id);
+        saveQuickSites();
+        renderQuickSiteDock();
+      }
+    });
+
+    listEl.appendChild(item);
+  });
+}
+
+function selectQuickSiteSwatch(color) {
+  selectedQuickColor = color;
+  const palette = document.getElementById("qsColorPalette");
+  if (!palette) return;
+  palette.querySelectorAll(".color-swatch").forEach(s => {
+    s.classList.toggle("selected", s.dataset.color === color);
+  });
+}
+
+function openQuickSiteModal(siteId = null) {
+  const modal = document.getElementById("quickSiteModal");
+  const titleEl = document.getElementById("quickSiteModalTitle");
+  const nameInput = document.getElementById("qsInputName");
+  const urlInput = document.getElementById("qsInputUrl");
+  const iconInput = document.getElementById("qsInputIcon");
+  const btnDel = document.getElementById("btnDeleteQuickSite");
+
+  editingQuickSiteId = siteId;
+
+  if (siteId) {
+    const target = quickSites.find(s => s.id === siteId);
+    if (!target) return;
+    titleEl.textContent = "⚡ 빠른 바로가기 수정";
+    nameInput.value = target.name || "";
+    urlInput.value = target.url || "";
+    iconInput.value = target.icon || "🌐";
+    selectQuickSiteSwatch(target.color || "indigo");
+    btnDel.classList.remove("hidden");
+  } else {
+    titleEl.textContent = "⚡ 새 바로가기 사이트 추가";
+    nameInput.value = "";
+    urlInput.value = "https://";
+    iconInput.value = "🌐";
+    selectQuickSiteSwatch("indigo");
+    btnDel.classList.add("hidden");
+  }
+
+  modal.classList.remove("hidden");
+  nameInput.focus();
+}
+
+function closeQuickSiteModal() {
+  document.getElementById("quickSiteModal").classList.add("hidden");
+  editingQuickSiteId = null;
+}
+
+function initQuickSiteDock() {
+  loadQuickSites();
+  renderQuickSiteDock();
+
+  const dock = document.getElementById("quickSiteDock");
+  const dockHeader = document.getElementById("quickDockHeader");
+  const miniTab = document.getElementById("quickDockMiniTab");
+  const btnAdd = document.getElementById("btnQuickDockAdd");
+  const btnAddBottom = document.getElementById("btnQuickDockAddBottom");
+  const btnEdit = document.getElementById("btnQuickDockEdit");
+  const btnCollapse = document.getElementById("btnQuickDockCollapse");
+
+  btnAdd.addEventListener("click", () => openQuickSiteModal(null));
+  btnAddBottom.addEventListener("click", () => openQuickSiteModal(null));
+
+  btnEdit.addEventListener("click", () => {
+    quickDockEditMode = !quickDockEditMode;
+    dock.classList.toggle("edit-mode", quickDockEditMode);
+    btnEdit.classList.toggle("active", quickDockEditMode);
+  });
+
+  btnCollapse.addEventListener("click", () => {
+    dock.classList.add("hidden");
+    miniTab.classList.remove("hidden");
+  });
+
+  miniTab.addEventListener("click", () => {
+    miniTab.classList.add("hidden");
+    dock.classList.remove("hidden");
+  });
+
+  // 독 헤더 드래그로 화면 어디든 이동 가능
+  dockHeader.addEventListener("mousedown", e => {
+    if (e.target.closest("button")) return;
+    e.preventDefault();
+    const rect = dock.getBoundingClientRect();
+    const startX = e.clientX;
+    const startY = e.clientY;
+    const origLeft = rect.left;
+    const origTop = rect.top;
+
+    function onMove(mv) {
+      const nx = Math.max(8, Math.min(window.innerWidth - rect.width - 8, origLeft + (mv.clientX - startX)));
+      const ny = Math.max(58, Math.min(window.innerHeight - 60, origTop + (mv.clientY - startY)));
+      dock.style.right = "auto";
+      dock.style.left = `${nx}px`;
+      dock.style.top = `${ny}px`;
+    }
+
+    function onUp() {
+      window.removeEventListener("mousemove", onMove);
+      window.removeEventListener("mouseup", onUp);
+    }
+
+    window.addEventListener("mousemove", onMove);
+    window.addEventListener("mouseup", onUp);
+  });
+
+  // 모달 이벤트
+  document.getElementById("btnCloseQuickSiteModal").addEventListener("click", closeQuickSiteModal);
+  document.getElementById("btnCancelQuickSite").addEventListener("click", closeQuickSiteModal);
+
+  document.getElementById("qsColorPalette").querySelectorAll(".color-swatch").forEach(sw => {
+    sw.addEventListener("click", () => selectQuickSiteSwatch(sw.dataset.color));
+  });
+
+  document.getElementById("btnDeleteQuickSite").addEventListener("click", async () => {
+    if (!editingQuickSiteId) return;
+    const target = quickSites.find(s => s.id === editingQuickSiteId);
+    const idToRemove = editingQuickSiteId;
+    closeQuickSiteModal();
+    const ok = await showCustomConfirm({
+      icon: "🗑️",
+      title: `'${target ? target.name : "사이트"}' 바로가기를 삭제할까요?`,
+      message: "빠른 바로가기 목록에서 제거됩니다.",
+      confirmText: "🗑️ 삭제",
+      danger: true
+    });
+    if (ok) {
+      quickSites = quickSites.filter(s => s.id !== idToRemove);
+      saveQuickSites();
+      renderQuickSiteDock();
+    }
+  });
+
+  document.getElementById("quickSiteForm").addEventListener("submit", e => {
+    e.preventDefault();
+    const name = document.getElementById("qsInputName").value.trim() || "사이트";
+    const url = document.getElementById("qsInputUrl").value.trim() || "https://";
+    const icon = document.getElementById("qsInputIcon").value.trim() || "🌐";
+
+    if (editingQuickSiteId) {
+      const target = quickSites.find(s => s.id === editingQuickSiteId);
+      if (target) {
+        target.name = name;
+        target.url = url;
+        target.icon = icon;
+        target.color = selectedQuickColor;
+      }
+    } else {
+      quickSites.push({
+        id: "qs-" + Date.now(),
+        name,
+        url,
+        icon,
+        color: selectedQuickColor
+      });
+    }
+
+    saveQuickSites();
+    renderQuickSiteDock();
+    closeQuickSiteModal();
+  });
+}
+
+// =========================================================================
+// 11. 📊 저장공간 점유율(%) & 1일 업로드 용량 & 확장자별 파일 통계 대시보드
+// =========================================================================
+const DAILY_UPLOAD_STORAGE_KEY = "dg1682_mixboard_daily_upload_v1";
+const SUPABASE_FREE_LIMIT_BYTES = 1024 * 1024 * 1024; // 1 GB (1,024 MB)
+const DAILY_RECOMMENDED_LIMIT_BYTES = 500 * 1024 * 1024; // 일일 권장 500 MB 기준
+let lastRemoteSupabaseScan = null;
+
+function getTodayDateKey() {
+  const d = new Date();
+  const yyyy = d.getFullYear();
+  const mm = String(d.getMonth() + 1).padStart(2, "0");
+  const dd = String(d.getDate()).padStart(2, "0");
+  return `${yyyy}-${mm}-${dd}`;
+}
+
+function getDailyUploadStats() {
+  const today = getTodayDateKey();
+  try {
+    const raw = localStorage.getItem(DAILY_UPLOAD_STORAGE_KEY);
+    if (raw) {
+      const parsed = JSON.parse(raw);
+      if (parsed && parsed.date === today) {
+        return {
+          date: today,
+          bytes: Number(parsed.bytes) || 0,
+          count: Number(parsed.count) || 0
+        };
+      }
+    }
+  } catch {}
+  return { date: today, bytes: 0, count: 0 };
+}
+
+function recordDailyUploadBytes(bytes) {
+  const current = getDailyUploadStats();
+  current.bytes += Number(bytes) || 0;
+  current.count += 1;
+  localStorage.setItem(DAILY_UPLOAD_STORAGE_KEY, JSON.stringify(current));
+  updateToolbarStorageMiniBadge();
+}
+
+function getAssetByteSize(asset) {
+  if (!asset) return 0;
+  if (asset.type === "file") {
+    return Number(asset.fileSize) || 0;
+  }
+  if (asset.type === "md") {
+    return new Blob([asset.content || ""]).size;
+  }
+  return 0;
+}
+
+function computePortalFileStatistics() {
+  const fileItems = assets.filter(a => a && (a.type === "file" || a.type === "md"));
+  let totalBytes = 0;
+
+  const byExt = new Map();
+  const byCategory = {
+    image: { label: "🖼️ 이미지", count: 0, bytes: 0 },
+    audio: { label: "🎵 음악·오디오", count: 0, bytes: 0 },
+    video: { label: "🎬 영상·비디오", count: 0, bytes: 0 },
+    md: { label: "📝 마크다운·메모", count: 0, bytes: 0 },
+    other: { label: "📦 일반·실행파일", count: 0, bytes: 0 }
+  };
+
+  fileItems.forEach(item => {
+    const bytes = getAssetByteSize(item);
+    totalBytes += bytes;
+
+    let ext = "file";
+    let cat = "other";
+
+    if (item.type === "md") {
+      ext = "md";
+      cat = "md";
+    } else {
+      const titleExt = (item.title || "").includes(".")
+        ? item.title.split(".").pop().toLowerCase()
+        : "";
+      ext = (item.ext || titleExt || "file").toLowerCase();
+      cat = byCategory[item.fileCategory] ? item.fileCategory : "other";
+    }
+
+    byCategory[cat].count += 1;
+    byCategory[cat].bytes += bytes;
+
+    if (!byExt.has(ext)) {
+      byExt.set(ext, {
+        ext,
+        category: cat,
+        count: 0,
+        bytes: 0
+      });
+    }
+    const entry = byExt.get(ext);
+    entry.count += 1;
+    entry.bytes += bytes;
+  });
+
+  const extList = Array.from(byExt.values()).sort((a, b) => b.bytes - a.bytes || b.count - a.count);
+
+  return {
+    totalFiles: fileItems.length,
+    totalBytes,
+    byCategory,
+    extList
+  };
+}
+
+function updateToolbarStorageMiniBadge() {
+  const badge = document.getElementById("storageMiniBadge");
+  if (!badge) return;
+  const stats = computePortalFileStatistics();
+  const effectiveBytes =
+    lastRemoteSupabaseScan && lastRemoteSupabaseScan.totalBytes > stats.totalBytes
+      ? lastRemoteSupabaseScan.totalBytes
+      : stats.totalBytes;
+
+  const pct = Math.min(100, (effectiveBytes / SUPABASE_FREE_LIMIT_BYTES) * 100);
+  badge.textContent = pct < 0.1 && effectiveBytes > 0 ? "<0.1%" : `${pct.toFixed(1)}%`;
+}
+
+async function scanSupabaseBucketActualUsage() {
+  const sb = getSbConfig();
+  const noteEl = document.getElementById("statRemoteScanNote");
+  if (!sb.url || !sb.key) {
+    if (noteEl) noteEl.textContent = "💡 Supabase 설정이 비어 있어 포털 내 업로드 파일 기준으로 계산되었습니다.";
+    return null;
+  }
+
+  if (noteEl) {
+    noteEl.textContent = "🔄 Supabase 'Potal' 버킷의 실제 저장 용량을 스캔하는 중...";
+  }
+
+  try {
+    const bucket = encodeURIComponent(sb.bucket || DEFAULT_SB_BUCKET);
+    const listUrl = `${sb.url}/storage/v1/object/list/${bucket}`;
+
+    async function listPrefix(prefix) {
+      const res = await fetch(listUrl, {
+        method: "POST",
+        headers: buildSbHeaders(sb.key, { "Content-Type": "application/json" }),
+        body: JSON.stringify({
+          prefix,
+          limit: 1000,
+          offset: 0
+        })
+      });
+      if (!res.ok) return [];
+      return await res.json();
+    }
+
+    let remoteCount = 0;
+    let remoteBytes = 0;
+
+    const topItems = await listPrefix("uploads");
+    for (const item of topItems) {
+      if (item.id && item.metadata && typeof item.metadata.size === "number") {
+        remoteCount += 1;
+        remoteBytes += item.metadata.size;
+      } else if (item.name && !item.id) {
+        // 하위 폴더인 경우 1단계 더 탐색
+        const subItems = await listPrefix(`uploads/${item.name}`);
+        for (const sub of subItems) {
+          if (sub.id && sub.metadata && typeof sub.metadata.size === "number") {
+            remoteCount += 1;
+            remoteBytes += sub.metadata.size;
+          }
+        }
+      }
+    }
+
+    lastRemoteSupabaseScan = {
+      count: remoteCount,
+      totalBytes: remoteBytes,
+      scannedAt: new Date().toLocaleTimeString("ko-KR")
+    };
+
+    if (noteEl) {
+      noteEl.innerHTML = `✅ <b>Supabase '${escapeHtml(sb.bucket || "Potal")}' 버킷 실시간 조회 완료</b> (${lastRemoteSupabaseScan.scannedAt} 기준): 원격 파일 <b>${remoteCount}개</b> · 실제 버킷 점유 용량 <b>${formatBytes(remoteBytes) || "0 B"}</b>`;
+    }
+
+    renderStorageStatsDashboard();
+    updateToolbarStorageMiniBadge();
+    return lastRemoteSupabaseScan;
+  } catch (err) {
+    if (noteEl) {
+      noteEl.textContent = `⚠️ 원격 버킷 스캔 안내: 포털 보드에 등록된 파일 기준으로 용량이 표시됩니다.`;
+    }
+    return null;
+  }
+}
+
+function renderStorageStatsDashboard() {
+  const stats = computePortalFileStatistics();
+  const daily = getDailyUploadStats();
+
+  const effectiveBytes =
+    lastRemoteSupabaseScan && lastRemoteSupabaseScan.totalBytes > stats.totalBytes
+      ? lastRemoteSupabaseScan.totalBytes
+      : stats.totalBytes;
+
+  // 1) 전체 저장공간 1GB 대비 %
+  const totalPct = Math.min(100, (effectiveBytes / SUPABASE_FREE_LIMIT_BYTES) * 100);
+  const statTotalPercent = document.getElementById("statTotalPercent");
+  const statTotalBar = document.getElementById("statTotalBar");
+  const statTotalBytesText = document.getElementById("statTotalBytesText");
+
+  if (statTotalPercent) statTotalPercent.textContent = `${totalPct.toFixed(2)}%`;
+  if (statTotalBar) {
+    statTotalBar.style.width = `${Math.max(totalPct, effectiveBytes > 0 ? 1.5 : 0)}%`;
+    statTotalBar.classList.toggle("warn", totalPct >= 80);
+  }
+  if (statTotalBytesText) {
+    statTotalBytesText.textContent = `${formatBytes(effectiveBytes) || "0 B"} 사용 중 (총 ${stats.totalFiles}개 파일)`;
+  }
+
+  // 2) 오늘(1일) 업로드 용량 & 한도 현황
+  const dailyPct = Math.min(100, (daily.bytes / DAILY_RECOMMENDED_LIMIT_BYTES) * 100);
+  const statDailyPercent = document.getElementById("statDailyPercent");
+  const statDailyBar = document.getElementById("statDailyBar");
+  const statDailyBytesText = document.getElementById("statDailyBytesText");
+
+  if (statDailyPercent) statDailyPercent.textContent = `${dailyPct.toFixed(1)}%`;
+  if (statDailyBar) {
+    statDailyBar.style.width = `${Math.max(dailyPct, daily.bytes > 0 ? 1.5 : 0)}%`;
+  }
+  if (statDailyBytesText) {
+    statDailyBytesText.textContent = `오늘 ${daily.count}개 파일 (${formatBytes(daily.bytes) || "0 B"}) 업로드됨`;
+  }
+
+  // 3) 종류별 요약 카드
+  const catSummaryEl = document.getElementById("statCategorySummary");
+  if (catSummaryEl) {
+    catSummaryEl.innerHTML = Object.values(stats.byCategory)
+      .map(
+        c => `
+        <div class="stat-cat-chip">
+          <span class="cat-top">${c.label}</span>
+          <span class="cat-val">${c.count}개 · ${formatBytes(c.bytes) || "0 B"}</span>
+        </div>
+      `
+      )
+      .join("");
+  }
+
+  // 4) 확장자별 상세 표
+  const tableWrap = document.getElementById("statExtTableWrap");
+  if (!tableWrap) return;
+
+  if (stats.extList.length === 0) {
+    tableWrap.innerHTML = `
+      <div style="padding: 26px; text-align: center; color: var(--text-sub); font-size: 0.85rem;">
+        아직 업로드된 파일이 없습니다.
+      </div>
+    `;
+    return;
+  }
+
+  const rowsHtml = stats.extList
+    .map(item => {
+      const sharePct = stats.totalBytes > 0 ? (item.bytes / stats.totalBytes) * 100 : 0;
+      const emoji = item.ext === "md" ? "📝" : getFileTypeEmoji(item.category, item.ext);
+      return `
+        <tr>
+          <td>
+            <span class="ext-pill-badge">${emoji} .${escapeHtml(item.ext.toUpperCase())}</span>
+          </td>
+          <td><b>${item.count}개</b></td>
+          <td><b>${formatBytes(item.bytes) || "0 B"}</b></td>
+          <td>
+            <div class="ext-mini-bar-wrap">
+              <div class="ext-mini-bar">
+                <div class="ext-mini-bar-fill" style="width: ${Math.max(sharePct, 2)}%"></div>
+              </div>
+              <span>${sharePct.toFixed(1)}%</span>
+            </div>
+          </td>
+        </tr>
+      `;
+    })
+    .join("");
+
+  tableWrap.innerHTML = `
+    <table class="stat-ext-table">
+      <thead>
+        <tr>
+          <th>확장자</th>
+          <th>파일 개수</th>
+          <th>합산 용량</th>
+          <th>비중 (%)</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${rowsHtml}
+      </tbody>
+    </table>
+  `;
+}
+
+function openStorageStatsModal() {
+  renderStorageStatsDashboard();
+  document.getElementById("storageStatsModal").classList.remove("hidden");
+  scanSupabaseBucketActualUsage();
+}
+
+function closeStorageStatsModal() {
+  document.getElementById("storageStatsModal").classList.add("hidden");
+}
+
+function bindStorageStatsEvents() {
+  const btnOpen = document.getElementById("btnStorageStats");
+  const btnClose = document.getElementById("btnCloseStorageModal");
+  const btnCloseBottom = document.getElementById("btnCloseStorageModalBottom");
+  const btnRefreshScan = document.getElementById("btnRefreshSupabaseScan");
+
+  if (btnOpen) btnOpen.addEventListener("click", openStorageStatsModal);
+  if (btnClose) btnClose.addEventListener("click", closeStorageStatsModal);
+  if (btnCloseBottom) btnCloseBottom.addEventListener("click", closeStorageStatsModal);
+  if (btnRefreshScan) btnRefreshScan.addEventListener("click", () => scanSupabaseBucketActualUsage());
 }
 
 init();

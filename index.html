@@ -79,6 +79,11 @@
           <span id="ghSyncLabel">☁️ 자동저장 켜짐</span>
         </button>
 
+        <button id="btnStorageStats" class="tool-btn storage-stats-btn" title="저장공간 점유율(%) · 일일 업로드 현황 · 확장자별 파일 용량 확인">
+          <span>📊 용량 확인</span>
+          <span id="storageMiniBadge" class="storage-mini-badge">0%</span>
+        </button>
+
         <button id="btnExport" class="tool-btn icon-only" title="전체 보드 + 파일 목록 통합 백업(.json) 다운로드">
           <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
         </button>
@@ -334,6 +339,147 @@
           </div>
         </div>
       </form>
+    </div>
+  </div>
+
+  <!-- 6. 우측 플로팅 퀵 사이트 독 (토스트/플로팅 런처 스타일, 사이트 추가/수정/삭제 지원) -->
+  <aside id="quickSiteDock" class="quick-site-dock">
+    <div id="quickDockHeader" class="quick-dock-header" title="드래그하여 위치 이동">
+      <div class="quick-dock-title">
+        <span>⚡ 빠른 바로가기</span>
+        <span id="quickDockCount" class="quick-dock-badge">7</span>
+      </div>
+      <div class="quick-dock-controls">
+        <button type="button" id="btnQuickDockAdd" class="qdock-ctrl-btn add" title="새 바로가기 사이트 추가">＋</button>
+        <button type="button" id="btnQuickDockEdit" class="qdock-ctrl-btn" title="사이트 순서/수정/삭제 편집 모드">✏️</button>
+        <button type="button" id="btnQuickDockCollapse" class="qdock-ctrl-btn" title="접기 / 펼치기">ㅡ</button>
+      </div>
+    </div>
+    <div id="quickDockBody" class="quick-dock-body">
+      <div id="quickDockList" class="quick-dock-list"></div>
+      <button type="button" id="btnQuickDockAddBottom" class="quick-dock-add-footer">＋ 사이트 추가</button>
+    </div>
+  </aside>
+
+  <!-- 접혔을 때 우측에 떠있는 미니 플로팅 토스트 탭 -->
+  <button type="button" id="quickDockMiniTab" class="quick-dock-mini-tab hidden" title="빠른 사이트 바로가기 펼치기">
+    <span>⚡ 빠른 사이트</span>
+    <span id="quickDockMiniCount" class="quick-dock-badge">7</span>
+  </button>
+
+  <!-- 7. 빠른 사이트 추가/편집 모달 -->
+  <div id="quickSiteModal" class="modal-backdrop hidden">
+    <div class="modal" style="width: 400px;">
+      <div class="modal-header">
+        <h2 id="quickSiteModalTitle">⚡ 빠른 바로가기 추가</h2>
+        <button type="button" id="btnCloseQuickSiteModal" class="close-btn">&times;</button>
+      </div>
+      <form id="quickSiteForm">
+        <div class="form-group">
+          <label for="qsInputName">사이트 이름</label>
+          <input type="text" id="qsInputName" required placeholder="예: 수노 (Suno)" />
+        </div>
+        <div class="form-group">
+          <label for="qsInputUrl">사이트 주소 (URL)</label>
+          <input type="url" id="qsInputUrl" required placeholder="https://..." />
+        </div>
+        <div class="form-group">
+          <label for="qsInputIcon">아이콘 / 이모지 (1~2글자)</label>
+          <input type="text" id="qsInputIcon" maxlength="4" placeholder="🎵, 🔥, ⚡, 🌐 등" />
+        </div>
+        <div class="form-group">
+          <label>뱃지 컬러</label>
+          <div class="color-palette" id="qsColorPalette">
+            <button type="button" class="color-swatch selected" data-color="indigo" title="인디고"></button>
+            <button type="button" class="color-swatch" data-color="blue" title="블루"></button>
+            <button type="button" class="color-swatch" data-color="emerald" title="에메랄드"></button>
+            <button type="button" class="color-swatch" data-color="amber" title="앰버"></button>
+            <button type="button" class="color-swatch" data-color="rose" title="로즈"></button>
+            <button type="button" class="color-swatch" data-color="violet" title="바이올렛"></button>
+            <button type="button" class="color-swatch" data-color="slate" title="슬레이트"></button>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" id="btnDeleteQuickSite" class="btn-danger hidden">삭제</button>
+          <div class="modal-footer-right">
+            <button type="button" id="btnCancelQuickSite" class="btn-secondary">취소</button>
+            <button type="submit" class="btn-primary">저장</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 8. 📊 저장공간 점유율(%) & 1일 업로드 현황 & 확장자별 용량 통계 모달 -->
+  <div id="storageStatsModal" class="modal-backdrop hidden">
+    <div class="modal storage-modal">
+      <div class="modal-header">
+        <h2>📊 클라우드 저장공간 & 확장자별 파일 현황</h2>
+        <button type="button" id="btnCloseStorageModal" class="close-btn">&times;</button>
+      </div>
+
+      <div class="storage-modal-body">
+        <!-- 1) 전체 저장공간 & 1일 업로드 용량 카드 그리드 -->
+        <div class="storage-gauge-grid">
+          <div class="storage-gauge-card">
+            <div class="gauge-card-top">
+              <span class="gauge-label">☁️ 전체 저장공간 (Supabase <code>Potal</code> 1GB 한도)</span>
+              <span id="statTotalPercent" class="gauge-percent">0.00%</span>
+            </div>
+            <div class="gauge-bar-track">
+              <div id="statTotalBar" class="gauge-bar-fill" style="width: 0%"></div>
+            </div>
+            <div class="gauge-card-sub">
+              <span id="statTotalBytesText">0 MB 사용 중</span>
+              <span>총 무료 제공: <b>1,024 MB (1 GB)</b></span>
+            </div>
+          </div>
+
+          <div class="storage-gauge-card">
+            <div class="gauge-card-top">
+              <span class="gauge-label">📅 오늘(1일) 업로드 용량 & 한도 현황</span>
+              <span id="statDailyPercent" class="gauge-percent emerald">0.0%</span>
+            </div>
+            <div class="gauge-bar-track">
+              <div id="statDailyBar" class="gauge-bar-fill emerald" style="width: 0%"></div>
+            </div>
+            <div class="gauge-card-sub">
+              <span id="statDailyBytesText">오늘 0개 (0 MB) 업로드됨</span>
+              <span>1회 파일당 최대 <b>50 MB</b> · 일일 권장 <b>500 MB</b></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2) 카테고리별 요약 칩 -->
+        <div id="statCategorySummary" class="stat-category-summary"></div>
+
+        <!-- 3) 확장자별 상세 개수 & 용량 테이블 -->
+        <div class="stat-section-header">
+          <h3>🧩 확장자별 업로드 파일 개수 & 용량 상세</h3>
+          <button type="button" id="btnRefreshSupabaseScan" class="win-action-btn">🔄 수파베이스 버킷 실시간 정밀 스캔</button>
+        </div>
+
+        <div id="statExtTableWrap" class="stat-ext-table-wrap"></div>
+
+        <div id="statRemoteScanNote" class="stat-remote-scan-note"></div>
+      </div>
+
+      <div class="modal-footer" style="margin-top: 14px;">
+        <span style="font-size:0.76rem;color:var(--text-muted);">💡 포털에서 파일을 삭제하면 클라우드 용량도 즉시 반환됩니다.</span>
+        <div class="modal-footer-right">
+          <button type="button" id="btnCloseStorageModalBottom" class="btn-primary">닫기</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 9. 커스텀 확인/삭제/알림 모달 (시스템 기본 alert/confirm 완전 대체) -->
+  <div id="customDialogModal" class="modal-backdrop hidden" style="z-index: 5000;">
+    <div class="custom-dialog-card">
+      <div id="customDialogIcon" class="custom-dialog-icon">🗑️</div>
+      <h3 id="customDialogTitle" class="custom-dialog-title">정말 삭제하시겠습니까?</h3>
+      <p id="customDialogMessage" class="custom-dialog-msg">삭제하면 클라우드 저장소에서도 함께 정리됩니다.</p>
+      <div id="customDialogActions" class="custom-dialog-actions"></div>
     </div>
   </div>
 
