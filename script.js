@@ -260,6 +260,7 @@ function getDefaultAssets() {
 let assets = [];
 let snapEnabled = true;
 let autoFitEnabled = true;
+let manualZoomPercent = 100;
 let boardScale = 1;
 let globalLocked = false;
 let editingAssetId = null;
@@ -328,28 +329,59 @@ function init() {
   autoPullFromGithubOnStart();
 }
 
-// 창을 작게 줄였을 때도 3개 구역이 안 찌그러지고 한눈에 보이도록 반응형 스케일 계산
+// 창을 작게 줄이거나 배율(%) 바를 조절했을 때 레이아웃 전체가 스크롤바 없이 함께 축소/확대되도록 계산
 function updateBoardResponsiveScale() {
   const autoFitLabel = document.getElementById("autoFitLabel");
-  if (!autoFitEnabled) {
-    boardScale = 1;
-    boardEl.style.transform = "scale(1)";
-    boardViewport.style.height = "auto";
-    if (autoFitLabel) autoFitLabel.textContent = "100% 원본";
-    return;
-  }
+  const zoomSlider = document.getElementById("zoomRangeSlider");
+  const zoomValText = document.getElementById("zoomSliderValueText");
+  const btnAutoMode = document.getElementById("btnZoomAutoFitMode");
+  const btnReset100 = document.getElementById("btnZoomReset100");
 
-  const vw = window.innerWidth;
-  if (vw < DESIGN_BOARD_WIDTH) {
-    boardScale = Math.max(0.48, (vw - 16) / DESIGN_BOARD_WIDTH);
+  // 실제 배치된 에셋들의 우측/하단 끝점 계산 (불필요한 2400px 가로 여백 제거)
+  let maxRight = DESIGN_BOARD_WIDTH;
+  let maxBottom = 860;
+  assets.forEach(a => {
+    if (!a || a.type === "quickdock_config") return;
+    if (isFolderorableAsset(a) && a.folderId) return;
+    const r = (Number(a.x) || 0) + (Number(a.w) || 0) + 48;
+    const b = (Number(a.y) || 0) + (Number(a.h) || 0) + 80;
+    if (r > maxRight) maxRight = r;
+    if (b > maxBottom) maxBottom = b;
+  });
+
+  const vw = document.documentElement.clientWidth || window.innerWidth;
+
+  if (autoFitEnabled) {
+    if (vw < maxRight) {
+      boardScale = Math.max(0.5, vw / maxRight);
+    } else {
+      boardScale = 1;
+    }
+    manualZoomPercent = Math.round(boardScale * 100);
   } else {
-    boardScale = 1;
+    boardScale = Math.max(0.5, Math.min(1.25, manualZoomPercent / 100));
   }
 
+  // 스케일 적용 시 실제 레이아웃 폭/높이도 함께 맞춰서 불필요한 가로 스크롤바가 생기지 않게 처리
+  const unscaledCanvasWidth = Math.max(maxRight, Math.floor(vw / boardScale));
+  boardEl.style.width = `${unscaledCanvasWidth}px`;
+  boardEl.style.height = `${maxBottom}px`;
   boardEl.style.transform = `scale(${boardScale})`;
-  boardViewport.style.height = `${Math.ceil(1500 * boardScale)}px`;
-  if (autoFitLabel) {
-    autoFitLabel.textContent = boardScale < 1 ? `화면 맞춤 (${Math.round(boardScale * 100)}%)` : "화면 맞춤";
+
+  const scaledWidth = Math.floor(unscaledCanvasWidth * boardScale);
+  const scaledHeight = Math.ceil(maxBottom * boardScale);
+  boardViewport.style.height = `${scaledHeight}px`;
+  boardViewport.style.overflowX = scaledWidth > vw + 4 ? "auto" : "hidden";
+
+  const pct = Math.round(boardScale * 100);
+  if (autoFitLabel) autoFitLabel.textContent = `${pct}%`;
+  if (zoomSlider) zoomSlider.value = String(pct);
+  if (zoomValText) zoomValText.textContent = `${pct}%`;
+  if (btnAutoMode) btnAutoMode.classList.toggle("active", autoFitEnabled);
+  if (btnReset100) btnReset100.classList.toggle("active", !autoFitEnabled && pct === 100);
+
+  if (typeof clampQuickDockToViewport === "function") {
+    clampQuickDockToViewport();
   }
 }
 
@@ -449,6 +481,7 @@ function renderBoard() {
     renderFolderWindowContent(activeFolderId);
   }
   updateToolbarStorageMiniBadge();
+  updateBoardResponsiveScale();
 }
 
 function getFolderItemCount(folderId) {
@@ -1995,13 +2028,64 @@ function bindToolbarEvents() {
     folderDirUpload.value = "";
   });
 
-  // 자동 화면 맞춤(반응형 스케일) 켜기/끄기
+  // 상단 배율(%) 조절 플로팅 슬라이더 팝오버
   const btnAutoFit = document.getElementById("btnAutoFit");
-  btnAutoFit.addEventListener("click", () => {
-    autoFitEnabled = !autoFitEnabled;
-    btnAutoFit.classList.toggle("active", autoFitEnabled);
-    updateBoardResponsiveScale();
+  const zoomPopover = document.getElementById("zoomFloatingPopover");
+  const zoomSlider = document.getElementById("zoomRangeSlider");
+  const btnZoomMinus = document.getElementById("btnZoomMinus");
+  const btnZoomPlus = document.getElementById("btnZoomPlus");
+  const btnZoomReset100 = document.getElementById("btnZoomReset100");
+  const btnZoomAutoFitMode = document.getElementById("btnZoomAutoFitMode");
+
+  btnAutoFit.addEventListener("click", e => {
+    e.stopPropagation();
+    zoomPopover.classList.toggle("hidden");
   });
+
+  window.addEventListener("mousedown", e => {
+    if (!zoomPopover.classList.contains("hidden") && !e.target.closest("#zoomCtrlWrap")) {
+      zoomPopover.classList.add("hidden");
+    }
+  });
+
+  if (zoomSlider) {
+    zoomSlider.addEventListener("input", e => {
+      autoFitEnabled = false;
+      manualZoomPercent = Number(e.target.value) || 100;
+      updateBoardResponsiveScale();
+    });
+  }
+
+  if (btnZoomMinus) {
+    btnZoomMinus.addEventListener("click", () => {
+      autoFitEnabled = false;
+      manualZoomPercent = Math.max(50, Math.round(boardScale * 100) - 5);
+      updateBoardResponsiveScale();
+    });
+  }
+
+  if (btnZoomPlus) {
+    btnZoomPlus.addEventListener("click", () => {
+      autoFitEnabled = false;
+      manualZoomPercent = Math.min(125, Math.round(boardScale * 100) + 5);
+      updateBoardResponsiveScale();
+    });
+  }
+
+  if (btnZoomReset100) {
+    btnZoomReset100.addEventListener("click", () => {
+      autoFitEnabled = false;
+      manualZoomPercent = 100;
+      updateBoardResponsiveScale();
+    });
+  }
+
+  if (btnZoomAutoFitMode) {
+    btnZoomAutoFitMode.addEventListener("click", () => {
+      autoFitEnabled = true;
+      updateBoardResponsiveScale();
+    });
+  }
 
   const btnSnapToggle = document.getElementById("btnSnapToggle");
   btnSnapToggle.addEventListener("click", () => {
@@ -2982,53 +3066,75 @@ function closeQuickSiteModal() {
   editingQuickSiteId = null;
 }
 
+let quickDockRightOffset = 16;
+let quickDockTopOffset = 112;
+
+function clampQuickDockToViewport() {
+  const dock = document.getElementById("quickSiteDock");
+  if (!dock) return;
+  const vw = document.documentElement.clientWidth || window.innerWidth;
+  const vh = document.documentElement.clientHeight || window.innerHeight;
+  const dockW = dock.offsetWidth || 160;
+  const dockH = Math.min(dock.offsetHeight || 44, 60);
+
+  const clampedRight = Math.max(8, Math.min(vw - dockW - 8, quickDockRightOffset));
+  const clampedTop = Math.max(58, Math.min(vh - dockH - 8, quickDockTopOffset));
+
+  dock.style.left = "auto";
+  dock.style.right = `${clampedRight}px`;
+  dock.style.top = `${clampedTop}px`;
+}
+
 function initQuickSiteDock() {
   loadQuickSites();
   renderQuickSiteDock();
 
   const dock = document.getElementById("quickSiteDock");
   const dockHeader = document.getElementById("quickDockHeader");
-  const miniTab = document.getElementById("quickDockMiniTab");
-  const btnAdd = document.getElementById("btnQuickDockAdd");
   const btnAddBottom = document.getElementById("btnQuickDockAddBottom");
   const btnEdit = document.getElementById("btnQuickDockEdit");
   const btnCollapse = document.getElementById("btnQuickDockCollapse");
 
-  btnAdd.addEventListener("click", () => openQuickSiteModal(null));
-  btnAddBottom.addEventListener("click", () => openQuickSiteModal(null));
+  if (btnAddBottom) btnAddBottom.addEventListener("click", () => openQuickSiteModal(null));
 
-  btnEdit.addEventListener("click", () => {
-    quickDockEditMode = !quickDockEditMode;
-    dock.classList.toggle("edit-mode", quickDockEditMode);
-    btnEdit.classList.toggle("active", quickDockEditMode);
-  });
+  if (btnEdit) {
+    btnEdit.addEventListener("click", () => {
+      quickDockEditMode = !quickDockEditMode;
+      dock.classList.toggle("edit-mode", quickDockEditMode);
+      btnEdit.classList.toggle("active", quickDockEditMode);
+    });
+  }
 
-  btnCollapse.addEventListener("click", () => {
-    dock.classList.add("hidden");
-    miniTab.classList.remove("hidden");
-  });
+  // 현재 위치 그대로 제자리에서 접고 펼치기
+  if (btnCollapse) {
+    btnCollapse.addEventListener("click", () => {
+      const isCollapsed = dock.classList.toggle("collapsed");
+      btnCollapse.textContent = isCollapsed ? "▼" : "▲";
+      btnCollapse.title = isCollapsed ? "현재 자리에서 펼치기" : "현재 자리에서 접기";
+      clampQuickDockToViewport();
+    });
+  }
 
-  miniTab.addEventListener("click", () => {
-    miniTab.classList.add("hidden");
-    dock.classList.remove("hidden");
-  });
-
-  // 독 헤더 드래그로 화면 어디든 이동 가능
+  // 독 헤더 드래그로 화면 어디든 이동 가능 (오른쪽 기준 상대 오프셋으로 저장하여 창 축소 시에도 함께 이동!)
   dockHeader.addEventListener("mousedown", e => {
     if (e.target.closest("button")) return;
     e.preventDefault();
+    const vw = document.documentElement.clientWidth || window.innerWidth;
     const rect = dock.getBoundingClientRect();
     const startX = e.clientX;
     const startY = e.clientY;
-    const origLeft = rect.left;
+    const origRight = vw - rect.right;
     const origTop = rect.top;
 
     function onMove(mv) {
-      const nx = Math.max(8, Math.min(window.innerWidth - rect.width - 8, origLeft + (mv.clientX - startX)));
-      const ny = Math.max(58, Math.min(window.innerHeight - 60, origTop + (mv.clientY - startY)));
-      dock.style.right = "auto";
-      dock.style.left = `${nx}px`;
-      dock.style.top = `${ny}px`;
+      const curVw = document.documentElement.clientWidth || window.innerWidth;
+      const curVh = document.documentElement.clientHeight || window.innerHeight;
+      const dx = mv.clientX - startX;
+      const dy = mv.clientY - startY;
+
+      quickDockRightOffset = Math.max(8, Math.min(curVw - rect.width - 8, origRight - dx));
+      quickDockTopOffset = Math.max(58, Math.min(curVh - 54, origTop + dy));
+      clampQuickDockToViewport();
     }
 
     function onUp() {
