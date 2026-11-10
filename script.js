@@ -2889,8 +2889,8 @@ function renderQuickSiteDock() {
       </div>
       <span class="qdock-arrow">↗</span>
       <div class="qdock-item-edit-btns">
-        <button type="button" class="qdock-mini-btn edit" title="수정">✏️</button>
-        <button type="button" class="qdock-mini-btn del" title="삭제">✕</button>
+        <button type="button" class="qdock-mini-btn edit" title="수정">수정</button>
+        <button type="button" class="qdock-mini-btn del" title="삭제">삭제</button>
       </div>
     `;
 

@@ -345,25 +345,26 @@
   <!-- 6. 우측 플로팅 퀵 사이트 독 (토스트/플로팅 런처 스타일, 사이트 추가/수정/삭제 지원) -->
   <aside id="quickSiteDock" class="quick-site-dock">
     <div id="quickDockHeader" class="quick-dock-header" title="드래그하여 위치 이동">
-      <div class="quick-dock-title">
-        <span>⚡ 빠른 바로가기</span>
+      <div class="quick-dock-title" title="즐겨찾는 사이트 빠른 이동">
+        <span class="quick-star-icon">⭐</span>
         <span id="quickDockCount" class="quick-dock-badge">7</span>
       </div>
       <div class="quick-dock-controls">
-        <button type="button" id="btnQuickDockAdd" class="qdock-ctrl-btn add" title="새 바로가기 사이트 추가">＋</button>
-        <button type="button" id="btnQuickDockEdit" class="qdock-ctrl-btn" title="사이트 순서/수정/삭제 편집 모드">✏️</button>
-        <button type="button" id="btnQuickDockCollapse" class="qdock-ctrl-btn" title="접기 / 펼치기">ㅡ</button>
+        <button type="button" id="btnQuickDockAdd" class="qdock-ctrl-btn add" title="새 바로가기 사이트 추가">＋ 추가</button>
+        <button type="button" id="btnQuickDockEdit" class="qdock-ctrl-btn edit" title="사이트 수정/삭제 편집 모드">⚙️ 편집</button>
+        <button type="button" id="btnQuickDockCollapse" class="qdock-ctrl-btn collapse" title="미니 버튼으로 접기">▲</button>
       </div>
     </div>
     <div id="quickDockBody" class="quick-dock-body">
       <div id="quickDockList" class="quick-dock-list"></div>
-      <button type="button" id="btnQuickDockAddBottom" class="quick-dock-add-footer">＋ 사이트 추가</button>
+      <button type="button" id="btnQuickDockAddBottom" class="quick-dock-add-footer">＋ 새 사이트 추가</button>
     </div>
   </aside>
 
   <!-- 접혔을 때 우측에 떠있는 미니 플로팅 토스트 탭 -->
   <button type="button" id="quickDockMiniTab" class="quick-dock-mini-tab hidden" title="빠른 사이트 바로가기 펼치기">
-    <span>⚡ 빠른 사이트</span>
+    <span class="quick-star-icon">⭐</span>
+    <span>즐겨찾기</span>
     <span id="quickDockMiniCount" class="quick-dock-badge">7</span>
   </button>
 
