@@ -347,7 +347,7 @@
   {
     "id": "folder-1794372632133-650",
     "type": "folder",
-    "title": "stems(MP3)",
+    "title": "가장 눈부신 쪽으로 stems(MP3)",
     "subtitle": "10개 파일 업로드됨",
     "x": 300,
     "y": 600,
@@ -355,7 +355,7 @@
     "h": 100,
     "color": "amber",
     "locked": false,
-    "z": 188
+    "z": 189
   },
   {
     "id": "file-1794372633566-383",
