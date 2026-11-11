@@ -229,14 +229,14 @@
     "ghPath": "",
     "ghSha": "",
     "dataUrl": "",
-    "folderId": "folder-1794287675162-327",
-    "x": 1040,
-    "y": 520,
+    "folderId": null,
+    "x": 180,
+    "y": 580,
     "w": 120,
     "h": 106,
     "color": "blue",
     "locked": false,
-    "z": 147
+    "z": 254
   },
   {
     "id": "file-1794287675630-758",
