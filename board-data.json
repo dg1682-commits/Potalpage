@@ -36,7 +36,7 @@
     "h": 60,
     "color": "default",
     "locked": false,
-    "z": 164
+    "z": 169
   },
   {
     "id": "repo-kjikjangin",
@@ -336,7 +336,7 @@
     "subtitle": "",
     "content": "가장 빛나는 쪽으로\nhttps://youtu.be/EWgWIdbYCQ0\n",
     "folderId": null,
-    "x": 300,
+    "x": 260,
     "y": 20,
     "w": 120,
     "h": 100,
