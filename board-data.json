@@ -212,7 +212,7 @@
     "h": 100,
     "color": "amber",
     "locked": false,
-    "z": 141
+    "z": 245
   },
   {
     "id": "md-sample-inside",
@@ -228,21 +228,6 @@
     "color": "indigo",
     "locked": false,
     "z": 111
-  },
-  {
-    "id": "md-sample-board",
-    "type": "md",
-    "title": "오늘의_작업메모.md",
-    "subtitle": "폴더로 드래그해서 넣어보세요",
-    "content": "# 📝 오늘의 개발 메모\n\n- 이 아이콘을 **더블클릭**하면 마크다운 뷰어/편집기가 열립니다.\n- 이 아이콘을 옆에 있는 **📂 안티그래비티 문서함** 폴더 위로 드래그해서 놓으면 폴더 안으로 들어갑니다!\n\n```js\nconsole.log(\"집 PC와 회사 PC 어디서든 편하게 이어서 작업하세요!\");\n```",
-    "folderId": null,
-    "x": 160,
-    "y": 600,
-    "w": 120,
-    "h": 100,
-    "color": "blue",
-    "locked": false,
-    "z": 246
   },
   {
     "id": "folder-1794287675162-327",
