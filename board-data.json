@@ -349,13 +349,13 @@
     "type": "folder",
     "title": "가장 눈부신 쪽으로 stems(MP3)",
     "subtitle": "10개 파일 업로드됨",
-    "x": 300,
-    "y": 600,
+    "x": 440,
+    "y": 700,
     "w": 130,
     "h": 100,
     "color": "amber",
     "locked": false,
-    "z": 190
+    "z": 199
   },
   {
     "id": "file-1794372633566-383",
@@ -681,5 +681,29 @@
     "color": "rose",
     "locked": false,
     "z": 196
+  },
+  {
+    "id": "file-1794373264947-758",
+    "type": "file",
+    "fileCategory": "audio",
+    "ext": "wav",
+    "fileSize": 36472492,
+    "mimeType": "audio/wav",
+    "title": "가장 눈부신 쪽으로 (Drums).wav",
+    "subtitle": "34.78 MB",
+    "fileUrl": "https://xgcgfmcwcrnanflbveup.supabase.co/storage/v1/object/public/Potal/uploads/stemsWAV/1794373263245_zofzf_Drums.wav",
+    "sbPath": "uploads/stemsWAV/1794373263245_zofzf_Drums.wav",
+    "sbBucket": "Potal",
+    "ghPath": "",
+    "ghSha": "",
+    "dataUrl": "",
+    "folderId": "folder-1794373256778-184",
+    "x": 240,
+    "y": 720,
+    "w": 120,
+    "h": 106,
+    "color": "rose",
+    "locked": false,
+    "z": 198
   }
 ]
