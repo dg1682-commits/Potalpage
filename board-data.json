@@ -849,5 +849,18 @@
     "color": "rose",
     "locked": false,
     "z": 206
+  },
+  {
+    "id": "asset-1794373286558",
+    "type": "text",
+    "title": "자유 텍스트 메모",
+    "subtitle": "더블클릭해서 내용을 수정하세요.",
+    "x": 160,
+    "y": 460,
+    "w": 280,
+    "h": 70,
+    "color": "default",
+    "locked": false,
+    "z": 208
   }
 ]
