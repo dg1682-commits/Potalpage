@@ -349,13 +349,13 @@
     "type": "folder",
     "title": "stems(MP3)",
     "subtitle": "10개 파일 업로드됨",
-    "x": 440,
+    "x": 680,
     "y": 700,
     "w": 130,
     "h": 100,
     "color": "amber",
     "locked": false,
-    "z": 200
+    "z": 215
   },
   {
     "id": "file-1794372633566-383",
@@ -602,13 +602,13 @@
     "type": "folder",
     "title": "stems(WAV)",
     "subtitle": "10개 파일 업로드됨",
-    "x": 560,
+    "x": 800,
     "y": 700,
     "w": 130,
     "h": 100,
     "color": "amber",
     "locked": false,
-    "z": 207
+    "z": 214
   },
   {
     "id": "file-1794373259570-438",
