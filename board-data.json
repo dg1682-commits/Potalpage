@@ -602,13 +602,13 @@
     "type": "folder",
     "title": "stems(WAV)",
     "subtitle": "10개 파일 업로드됨",
-    "x": 440,
-    "y": 600,
+    "x": 560,
+    "y": 700,
     "w": 130,
     "h": 100,
     "color": "amber",
     "locked": false,
-    "z": 195
+    "z": 207
   },
   {
     "id": "file-1794373259570-438",
