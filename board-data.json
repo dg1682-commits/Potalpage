@@ -825,5 +825,29 @@
     "color": "rose",
     "locked": false,
     "z": 205
+  },
+  {
+    "id": "file-1794373275518-30",
+    "type": "file",
+    "fileCategory": "audio",
+    "ext": "wav",
+    "fileSize": 36472492,
+    "mimeType": "audio/wav",
+    "title": "가장 눈부신 쪽으로 (Vocals).wav",
+    "subtitle": "34.78 MB",
+    "fileUrl": "https://xgcgfmcwcrnanflbveup.supabase.co/storage/v1/object/public/Potal/uploads/stemsWAV/1794373273713_ipm9a_Vocals.wav",
+    "sbPath": "uploads/stemsWAV/1794373273713_ipm9a_Vocals.wav",
+    "sbBucket": "Potal",
+    "ghPath": "",
+    "ghSha": "",
+    "dataUrl": "",
+    "folderId": "folder-1794373256778-184",
+    "x": 240,
+    "y": 720,
+    "w": 120,
+    "h": 106,
+    "color": "rose",
+    "locked": false,
+    "z": 206
   }
 ]
