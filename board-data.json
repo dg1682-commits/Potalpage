@@ -336,13 +336,13 @@
     "subtitle": "",
     "content": "가장 빛나는 쪽으로\nhttps://youtu.be/EWgWIdbYCQ0\n",
     "folderId": null,
-    "x": 580,
-    "y": 700,
+    "x": 560,
+    "y": 780,
     "w": 120,
     "h": 100,
     "color": "indigo",
     "locked": false,
-    "z": 218
+    "z": 219
   },
   {
     "id": "folder-1794372632133-650",
@@ -849,19 +849,6 @@
     "color": "rose",
     "locked": false,
     "z": 206
-  },
-  {
-    "id": "asset-1794373286558",
-    "type": "text",
-    "title": "가장 눈부신 쪽으로",
-    "subtitle": "",
-    "x": 680,
-    "y": 640,
-    "w": 180,
-    "h": 45,
-    "color": "default",
-    "locked": false,
-    "z": 220
   },
   {
     "id": "asset-1794373333445",
