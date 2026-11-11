@@ -895,12 +895,12 @@
     "ghSha": "",
     "dataUrl": "",
     "folderId": null,
-    "x": 1100,
-    "y": 680,
+    "x": 740,
+    "y": 760,
     "w": 120,
     "h": 106,
     "color": "rose",
     "locked": false,
-    "z": 298
+    "z": 299
   }
 ]
