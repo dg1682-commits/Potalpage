@@ -596,5 +596,18 @@
     "color": "rose",
     "locked": false,
     "z": 187
+  },
+  {
+    "id": "folder-1794373256778-184",
+    "type": "folder",
+    "title": "stems(WAV)",
+    "subtitle": "10개 파일 업로드됨",
+    "x": 240,
+    "y": 720,
+    "w": 130,
+    "h": 100,
+    "color": "amber",
+    "locked": false,
+    "z": 191
   }
 ]
