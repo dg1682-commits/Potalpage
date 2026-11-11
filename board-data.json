@@ -786,18 +786,18 @@
     "ghSha": "",
     "dataUrl": "",
     "folderId": null,
-    "x": 1120,
-    "y": 720,
+    "x": 140,
+    "y": 640,
     "w": 120,
     "h": 106,
     "color": "blue",
     "locked": false,
-    "z": 257
+    "z": 264
   },
   {
     "id": "folder-1794373680657-236",
     "type": "folder",
-    "title": "포털",
+    "title": "포털백업(1111/1408)",
     "subtitle": "3개 파일 업로드됨",
     "x": 20,
     "y": 580,
