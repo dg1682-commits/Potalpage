@@ -777,5 +777,29 @@
     "color": "rose",
     "locked": false,
     "z": 203
+  },
+  {
+    "id": "file-1794373272003-112",
+    "type": "file",
+    "fileCategory": "audio",
+    "ext": "wav",
+    "fileSize": 36472492,
+    "mimeType": "audio/wav",
+    "title": "가장 눈부신 쪽으로 (Strings).wav",
+    "subtitle": "34.78 MB",
+    "fileUrl": "https://xgcgfmcwcrnanflbveup.supabase.co/storage/v1/object/public/Potal/uploads/stemsWAV/1794373270193_0h720_Strings.wav",
+    "sbPath": "uploads/stemsWAV/1794373270193_0h720_Strings.wav",
+    "sbBucket": "Potal",
+    "ghPath": "",
+    "ghSha": "",
+    "dataUrl": "",
+    "folderId": "folder-1794373256778-184",
+    "x": 240,
+    "y": 720,
+    "w": 120,
+    "h": 106,
+    "color": "rose",
+    "locked": false,
+    "z": 204
   }
 ]
