@@ -854,5 +854,29 @@
     "color": "indigo",
     "locked": false,
     "z": 243
+  },
+  {
+    "id": "file-1794373627493-93",
+    "type": "file",
+    "fileCategory": "other",
+    "ext": "json",
+    "fileSize": 27454,
+    "mimeType": "application/json",
+    "title": "mixboard-portal-backup (5).json",
+    "subtitle": "26.8 KB",
+    "fileUrl": "https://xgcgfmcwcrnanflbveup.supabase.co/storage/v1/object/public/Potal/uploads/1794373626754_waipx_mixboard-portal-backup5.json",
+    "sbPath": "uploads/1794373626754_waipx_mixboard-portal-backup5.json",
+    "sbBucket": "Potal",
+    "ghPath": "",
+    "ghSha": "",
+    "dataUrl": "",
+    "folderId": null,
+    "x": 140,
+    "y": 620,
+    "w": 120,
+    "h": 106,
+    "color": "blue",
+    "locked": false,
+    "z": 248
   }
 ]
