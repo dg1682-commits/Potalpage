@@ -336,13 +336,13 @@
     "subtitle": "",
     "content": "가장 빛나는 쪽으로\nhttps://youtu.be/EWgWIdbYCQ0\n",
     "folderId": null,
-    "x": 560,
-    "y": 680,
+    "x": 540,
+    "y": 660,
     "w": 120,
     "h": 100,
     "color": "indigo",
     "locked": false,
-    "z": 219
+    "z": 222
   },
   {
     "id": "folder-1794372632133-650",
@@ -603,7 +603,7 @@
     "title": "stems(WAV)",
     "subtitle": "10개 파일 업로드됨",
     "x": 800,
-    "y": 680,
+    "y": 660,
     "w": 130,
     "h": 100,
     "color": "amber",
