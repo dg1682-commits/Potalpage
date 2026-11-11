@@ -878,5 +878,29 @@
     "color": "blue",
     "locked": false,
     "z": 262
+  },
+  {
+    "id": "file-1794383638430-303",
+    "type": "file",
+    "fileCategory": "audio",
+    "ext": "wav",
+    "fileSize": 50269064,
+    "mimeType": "audio/wav",
+    "title": "가장 눈부신 쪽으로(최종 리마스터링).wav",
+    "subtitle": "47.94 MB",
+    "fileUrl": "https://xgcgfmcwcrnanflbveup.supabase.co/storage/v1/object/public/Potal/uploads/1794383635657_32r2m_item.wav",
+    "sbPath": "uploads/1794383635657_32r2m_item.wav",
+    "sbBucket": "Potal",
+    "ghPath": "",
+    "ghSha": "",
+    "dataUrl": "",
+    "folderId": null,
+    "x": 240,
+    "y": 20,
+    "w": 120,
+    "h": 106,
+    "color": "rose",
+    "locked": false,
+    "z": 267
   }
 ]
