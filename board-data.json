@@ -861,13 +861,13 @@
     "h": 45,
     "color": "default",
     "locked": false,
-    "z": 219
+    "z": 220
   },
   {
     "id": "asset-1794373333445",
     "type": "shape",
     "title": "가장 눈부신 쪽으로",
-    "subtitle": "이 구역 위에 버튼들을 올려놓으세요",
+    "subtitle": "",
     "x": 540,
     "y": 600,
     "w": 440,
