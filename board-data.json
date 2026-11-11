@@ -212,7 +212,7 @@
     "h": 100,
     "color": "amber",
     "locked": false,
-    "z": 246
+    "z": 250
   },
   {
     "id": "file-1794287675398-8",
@@ -871,12 +871,12 @@
     "ghSha": "",
     "dataUrl": "",
     "folderId": null,
-    "x": 180,
+    "x": 60,
     "y": 580,
     "w": 120,
     "h": 106,
     "color": "blue",
     "locked": false,
-    "z": 248
+    "z": 251
   }
 ]
