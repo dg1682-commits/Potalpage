@@ -349,13 +349,13 @@
     "type": "folder",
     "title": "stems(MP3)",
     "subtitle": "10개 파일 업로드됨",
-    "x": 680,
+    "x": 640,
     "y": 660,
     "w": 130,
     "h": 100,
     "color": "amber",
     "locked": false,
-    "z": 220
+    "z": 223
   },
   {
     "id": "file-1794372633566-383",
