@@ -249,13 +249,13 @@
     "type": "folder",
     "title": "포털백업(1110 1415)",
     "subtitle": "3개 파일 업로드됨",
-    "x": 380,
-    "y": 600,
+    "x": 40,
+    "y": 720,
     "w": 130,
     "h": 100,
     "color": "amber",
     "locked": false,
-    "z": 159
+    "z": 165
   },
   {
     "id": "file-1794287675398-8",
@@ -336,12 +336,12 @@
     "subtitle": "",
     "content": "가장 빛나는 쪽으로\nhttps://youtu.be/EWgWIdbYCQ0\n",
     "folderId": null,
-    "x": 580,
-    "y": 600,
+    "x": 400,
+    "y": 580,
     "w": 120,
     "h": 100,
     "color": "indigo",
     "locked": false,
-    "z": 163
+    "z": 166
   }
 ]
