@@ -60,13 +60,13 @@
     "subtitle": "아이템 추천 및 대본작성",
     "url": "https://github.com/dg1682-commits/VCL",
     "pagesUrl": "https://dg1682-commits.github.io/VCL/",
-    "x": 60,
-    "y": 360,
+    "x": 980,
+    "y": 460,
     "w": 380,
     "h": 80,
     "color": "indigo",
     "locked": false,
-    "z": 66
+    "z": 282
   },
   {
     "id": "repo-vti",
@@ -136,12 +136,12 @@
     "url": "https://github.com/dg1682-commits/Potalpage",
     "pagesUrl": "https://dg1682-commits.github.io/Potalpage/",
     "x": 60,
-    "y": 460,
+    "y": 360,
     "w": 380,
     "h": 80,
     "color": "violet",
     "locked": false,
-    "z": 145
+    "z": 283
   },
   {
     "id": "repo-gymmusic",
