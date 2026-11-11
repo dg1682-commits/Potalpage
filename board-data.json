@@ -343,5 +343,18 @@
     "color": "indigo",
     "locked": false,
     "z": 173
+  },
+  {
+    "id": "folder-1794372632133-650",
+    "type": "folder",
+    "title": "stems(MP3)",
+    "subtitle": "10개 파일 업로드됨",
+    "x": 400,
+    "y": 640,
+    "w": 130,
+    "h": 100,
+    "color": "amber",
+    "locked": false,
+    "z": 175
   }
 ]
