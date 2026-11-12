@@ -919,13 +919,13 @@
     "ghSha": "",
     "dataUrl": "",
     "folderId": null,
-    "x": 360,
+    "x": 340,
     "y": 660,
     "w": 120,
     "h": 106,
     "color": "rose",
     "locked": false,
-    "z": 318
+    "z": 324
   },
   {
     "id": "file-1794449621035-944",
@@ -943,13 +943,13 @@
     "ghSha": "",
     "dataUrl": "",
     "folderId": null,
-    "x": 160,
+    "x": 140,
     "y": 660,
     "w": 120,
     "h": 106,
     "color": "rose",
     "locked": false,
-    "z": 317
+    "z": 322
   },
   {
     "id": "file-1794449625692-951",
@@ -967,13 +967,13 @@
     "ghSha": "",
     "dataUrl": "",
     "folderId": null,
-    "x": 260,
+    "x": 240,
     "y": 660,
     "w": 120,
     "h": 106,
     "color": "rose",
     "locked": false,
-    "z": 316
+    "z": 323
   },
   {
     "id": "file-1794449666225-515",
