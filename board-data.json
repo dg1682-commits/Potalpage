@@ -943,13 +943,13 @@
     "ghSha": "",
     "dataUrl": "",
     "folderId": null,
-    "x": 140,
-    "y": 660,
+    "x": 180,
+    "y": 620,
     "w": 120,
     "h": 106,
     "color": "rose",
     "locked": false,
-    "z": 315
+    "z": 317
   },
   {
     "id": "file-1794449625692-951",
@@ -967,7 +967,7 @@
     "ghSha": "",
     "dataUrl": "",
     "folderId": null,
-    "x": 240,
+    "x": 260,
     "y": 660,
     "w": 120,
     "h": 106,
