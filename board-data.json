@@ -1002,14 +1002,14 @@
   {
     "id": "asset-1794449669591",
     "type": "shape",
-    "title": "NEW GROUP ZONE",
-    "subtitle": "이 구역 위에 버튼들을 올려놓으세요",
-    "x": 180,
-    "y": 460,
+    "title": "칼리스토 미니앨범",
+    "subtitle": "",
+    "x": 80,
+    "y": 580,
     "w": 440,
     "h": 280,
-    "color": "slate",
+    "color": "emerald",
     "locked": false,
-    "z": 20
+    "z": 37
   }
 ]
