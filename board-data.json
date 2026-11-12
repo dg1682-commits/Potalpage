@@ -920,12 +920,12 @@
     "dataUrl": "",
     "folderId": null,
     "x": 340,
-    "y": 660,
+    "y": 720,
     "w": 120,
     "h": 106,
     "color": "rose",
     "locked": false,
-    "z": 324
+    "z": 335
   },
   {
     "id": "file-1794449621035-944",
@@ -1018,11 +1018,11 @@
     "title": "타이틀",
     "subtitle": "",
     "x": 60,
-    "y": 860,
+    "y": 680,
     "w": 140,
     "h": 60,
     "color": "default",
     "locked": false,
-    "z": 330
+    "z": 336
   }
 ]
