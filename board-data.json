@@ -926,5 +926,29 @@
     "color": "rose",
     "locked": false,
     "z": 300
+  },
+  {
+    "id": "file-1794449621035-944",
+    "type": "file",
+    "fileCategory": "audio",
+    "ext": "mp3",
+    "fileSize": 4017275,
+    "mimeType": "audio/mpeg",
+    "title": "우리의 모험.mp3",
+    "subtitle": "3.83 MB",
+    "fileUrl": "https://xgcgfmcwcrnanflbveup.supabase.co/storage/v1/object/public/Potal/uploads/1794449620487_4n8lb_item.mp3",
+    "sbPath": "uploads/1794449620487_4n8lb_item.mp3",
+    "sbBucket": "Potal",
+    "ghPath": "",
+    "ghSha": "",
+    "dataUrl": "",
+    "folderId": null,
+    "x": 600,
+    "y": 20,
+    "w": 120,
+    "h": 106,
+    "color": "rose",
+    "locked": false,
+    "z": 301
   }
 ]
