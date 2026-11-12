@@ -208,26 +208,26 @@
     "subtitle": "",
     "content": "가장 빛나는 쪽으로\nhttps://youtu.be/EWgWIdbYCQ0\n",
     "folderId": null,
-    "x": 500,
+    "x": 540,
     "y": 660,
     "w": 120,
     "h": 100,
     "color": "indigo",
     "locked": false,
-    "z": 341
+    "z": 236
   },
   {
     "id": "folder-1794372632133-650",
     "type": "folder",
     "title": "stems(MP3)",
     "subtitle": "10개 파일 업로드됨",
-    "x": 800,
+    "x": 840,
     "y": 760,
     "w": 130,
     "h": 100,
     "color": "amber",
     "locked": false,
-    "z": 348
+    "z": 230
   },
   {
     "id": "file-1794372633566-383",
@@ -474,13 +474,13 @@
     "type": "folder",
     "title": "stems(WAV)",
     "subtitle": "10개 파일 업로드됨",
-    "x": 800,
+    "x": 840,
     "y": 660,
     "w": 130,
     "h": 100,
     "color": "amber",
     "locked": false,
-    "z": 347
+    "z": 291
   },
   {
     "id": "file-1794373259570-438",
@@ -727,13 +727,13 @@
     "type": "shape",
     "title": "가장 눈부신 쪽으로",
     "subtitle": "",
-    "x": 500,
+    "x": 540,
     "y": 600,
-    "w": 440,
+    "w": 420,
     "h": 280,
     "color": "amber",
     "locked": false,
-    "z": 40
+    "z": 35
   },
   {
     "id": "asset-1794373387865",
@@ -742,13 +742,13 @@
     "subtitle": "",
     "content": "오늘 집에 가셔서 하실 '0원 1인 기획사' 작업 순서만 가볍게 갈무리해 드립니다.\n\n스템 추출: 수노 프로 계정에서 'WAV', 'Follow tempo changes' 옵션으로 개별 오디오 트랙 다운로드\n\n공간감 배치: 밴드랩 타임라인에 트랙 얹고 악기별 좌우 패닝(Pan) 조절 및 리버브 입히기\n\n다이나믹 부여: 오토메이션(단축키 A) 기능으로 1절은 덜어내고, 코러스(후렴)는 빵 터지게 구간별 볼륨/EQ 그리기\n\n최종 심사: 밴드랩 마스터링으로 음압을 꽉 채운 후, 비스킷 사운드 이메일로 칼리스토 데뷔곡 유통 접수",
     "folderId": null,
-    "x": 500,
+    "x": 540,
     "y": 760,
     "w": 120,
     "h": 100,
     "color": "indigo",
     "locked": false,
-    "z": 342
+    "z": 237
   },
   {
     "id": "md-1794373531348-583",
@@ -762,13 +762,13 @@
     "ghSha": "",
     "fileUrl": "",
     "folderId": null,
-    "x": 600,
+    "x": 640,
     "y": 660,
     "w": 120,
     "h": 100,
     "color": "indigo",
     "locked": false,
-    "z": 343
+    "z": 243
   },
   {
     "id": "file-1794373627493-93",
@@ -895,13 +895,13 @@
     "ghSha": "",
     "dataUrl": "",
     "folderId": null,
-    "x": 700,
+    "x": 740,
     "y": 760,
     "w": 120,
     "h": 106,
     "color": "rose",
     "locked": false,
-    "z": 344
+    "z": 299
   },
   {
     "id": "file-1794449614703-122",
@@ -997,7 +997,7 @@
     "h": 106,
     "color": "rose",
     "locked": false,
-    "z": 332
+    "z": 342
   },
   {
     "id": "asset-1794449669591",
