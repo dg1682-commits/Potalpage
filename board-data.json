@@ -992,12 +992,12 @@
     "dataUrl": "",
     "folderId": null,
     "x": 40,
-    "y": 660,
+    "y": 720,
     "w": 120,
     "h": 106,
     "color": "rose",
     "locked": false,
-    "z": 325
+    "z": 332
   },
   {
     "id": "asset-1794449669591",
