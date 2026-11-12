@@ -762,13 +762,13 @@
     "ghSha": "",
     "fileUrl": "",
     "folderId": null,
-    "x": 640,
+    "x": 600,
     "y": 660,
     "w": 120,
     "h": 100,
     "color": "indigo",
     "locked": false,
-    "z": 243
+    "z": 343
   },
   {
     "id": "file-1794373627493-93",
