@@ -1018,11 +1018,11 @@
     "title": "타이틀",
     "subtitle": "",
     "x": 60,
-    "y": 780,
+    "y": 860,
     "w": 140,
     "h": 60,
     "color": "default",
     "locked": false,
-    "z": 328
+    "z": 330
   }
 ]
