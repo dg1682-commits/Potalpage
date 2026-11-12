@@ -974,5 +974,29 @@
     "color": "rose",
     "locked": false,
     "z": 316
+  },
+  {
+    "id": "file-1794449666225-515",
+    "type": "file",
+    "fileCategory": "audio",
+    "ext": "mp3",
+    "fileSize": 4276735,
+    "mimeType": "audio/mpeg",
+    "title": "가장 눈부신 쪽으로.mp3",
+    "subtitle": "4.08 MB",
+    "fileUrl": "https://xgcgfmcwcrnanflbveup.supabase.co/storage/v1/object/public/Potal/uploads/1794449665671_lmdb0_item.mp3",
+    "sbPath": "uploads/1794449665671_lmdb0_item.mp3",
+    "sbBucket": "Potal",
+    "ghPath": "",
+    "ghSha": "",
+    "dataUrl": "",
+    "folderId": null,
+    "x": 60,
+    "y": 660,
+    "w": 120,
+    "h": 106,
+    "color": "rose",
+    "locked": false,
+    "z": 320
   }
 ]
