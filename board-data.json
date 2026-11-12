@@ -1024,5 +1024,18 @@
     "color": "default",
     "locked": false,
     "z": 336
+  },
+  {
+    "id": "asset-1794449741360",
+    "type": "text",
+    "title": "자유 텍스트 메모",
+    "subtitle": "더블클릭해서 내용을 수정하세요.",
+    "x": 200,
+    "y": 500,
+    "w": 280,
+    "h": 70,
+    "color": "default",
+    "locked": false,
+    "z": 337
   }
 ]
