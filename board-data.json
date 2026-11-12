@@ -944,12 +944,12 @@
     "dataUrl": "",
     "folderId": null,
     "x": 140,
-    "y": 660,
+    "y": 720,
     "w": 120,
     "h": 106,
     "color": "rose",
     "locked": false,
-    "z": 322
+    "z": 333
   },
   {
     "id": "file-1794449625692-951",
@@ -968,12 +968,12 @@
     "dataUrl": "",
     "folderId": null,
     "x": 240,
-    "y": 660,
+    "y": 720,
     "w": 120,
     "h": 106,
     "color": "rose",
     "locked": false,
-    "z": 323
+    "z": 334
   },
   {
     "id": "file-1794449666225-515",
