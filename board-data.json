@@ -902,5 +902,29 @@
     "color": "rose",
     "locked": false,
     "z": 299
+  },
+  {
+    "id": "file-1794449614703-122",
+    "type": "file",
+    "fileCategory": "audio",
+    "ext": "mp3",
+    "fileSize": 4073146,
+    "mimeType": "audio/mpeg",
+    "title": "끝까지 함께 가자.mp3",
+    "subtitle": "3.88 MB",
+    "fileUrl": "https://xgcgfmcwcrnanflbveup.supabase.co/storage/v1/object/public/Potal/uploads/1794449613497_wg43x_item.mp3",
+    "sbPath": "uploads/1794449613497_wg43x_item.mp3",
+    "sbBucket": "Potal",
+    "ghPath": "",
+    "ghSha": "",
+    "dataUrl": "",
+    "folderId": null,
+    "x": 500,
+    "y": 20,
+    "w": 120,
+    "h": 106,
+    "color": "rose",
+    "locked": false,
+    "z": 300
   }
 ]
