@@ -221,13 +221,13 @@
     "type": "folder",
     "title": "stems(MP3)",
     "subtitle": "10개 파일 업로드됨",
-    "x": 800,
+    "x": 820,
     "y": 760,
     "w": 130,
     "h": 100,
     "color": "amber",
     "locked": false,
-    "z": 398
+    "z": 400
   },
   {
     "id": "file-1794372633566-383",
@@ -480,7 +480,7 @@
     "h": 100,
     "color": "amber",
     "locked": false,
-    "z": 399
+    "z": 402
   },
   {
     "id": "file-1794373259570-438",
@@ -799,13 +799,13 @@
     "ghSha": "",
     "dataUrl": "",
     "folderId": null,
-    "x": 700,
+    "x": 720,
     "y": 760,
     "w": 120,
     "h": 106,
     "color": "rose",
     "locked": false,
-    "z": 396
+    "z": 401
   },
   {
     "id": "file-1794449614703-122",
