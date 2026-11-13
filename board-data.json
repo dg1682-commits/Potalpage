@@ -1186,5 +1186,18 @@
     "color": "indigo",
     "locked": false,
     "z": 425
+  },
+  {
+    "id": "asset-1794556925176",
+    "type": "shape",
+    "title": "NEW GROUP ZONE",
+    "subtitle": "이 구역 위에 버튼들을 올려놓으세요",
+    "x": 220,
+    "y": 420,
+    "w": 440,
+    "h": 280,
+    "color": "slate",
+    "locked": false,
+    "z": 20
   }
 ]
