@@ -957,14 +957,14 @@
     "ghPath": "",
     "ghSha": "",
     "dataUrl": "",
-    "folderId": "folder-1794373680657-236",
-    "x": 500,
+    "folderId": null,
+    "x": 1100,
     "y": 560,
     "w": 120,
     "h": 106,
     "color": "blue",
     "locked": false,
-    "z": 383
+    "z": 449
   },
   {
     "id": "file-1794555544665-772",
