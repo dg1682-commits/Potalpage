@@ -46,12 +46,12 @@
     "url": "https://github.com/dg1682-commits/kjikjangin",
     "pagesUrl": "https://dg1682-commits.github.io/kjikjangin/",
     "x": 980,
-    "y": 360,
+    "y": 260,
     "w": 380,
     "h": 80,
     "color": "blue",
     "locked": false,
-    "z": 102
+    "z": 416
   },
   {
     "id": "repo-vcl",
@@ -61,12 +61,12 @@
     "url": "https://github.com/dg1682-commits/VCL",
     "pagesUrl": "https://dg1682-commits.github.io/VCL/",
     "x": 980,
-    "y": 460,
+    "y": 360,
     "w": 380,
     "h": 80,
     "color": "indigo",
     "locked": false,
-    "z": 282
+    "z": 417
   },
   {
     "id": "repo-vti",
