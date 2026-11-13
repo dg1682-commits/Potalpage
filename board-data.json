@@ -771,30 +771,6 @@
     "z": 356
   },
   {
-    "id": "file-1794373627493-93",
-    "type": "file",
-    "fileCategory": "other",
-    "ext": "json",
-    "fileSize": 27454,
-    "mimeType": "application/json",
-    "title": "mixboard-portal-backup (5).json",
-    "subtitle": "26.8 KB",
-    "fileUrl": "https://xgcgfmcwcrnanflbveup.supabase.co/storage/v1/object/public/Potal/uploads/1794373626754_waipx_mixboard-portal-backup5.json",
-    "sbPath": "uploads/1794373626754_waipx_mixboard-portal-backup5.json",
-    "sbBucket": "Potal",
-    "ghPath": "",
-    "ghSha": "",
-    "dataUrl": "",
-    "folderId": null,
-    "x": 1100,
-    "y": 640,
-    "w": 120,
-    "h": 106,
-    "color": "blue",
-    "locked": false,
-    "z": 384
-  },
-  {
     "id": "folder-1794373680657-236",
     "type": "folder",
     "title": "포털백업(1111/1408)",
@@ -805,7 +781,7 @@
     "h": 100,
     "color": "amber",
     "locked": false,
-    "z": 382
+    "z": 385
   },
   {
     "id": "file-1794373680848-224",
