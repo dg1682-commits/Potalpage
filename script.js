@@ -1398,7 +1398,7 @@ function renderMobileSyncView() {
 
       bucket.links.forEach(linkAsset => {
         const row = document.createElement("div");
-        row.className = "mob-link-card";
+        row.className = `mob-link-card color-${linkAsset.color || "blue"}`;
         const pagesBtn = linkAsset.pagesUrl
           ? `<a href="${escapeHtml(linkAsset.pagesUrl)}" target="_blank" rel="noopener noreferrer" class="open-link-btn">🌐 웹</a>`
           : "";
@@ -1424,7 +1424,7 @@ function renderMobileSyncView() {
 
       bucket.filesAndFolders.forEach(item => {
         const fCard = document.createElement("div");
-        fCard.className = "mob-file-card";
+        fCard.className = `mob-file-card type-${item.type}`;
 
         let iconHtml = "📄";
         let metaText = "";
@@ -1432,10 +1432,10 @@ function renderMobileSyncView() {
         if (item.type === "folder") {
           const cnt = getFolderItemCount(item.id);
           iconHtml = "📁";
-          metaText = `폴더 · ${cnt}개 파일`;
+          metaText = `폴더 · ${cnt}개`;
         } else if (item.type === "md") {
           iconHtml = "📝";
-          metaText = "MD 메모장 · 터치하여 열기";
+          metaText = "MD 메모";
         } else if (item.type === "file") {
           iconHtml = getFileTypeEmoji(item.fileCategory, item.ext);
           const extUpper = (item.ext || "FILE").toUpperCase();
@@ -1444,12 +1444,15 @@ function renderMobileSyncView() {
 
         fCard.innerHTML = `
           <div class="mob-file-icon">${iconHtml}</div>
-          <div class="mob-file-name">${escapeHtml(item.title)}</div>
-          <div class="mob-file-meta">${escapeHtml(metaText)}</div>
+          <div class="mob-file-info">
+            <div class="mob-file-title" title="${escapeHtml(item.title)}">${escapeHtml(item.title)}</div>
+            <div class="mob-file-meta">${escapeHtml(metaText)}</div>
+          </div>
         `;
 
         // 모바일에서는 한 번 터치(click)로 즉시 열기
-        fCard.addEventListener("click", () => {
+        fCard.addEventListener("click", e => {
+          e.stopPropagation();
           if (item.type === "folder") {
             openFolderWindow(item.id);
           } else if (item.type === "md") {
@@ -1989,6 +1992,31 @@ function renderFolderWindowContent(folderId) {
 
 function bindFolderWindowEvents() {
   document.getElementById("btnCloseFolderWin").addEventListener("click", closeFolderWindow);
+  const btnCloseRight = document.getElementById("btnCloseFolderWinRight");
+  if (btnCloseRight) {
+    btnCloseRight.addEventListener("click", closeFolderWindow);
+  }
+
+  // 모바일 등에서 폴더 창 바깥 배경을 터치/클릭하면 폴더 창 닫기 (다른 모달이 열려 있을 때는 제외)
+  function handleOutsideFolderTap(e) {
+    if (folderWindow.classList.contains("hidden")) return;
+    if (
+      e.target.closest("#folderWindow") ||
+      e.target.closest("#mdViewerModal") ||
+      e.target.closest("#fileActionModal") ||
+      e.target.closest("#editModal") ||
+      e.target.closest("#customDialogModal") ||
+      e.target.closest(".mob-file-card") ||
+      e.target.closest('.asset-item[data-type="folder"]')
+    ) {
+      return;
+    }
+    if ((window.innerWidth || document.documentElement.clientWidth) <= 768) {
+      closeFolderWindow();
+    }
+  }
+  window.addEventListener("mousedown", handleOutsideFolderTap);
+  window.addEventListener("touchstart", handleOutsideFolderTap, { passive: true });
 
   document.getElementById("btnFolderNewMd").addEventListener("click", () => {
     if (!activeFolderId) return;
@@ -4083,13 +4111,14 @@ function initQuickSiteDock() {
   }
 
   if (btnClosePopover && popover) {
-    btnClosePopover.addEventListener("click", () => {
+    btnClosePopover.addEventListener("click", e => {
+      e.stopPropagation();
       popover.classList.add("hidden");
     });
   }
 
-  // 팝오버 바깥을 클릭하면 자동으로 닫기 (모달이 열려 있을 때는 유지)
-  window.addEventListener("mousedown", e => {
+  // 팝오버 바깥을 클릭/터치하면 자동으로 닫기 (모달이 열려 있을 때는 유지)
+  function handleOutsideQuickPopover(e) {
     if (!popover || popover.classList.contains("hidden")) return;
     if (
       e.target.closest("#quickSiteWrap") ||
@@ -4099,7 +4128,9 @@ function initQuickSiteDock() {
       return;
     }
     popover.classList.add("hidden");
-  });
+  }
+  window.addEventListener("mousedown", handleOutsideQuickPopover);
+  window.addEventListener("touchstart", handleOutsideQuickPopover, { passive: true });
 
   if (btnAddBottom) btnAddBottom.addEventListener("click", () => openQuickSiteModal(null));
 

@@ -91,27 +91,27 @@ body {
 }
 
 .toolbar {
-  min-height: 54px;
+  min-height: 46px;
   border-bottom: 1px solid var(--toolbar-border);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 8px 16px;
-  gap: 12px;
+  padding: 6px 14px;
+  gap: 8px;
   flex-wrap: wrap;
 }
 
 .toolbar-brand {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 7px;
   flex-shrink: 0;
   white-space: nowrap;
 }
 
 .brand-dot {
-  width: 10px;
-  height: 10px;
+  width: 9px;
+  height: 9px;
   border-radius: 50%;
   background: var(--accent);
   box-shadow: 0 0 8px var(--accent);
@@ -119,15 +119,15 @@ body {
 }
 
 .toolbar-brand h1 {
-  font-size: 1rem;
+  font-size: 0.9rem;
   font-weight: 800;
   letter-spacing: -0.02em;
   white-space: nowrap;
 }
 
 .toolbar-brand .badge {
-  font-size: 0.72rem;
-  padding: 3px 8px;
+  font-size: 0.66rem;
+  padding: 2px 7px;
   border-radius: 999px;
   background: var(--btn-bg);
   color: var(--text-sub);
@@ -138,13 +138,13 @@ body {
 .toolbar-actions {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 5px;
   flex-wrap: wrap;
 }
 
 .divider {
   width: 1px;
-  height: 20px;
+  height: 18px;
   background: var(--toolbar-border);
   margin: 0 2px;
 }
@@ -152,14 +152,14 @@ body {
 .tool-btn {
   display: inline-flex;
   align-items: center;
-  gap: 5px;
-  height: 32px;
-  padding: 0 10px;
-  border-radius: 8px;
+  gap: 4px;
+  height: 29px;
+  padding: 0 8px;
+  border-radius: 7px;
   border: 1px solid var(--card-border);
   background: var(--card-bg);
   color: var(--text-main);
-  font-size: 0.8rem;
+  font-size: 0.73rem;
   font-weight: 600;
   cursor: pointer;
   white-space: nowrap;
@@ -434,7 +434,7 @@ body.global-locked .asset-controls {
   border: 1px solid var(--card-border);
   border-left: 5px solid var(--c-accent);
   box-shadow: var(--card-shadow);
-  padding: 14px 16px;
+  padding: 11px 14px;
   justify-content: space-between;
   overflow: hidden;
 }
@@ -448,25 +448,25 @@ body.global-locked .asset-controls {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  gap: 8px;
+  gap: 6px;
 }
 
 .link-title-wrap {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   min-width: 0;
 }
 
 .gh-icon {
-  width: 18px;
-  height: 18px;
+  width: 15px;
+  height: 15px;
   flex-shrink: 0;
   color: var(--c-accent);
 }
 
 .link-title {
-  font-size: 1rem;
+  font-size: 0.86rem;
   font-weight: 700;
   color: var(--text-main);
   white-space: nowrap;
@@ -477,7 +477,7 @@ body.global-locked .asset-controls {
 .link-actions {
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: 4px;
   flex-shrink: 0;
 }
 
@@ -486,11 +486,11 @@ body.global-locked .asset-controls {
   align-items: center;
   justify-content: center;
   gap: 3px;
-  padding: 4px 8px;
+  padding: 3px 7px;
   border-radius: 6px;
   background: var(--c-badge);
   color: var(--c-text);
-  font-size: 0.74rem;
+  font-size: 0.68rem;
   font-weight: 700;
   text-decoration: none;
   transition: filter 0.15s ease, transform 0.15s ease;
@@ -502,12 +502,12 @@ body.global-locked .asset-controls {
 }
 
 .link-sub {
-  font-size: 0.78rem;
+  font-size: 0.71rem;
   color: var(--text-sub);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  margin-top: 6px;
+  margin-top: 4px;
 }
 
 /* 2. 소제목 도형 배지 (Subtitle Pill / Header Shape) */
@@ -519,12 +519,12 @@ body.global-locked .asset-controls {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 6px 18px;
+  padding: 5px 14px;
   box-shadow: var(--card-shadow);
 }
 
 .badge-text {
-  font-size: 0.92rem;
+  font-size: 0.8rem;
   font-weight: 800;
   letter-spacing: -0.01em;
   text-align: center;
@@ -537,21 +537,21 @@ body.global-locked .asset-controls {
 .asset-item[data-type="shape"] {
   background: var(--c-bg);
   border: 2px dashed var(--c-accent);
-  border-radius: 18px;
-  padding: 14px 18px;
+  border-radius: 16px;
+  padding: 12px 16px;
 }
 
 .shape-title {
-  font-size: 0.85rem;
+  font-size: 0.77rem;
   font-weight: 800;
   text-transform: uppercase;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.03em;
   color: var(--c-text);
-  opacity: 0.9;
+  opacity: 0.92;
 }
 
 .shape-sub {
-  font-size: 0.76rem;
+  font-size: 0.69rem;
   color: var(--text-sub);
   margin-top: 2px;
 }
@@ -560,7 +560,7 @@ body.global-locked .asset-controls {
 .asset-item[data-type="text"] {
   background: transparent;
   border: 1px dashed transparent;
-  padding: 8px 10px;
+  padding: 6px 8px;
 }
 
 .asset-item[data-type="text"]:hover {
@@ -569,18 +569,18 @@ body.global-locked .asset-controls {
 }
 
 .text-main-content {
-  font-size: 1.05rem;
+  font-size: 0.88rem;
   font-weight: 700;
   color: var(--c-text);
-  line-height: 1.4;
+  line-height: 1.35;
   word-break: break-word;
 }
 
 .text-sub-content {
-  font-size: 0.84rem;
+  font-size: 0.74rem;
   color: var(--text-sub);
-  margin-top: 4px;
-  line-height: 1.45;
+  margin-top: 3px;
+  line-height: 1.4;
   word-break: break-word;
   white-space: pre-wrap;
 }
@@ -818,17 +818,17 @@ body.global-locked .resize-handle {
 
 .folder-visual {
   position: relative;
-  width: 68px;
-  height: 54px;
+  width: 54px;
+  height: 44px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .folder-svg {
-  width: 66px;
-  height: 54px;
-  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.15));
+  width: 52px;
+  height: 42px;
+  filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.14));
   color: var(--c-accent);
 }
 
@@ -839,36 +839,40 @@ body.global-locked .resize-handle {
 
 .folder-badge-count {
   position: absolute;
-  top: -4px;
-  right: -6px;
-  min-width: 20px;
-  height: 20px;
-  padding: 0 6px;
+  top: -3px;
+  right: -5px;
+  min-width: 17px;
+  height: 17px;
+  padding: 0 5px;
   border-radius: 999px;
   background: #e11d48;
   color: #fff;
-  font-size: 0.7rem;
+  font-size: 0.62rem;
   font-weight: 800;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 2px 6px rgba(225, 29, 72, 0.4);
+  box-shadow: 0 2px 5px rgba(225, 29, 72, 0.38);
 }
 
 .folder-label {
-  margin-top: 6px;
-  font-size: 0.82rem;
-  font-weight: 700;
+  margin-top: 4px;
+  font-size: 0.7rem;
+  font-weight: 600;
   color: var(--text-main);
   text-align: center;
   max-width: 100%;
-  white-space: nowrap;
+  line-height: 1.24;
+  white-space: normal;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
   overflow: hidden;
-  text-overflow: ellipsis;
-  padding: 2px 8px;
-  border-radius: 6px;
+  word-break: break-all;
+  padding: 2px 6px;
+  border-radius: 5px;
   background: var(--card-bg);
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
 }
 
 /* 6. 마크다운(.md) 문서 에셋 (MD File on Board) */
@@ -878,8 +882,8 @@ body.global-locked .resize-handle {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 6px;
-  border-radius: 14px;
+  padding: 4px;
+  border-radius: 12px;
   transition: transform 0.15s ease, background-color 0.15s ease;
 }
 
@@ -890,16 +894,16 @@ body.global-locked .resize-handle {
 
 .md-paper-icon {
   position: relative;
-  width: 54px;
-  height: 64px;
+  width: 44px;
+  height: 52px;
   background: var(--card-bg);
   border: 1.5px solid var(--c-accent);
-  border-radius: 6px 14px 6px 6px;
+  border-radius: 5px 12px 5px 5px;
   box-shadow: var(--card-shadow);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 7px 6px 6px 6px;
+  padding: 5px;
 }
 
 .md-paper-icon::before {
@@ -907,8 +911,8 @@ body.global-locked .resize-handle {
   position: absolute;
   top: -1px;
   right: -1px;
-  width: 13px;
-  height: 13px;
+  width: 11px;
+  height: 11px;
   background: var(--c-badge);
   border-left: 1.5px solid var(--c-accent);
   border-bottom: 1.5px solid var(--c-accent);
@@ -918,13 +922,13 @@ body.global-locked .resize-handle {
 .md-lines {
   display: flex;
   flex-direction: column;
-  gap: 3px;
-  margin-top: 8px;
+  gap: 2.5px;
+  margin-top: 6px;
 }
 
 .md-lines span {
   display: block;
-  height: 2.5px;
+  height: 2px;
   border-radius: 2px;
   background: var(--dot-color);
 }
@@ -935,9 +939,9 @@ body.global-locked .resize-handle {
 
 .md-tag-pill {
   align-self: flex-start;
-  font-size: 0.6rem;
+  font-size: 0.52rem;
   font-weight: 800;
-  padding: 1px 4px;
+  padding: 1px 3px;
   border-radius: 3px;
   background: var(--c-accent);
   color: #fff;
@@ -945,17 +949,21 @@ body.global-locked .resize-handle {
 }
 
 .md-file-label {
-  margin-top: 6px;
-  font-size: 0.78rem;
-  font-weight: 700;
+  margin-top: 4px;
+  font-size: 0.68rem;
+  font-weight: 600;
   color: var(--text-main);
   text-align: center;
   max-width: 100%;
-  white-space: nowrap;
+  line-height: 1.24;
+  white-space: normal;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
   overflow: hidden;
-  text-overflow: ellipsis;
-  padding: 2px 7px;
-  border-radius: 6px;
+  word-break: break-all;
+  padding: 2px 5px;
+  border-radius: 5px;
   background: var(--card-bg);
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
 }
@@ -963,15 +971,15 @@ body.global-locked .resize-handle {
 /* 실제 OS 폴더 팝업 윈도우 (Finder / Explorer 스타일) */
 .os-window {
   position: fixed;
-  top: 130px;
+  top: 120px;
   left: 240px;
-  width: 680px;
-  height: 460px;
-  min-width: 420px;
-  min-height: 300px;
+  width: 640px;
+  height: 440px;
+  min-width: 360px;
+  min-height: 260px;
   background: var(--modal-bg);
   border: 1px solid var(--card-border);
-  border-radius: 16px;
+  border-radius: 14px;
   box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35), 0 4px 16px rgba(0, 0, 0, 0.15);
   display: flex;
   flex-direction: column;
@@ -997,25 +1005,27 @@ body.global-locked .resize-handle {
 }
 
 .os-window-header {
-  height: 50px;
+  min-height: 44px;
   background: var(--btn-bg);
   border-bottom: 1px solid var(--toolbar-border);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 14px;
+  padding: 6px 12px;
+  gap: 8px;
   cursor: move;
 }
 
 .os-window-controls {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 7px;
+  flex-shrink: 0;
 }
 
 .traffic-btn {
-  width: 14px;
-  height: 14px;
+  width: 15px;
+  height: 15px;
   border-radius: 50%;
   border: none;
   display: inline-flex;
@@ -1029,7 +1039,7 @@ body.global-locked .resize-handle {
 
 .traffic-btn.close {
   background: #ff5f56;
-  color: rgba(0, 0, 0, 0.55);
+  color: rgba(0, 0, 0, 0.65);
 }
 
 .traffic-btn.minimize {
@@ -1043,27 +1053,33 @@ body.global-locked .resize-handle {
 .os-window-title {
   display: flex;
   align-items: center;
-  gap: 7px;
-  font-size: 0.94rem;
+  gap: 6px;
+  font-size: 0.82rem;
   font-weight: 800;
   color: var(--text-main);
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .os-window-actions {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 5px;
+  flex-shrink: 0;
 }
 
 .win-action-btn {
-  padding: 5px 10px;
-  border-radius: 7px;
+  padding: 4px 8px;
+  border-radius: 6px;
   border: 1px solid var(--card-border);
   background: var(--card-bg);
   color: var(--text-main);
-  font-size: 0.76rem;
+  font-size: 0.7rem;
   font-weight: 700;
   cursor: pointer;
+  white-space: nowrap;
   transition: all 0.12s ease;
 }
 
@@ -1077,47 +1093,60 @@ body.global-locked .resize-handle {
   color: #fff;
 }
 
+.win-action-btn.close-win-btn {
+  background: rgba(225, 29, 72, 0.12);
+  border-color: rgba(225, 29, 72, 0.35);
+  color: #e11d48;
+  font-weight: 800;
+}
+
+.win-action-btn.close-win-btn:hover {
+  background: #e11d48;
+  color: #fff;
+}
+
 .os-window-pathbar {
-  height: 32px;
-  padding: 0 16px;
+  height: 28px;
+  padding: 0 12px;
   background: var(--card-bg);
   border-bottom: 1px solid var(--toolbar-border);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  font-size: 0.76rem;
+  font-size: 0.7rem;
   color: var(--text-sub);
 }
 
 .folder-count-badge {
   background: var(--btn-bg);
-  padding: 2px 8px;
+  padding: 2px 7px;
   border-radius: 999px;
   font-weight: 700;
+  font-size: 0.66rem;
 }
 
 .os-folder-grid {
   flex: 1;
-  padding: 18px;
+  padding: 12px;
   overflow-y: auto;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
-  grid-auto-rows: 118px;
-  gap: 14px;
+  grid-template-columns: repeat(auto-fill, minmax(92px, 1fr));
+  grid-auto-rows: 102px;
+  gap: 10px;
   align-content: start;
   background: var(--bg-canvas);
 }
 
 .folder-empty-state {
   grid-column: 1 / -1;
-  height: 220px;
+  height: 180px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   color: var(--text-muted);
-  font-size: 0.86rem;
-  gap: 8px;
+  font-size: 0.78rem;
+  gap: 6px;
   border: 2px dashed var(--toolbar-border);
   border-radius: 12px;
 }
@@ -1127,8 +1156,8 @@ body.global-locked .resize-handle {
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  padding: 10px 6px;
-  border-radius: 12px;
+  padding: 7px 4px;
+  border-radius: 10px;
   cursor: grab;
   transition: background-color 0.12s ease, transform 0.12s ease;
   position: relative;
@@ -1140,25 +1169,26 @@ body.global-locked .resize-handle {
 }
 
 .folder-grid-item .md-file-label {
-  margin-top: 8px;
+  margin-top: 5px;
   background: transparent;
   box-shadow: none;
-  font-size: 0.77rem;
+  font-size: 0.68rem;
+  font-weight: 600;
   white-space: normal;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
-  line-height: 1.25;
+  line-height: 1.22;
 }
 
 .os-window-statusbar {
-  height: 30px;
-  padding: 0 14px;
+  height: 26px;
+  padding: 0 12px;
   background: var(--btn-bg);
   border-top: 1px solid var(--toolbar-border);
   display: flex;
   align-items: center;
-  font-size: 0.73rem;
+  font-size: 0.68rem;
   color: var(--text-sub);
 }
 
@@ -1518,9 +1548,9 @@ body.global-locked .resize-handle {
 
 .file-thumb-card {
   position: relative;
-  width: 68px;
-  height: 68px;
-  border-radius: 14px;
+  width: 54px;
+  height: 54px;
+  border-radius: 12px;
   background: var(--card-bg);
   border: 1.5px solid var(--c-accent);
   box-shadow: var(--card-shadow);
@@ -1539,18 +1569,18 @@ body.global-locked .resize-handle {
 }
 
 .file-type-emoji {
-  font-size: 1.65rem;
+  font-size: 1.35rem;
   line-height: 1;
 }
 
 .file-ext-badge {
   position: absolute;
-  bottom: 4px;
-  right: 4px;
-  font-size: 0.56rem;
+  bottom: 3px;
+  right: 3px;
+  font-size: 0.5rem;
   font-weight: 800;
-  padding: 1px 4px;
-  border-radius: 4px;
+  padding: 1px 3px;
+  border-radius: 3px;
   background: var(--c-accent);
   color: #fff;
   text-transform: uppercase;
@@ -1847,18 +1877,18 @@ body.global-locked .resize-handle {
 
 .quick-site-popover {
   position: absolute;
-  top: calc(100% + 8px);
+  top: calc(100% + 6px);
   right: 0;
-  width: 256px;
+  width: 230px;
   background: var(--card-bg);
   border: 1px solid var(--card-border);
-  border-radius: 16px;
+  border-radius: 14px;
   box-shadow: 0 18px 40px rgba(15, 23, 42, 0.24);
-  padding: 10px;
+  padding: 8px;
   z-index: 3200;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 6px;
 }
 
 .quick-site-popover.hidden {
@@ -1869,34 +1899,41 @@ body.global-locked .resize-handle {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 2px 4px 6px;
+  padding: 2px 3px 6px;
   border-bottom: 1px solid var(--toolbar-border);
+  gap: 6px;
 }
 
 .quick-pop-title {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  font-size: 0.8rem;
+  gap: 5px;
+  font-size: 0.74rem;
   font-weight: 800;
   color: var(--text-main);
 }
 
+.quick-pop-header-btns {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
 .qdock-ctrl-btn {
-  height: 26px;
-  padding: 0 9px;
-  border-radius: 7px;
+  height: 24px;
+  padding: 0 7px;
+  border-radius: 6px;
   border: 1px solid var(--card-border);
   background: var(--btn-bg);
   color: var(--text-main);
-  font-size: 0.72rem;
+  font-size: 0.68rem;
   font-weight: 800;
   white-space: nowrap;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 3px;
+  gap: 2px;
   transition: all 0.14s ease;
 }
 
@@ -1911,11 +1948,23 @@ body.global-locked .resize-handle {
   color: #fff;
 }
 
+.qdock-ctrl-btn.close {
+  background: rgba(225, 29, 72, 0.12);
+  border-color: rgba(225, 29, 72, 0.35);
+  color: #e11d48;
+}
+
+.qdock-ctrl-btn.close:hover {
+  background: #e11d48;
+  border-color: #e11d48;
+  color: #fff;
+}
+
 .quick-dock-list {
   display: flex;
   flex-direction: column;
-  gap: 5px;
-  max-height: 58vh;
+  gap: 4px;
+  max-height: 54vh;
   overflow-y: auto;
 }
 
@@ -1924,14 +1973,14 @@ body.global-locked .resize-handle {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 7px;
-  padding: 7px 10px;
-  border-radius: 10px;
+  gap: 6px;
+  padding: 6px 8px;
+  border-radius: 8px;
   background: var(--btn-bg);
   border: 1px solid var(--card-border);
   text-decoration: none;
   color: var(--text-main);
-  font-size: 0.8rem;
+  font-size: 0.74rem;
   font-weight: 700;
   transition: all 0.15s ease;
   cursor: pointer;
@@ -1946,19 +1995,19 @@ body.global-locked .resize-handle {
 .quick-dock-item-left {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   min-width: 0;
   flex: 1;
 }
 
 .qdock-icon {
-  width: 24px;
-  height: 24px;
-  border-radius: 7px;
+  width: 21px;
+  height: 21px;
+  border-radius: 6px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.86rem;
+  font-size: 0.76rem;
   flex-shrink: 0;
   background: var(--card-bg);
 }
@@ -1978,7 +2027,7 @@ body.global-locked .resize-handle {
 }
 
 .qdock-arrow {
-  font-size: 0.7rem;
+  font-size: 0.65rem;
   color: var(--text-muted);
   flex-shrink: 0;
 }
@@ -1986,7 +2035,7 @@ body.global-locked .resize-handle {
 .qdock-item-edit-btns {
   display: none;
   align-items: center;
-  gap: 4px;
+  gap: 3px;
   flex-shrink: 0;
 }
 
@@ -1999,13 +2048,13 @@ body.global-locked .resize-handle {
 }
 
 .qdock-mini-btn {
-  height: 22px;
-  padding: 0 7px;
-  border-radius: 6px;
+  height: 20px;
+  padding: 0 6px;
+  border-radius: 5px;
   border: 1px solid var(--card-border);
   background: var(--card-bg);
   color: var(--text-main);
-  font-size: 0.68rem;
+  font-size: 0.64rem;
   font-weight: 800;
   white-space: nowrap;
   cursor: pointer;
@@ -2040,12 +2089,12 @@ body.global-locked .resize-handle {
 
 .quick-dock-add-footer {
   width: 100%;
-  padding: 7px;
-  border-radius: 9px;
+  padding: 6px;
+  border-radius: 8px;
   border: 1px dashed var(--card-border);
   background: transparent;
   color: var(--text-sub);
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   font-weight: 700;
   cursor: pointer;
   transition: all 0.14s ease;
@@ -2063,8 +2112,8 @@ body.global-locked .resize-handle {
 .mobile-sync-view {
   display: none;
   flex-direction: column;
-  gap: 16px;
-  padding: 14px 12px 60px;
+  gap: 11px;
+  padding: 10px 10px 48px;
   max-width: 100%;
 }
 
@@ -2075,46 +2124,54 @@ body.global-locked .resize-handle {
 .mob-group-card {
   background: var(--card-bg);
   border: 1.5px solid var(--card-border);
-  border-radius: 16px;
-  padding: 14px;
+  border-radius: 13px;
+  padding: 10px 11px;
   box-shadow: var(--card-shadow);
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 8px;
 }
 
-.mob-group-card.mcolor-blue { border-color: rgba(59, 130, 246, 0.45); background: linear-gradient(180deg, rgba(59, 130, 246, 0.05) 0%, var(--card-bg) 100%); }
-.mob-group-card.mcolor-violet { border-color: rgba(139, 92, 246, 0.45); background: linear-gradient(180deg, rgba(139, 92, 246, 0.05) 0%, var(--card-bg) 100%); }
-.mob-group-card.mcolor-rose { border-color: rgba(244, 63, 94, 0.45); background: linear-gradient(180deg, rgba(244, 63, 94, 0.05) 0%, var(--card-bg) 100%); }
-.mob-group-card.mcolor-emerald { border-color: rgba(16, 185, 129, 0.45); background: linear-gradient(180deg, rgba(16, 185, 129, 0.05) 0%, var(--card-bg) 100%); }
-.mob-group-card.mcolor-amber { border-color: rgba(245, 158, 11, 0.45); background: linear-gradient(180deg, rgba(245, 158, 11, 0.06) 0%, var(--card-bg) 100%); }
-.mob-group-card.mcolor-indigo { border-color: rgba(99, 102, 241, 0.45); background: linear-gradient(180deg, rgba(99, 102, 241, 0.05) 0%, var(--card-bg) 100%); }
+.mob-group-card.color-blue,
+.mob-group-card.mcolor-blue { border-color: rgba(59, 130, 246, 0.42); background: linear-gradient(180deg, rgba(59, 130, 246, 0.05) 0%, var(--card-bg) 100%); }
+.mob-group-card.color-violet,
+.mob-group-card.mcolor-violet { border-color: rgba(139, 92, 246, 0.42); background: linear-gradient(180deg, rgba(139, 92, 246, 0.05) 0%, var(--card-bg) 100%); }
+.mob-group-card.color-rose,
+.mob-group-card.mcolor-rose { border-color: rgba(244, 63, 94, 0.42); background: linear-gradient(180deg, rgba(244, 63, 94, 0.05) 0%, var(--card-bg) 100%); }
+.mob-group-card.color-emerald,
+.mob-group-card.mcolor-emerald { border-color: rgba(16, 185, 129, 0.42); background: linear-gradient(180deg, rgba(16, 185, 129, 0.05) 0%, var(--card-bg) 100%); }
+.mob-group-card.color-amber,
+.mob-group-card.mcolor-amber { border-color: rgba(245, 158, 11, 0.42); background: linear-gradient(180deg, rgba(245, 158, 11, 0.06) 0%, var(--card-bg) 100%); }
+.mob-group-card.color-indigo,
+.mob-group-card.mcolor-indigo { border-color: rgba(99, 102, 241, 0.42); background: linear-gradient(180deg, rgba(99, 102, 241, 0.05) 0%, var(--card-bg) 100%); }
 
 .mob-group-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 8px;
-  padding-bottom: 8px;
+  padding-bottom: 6px;
   border-bottom: 1px dashed var(--card-border);
 }
 
 .mob-group-title {
-  font-size: 0.94rem;
+  font-size: 0.78rem;
   font-weight: 800;
   color: var(--text-main);
+  letter-spacing: 0.01em;
 }
 
 .mob-group-sub {
-  font-size: 0.74rem;
+  font-size: 0.65rem;
   color: var(--text-sub);
-  margin-top: 2px;
+  margin-top: 1px;
 }
 
+.mob-group-badge,
 .mob-group-count {
-  font-size: 0.7rem;
+  font-size: 0.63rem;
   font-weight: 800;
-  padding: 3px 8px;
+  padding: 2px 7px;
   border-radius: 999px;
   background: var(--btn-bg);
   color: var(--text-sub);
@@ -2124,20 +2181,20 @@ body.global-locked .resize-handle {
 .mob-links-stack {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 6px;
 }
 
 .mob-link-card {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 10px;
-  padding: 11px 12px;
-  border-radius: 12px;
+  gap: 8px;
+  padding: 8px 10px;
+  border-radius: 9px;
   background: var(--card-bg);
   border: 1px solid var(--card-border);
-  border-left: 5px solid var(--accent);
-  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.04);
+  border-left: 4px solid var(--accent);
+  box-shadow: 0 1px 4px rgba(15, 23, 42, 0.04);
 }
 
 .mob-link-card.color-blue { border-left-color: #3b82f6; }
@@ -2154,7 +2211,7 @@ body.global-locked .resize-handle {
 }
 
 .mob-link-title {
-  font-size: 0.9rem;
+  font-size: 0.77rem;
   font-weight: 800;
   color: var(--text-main);
   white-space: nowrap;
@@ -2163,9 +2220,9 @@ body.global-locked .resize-handle {
 }
 
 .mob-link-sub {
-  font-size: 0.74rem;
+  font-size: 0.65rem;
   color: var(--text-sub);
-  margin-top: 2px;
+  margin-top: 1px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -2174,31 +2231,37 @@ body.global-locked .resize-handle {
 .mob-link-btns {
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: 4px;
   flex-shrink: 0;
 }
 
 .mob-link-btns .open-link-btn {
-  padding: 6px 10px;
-  font-size: 0.76rem;
+  padding: 4px 8px;
+  font-size: 0.67rem;
 }
 
 .mob-files-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(135px, 1fr));
-  gap: 8px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 6px;
 }
 
 .mob-file-card {
   display: flex;
   align-items: center;
-  gap: 9px;
-  padding: 10px;
-  border-radius: 12px;
+  gap: 7px;
+  padding: 7px 8px;
+  border-radius: 9px;
   background: var(--btn-bg);
   border: 1px solid var(--card-border);
   cursor: pointer;
   transition: all 0.14s ease;
+  min-width: 0;
+}
+
+.mob-file-card.type-folder {
+  background: rgba(245, 158, 11, 0.08);
+  border-color: rgba(245, 158, 11, 0.32);
 }
 
 .mob-file-card:active {
@@ -2207,15 +2270,15 @@ body.global-locked .resize-handle {
 }
 
 .mob-file-icon {
-  width: 36px;
-  height: 36px;
-  border-radius: 10px;
+  width: 28px;
+  height: 28px;
+  border-radius: 7px;
   background: var(--card-bg);
   border: 1px solid var(--card-border);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.15rem;
+  font-size: 0.94rem;
   flex-shrink: 0;
 }
 
@@ -2224,19 +2287,27 @@ body.global-locked .resize-handle {
   flex: 1;
 }
 
-.mob-file-title {
-  font-size: 0.78rem;
-  font-weight: 800;
+.mob-file-title,
+.mob-file-name {
+  font-size: 0.7rem;
+  font-weight: 700;
   color: var(--text-main);
-  white-space: nowrap;
+  line-height: 1.24;
+  white-space: normal;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
   overflow: hidden;
-  text-overflow: ellipsis;
+  word-break: break-all;
 }
 
 .mob-file-meta {
-  font-size: 0.68rem;
+  font-size: 0.61rem;
   color: var(--text-sub);
   margin-top: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 @media (max-width: 768px) {
@@ -2258,12 +2329,13 @@ body.global-locked .resize-handle {
   }
 
   .toolbar {
-    padding: 8px 10px;
-    gap: 6px;
+    padding: 6px 8px;
+    gap: 5px;
+    min-height: 42px;
   }
 
   .toolbar-brand h1 {
-    font-size: 0.92rem;
+    font-size: 0.82rem;
   }
 
   .toolbar-brand .badge {
@@ -2271,25 +2343,40 @@ body.global-locked .resize-handle {
   }
 
   .tool-btn {
-    height: 32px;
-    padding: 0 9px;
-    font-size: 0.74rem;
+    height: 27px;
+    padding: 0 7px;
+    font-size: 0.68rem;
   }
 
   .quick-site-popover {
     position: fixed;
-    top: 58px;
+    top: 52px;
     right: 10px;
-    left: 10px;
-    width: auto;
+    left: auto;
+    width: min(240px, 88vw);
+    z-index: 10020;
   }
 
-  /* 모바일에서 폴더 창 / 메모장 모달 / 미디어 모달이 화면에 꽉 차게 최적화 */
+  /* 모바일에서 폴더 창 / 메모장 모달 / 미디어 모달이 잘리지 않고 닫기 버튼이 항상 보이도록 고정 */
   .os-window {
+    min-width: 0 !important;
     left: 3vw !important;
-    top: 8vh !important;
+    right: 3vw !important;
+    top: 7vh !important;
     width: 94vw !important;
     height: 80vh !important;
+    resize: none !important;
+  }
+
+  .os-window-controls {
+    display: none;
+  }
+
+  .os-folder-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-auto-rows: 94px;
+    gap: 8px;
+    padding: 10px;
   }
 
   .md-modal {
@@ -2312,7 +2399,7 @@ body.global-locked .resize-handle {
   .storage-modal {
     width: 94vw !important;
     max-height: 88vh !important;
-    padding: 16px !important;
+    padding: 14px !important;
   }
 }
 

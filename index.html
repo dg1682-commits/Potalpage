@@ -114,7 +114,10 @@
                 <span class="quick-star-icon">⭐</span>
                 <span>즐겨찾는 사이트</span>
               </div>
-              <button type="button" id="btnQuickDockEdit" class="qdock-ctrl-btn edit" title="사이트 수정/삭제 편집 모드">⚙️ 편집</button>
+              <div class="quick-pop-header-btns">
+                <button type="button" id="btnQuickDockEdit" class="qdock-ctrl-btn edit" title="사이트 수정/삭제 편집 모드">⚙️ 편집</button>
+                <button type="button" id="btnQuickPopoverClose" class="qdock-ctrl-btn close" title="즐겨찾기 닫기">✕ 닫기</button>
+              </div>
             </div>
             <div id="quickDockList" class="quick-dock-list"></div>
             <button type="button" id="btnQuickDockAddBottom" class="quick-dock-add-footer">＋ 새 사이트 추가</button>
@@ -159,9 +162,10 @@
         <span id="folderWinTitleText">안티그래비티 문서함</span>
       </div>
       <div class="os-window-actions">
-        <button type="button" id="btnFolderNewMd" class="win-action-btn primary">+ 새 MD 메모</button>
-        <button type="button" id="btnFolderUploadFile" class="win-action-btn">📥 파일 업로드</button>
+        <button type="button" id="btnFolderNewMd" class="win-action-btn primary">+ MD 메모</button>
+        <button type="button" id="btnFolderUploadFile" class="win-action-btn">📥 업로드</button>
         <button type="button" id="btnFolderEditInfo" class="win-action-btn" title="폴더 이름/색상 변경">⚙️</button>
+        <button type="button" id="btnCloseFolderWinRight" class="win-action-btn close-win-btn" title="폴더 창 닫기">✕ 닫기</button>
       </div>
     </div>
 
