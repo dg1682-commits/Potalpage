@@ -798,14 +798,14 @@
     "ghPath": "",
     "ghSha": "",
     "dataUrl": "",
-    "folderId": "folder-1794373680657-236",
-    "x": 60,
+    "folderId": null,
+    "x": 1180,
     "y": 580,
     "w": 120,
     "h": 106,
     "color": "blue",
     "locked": false,
-    "z": 259
+    "z": 388
   },
   {
     "id": "file-1794373681292-515",
