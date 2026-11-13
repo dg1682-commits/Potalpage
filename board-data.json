@@ -166,12 +166,12 @@
     "url": "https://github.com/dg1682-commits/TAPE",
     "pagesUrl": "https://dg1682-commits.github.io/TAPE/",
     "x": 980,
-    "y": 260,
+    "y": 160,
     "w": 380,
     "h": 80,
     "color": "amber",
     "locked": false,
-    "z": 100
+    "z": 415
   },
   {
     "id": "repo-gambuddy",
@@ -180,13 +180,13 @@
     "subtitle": "음악 퀴즈",
     "url": "https://github.com/dg1682-commits/MUSICKING",
     "pagesUrl": "https://dg1682-commits.github.io/MUSICKING/",
-    "x": 980,
-    "y": 160,
+    "x": 520,
+    "y": 460,
     "w": 380,
     "h": 80,
     "color": "indigo",
     "locked": false,
-    "z": 413
+    "z": 414
   },
   {
     "id": "asset-1794267008928",
