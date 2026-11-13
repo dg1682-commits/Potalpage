@@ -209,12 +209,12 @@
     "content": "가장 빛나는 쪽으로\nhttps://youtu.be/EWgWIdbYCQ0\n",
     "folderId": null,
     "x": 500,
-    "y": 660,
+    "y": 640,
     "w": 120,
     "h": 100,
     "color": "indigo",
     "locked": false,
-    "z": 393
+    "z": 426
   },
   {
     "id": "folder-1794372632133-650",
@@ -475,12 +475,12 @@
     "title": "stems(WAV)",
     "subtitle": "10개 파일 업로드됨",
     "x": 820,
-    "y": 660,
+    "y": 640,
     "w": 130,
     "h": 100,
     "color": "amber",
     "locked": false,
-    "z": 402
+    "z": 428
   },
   {
     "id": "file-1794373259570-438",
@@ -763,12 +763,12 @@
     "fileUrl": "",
     "folderId": null,
     "x": 600,
-    "y": 660,
+    "y": 640,
     "w": 120,
     "h": 100,
     "color": "indigo",
     "locked": false,
-    "z": 394
+    "z": 427
   },
   {
     "id": "folder-1794373680657-236",
