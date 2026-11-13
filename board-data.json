@@ -1049,7 +1049,7 @@
     "h": 240,
     "color": "slate",
     "locked": false,
-    "z": 51
+    "z": 52
   },
   {
     "id": "folder-1794557974074-699",
@@ -1060,7 +1060,7 @@
     "y": 720,
     "w": 130,
     "h": 100,
-    "color": "amber",
+    "color": "indigo",
     "locked": false,
     "z": 443
   },
