@@ -934,13 +934,13 @@
     "type": "text",
     "title": "마지막",
     "subtitle": "",
-    "x": 380,
+    "x": 360,
     "y": 680,
     "w": 140,
     "h": 45,
     "color": "default",
     "locked": false,
-    "z": 404
+    "z": 411
   },
   {
     "id": "asset-1794555485179",
