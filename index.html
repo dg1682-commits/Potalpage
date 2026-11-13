@@ -40,24 +40,24 @@
         <input type="file" id="fileAnyUpload" multiple hidden />
         <input type="file" id="folderDirUpload" webkitdirectory directory multiple hidden />
 
-        <div class="divider"></div>
+        <div class="divider pc-only-tool"></div>
 
-        <button id="btnAddBadge" class="tool-btn" title="소제목/카테고리 배지 도형 추가">
+        <button id="btnAddBadge" class="tool-btn pc-only-tool" title="소제목/카테고리 배지 도형 추가">
           <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="6" width="18" height="12" rx="6"/></svg>
           + 소제목
         </button>
-        <button id="btnAddShape" class="tool-btn" title="배경 구역용 도형 박스 추가">
+        <button id="btnAddShape" class="tool-btn pc-only-tool" title="배경 구역용 도형 박스 추가">
           <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="3" stroke-dasharray="4 2"/></svg>
           + 구역 박스
         </button>
-        <button id="btnAddText" class="tool-btn" title="자유 텍스트/메모 추가">
+        <button id="btnAddText" class="tool-btn pc-only-tool" title="자유 텍스트/메모 추가">
           <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 7 4 4 20 4 20 7"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="4" x2="12" y2="20"/></svg>
           + 텍스트
         </button>
 
-        <div class="divider"></div>
+        <div class="divider pc-only-tool"></div>
 
-        <div class="zoom-ctrl-wrap" id="zoomCtrlWrap">
+        <div class="zoom-ctrl-wrap pc-only-tool" id="zoomCtrlWrap">
           <button id="btnAutoFit" class="tool-btn" title="클릭하여 화면 배율(%) 바 조절 또는 자동 맞춤">
             <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
             <span id="autoFitLabel">100%</span>
@@ -78,12 +78,12 @@
           </div>
         </div>
 
-        <button id="btnSnapToggle" class="tool-btn active" title="그리드 자석 정렬 켜기/끄기">
+        <button id="btnSnapToggle" class="tool-btn active pc-only-tool" title="그리드 자석 정렬 켜기/끄기">
           <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
           스냅
         </button>
 
-        <button id="btnGlobalLock" class="tool-btn" title="전체 레이아웃 고정/잠금 (클릭 전용 모드)">
+        <button id="btnGlobalLock" class="tool-btn pc-only-tool" title="전체 레이아웃 고정/잠금 (클릭 전용 모드)">
           <svg id="lockIcon" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 9.9-1"/></svg>
           <span id="lockLabel">편집 모드</span>
         </button>
@@ -100,15 +100,36 @@
           <span id="storageMiniBadge" class="storage-mini-badge">0%</span>
         </button>
 
-        <button id="btnExport" class="tool-btn icon-only" title="전체 보드 + 파일 목록 통합 백업(.json) 다운로드">
+        <!-- 상단 즐겨찾기 버튼 & 클릭 시 열리는 플로팅 드롭다운 팝오버 -->
+        <div class="quick-site-wrap" id="quickSiteWrap">
+          <button type="button" id="btnQuickSitesToggle" class="tool-btn quick-star-btn" title="자주 쓰는 사이트 즐겨찾기 열기">
+            <span class="quick-star-icon">⭐</span>
+            <span>즐겨찾기</span>
+            <span id="quickDockCount" class="quick-dock-badge">7</span>
+          </button>
+
+          <div id="quickSitePopover" class="quick-site-popover hidden">
+            <div class="quick-pop-header">
+              <div class="quick-pop-title">
+                <span class="quick-star-icon">⭐</span>
+                <span>즐겨찾는 사이트</span>
+              </div>
+              <button type="button" id="btnQuickDockEdit" class="qdock-ctrl-btn edit" title="사이트 수정/삭제 편집 모드">⚙️ 편집</button>
+            </div>
+            <div id="quickDockList" class="quick-dock-list"></div>
+            <button type="button" id="btnQuickDockAddBottom" class="quick-dock-add-footer">＋ 새 사이트 추가</button>
+          </div>
+        </div>
+
+        <button id="btnExport" class="tool-btn icon-only pc-only-tool" title="전체 보드 + 파일 목록 통합 백업(.json) 다운로드">
           <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
         </button>
-        <button id="btnImport" class="tool-btn icon-only" title="통합 백업(.json) 불러오기">
+        <button id="btnImport" class="tool-btn icon-only pc-only-tool" title="통합 백업(.json) 불러오기">
           <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
         </button>
         <input type="file" id="fileImport" accept=".json" hidden />
 
-        <button id="btnReset" class="tool-btn icon-only" title="초기 보드 레이아웃으로 리셋">
+        <button id="btnReset" class="tool-btn icon-only pc-only-tool" title="초기 보드 레이아웃으로 리셋">
           <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
         </button>
 
@@ -117,16 +138,12 @@
         </button>
       </div>
     </header>
-
-    <!-- 안내 바 -->
-    <div class="hint-bar" id="hintBar">
-      <span>💡 <b>더블클릭</b>: 폴더·메모장·미디어·파일 열기 | <b>파일 → 폴더 드래그</b>: 폴더에 넣기 | <b>PC의 모든 파일(이미지·음악·영상·엑셀·exe·md)</b>을 화면에 드래그 앤 드롭하면 바로 업로드됩니다!</span>
-    </div>
   </div>
 
-  <!-- 믹스보드 자유 캔버스 래퍼 -->
+  <!-- 믹스보드 자유 캔버스 래퍼 (PC: 자유 캔버스 / 모바일: 연동형 세로 뷰 자동 전환) -->
   <div id="boardViewport" class="board-viewport">
     <main id="board" class="board-canvas"></main>
+    <section id="mobileSyncView" class="mobile-sync-view hidden" aria-label="모바일 연동 뷰"></section>
   </div>
 
   <!-- 1. 실제 OS 스타일 폴더 탐색기 팝업 창 -->
@@ -357,24 +374,6 @@
       </form>
     </div>
   </div>
-
-  <!-- 6. 우측 플로팅 퀵 사이트 독 (현재 위치에서 그대로 접기/펼치기 + 창 크기 반응형 추적) -->
-  <aside id="quickSiteDock" class="quick-site-dock">
-    <div id="quickDockHeader" class="quick-dock-header" title="드래그하여 위치 이동">
-      <div class="quick-dock-title" title="즐겨찾는 사이트 빠른 이동">
-        <span class="quick-star-icon">⭐</span>
-        <span id="quickDockCount" class="quick-dock-badge">7</span>
-      </div>
-      <div class="quick-dock-controls">
-        <button type="button" id="btnQuickDockEdit" class="qdock-ctrl-btn edit" title="사이트 수정/삭제 편집 모드">⚙️ 편집</button>
-        <button type="button" id="btnQuickDockCollapse" class="qdock-ctrl-btn collapse" title="현재 자리에서 접기 / 펼치기">▲</button>
-      </div>
-    </div>
-    <div id="quickDockBody" class="quick-dock-body">
-      <div id="quickDockList" class="quick-dock-list"></div>
-      <button type="button" id="btnQuickDockAddBottom" class="quick-dock-add-footer">＋ 새 사이트 추가</button>
-    </div>
-  </aside>
 
   <!-- 7. 빠른 사이트 추가/편집 모달 -->
   <div id="quickSiteModal" class="modal-backdrop hidden">

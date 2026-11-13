@@ -1,258 +1,1052 @@
-const STORAGE_KEY = "dg1682_mixboard_portal_v3";
-const PREV_STORAGE_KEY = "dg1682_mixboard_portal_v2";
+const STORAGE_KEY = "dg1682_mixboard_portal_v4";
+const PREV_STORAGE_KEY = "dg1682_mixboard_portal_v3";
 const THEME_KEY = "dg1682_mixboard_theme";
 const GH_CONFIG_KEY = "dg1682_mixboard_gh_config";
 const GH_DATA_FILE = "board-data.json";
 const SNAP_SIZE = 20;
 const DESIGN_BOARD_WIDTH = 1440;
 
-// 초기 10개 깃허브 레포지토리 + 소제목 도형/구역 박스/텍스트 + 안티그래비티 폴더 & 샘플 MD 파일 기본 배치
+// 현재 사용자의 최신 백업 세팅 (mixboard-portal-backup (6).json 그대로 유지)
 function getDefaultAssets() {
   return [
     {
-      id: "shape-zone-1",
-      type: "shape",
-      title: "WORKSPACE & TOOLS",
-      subtitle: "주요 업무 및 유틸리티 프로젝트",
-      x: 40,
-      y: 80,
-      w: 440,
-      h: 480,
-      color: "blue",
-      locked: false,
-      z: 19
+      "id": "shape-zone-1",
+      "type": "shape",
+      "title": "WORKSPACE & TOOLS",
+      "subtitle": "주요 업무 및 유틸리티 프로젝트",
+      "x": 40,
+      "y": 80,
+      "w": 440,
+      "h": 480,
+      "color": "blue",
+      "locked": false,
+      "z": 30
     },
     {
-      id: "shape-zone-2",
-      type: "shape",
-      title: "MEDIA · LIVE · PLAY",
-      subtitle: "미디어, 음악, 플레이어 및 소셜 레포지토리",
-      x: 500,
-      y: 80,
-      w: 440,
-      h: 480,
-      color: "violet",
-      locked: false,
-      z: 29
+      "id": "shape-zone-2",
+      "type": "shape",
+      "title": "MEDIA · LIVE · PLAY",
+      "subtitle": "미디어, 음악, 플레이어 및 소셜 레포지토리",
+      "x": 500,
+      "y": 80,
+      "w": 440,
+      "h": 480,
+      "color": "violet",
+      "locked": false,
+      "z": 36
     },
     {
-      id: "text-welcome",
-      type: "text",
-      title: "🚀 GitHub Mixboard",
-      subtitle: "",
-      x: 40,
-      y: 20,
-      w: 520,
-      h: 60,
-      color: "default",
-      locked: false,
-      z: 106
+      "id": "text-welcome",
+      "type": "text",
+      "title": "🚀 GitHub Mixboard",
+      "subtitle": "",
+      "x": 40,
+      "y": 20,
+      "w": 220,
+      "h": 45,
+      "color": "default",
+      "locked": false,
+      "z": 169
     },
     {
-      id: "repo-kjikjangin",
-      type: "link",
-      title: "K직장인키우기",
-      subtitle: "dg1682-commits/kjikjangin",
-      url: "https://github.com/dg1682-commits/kjikjangin",
-      pagesUrl: "https://dg1682-commits.github.io/kjikjangin/",
-      x: 980,
-      y: 360,
-      w: 380,
-      h: 80,
-      color: "blue",
-      locked: false,
-      z: 102
+      "id": "repo-kjikjangin",
+      "type": "link",
+      "title": "K직장인키우기",
+      "subtitle": "dg1682-commits/kjikjangin",
+      "url": "https://github.com/dg1682-commits/kjikjangin",
+      "pagesUrl": "https://dg1682-commits.github.io/kjikjangin/",
+      "x": 980,
+      "y": 360,
+      "w": 380,
+      "h": 80,
+      "color": "blue",
+      "locked": false,
+      "z": 102
     },
     {
-      id: "repo-vcl",
-      type: "link",
-      title: "대본 생성기 v1",
-      subtitle: "아이템 추천 및 대본작성",
-      url: "https://github.com/dg1682-commits/VCL",
-      pagesUrl: "https://dg1682-commits.github.io/VCL/",
-      x: 60,
-      y: 360,
-      w: 380,
-      h: 80,
-      color: "indigo",
-      locked: false,
-      z: 66
+      "id": "repo-vcl",
+      "type": "link",
+      "title": "대본 생성기 v1",
+      "subtitle": "아이템 추천 및 대본작성",
+      "url": "https://github.com/dg1682-commits/VCL",
+      "pagesUrl": "https://dg1682-commits.github.io/VCL/",
+      "x": 980,
+      "y": 460,
+      "w": 380,
+      "h": 80,
+      "color": "indigo",
+      "locked": false,
+      "z": 282
     },
     {
-      id: "repo-vti",
-      type: "link",
-      title: "궁디스튜디오",
-      subtitle: "이미지/영상/유튜브",
-      url: "https://github.com/dg1682-commits/VTI",
-      pagesUrl: "https://dg1682-commits.github.io/VTI/",
-      x: 60,
-      y: 160,
-      w: 380,
-      h: 80,
-      color: "emerald",
-      locked: false,
-      z: 62
+      "id": "repo-vti",
+      "type": "link",
+      "title": "궁디스튜디오",
+      "subtitle": "이미지/영상/유튜브",
+      "url": "https://github.com/dg1682-commits/VTI",
+      "pagesUrl": "https://dg1682-commits.github.io/VTI/",
+      "x": 60,
+      "y": 160,
+      "w": 380,
+      "h": 80,
+      "color": "emerald",
+      "locked": false,
+      "z": 62
     },
     {
-      id: "repo-pa",
-      type: "link",
-      title: "프롬프트 스튜디오",
-      subtitle: "도대체 왜 프롬프트",
-      url: "https://github.com/dg1682-commits/PA",
-      pagesUrl: "https://dg1682-commits.github.io/PA/",
-      x: 60,
-      y: 260,
-      w: 380,
-      h: 80,
-      color: "amber",
-      locked: false,
-      z: 64
+      "id": "repo-pa",
+      "type": "link",
+      "title": "프롬프트 스튜디오",
+      "subtitle": "도대체 왜 프롬프트",
+      "url": "https://github.com/dg1682-commits/PA",
+      "pagesUrl": "https://dg1682-commits.github.io/PA/",
+      "x": 60,
+      "y": 260,
+      "w": 380,
+      "h": 80,
+      "color": "amber",
+      "locked": false,
+      "z": 64
     },
     {
-      id: "repo-dnjfrmq",
-      type: "link",
-      title: "월급찍고갑니다",
-      subtitle: "월찍가 어플",
-      url: "https://github.com/dg1682-commits/dnjfrmq",
-      pagesUrl: "https://dg1682-commits.github.io/dnjfrmq/",
-      x: 520,
-      y: 360,
-      w: 380,
-      h: 80,
-      color: "violet",
-      locked: false,
-      z: 88
+      "id": "repo-dnjfrmq",
+      "type": "link",
+      "title": "월급찍고갑니다",
+      "subtitle": "월찍가 어플",
+      "url": "https://github.com/dg1682-commits/dnjfrmq",
+      "pagesUrl": "https://dg1682-commits.github.io/dnjfrmq/",
+      "x": 520,
+      "y": 360,
+      "w": 380,
+      "h": 80,
+      "color": "violet",
+      "locked": false,
+      "z": 88
     },
     {
-      id: "repo-goongdyplay",
-      type: "link",
-      title: "궁디플레이",
-      subtitle: "궁디플레이어",
-      url: "https://github.com/dg1682-commits/goongdyplay",
-      pagesUrl: "https://dg1682-commits.github.io/goongdyplay/",
-      x: 520,
-      y: 160,
-      w: 380,
-      h: 80,
-      color: "rose",
-      locked: false,
-      z: 80
+      "id": "repo-goongdyplay",
+      "type": "link",
+      "title": "궁디플레이",
+      "subtitle": "음악 플레이어(AI추가)",
+      "url": "https://github.com/dg1682-commits/goongdyplay",
+      "pagesUrl": "https://dg1682-commits.github.io/goongdyplay/",
+      "x": 520,
+      "y": 160,
+      "w": 380,
+      "h": 80,
+      "color": "rose",
+      "locked": false,
+      "z": 157
     },
     {
-      id: "repo-isvmliveshow",
-      type: "link",
-      title: "포털 페이지",
-      subtitle: "",
-      url: "https://github.com/dg1682-commits/Potalpage",
-      pagesUrl: "https://dg1682-commits.github.io/Potalpage/",
-      x: 60,
-      y: 460,
-      w: 380,
-      h: 80,
-      color: "violet",
-      locked: false,
-      z: 139
+      "id": "repo-isvmliveshow",
+      "type": "link",
+      "title": "포털 페이지",
+      "subtitle": "개발 웹앱 모음",
+      "url": "https://github.com/dg1682-commits/Potalpage",
+      "pagesUrl": "https://dg1682-commits.github.io/Potalpage/",
+      "x": 60,
+      "y": 360,
+      "w": 380,
+      "h": 80,
+      "color": "violet",
+      "locked": false,
+      "z": 283
     },
     {
-      id: "repo-gymmusic",
-      type: "link",
-      title: "AIMAS",
-      subtitle: "음원 AI마스터링",
-      url: "https://github.com/dg1682-commits/gymmusic",
-      pagesUrl: "https://dg1682-commits.github.io/gymmusic/",
-      x: 520,
-      y: 260,
-      w: 380,
-      h: 80,
-      color: "slate",
-      locked: false,
-      z: 86
+      "id": "repo-gymmusic",
+      "type": "link",
+      "title": "AIMAS",
+      "subtitle": "음원 AI마스터링",
+      "url": "https://github.com/dg1682-commits/gymmusic",
+      "pagesUrl": "https://dg1682-commits.github.io/gymmusic/",
+      "x": 520,
+      "y": 260,
+      "w": 380,
+      "h": 80,
+      "color": "slate",
+      "locked": false,
+      "z": 86
     },
     {
-      id: "repo-tape",
-      type: "link",
-      title: "테이프",
-      subtitle: "dg1682-commits/TAPE",
-      url: "https://github.com/dg1682-commits/TAPE",
-      pagesUrl: "https://dg1682-commits.github.io/TAPE/",
-      x: 980,
-      y: 260,
-      w: 380,
-      h: 80,
-      color: "amber",
-      locked: false,
-      z: 100
+      "id": "repo-tape",
+      "type": "link",
+      "title": "테이프",
+      "subtitle": "dg1682-commits/TAPE",
+      "url": "https://github.com/dg1682-commits/TAPE",
+      "pagesUrl": "https://dg1682-commits.github.io/TAPE/",
+      "x": 980,
+      "y": 260,
+      "w": 380,
+      "h": 80,
+      "color": "amber",
+      "locked": false,
+      "z": 100
     },
     {
-      id: "repo-gambuddy",
-      type: "link",
-      title: "겜버디",
-      subtitle: "dg1682-commits/gambuddy",
-      url: "https://github.com/dg1682-commits/gambuddy",
-      pagesUrl: "https://dg1682-commits.github.io/gambuddy/",
-      x: 980,
-      y: 160,
-      w: 380,
-      h: 80,
-      color: "indigo",
-      locked: false,
-      z: 98
+      "id": "repo-gambuddy",
+      "type": "link",
+      "title": "겜버디",
+      "subtitle": "dg1682-commits/gambuddy",
+      "url": "https://github.com/dg1682-commits/gambuddy",
+      "pagesUrl": "https://dg1682-commits.github.io/gambuddy/",
+      "x": 980,
+      "y": 160,
+      "w": 380,
+      "h": 80,
+      "color": "indigo",
+      "locked": false,
+      "z": 98
     },
     {
-      id: "asset-1794267008928",
-      type: "shape",
-      title: "안쓰는 것들",
-      subtitle: "이 구역 위에 버튼들을 올려놓으세요",
-      x: 960,
-      y: 80,
-      w: 440,
-      h: 480,
-      color: "rose",
-      locked: false,
-      z: 26
+      "id": "asset-1794267008928",
+      "type": "shape",
+      "title": "안쓰는 것들",
+      "subtitle": "이 구역 위에 버튼들을 올려놓으세요",
+      "x": 960,
+      "y": 80,
+      "w": 440,
+      "h": 480,
+      "color": "rose",
+      "locked": false,
+      "z": 26
     },
     {
-      id: "folder-antigravity",
-      type: "folder",
-      title: "안티그래비티 문서함",
-      subtitle: "회사PC ↔ 집PC 작업 연동 MD 보관함",
-      x: 39,
-      y: 598,
-      w: 130,
-      h: 100,
-      color: "amber",
-      locked: false,
-      z: 135
+      "id": "asset-1794368190025",
+      "type": "md",
+      "title": "음원 링크.md",
+      "subtitle": "",
+      "content": "가장 빛나는 쪽으로\nhttps://youtu.be/EWgWIdbYCQ0\n",
+      "folderId": null,
+      "x": 540,
+      "y": 660,
+      "w": 120,
+      "h": 100,
+      "color": "indigo",
+      "locked": false,
+      "z": 236
     },
     {
-      id: "md-sample-inside",
-      type: "md",
-      title: "집-회사_인수인계_가이드.md",
-      subtitle: "안티그래비티 작업 내역 동기화 방법",
-      content: "# 🚀 안티그래비티 회사 PC ↔ 집 PC 연동 가이드\n\n회사 PC와 집 PC에서 작업하던 안티그래비티(Antigravity) 내역이나 프롬프트, 기획서를 이 폴더에 모아두세요!\n\n## 💡 주요 사용법\n1. **더블클릭해서 열기**: 내용을 바로 읽고 `📋 전체 복사` 버튼으로 원클릭 복사할 수 있습니다.\n2. **💾 .md 내려받기**: 언제든 실제 `.md` 파일로 PC에 다운로드할 수 있습니다.\n3. **자유로운 드래그 이동**:\n   - 보드 위의 MD 파일을 **폴더 아이콘 위로 드래그**하면 폴더 안으로 쏙 들어갑니다.\n   - 폴더 창 안의 MD 아이콘을 **창 바깥(믹스보드)으로 드래그**하면 보드 위로 꺼내집니다.\n4. **PC 파일 드래그 앤 드롭**: 내 컴퓨터의 `.md` 파일을 브라우저 화면이나 열린 폴더 창에 끌어다 놓으면 즉시 추가됩니다.",
-      folderId: "folder-antigravity",
-      x: 220,
-      y: 460,
-      w: 120,
-      h: 100,
-      color: "indigo",
-      locked: false,
-      z: 111
+      "id": "folder-1794372632133-650",
+      "type": "folder",
+      "title": "stems(MP3)",
+      "subtitle": "10개 파일 업로드됨",
+      "x": 840,
+      "y": 760,
+      "w": 130,
+      "h": 100,
+      "color": "amber",
+      "locked": false,
+      "z": 230
     },
     {
-      id: "md-sample-board",
-      type: "md",
-      title: "오늘의_작업메모.md",
-      subtitle: "폴더로 드래그해서 넣어보세요",
-      content: "# 📝 오늘의 개발 메모\n\n- 이 아이콘을 **더블클릭**하면 마크다운 뷰어/편집기가 열립니다.\n- 이 아이콘을 옆에 있는 **📂 안티그래비티 문서함** 폴더 위로 드래그해서 놓으면 폴더 안으로 들어갑니다!\n\n```js\nconsole.log(\"집 PC와 회사 PC 어디서든 편하게 이어서 작업하세요!\");\n```",
-      folderId: null,
-      x: 189,
-      y: 592,
-      w: 120,
-      h: 100,
-      color: "blue",
-      locked: false,
-      z: 136
+      "id": "file-1794372633566-383",
+      "type": "file",
+      "fileCategory": "audio",
+      "ext": "mp3",
+      "fileSize": 3123414,
+      "mimeType": "audio/mpeg",
+      "title": "가장 눈부신 쪽으로 (Backing Vocals).mp3",
+      "subtitle": "2.98 MB",
+      "fileUrl": "https://xgcgfmcwcrnanflbveup.supabase.co/storage/v1/object/public/Potal/uploads/stemsMP3/1794372632137_mrjfq_BackingVocals.mp3",
+      "sbPath": "uploads/stemsMP3/1794372632137_mrjfq_BackingVocals.mp3",
+      "sbBucket": "Potal",
+      "ghPath": "",
+      "ghSha": "",
+      "dataUrl": "",
+      "folderId": "folder-1794372632133-650",
+      "x": 1120,
+      "y": 620,
+      "w": 120,
+      "h": 106,
+      "color": "rose",
+      "locked": false,
+      "z": 176
+    },
+    {
+      "id": "file-1794372634748-934",
+      "type": "file",
+      "fileCategory": "audio",
+      "ext": "mp3",
+      "fileSize": 2879143,
+      "mimeType": "audio/mpeg",
+      "title": "가장 눈부신 쪽으로 (Bass).mp3",
+      "subtitle": "2.75 MB",
+      "fileUrl": "https://xgcgfmcwcrnanflbveup.supabase.co/storage/v1/object/public/Potal/uploads/stemsMP3/1794372633570_r5v7f_Bass.mp3",
+      "sbPath": "uploads/stemsMP3/1794372633570_r5v7f_Bass.mp3",
+      "sbBucket": "Potal",
+      "ghPath": "",
+      "ghSha": "",
+      "dataUrl": "",
+      "folderId": "folder-1794372632133-650",
+      "x": 1120,
+      "y": 620,
+      "w": 120,
+      "h": 106,
+      "color": "rose",
+      "locked": false,
+      "z": 178
+    },
+    {
+      "id": "file-1794372635029-217",
+      "type": "file",
+      "fileCategory": "audio",
+      "ext": "mp3",
+      "fileSize": 1921112,
+      "mimeType": "audio/mpeg",
+      "title": "가장 눈부신 쪽으로 (Brass).mp3",
+      "subtitle": "1.83 MB",
+      "fileUrl": "https://xgcgfmcwcrnanflbveup.supabase.co/storage/v1/object/public/Potal/uploads/stemsMP3/1794372634751_wic6r_Brass.mp3",
+      "sbPath": "uploads/stemsMP3/1794372634751_wic6r_Brass.mp3",
+      "sbBucket": "Potal",
+      "ghPath": "",
+      "ghSha": "",
+      "dataUrl": "",
+      "folderId": "folder-1794372632133-650",
+      "x": 1120,
+      "y": 620,
+      "w": 120,
+      "h": 106,
+      "color": "rose",
+      "locked": false,
+      "z": 179
+    },
+    {
+      "id": "file-1794372636171-231",
+      "type": "file",
+      "fileCategory": "audio",
+      "ext": "mp3",
+      "fileSize": 5408984,
+      "mimeType": "audio/mpeg",
+      "title": "가장 눈부신 쪽으로 (Drums).mp3",
+      "subtitle": "5.16 MB",
+      "fileUrl": "https://xgcgfmcwcrnanflbveup.supabase.co/storage/v1/object/public/Potal/uploads/stemsMP3/1794372635034_ktnzx_Drums.mp3",
+      "sbPath": "uploads/stemsMP3/1794372635034_ktnzx_Drums.mp3",
+      "sbBucket": "Potal",
+      "ghPath": "",
+      "ghSha": "",
+      "dataUrl": "",
+      "folderId": "folder-1794372632133-650",
+      "x": 1120,
+      "y": 620,
+      "w": 120,
+      "h": 106,
+      "color": "rose",
+      "locked": false,
+      "z": 180
+    },
+    {
+      "id": "file-1794372637013-391",
+      "type": "file",
+      "fileCategory": "audio",
+      "ext": "mp3",
+      "fileSize": 830429,
+      "mimeType": "audio/mpeg",
+      "title": "가장 눈부신 쪽으로 (FX).mp3",
+      "subtitle": "811.0 KB",
+      "fileUrl": "https://xgcgfmcwcrnanflbveup.supabase.co/storage/v1/object/public/Potal/uploads/stemsMP3/1794372636174_1cl78_FX.mp3",
+      "sbPath": "uploads/stemsMP3/1794372636174_1cl78_FX.mp3",
+      "sbBucket": "Potal",
+      "ghPath": "",
+      "ghSha": "",
+      "dataUrl": "",
+      "folderId": "folder-1794372632133-650",
+      "x": 1120,
+      "y": 620,
+      "w": 120,
+      "h": 106,
+      "color": "rose",
+      "locked": false,
+      "z": 181
+    },
+    {
+      "id": "file-1794372637867-63",
+      "type": "file",
+      "fileCategory": "audio",
+      "ext": "mp3",
+      "fileSize": 4021521,
+      "mimeType": "audio/mpeg",
+      "title": "가장 눈부신 쪽으로 (Guitar).mp3",
+      "subtitle": "3.84 MB",
+      "fileUrl": "https://xgcgfmcwcrnanflbveup.supabase.co/storage/v1/object/public/Potal/uploads/stemsMP3/1794372637019_8kc46_Guitar.mp3",
+      "sbPath": "uploads/stemsMP3/1794372637019_8kc46_Guitar.mp3",
+      "sbBucket": "Potal",
+      "ghPath": "",
+      "ghSha": "",
+      "dataUrl": "",
+      "folderId": "folder-1794372632133-650",
+      "x": 1120,
+      "y": 620,
+      "w": 120,
+      "h": 106,
+      "color": "rose",
+      "locked": false,
+      "z": 183
+    },
+    {
+      "id": "file-1794372638503-648",
+      "type": "file",
+      "fileCategory": "audio",
+      "ext": "mp3",
+      "fileSize": 3731747,
+      "mimeType": "audio/mpeg",
+      "title": "가장 눈부신 쪽으로 (Keyboard).mp3",
+      "subtitle": "3.56 MB",
+      "fileUrl": "https://xgcgfmcwcrnanflbveup.supabase.co/storage/v1/object/public/Potal/uploads/stemsMP3/1794372637871_evytr_Keyboard.mp3",
+      "sbPath": "uploads/stemsMP3/1794372637871_evytr_Keyboard.mp3",
+      "sbBucket": "Potal",
+      "ghPath": "",
+      "ghSha": "",
+      "dataUrl": "",
+      "folderId": "folder-1794372632133-650",
+      "x": 1120,
+      "y": 620,
+      "w": 120,
+      "h": 106,
+      "color": "rose",
+      "locked": false,
+      "z": 184
+    },
+    {
+      "id": "file-1794372638928-154",
+      "type": "file",
+      "fileCategory": "audio",
+      "ext": "mp3",
+      "fileSize": 2078818,
+      "mimeType": "audio/mpeg",
+      "title": "가장 눈부신 쪽으로 (Strings).mp3",
+      "subtitle": "1.98 MB",
+      "fileUrl": "https://xgcgfmcwcrnanflbveup.supabase.co/storage/v1/object/public/Potal/uploads/stemsMP3/1794372638506_w9jvo_Strings.mp3",
+      "sbPath": "uploads/stemsMP3/1794372638506_w9jvo_Strings.mp3",
+      "sbBucket": "Potal",
+      "ghPath": "",
+      "ghSha": "",
+      "dataUrl": "",
+      "folderId": "folder-1794372632133-650",
+      "x": 1120,
+      "y": 620,
+      "w": 120,
+      "h": 106,
+      "color": "rose",
+      "locked": false,
+      "z": 185
+    },
+    {
+      "id": "file-1794372639406-720",
+      "type": "file",
+      "fileCategory": "audio",
+      "ext": "mp3",
+      "fileSize": 4133720,
+      "mimeType": "audio/mpeg",
+      "title": "가장 눈부신 쪽으로 (Synth).mp3",
+      "subtitle": "3.94 MB",
+      "fileUrl": "https://xgcgfmcwcrnanflbveup.supabase.co/storage/v1/object/public/Potal/uploads/stemsMP3/1794372638931_94ra7_Synth.mp3",
+      "sbPath": "uploads/stemsMP3/1794372638931_94ra7_Synth.mp3",
+      "sbBucket": "Potal",
+      "ghPath": "",
+      "ghSha": "",
+      "dataUrl": "",
+      "folderId": "folder-1794372632133-650",
+      "x": 1120,
+      "y": 620,
+      "w": 120,
+      "h": 106,
+      "color": "rose",
+      "locked": false,
+      "z": 186
+    },
+    {
+      "id": "file-1794372639739-862",
+      "type": "file",
+      "fileCategory": "audio",
+      "ext": "mp3",
+      "fileSize": 3917446,
+      "mimeType": "audio/mpeg",
+      "title": "가장 눈부신 쪽으로 (Vocals).mp3",
+      "subtitle": "3.74 MB",
+      "fileUrl": "https://xgcgfmcwcrnanflbveup.supabase.co/storage/v1/object/public/Potal/uploads/stemsMP3/1794372639409_qykyk_Vocals.mp3",
+      "sbPath": "uploads/stemsMP3/1794372639409_qykyk_Vocals.mp3",
+      "sbBucket": "Potal",
+      "ghPath": "",
+      "ghSha": "",
+      "dataUrl": "",
+      "folderId": "folder-1794372632133-650",
+      "x": 1120,
+      "y": 620,
+      "w": 120,
+      "h": 106,
+      "color": "rose",
+      "locked": false,
+      "z": 187
+    },
+    {
+      "id": "folder-1794373256778-184",
+      "type": "folder",
+      "title": "stems(WAV)",
+      "subtitle": "10개 파일 업로드됨",
+      "x": 840,
+      "y": 660,
+      "w": 130,
+      "h": 100,
+      "color": "amber",
+      "locked": false,
+      "z": 291
+    },
+    {
+      "id": "file-1794373259570-438",
+      "type": "file",
+      "fileCategory": "audio",
+      "ext": "wav",
+      "fileSize": 36472492,
+      "mimeType": "audio/wav",
+      "title": "가장 눈부신 쪽으로 (Backing Vocals).wav",
+      "subtitle": "34.78 MB",
+      "fileUrl": "https://xgcgfmcwcrnanflbveup.supabase.co/storage/v1/object/public/Potal/uploads/stemsWAV/1794373256785_djknx_BackingVocals.wav",
+      "sbPath": "uploads/stemsWAV/1794373256785_djknx_BackingVocals.wav",
+      "sbBucket": "Potal",
+      "ghPath": "",
+      "ghSha": "",
+      "dataUrl": "",
+      "folderId": "folder-1794373256778-184",
+      "x": 240,
+      "y": 720,
+      "w": 120,
+      "h": 106,
+      "color": "rose",
+      "locked": false,
+      "z": 193
+    },
+    {
+      "id": "file-1794373261246-43",
+      "type": "file",
+      "fileCategory": "audio",
+      "ext": "wav",
+      "fileSize": 36472492,
+      "mimeType": "audio/wav",
+      "title": "가장 눈부신 쪽으로 (Bass).wav",
+      "subtitle": "34.78 MB",
+      "fileUrl": "https://xgcgfmcwcrnanflbveup.supabase.co/storage/v1/object/public/Potal/uploads/stemsWAV/1794373259573_8qis7_Bass.wav",
+      "sbPath": "uploads/stemsWAV/1794373259573_8qis7_Bass.wav",
+      "sbBucket": "Potal",
+      "ghPath": "",
+      "ghSha": "",
+      "dataUrl": "",
+      "folderId": "folder-1794373256778-184",
+      "x": 240,
+      "y": 720,
+      "w": 120,
+      "h": 106,
+      "color": "rose",
+      "locked": false,
+      "z": 194
+    },
+    {
+      "id": "file-1794373263242-752",
+      "type": "file",
+      "fileCategory": "audio",
+      "ext": "wav",
+      "fileSize": 36472492,
+      "mimeType": "audio/wav",
+      "title": "가장 눈부신 쪽으로 (Brass).wav",
+      "subtitle": "34.78 MB",
+      "fileUrl": "https://xgcgfmcwcrnanflbveup.supabase.co/storage/v1/object/public/Potal/uploads/stemsWAV/1794373261250_2ap80_Brass.wav",
+      "sbPath": "uploads/stemsWAV/1794373261250_2ap80_Brass.wav",
+      "sbBucket": "Potal",
+      "ghPath": "",
+      "ghSha": "",
+      "dataUrl": "",
+      "folderId": "folder-1794373256778-184",
+      "x": 240,
+      "y": 720,
+      "w": 120,
+      "h": 106,
+      "color": "rose",
+      "locked": false,
+      "z": 196
+    },
+    {
+      "id": "file-1794373264947-758",
+      "type": "file",
+      "fileCategory": "audio",
+      "ext": "wav",
+      "fileSize": 36472492,
+      "mimeType": "audio/wav",
+      "title": "가장 눈부신 쪽으로 (Drums).wav",
+      "subtitle": "34.78 MB",
+      "fileUrl": "https://xgcgfmcwcrnanflbveup.supabase.co/storage/v1/object/public/Potal/uploads/stemsWAV/1794373263245_zofzf_Drums.wav",
+      "sbPath": "uploads/stemsWAV/1794373263245_zofzf_Drums.wav",
+      "sbBucket": "Potal",
+      "ghPath": "",
+      "ghSha": "",
+      "dataUrl": "",
+      "folderId": "folder-1794373256778-184",
+      "x": 240,
+      "y": 720,
+      "w": 120,
+      "h": 106,
+      "color": "rose",
+      "locked": false,
+      "z": 198
+    },
+    {
+      "id": "file-1794373266837-735",
+      "type": "file",
+      "fileCategory": "audio",
+      "ext": "wav",
+      "fileSize": 36472492,
+      "mimeType": "audio/wav",
+      "title": "가장 눈부신 쪽으로 (FX).wav",
+      "subtitle": "34.78 MB",
+      "fileUrl": "https://xgcgfmcwcrnanflbveup.supabase.co/storage/v1/object/public/Potal/uploads/stemsWAV/1794373264951_jzhgd_FX.wav",
+      "sbPath": "uploads/stemsWAV/1794373264951_jzhgd_FX.wav",
+      "sbBucket": "Potal",
+      "ghPath": "",
+      "ghSha": "",
+      "dataUrl": "",
+      "folderId": "folder-1794373256778-184",
+      "x": 240,
+      "y": 720,
+      "w": 120,
+      "h": 106,
+      "color": "rose",
+      "locked": false,
+      "z": 201
+    },
+    {
+      "id": "file-1794373268591-621",
+      "type": "file",
+      "fileCategory": "audio",
+      "ext": "wav",
+      "fileSize": 36472492,
+      "mimeType": "audio/wav",
+      "title": "가장 눈부신 쪽으로 (Guitar).wav",
+      "subtitle": "34.78 MB",
+      "fileUrl": "https://xgcgfmcwcrnanflbveup.supabase.co/storage/v1/object/public/Potal/uploads/stemsWAV/1794373266840_s7d94_Guitar.wav",
+      "sbPath": "uploads/stemsWAV/1794373266840_s7d94_Guitar.wav",
+      "sbBucket": "Potal",
+      "ghPath": "",
+      "ghSha": "",
+      "dataUrl": "",
+      "folderId": "folder-1794373256778-184",
+      "x": 240,
+      "y": 720,
+      "w": 120,
+      "h": 106,
+      "color": "rose",
+      "locked": false,
+      "z": 202
+    },
+    {
+      "id": "file-1794373270190-564",
+      "type": "file",
+      "fileCategory": "audio",
+      "ext": "wav",
+      "fileSize": 36472492,
+      "mimeType": "audio/wav",
+      "title": "가장 눈부신 쪽으로 (Keyboard).wav",
+      "subtitle": "34.78 MB",
+      "fileUrl": "https://xgcgfmcwcrnanflbveup.supabase.co/storage/v1/object/public/Potal/uploads/stemsWAV/1794373268594_flm3c_Keyboard.wav",
+      "sbPath": "uploads/stemsWAV/1794373268594_flm3c_Keyboard.wav",
+      "sbBucket": "Potal",
+      "ghPath": "",
+      "ghSha": "",
+      "dataUrl": "",
+      "folderId": "folder-1794373256778-184",
+      "x": 240,
+      "y": 720,
+      "w": 120,
+      "h": 106,
+      "color": "rose",
+      "locked": false,
+      "z": 203
+    },
+    {
+      "id": "file-1794373272003-112",
+      "type": "file",
+      "fileCategory": "audio",
+      "ext": "wav",
+      "fileSize": 36472492,
+      "mimeType": "audio/wav",
+      "title": "가장 눈부신 쪽으로 (Strings).wav",
+      "subtitle": "34.78 MB",
+      "fileUrl": "https://xgcgfmcwcrnanflbveup.supabase.co/storage/v1/object/public/Potal/uploads/stemsWAV/1794373270193_0h720_Strings.wav",
+      "sbPath": "uploads/stemsWAV/1794373270193_0h720_Strings.wav",
+      "sbBucket": "Potal",
+      "ghPath": "",
+      "ghSha": "",
+      "dataUrl": "",
+      "folderId": "folder-1794373256778-184",
+      "x": 240,
+      "y": 720,
+      "w": 120,
+      "h": 106,
+      "color": "rose",
+      "locked": false,
+      "z": 204
+    },
+    {
+      "id": "file-1794373273710-10",
+      "type": "file",
+      "fileCategory": "audio",
+      "ext": "wav",
+      "fileSize": 36472492,
+      "mimeType": "audio/wav",
+      "title": "가장 눈부신 쪽으로 (Synth).wav",
+      "subtitle": "34.78 MB",
+      "fileUrl": "https://xgcgfmcwcrnanflbveup.supabase.co/storage/v1/object/public/Potal/uploads/stemsWAV/1794373272006_pklgt_Synth.wav",
+      "sbPath": "uploads/stemsWAV/1794373272006_pklgt_Synth.wav",
+      "sbBucket": "Potal",
+      "ghPath": "",
+      "ghSha": "",
+      "dataUrl": "",
+      "folderId": "folder-1794373256778-184",
+      "x": 240,
+      "y": 720,
+      "w": 120,
+      "h": 106,
+      "color": "rose",
+      "locked": false,
+      "z": 205
+    },
+    {
+      "id": "file-1794373275518-30",
+      "type": "file",
+      "fileCategory": "audio",
+      "ext": "wav",
+      "fileSize": 36472492,
+      "mimeType": "audio/wav",
+      "title": "가장 눈부신 쪽으로 (Vocals).wav",
+      "subtitle": "34.78 MB",
+      "fileUrl": "https://xgcgfmcwcrnanflbveup.supabase.co/storage/v1/object/public/Potal/uploads/stemsWAV/1794373273713_ipm9a_Vocals.wav",
+      "sbPath": "uploads/stemsWAV/1794373273713_ipm9a_Vocals.wav",
+      "sbBucket": "Potal",
+      "ghPath": "",
+      "ghSha": "",
+      "dataUrl": "",
+      "folderId": "folder-1794373256778-184",
+      "x": 240,
+      "y": 720,
+      "w": 120,
+      "h": 106,
+      "color": "rose",
+      "locked": false,
+      "z": 206
+    },
+    {
+      "id": "asset-1794373333445",
+      "type": "shape",
+      "title": "가장 눈부신 쪽으로",
+      "subtitle": "",
+      "x": 540,
+      "y": 600,
+      "w": 420,
+      "h": 280,
+      "color": "amber",
+      "locked": false,
+      "z": 35
+    },
+    {
+      "id": "asset-1794373387865",
+      "type": "md",
+      "title": "믹싱 작업.md",
+      "subtitle": "",
+      "content": "오늘 집에 가셔서 하실 '0원 1인 기획사' 작업 순서만 가볍게 갈무리해 드립니다.\n\n스템 추출: 수노 프로 계정에서 'WAV', 'Follow tempo changes' 옵션으로 개별 오디오 트랙 다운로드\n\n공간감 배치: 밴드랩 타임라인에 트랙 얹고 악기별 좌우 패닝(Pan) 조절 및 리버브 입히기\n\n다이나믹 부여: 오토메이션(단축키 A) 기능으로 1절은 덜어내고, 코러스(후렴)는 빵 터지게 구간별 볼륨/EQ 그리기\n\n최종 심사: 밴드랩 마스터링으로 음압을 꽉 채운 후, 비스킷 사운드 이메일로 칼리스토 데뷔곡 유통 접수",
+      "folderId": null,
+      "x": 540,
+      "y": 760,
+      "w": 120,
+      "h": 100,
+      "color": "indigo",
+      "locked": false,
+      "z": 237
+    },
+    {
+      "id": "md-1794373531348-583",
+      "type": "md",
+      "title": "칼리스토 프로필.md",
+      "subtitle": "",
+      "content": "# 🎸 궁디뮤직 소속 버추얼 프로젝트 밴드 [칼리스토 (Callisto)] 공식 프로필\n\n## 1. 아티스트 개요\n* **아티스트명:** 칼리스토 (Callisto)\n* **총괄 프로듀서:** 슈퍼스타재훈 (궁디뮤직)\n* **장르:** K-인디 팝록 (J-Rock 베이스의 질주감 있는 밴드 사운드)\n* **구성:** 5인조 남성 밴드 (보컬/기타, 바이올린, 리드기타, 베이스, 드럼)\n* **시그니처 사운드:** 거친 록 밴드 사운드를 찢고 나오는 서정적인 **'바이올린'** 선율\n\n## 2. 세계관 및 기획 의도 (Lore & Concept)\n**\"가장 닳고 해진 상처투성이 별이, 우주에서 가장 아름다운 궤적을 그린다.\"**\n\n목성의 위성 중 하나이자 고대어로 '가장 아름다운'이라는 뜻을 품은 별, 칼리스토. 표면은 수많은 크레이터(운석 충돌구)로 덮여 상처투성이지만, 그 흔적들조차 아름다운 빛이 됩니다. \n밴드 '칼리스토'는 끝없는 학업과 불확실한 미래 사이에서 상처 입고 방황하는 청춘들을 대변합니다. 무너지기 직전의 수험생들과 지친 일상 속 뚜벅이들에게, 벅차오르는 밴드 사운드와 함께 \"가장 눈부신 쪽으로 함께 달려가자\"는 위로와 응원의 메시지를 던지는 버추얼 AI 프로젝트 밴드입니다.\n\n---\n\n## 3. 멤버 상세 프로필\n\n### ① 하늘 (Haneul)\n* **포지션:** 메인 보컬 & 리듬 기타 / 프론트맨\n* **상징 요소:** 모든 별을 품고 있는 드넓은 공간 (하늘)\n* **캐릭터 및 역할:**\n  * 밴드의 중심이자 막힌 가슴을 뻥 뚫어주는 시원하고 폭발적인 고음의 소유자.\n  * 무대 위에서 마이크를 쥐고 가장 앞장서서 달리는 역동적인 리더.\n  * 불안에 떠는 청춘들에게 먼저 손을 내밀고 끌어올려 주는 밝고 강렬한 에너지를 뿜어냅니다.\n\n### ② 성운 (Sung-woon)\n* **포지션:** 바이올린\n* **상징 요소:** 별들이 태어나는 거대한 구름 (성운)\n* **캐릭터 및 역할:**\n  * 밴드 '칼리스토'만의 대체 불가한 정체성이자 시그니처 사운드를 담당.\n  * 거칠고 투박한 록 사운드 사이를 섬세하고 우아한 선율로 유영하며 시각적/청각적 대비를 극대화합니다.\n  * 무대 오프닝에서 홀로 눈을 감고 아련하게 활을 켜며 관객을 몰입시키는 '오프닝 요정'.\n\n### ③ 유성 (Yoo-sung)\n* **포지션:** 리드 기타 (일렉트릭 기타)\n* **상징 요소:** 밤하늘을 날카롭게 찢고 떨어지는 별똥별 (유성)\n* **캐릭터 및 역할:**\n  * 곡의 텐션이 최고조에 달할 때 화려하게 쏟아지는 기타 솔로와 리프를 담당.\n  * 날렵하고 스피디한 핑거링으로 무대를 장악하며, 칼리스토가 향하는 '가장 눈부신 쪽'을 소리로 직관적으로 표현하는 멤버입니다.\n\n### ④ 우진 (Woo-jin)\n* **포지션:** 드럼\n* **상징 요소:** 우주를 향해 끝없이 나아가는 추진력\n* **캐릭터 및 역할:**\n  * 밴드의 심장 박동. 멈추지 않는 속도감과 혜성이 충돌하는 듯한 파워풀한 타격감을 만들어냅니다.\n  * 수험생들이 목표를 향해 달려가는 쉼 없는 발소리를 벅차오르는 드럼 비트로 승화시키는 에너자이저입니다.\n\n### ⑤ 우주 (Woo-ju)\n* **포지션:** 베이스\n* **상징 요소:** 궤도와 별들을 품고 있는 깊은 무한의 공간, 그리고 중력 (우주)\n* **캐릭터 및 역할:**\n  * 총괄 프로듀서 '슈퍼스타재훈'의 음악적 뼈대와 철학이 가장 깊게 투영된 묵직한 존재.\n  * 화려하게 튀기보다는 곡의 가장 밑바닥에서 단단하게 중심을 잡고 흔들림 없이 밸런스를 지켜줍니다.\n  * 멤버들이 미친 듯이 달릴 때 든든하게 뒤를 받쳐주며, 멘탈이 흔들리는 청춘들을 꽉 잡아주는 닻(Anchor) 역할을 합니다.\n\n---\n\n## 4. 데뷔 프로젝트 정보\n* **데뷔 싱글명:** [가장 눈부신 쪽으로]\n* **발매 목표 시기:** 2026년 12월 초\n* **프로젝트 타겟:** 수능이라는 큰 허들을 넘고 있는 수험생 및 2030 청춘 리스너\n* **감상 포인트:** 적막을 깨는 성운의 서정적인 바이올린 인트로에 이어 유성과 우진의 폭발적인 악기 드롭이 터지고, 그 위로 하늘의 벅차오르는 보컬과 우주의 묵직한 베이스 댐핑이 얹어지는 카타르시스.",
+      "sbPath": "",
+      "sbBucket": "",
+      "ghPath": "",
+      "ghSha": "",
+      "fileUrl": "",
+      "folderId": null,
+      "x": 640,
+      "y": 660,
+      "w": 120,
+      "h": 100,
+      "color": "indigo",
+      "locked": false,
+      "z": 356
+    },
+    {
+      "id": "file-1794373627493-93",
+      "type": "file",
+      "fileCategory": "other",
+      "ext": "json",
+      "fileSize": 27454,
+      "mimeType": "application/json",
+      "title": "mixboard-portal-backup (5).json",
+      "subtitle": "26.8 KB",
+      "fileUrl": "https://xgcgfmcwcrnanflbveup.supabase.co/storage/v1/object/public/Potal/uploads/1794373626754_waipx_mixboard-portal-backup5.json",
+      "sbPath": "uploads/1794373626754_waipx_mixboard-portal-backup5.json",
+      "sbBucket": "Potal",
+      "ghPath": "",
+      "ghSha": "",
+      "dataUrl": "",
+      "folderId": "folder-1794373680657-236",
+      "x": 20,
+      "y": 580,
+      "w": 120,
+      "h": 106,
+      "color": "blue",
+      "locked": false,
+      "z": 264
+    },
+    {
+      "id": "folder-1794373680657-236",
+      "type": "folder",
+      "title": "포털백업(1111/1408)",
+      "subtitle": "3개 파일 업로드됨",
+      "x": 980,
+      "y": 600,
+      "w": 130,
+      "h": 100,
+      "color": "amber",
+      "locked": false,
+      "z": 314
+    },
+    {
+      "id": "file-1794373680848-224",
+      "type": "file",
+      "fileCategory": "other",
+      "ext": "html",
+      "fileSize": 27341,
+      "mimeType": "text/html",
+      "title": "index.html",
+      "subtitle": "26.7 KB",
+      "fileUrl": "https://xgcgfmcwcrnanflbveup.supabase.co/storage/v1/object/public/Potal/uploads/item/1794373680661_rq57o_index.html",
+      "sbPath": "uploads/item/1794373680661_rq57o_index.html",
+      "sbBucket": "Potal",
+      "ghPath": "",
+      "ghSha": "",
+      "dataUrl": "",
+      "folderId": "folder-1794373680657-236",
+      "x": 60,
+      "y": 580,
+      "w": 120,
+      "h": 106,
+      "color": "blue",
+      "locked": false,
+      "z": 259
+    },
+    {
+      "id": "file-1794373681292-515",
+      "type": "file",
+      "fileCategory": "other",
+      "ext": "js",
+      "fileSize": 119303,
+      "mimeType": "text/javascript",
+      "title": "script.js",
+      "subtitle": "116.5 KB",
+      "fileUrl": "https://xgcgfmcwcrnanflbveup.supabase.co/storage/v1/object/public/Potal/uploads/item/1794373680852_utk41_script.js",
+      "sbPath": "uploads/item/1794373680852_utk41_script.js",
+      "sbBucket": "Potal",
+      "ghPath": "",
+      "ghSha": "",
+      "dataUrl": "",
+      "folderId": "folder-1794373680657-236",
+      "x": 60,
+      "y": 580,
+      "w": 120,
+      "h": 106,
+      "color": "blue",
+      "locked": false,
+      "z": 260
+    },
+    {
+      "id": "file-1794373681502-37",
+      "type": "file",
+      "fileCategory": "other",
+      "ext": "css",
+      "fileSize": 48138,
+      "mimeType": "text/css",
+      "title": "style.css",
+      "subtitle": "47.0 KB",
+      "fileUrl": "https://xgcgfmcwcrnanflbveup.supabase.co/storage/v1/object/public/Potal/uploads/item/1794373681296_t0hlh_style.css",
+      "sbPath": "uploads/item/1794373681296_t0hlh_style.css",
+      "sbBucket": "Potal",
+      "ghPath": "",
+      "ghSha": "",
+      "dataUrl": "",
+      "folderId": "folder-1794373680657-236",
+      "x": 60,
+      "y": 580,
+      "w": 120,
+      "h": 106,
+      "color": "blue",
+      "locked": false,
+      "z": 262
+    },
+    {
+      "id": "file-1794383638430-303",
+      "type": "file",
+      "fileCategory": "audio",
+      "ext": "wav",
+      "fileSize": 50269064,
+      "mimeType": "audio/wav",
+      "title": "가장 눈부신 쪽으로(최종 리마스터링).wav",
+      "subtitle": "47.94 MB",
+      "fileUrl": "https://xgcgfmcwcrnanflbveup.supabase.co/storage/v1/object/public/Potal/uploads/1794383635657_32r2m_item.wav",
+      "sbPath": "uploads/1794383635657_32r2m_item.wav",
+      "sbBucket": "Potal",
+      "ghPath": "",
+      "ghSha": "",
+      "dataUrl": "",
+      "folderId": null,
+      "x": 740,
+      "y": 760,
+      "w": 120,
+      "h": 106,
+      "color": "rose",
+      "locked": false,
+      "z": 299
+    },
+    {
+      "id": "file-1794449614703-122",
+      "type": "file",
+      "fileCategory": "audio",
+      "ext": "mp3",
+      "fileSize": 4073146,
+      "mimeType": "audio/mpeg",
+      "title": "끝까지 함께 가자.mp3",
+      "subtitle": "3.88 MB",
+      "fileUrl": "https://xgcgfmcwcrnanflbveup.supabase.co/storage/v1/object/public/Potal/uploads/1794449613497_wg43x_item.mp3",
+      "sbPath": "uploads/1794449613497_wg43x_item.mp3",
+      "sbBucket": "Potal",
+      "ghPath": "",
+      "ghSha": "",
+      "dataUrl": "",
+      "folderId": null,
+      "x": 340,
+      "y": 720,
+      "w": 120,
+      "h": 106,
+      "color": "rose",
+      "locked": false,
+      "z": 352
+    },
+    {
+      "id": "file-1794449621035-944",
+      "type": "file",
+      "fileCategory": "audio",
+      "ext": "mp3",
+      "fileSize": 4017275,
+      "mimeType": "audio/mpeg",
+      "title": "우리의 모험.mp3",
+      "subtitle": "3.83 MB",
+      "fileUrl": "https://xgcgfmcwcrnanflbveup.supabase.co/storage/v1/object/public/Potal/uploads/1794449620487_4n8lb_item.mp3",
+      "sbPath": "uploads/1794449620487_4n8lb_item.mp3",
+      "sbBucket": "Potal",
+      "ghPath": "",
+      "ghSha": "",
+      "dataUrl": "",
+      "folderId": null,
+      "x": 140,
+      "y": 720,
+      "w": 120,
+      "h": 106,
+      "color": "rose",
+      "locked": false,
+      "z": 348
+    },
+    {
+      "id": "file-1794449625692-951",
+      "type": "file",
+      "fileCategory": "audio",
+      "ext": "mp3",
+      "fileSize": 4758571,
+      "mimeType": "audio/mpeg",
+      "title": "푸른 끝까지.mp3",
+      "subtitle": "4.54 MB",
+      "fileUrl": "https://xgcgfmcwcrnanflbveup.supabase.co/storage/v1/object/public/Potal/uploads/1794449625272_1pbf3_item.mp3",
+      "sbPath": "uploads/1794449625272_1pbf3_item.mp3",
+      "sbBucket": "Potal",
+      "ghPath": "",
+      "ghSha": "",
+      "dataUrl": "",
+      "folderId": null,
+      "x": 240,
+      "y": 720,
+      "w": 120,
+      "h": 106,
+      "color": "rose",
+      "locked": false,
+      "z": 354
+    },
+    {
+      "id": "file-1794449666225-515",
+      "type": "file",
+      "fileCategory": "audio",
+      "ext": "mp3",
+      "fileSize": 4276735,
+      "mimeType": "audio/mpeg",
+      "title": "가장 눈부신 쪽으로.mp3",
+      "subtitle": "4.08 MB",
+      "fileUrl": "https://xgcgfmcwcrnanflbveup.supabase.co/storage/v1/object/public/Potal/uploads/1794449665671_lmdb0_item.mp3",
+      "sbPath": "uploads/1794449665671_lmdb0_item.mp3",
+      "sbBucket": "Potal",
+      "ghPath": "",
+      "ghSha": "",
+      "dataUrl": "",
+      "folderId": null,
+      "x": 40,
+      "y": 720,
+      "w": 120,
+      "h": 106,
+      "color": "rose",
+      "locked": false,
+      "z": 360
+    },
+    {
+      "id": "asset-1794449669591",
+      "type": "shape",
+      "title": "25hz 미니앨범",
+      "subtitle": "",
+      "x": 40,
+      "y": 600,
+      "w": 420,
+      "h": 240,
+      "color": "emerald",
+      "locked": false,
+      "z": 41
+    },
+    {
+      "id": "asset-1794449697886",
+      "type": "text",
+      "title": "타이틀",
+      "subtitle": "",
+      "x": 60,
+      "y": 680,
+      "w": 140,
+      "h": 60,
+      "color": "default",
+      "locked": false,
+      "z": 336
+    },
+    {
+      "id": "asset-1794449741360",
+      "type": "text",
+      "title": "마지막",
+      "subtitle": "",
+      "x": 360,
+      "y": 680,
+      "w": 140,
+      "h": 45,
+      "color": "default",
+      "locked": false,
+      "z": 340
     }
   ];
 }
@@ -351,6 +1145,13 @@ function updateBoardResponsiveScale() {
 
   const vw = document.documentElement.clientWidth || window.innerWidth;
 
+  // 모바일(<= 768px)에서는 세로 카드형 연동 뷰가 표시되므로 높이 제한을 해제
+  if (vw <= 768) {
+    boardViewport.style.height = "auto";
+    boardViewport.style.overflowX = "hidden";
+    return;
+  }
+
   if (autoFitEnabled) {
     if (vw < maxRight) {
       boardScale = Math.max(0.5, vw / maxRight);
@@ -418,19 +1219,20 @@ function loadState() {
         return;
       }
     }
+    const defaults = getDefaultAssets();
     const prevRaw = localStorage.getItem(PREV_STORAGE_KEY);
     if (prevRaw) {
       const prevParsed = JSON.parse(prevRaw);
       if (Array.isArray(prevParsed) && prevParsed.length > 0) {
-        assets = prevParsed;
-        if (!assets.some(a => a.type === "folder")) {
-          const defaults = getDefaultAssets().filter(a => a.type === "folder" || a.type === "md");
-          assets.push(...defaults);
+        const quickCfg = prevParsed.find(a => a && a.id === "__quick_dock_config__");
+        if (quickCfg) {
+          defaults.push(quickCfg);
         }
-        saveState();
-        return;
       }
     }
+    assets = defaults;
+    saveState();
+    return;
   } catch (e) {
     console.warn("저장된 보드 데이터를 불러오지 못해 기본값을 사용합니다.", e);
   }
@@ -477,11 +1279,194 @@ function renderBoard() {
     boardEl.appendChild(el);
   });
 
+  renderMobileSyncView();
+
   if (activeFolderId) {
     renderFolderWindowContent(activeFolderId);
   }
   updateToolbarStorageMiniBadge();
   updateBoardResponsiveScale();
+}
+
+// 모바일 전용 연동형 뷰 렌더링 (PC의 x, y 좌표를 건드리지 않고 구역 박스 기준으로 자동 그룹핑)
+function renderMobileSyncView() {
+  const mobileContainer = document.getElementById("mobileSyncView");
+  if (!mobileContainer) return;
+
+  mobileContainer.innerHTML = "";
+
+  const shapes = assets
+    .filter(a => a && a.type === "shape")
+    .slice()
+    .sort((a, b) => (Number(a.y) || 0) - (Number(b.y) || 0) || (Number(a.x) || 0) - (Number(b.x) || 0));
+
+  const topItems = assets.filter(a => {
+    if (!a || a.type === "quickdock_config" || a.type === "shape") return false;
+    if (a.id === "text-welcome") return false;
+    if (isFolderorableAsset(a) && a.folderId) return false;
+    return true;
+  });
+
+  const assignedIds = new Set();
+  const groupBuckets = shapes.map(shape => ({
+    shape,
+    links: [],
+    filesAndFolders: [],
+    texts: []
+  }));
+
+  topItems.forEach(item => {
+    const cx = (Number(item.x) || 0) + (Number(item.w) || 120) / 2;
+    const cy = (Number(item.y) || 0) + (Number(item.h) || 80) / 2;
+
+    let matchedBucket = null;
+    for (const bucket of groupBuckets) {
+      const s = bucket.shape;
+      const sx = Number(s.x) || 0;
+      const sy = Number(s.y) || 0;
+      const sw = Number(s.w) || 400;
+      const sh = Number(s.h) || 280;
+      if (cx >= sx - 25 && cx <= sx + sw + 25 && cy >= sy - 25 && cy <= sy + sh + 90) {
+        matchedBucket = bucket;
+        break;
+      }
+    }
+
+    if (matchedBucket) {
+      assignedIds.add(item.id);
+      if (item.type === "link") {
+        matchedBucket.links.push(item);
+      } else if (item.type === "folder" || item.type === "md" || item.type === "file") {
+        matchedBucket.filesAndFolders.push(item);
+      } else if (item.type === "text" || item.type === "badge") {
+        matchedBucket.texts.push(item);
+      }
+    }
+  });
+
+  const ungroupedLinks = [];
+  const ungroupedFiles = [];
+  topItems.forEach(item => {
+    if (assignedIds.has(item.id)) return;
+    if (item.type === "link") {
+      ungroupedLinks.push(item);
+    } else if (item.type === "folder" || item.type === "md" || item.type === "file") {
+      ungroupedFiles.push(item);
+    }
+  });
+
+  if (ungroupedLinks.length > 0 || ungroupedFiles.length > 0) {
+    groupBuckets.push({
+      shape: {
+        id: "mob-ungrouped",
+        title: "📁 기타 폴더 & 파일",
+        subtitle: "구역 박스 바깥에 배치된 항목",
+        color: "slate"
+      },
+      links: ungroupedLinks,
+      filesAndFolders: ungroupedFiles,
+      texts: []
+    });
+  }
+
+  const sortByPos = (a, b) => (Number(a.y) || 0) - (Number(b.y) || 0) || (Number(a.x) || 0) - (Number(b.x) || 0);
+
+  groupBuckets.forEach(bucket => {
+    bucket.links.sort(sortByPos);
+    bucket.filesAndFolders.sort(sortByPos);
+
+    if (bucket.links.length === 0 && bucket.filesAndFolders.length === 0) return;
+
+    const card = document.createElement("div");
+    card.className = `mob-group-card color-${bucket.shape.color || "slate"}`;
+
+    const totalCount = bucket.links.length + bucket.filesAndFolders.length;
+    const header = document.createElement("div");
+    header.className = "mob-group-header";
+    header.innerHTML = `
+      <div>
+        <div class="mob-group-title">${escapeHtml(bucket.shape.title || "그룹")}</div>
+        ${bucket.shape.subtitle ? `<div class="mob-group-sub">${escapeHtml(bucket.shape.subtitle)}</div>` : ""}
+      </div>
+      <span class="mob-group-badge">${totalCount}개</span>
+    `;
+    card.appendChild(header);
+
+    if (bucket.links.length > 0) {
+      const linksStack = document.createElement("div");
+      linksStack.className = "mob-links-stack";
+
+      bucket.links.forEach(linkAsset => {
+        const row = document.createElement("div");
+        row.className = "mob-link-card";
+        const pagesBtn = linkAsset.pagesUrl
+          ? `<a href="${escapeHtml(linkAsset.pagesUrl)}" target="_blank" rel="noopener noreferrer" class="open-link-btn">🌐 웹</a>`
+          : "";
+        row.innerHTML = `
+          <div class="mob-link-info">
+            <div class="mob-link-title">${escapeHtml(linkAsset.title)}</div>
+            <div class="mob-link-sub">${escapeHtml(linkAsset.subtitle || linkAsset.url || "")}</div>
+          </div>
+          <div class="mob-link-btns">
+            ${pagesBtn}
+            <a href="${escapeHtml(linkAsset.url || "#")}" target="_blank" rel="noopener noreferrer" class="open-link-btn">Repo ↗</a>
+          </div>
+        `;
+        linksStack.appendChild(row);
+      });
+
+      card.appendChild(linksStack);
+    }
+
+    if (bucket.filesAndFolders.length > 0) {
+      const filesGrid = document.createElement("div");
+      filesGrid.className = "mob-files-grid";
+
+      bucket.filesAndFolders.forEach(item => {
+        const fCard = document.createElement("div");
+        fCard.className = "mob-file-card";
+
+        let iconHtml = "📄";
+        let metaText = "";
+
+        if (item.type === "folder") {
+          const cnt = getFolderItemCount(item.id);
+          iconHtml = "📁";
+          metaText = `폴더 · ${cnt}개 파일`;
+        } else if (item.type === "md") {
+          iconHtml = "📝";
+          metaText = "MD 메모장 · 터치하여 열기";
+        } else if (item.type === "file") {
+          iconHtml = getFileTypeEmoji(item.fileCategory, item.ext);
+          const extUpper = (item.ext || "FILE").toUpperCase();
+          metaText = [extUpper, item.subtitle || formatBytes(item.fileSize)].filter(Boolean).join(" · ");
+        }
+
+        fCard.innerHTML = `
+          <div class="mob-file-icon">${iconHtml}</div>
+          <div class="mob-file-name">${escapeHtml(item.title)}</div>
+          <div class="mob-file-meta">${escapeHtml(metaText)}</div>
+        `;
+
+        // 모바일에서는 한 번 터치(click)로 즉시 열기
+        fCard.addEventListener("click", () => {
+          if (item.type === "folder") {
+            openFolderWindow(item.id);
+          } else if (item.type === "md") {
+            openMdModal(item.id, "preview");
+          } else if (item.type === "file") {
+            openFileActionModal(item.id);
+          }
+        });
+
+        filesGrid.appendChild(fCard);
+      });
+
+      card.appendChild(filesGrid);
+    }
+
+    mobileContainer.appendChild(card);
+  });
 }
 
 function getFolderItemCount(folderId) {
@@ -919,8 +1904,18 @@ function renderFolderWindowContent(folderId) {
       cell.innerHTML = buildFileIconMarkup(itemAsset);
     }
 
-    // 더블클릭 시 열기
+    // PC에서는 더블클릭, 모바일(<=768px)에서는 원터치(click)로 즉시 열기
     cell.addEventListener("dblclick", e => {
+      e.stopPropagation();
+      if (itemAsset.type === "md") {
+        openMdModal(itemAsset.id, "preview");
+      } else {
+        openFileActionModal(itemAsset.id);
+      }
+    });
+
+    cell.addEventListener("click", e => {
+      if ((window.innerWidth || document.documentElement.clientWidth) > 768 && !globalLocked) return;
       e.stopPropagation();
       if (itemAsset.type === "md") {
         openMdModal(itemAsset.id, "preview");
@@ -3066,85 +4061,55 @@ function closeQuickSiteModal() {
   editingQuickSiteId = null;
 }
 
-let quickDockRightOffset = 16;
-let quickDockTopOffset = 112;
-
 function clampQuickDockToViewport() {
-  const dock = document.getElementById("quickSiteDock");
-  if (!dock) return;
-  const vw = document.documentElement.clientWidth || window.innerWidth;
-  const vh = document.documentElement.clientHeight || window.innerHeight;
-  const dockW = dock.offsetWidth || 160;
-  const dockH = Math.min(dock.offsetHeight || 44, 60);
-
-  const clampedRight = Math.max(8, Math.min(vw - dockW - 8, quickDockRightOffset));
-  const clampedTop = Math.max(58, Math.min(vh - dockH - 8, quickDockTopOffset));
-
-  dock.style.left = "auto";
-  dock.style.right = `${clampedRight}px`;
-  dock.style.top = `${clampedTop}px`;
+  // 상단 툴바 팝오버 방식으로 전환되어 별도 클램핑 불필요 (호환성 유지용 빈 함수)
 }
 
 function initQuickSiteDock() {
   loadQuickSites();
   renderQuickSiteDock();
 
-  const dock = document.getElementById("quickSiteDock");
-  const dockHeader = document.getElementById("quickDockHeader");
+  const btnToggle = document.getElementById("btnQuickSitesToggle");
+  const popover = document.getElementById("quickSitePopover");
+  const btnClosePopover = document.getElementById("btnQuickPopoverClose");
   const btnAddBottom = document.getElementById("btnQuickDockAddBottom");
   const btnEdit = document.getElementById("btnQuickDockEdit");
-  const btnCollapse = document.getElementById("btnQuickDockCollapse");
+
+  if (btnToggle && popover) {
+    btnToggle.addEventListener("click", e => {
+      e.stopPropagation();
+      popover.classList.toggle("hidden");
+    });
+  }
+
+  if (btnClosePopover && popover) {
+    btnClosePopover.addEventListener("click", () => {
+      popover.classList.add("hidden");
+    });
+  }
+
+  // 팝오버 바깥을 클릭하면 자동으로 닫기 (모달이 열려 있을 때는 유지)
+  window.addEventListener("mousedown", e => {
+    if (!popover || popover.classList.contains("hidden")) return;
+    if (
+      e.target.closest("#quickSiteWrap") ||
+      e.target.closest("#quickSiteModal") ||
+      e.target.closest("#customDialogModal")
+    ) {
+      return;
+    }
+    popover.classList.add("hidden");
+  });
 
   if (btnAddBottom) btnAddBottom.addEventListener("click", () => openQuickSiteModal(null));
 
-  if (btnEdit) {
+  if (btnEdit && popover) {
     btnEdit.addEventListener("click", () => {
       quickDockEditMode = !quickDockEditMode;
-      dock.classList.toggle("edit-mode", quickDockEditMode);
+      popover.classList.toggle("edit-mode", quickDockEditMode);
       btnEdit.classList.toggle("active", quickDockEditMode);
     });
   }
-
-  // 현재 위치 그대로 제자리에서 접고 펼치기
-  if (btnCollapse) {
-    btnCollapse.addEventListener("click", () => {
-      const isCollapsed = dock.classList.toggle("collapsed");
-      btnCollapse.textContent = isCollapsed ? "▼" : "▲";
-      btnCollapse.title = isCollapsed ? "현재 자리에서 펼치기" : "현재 자리에서 접기";
-      clampQuickDockToViewport();
-    });
-  }
-
-  // 독 헤더 드래그로 화면 어디든 이동 가능 (오른쪽 기준 상대 오프셋으로 저장하여 창 축소 시에도 함께 이동!)
-  dockHeader.addEventListener("mousedown", e => {
-    if (e.target.closest("button")) return;
-    e.preventDefault();
-    const vw = document.documentElement.clientWidth || window.innerWidth;
-    const rect = dock.getBoundingClientRect();
-    const startX = e.clientX;
-    const startY = e.clientY;
-    const origRight = vw - rect.right;
-    const origTop = rect.top;
-
-    function onMove(mv) {
-      const curVw = document.documentElement.clientWidth || window.innerWidth;
-      const curVh = document.documentElement.clientHeight || window.innerHeight;
-      const dx = mv.clientX - startX;
-      const dy = mv.clientY - startY;
-
-      quickDockRightOffset = Math.max(8, Math.min(curVw - rect.width - 8, origRight - dx));
-      quickDockTopOffset = Math.max(58, Math.min(curVh - 54, origTop + dy));
-      clampQuickDockToViewport();
-    }
-
-    function onUp() {
-      window.removeEventListener("mousemove", onMove);
-      window.removeEventListener("mouseup", onUp);
-    }
-
-    window.addEventListener("mousemove", onMove);
-    window.addEventListener("mouseup", onUp);
-  });
 
   // 모달 이벤트
   document.getElementById("btnCloseQuickSiteModal").addEventListener("click", closeQuickSiteModal);
