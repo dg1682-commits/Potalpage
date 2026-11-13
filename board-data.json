@@ -822,14 +822,14 @@
     "ghPath": "",
     "ghSha": "",
     "dataUrl": "",
-    "folderId": "folder-1794373680657-236",
-    "x": 60,
-    "y": 580,
+    "folderId": null,
+    "x": 1140,
+    "y": 740,
     "w": 120,
     "h": 106,
     "color": "blue",
     "locked": false,
-    "z": 260
+    "z": 387
   },
   {
     "id": "file-1794373681502-37",
@@ -846,14 +846,14 @@
     "ghPath": "",
     "ghSha": "",
     "dataUrl": "",
-    "folderId": "folder-1794373680657-236",
-    "x": 60,
-    "y": 580,
+    "folderId": null,
+    "x": 1120,
+    "y": 660,
     "w": 120,
     "h": 106,
     "color": "blue",
     "locked": false,
-    "z": 262
+    "z": 386
   },
   {
     "id": "file-1794383638430-303",
