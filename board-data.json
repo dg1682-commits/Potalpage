@@ -871,13 +871,13 @@
     "ghSha": "",
     "dataUrl": "",
     "folderId": null,
-    "x": 240,
+    "x": 260,
     "y": 720,
     "w": 120,
     "h": 106,
     "color": "rose",
     "locked": false,
-    "z": 354
+    "z": 405
   },
   {
     "id": "file-1794449666225-515",
