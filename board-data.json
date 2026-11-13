@@ -847,13 +847,13 @@
     "ghSha": "",
     "dataUrl": "",
     "folderId": null,
-    "x": 160,
+    "x": 140,
     "y": 720,
     "w": 120,
     "h": 106,
     "color": "rose",
     "locked": false,
-    "z": 406
+    "z": 408
   },
   {
     "id": "file-1794449625692-951",
@@ -901,7 +901,7 @@
     "h": 106,
     "color": "rose",
     "locked": false,
-    "z": 360
+    "z": 407
   },
   {
     "id": "asset-1794449669591",
@@ -914,7 +914,7 @@
     "h": 240,
     "color": "emerald",
     "locked": false,
-    "z": 44
+    "z": 46
   },
   {
     "id": "asset-1794449697886",
