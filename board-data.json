@@ -966,14 +966,14 @@
     "ghPath": "",
     "ghSha": "",
     "fileUrl": "https://xgcgfmcwcrnanflbveup.supabase.co/storage/v1/object/public/Potal/uploads/item/1794555498676_xp75r_item.md",
-    "folderId": "asset-1794555485179",
-    "x": 600,
-    "y": 500,
+    "folderId": null,
+    "x": 1120,
+    "y": 660,
     "w": 120,
     "h": 100,
     "color": "indigo",
     "locked": false,
-    "z": 378
+    "z": 426
   },
   {
     "id": "file-1794555515357-868",
