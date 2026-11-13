@@ -823,13 +823,13 @@
     "ghSha": "",
     "dataUrl": "",
     "folderId": null,
-    "x": 340,
+    "x": 360,
     "y": 720,
     "w": 120,
     "h": 106,
     "color": "rose",
     "locked": false,
-    "z": 352
+    "z": 403
   },
   {
     "id": "file-1794449621035-944",
@@ -934,13 +934,13 @@
     "type": "text",
     "title": "마지막",
     "subtitle": "",
-    "x": 360,
+    "x": 380,
     "y": 680,
     "w": 140,
     "h": 45,
     "color": "default",
     "locked": false,
-    "z": 340
+    "z": 404
   },
   {
     "id": "asset-1794555485179",
