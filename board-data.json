@@ -208,13 +208,13 @@
     "subtitle": "",
     "content": "가장 빛나는 쪽으로\nhttps://youtu.be/EWgWIdbYCQ0\n",
     "folderId": null,
-    "x": 540,
+    "x": 500,
     "y": 660,
     "w": 120,
     "h": 100,
     "color": "indigo",
     "locked": false,
-    "z": 236
+    "z": 393
   },
   {
     "id": "folder-1794372632133-650",
@@ -748,7 +748,7 @@
     "h": 100,
     "color": "indigo",
     "locked": false,
-    "z": 237
+    "z": 395
   },
   {
     "id": "md-1794373531348-583",
@@ -762,13 +762,13 @@
     "ghSha": "",
     "fileUrl": "",
     "folderId": null,
-    "x": 640,
+    "x": 600,
     "y": 660,
     "w": 120,
     "h": 100,
     "color": "indigo",
     "locked": false,
-    "z": 356
+    "z": 394
   },
   {
     "id": "folder-1794373680657-236",
