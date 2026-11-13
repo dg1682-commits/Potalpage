@@ -1041,13 +1041,13 @@
   {
     "id": "asset-1794555485179",
     "type": "folder",
-    "title": "새 폴더",
+    "title": "음악왕",
     "subtitle": "파일 및 메모 보관함",
     "x": 220,
     "y": 460,
     "w": 130,
     "h": 100,
-    "color": "amber",
+    "color": "blue",
     "locked": false,
     "z": 374
   }
