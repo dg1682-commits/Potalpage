@@ -1852,11 +1852,25 @@ function openFolderWindow(folderId) {
 
   activeFolderId = folderId;
   renderFolderWindowContent(folderId);
+
+  // 항상 화면 정중앙에 뜨도록 인라인 위치 초기화
+  folderWindow.style.left = "";
+  folderWindow.style.top = "";
+  folderWindow.style.transform = "";
+
+  const backdrop = document.getElementById("folderBackdrop");
+  if (backdrop) backdrop.classList.remove("hidden");
+  document.body.classList.add("folder-modal-open");
+
   folderWindow.classList.remove("hidden");
+  folderGrid.scrollTop = 0;
 }
 
 function closeFolderWindow() {
   folderWindow.classList.add("hidden");
+  const backdrop = document.getElementById("folderBackdrop");
+  if (backdrop) backdrop.classList.add("hidden");
+  document.body.classList.remove("folder-modal-open");
   activeFolderId = null;
 }
 
@@ -1927,8 +1941,9 @@ function renderFolderWindowContent(folderId) {
       }
     });
 
-    // 폴더 안에서 드래그하여 창 바깥(믹스보드)으로 놓으면 보드로 꺼내기
+    // 폴더 안에서 드래그하여 창 바깥(믹스보드)으로 놓으면 보드로 꺼내기 (PC 전용 - 모바일 스크롤 방해 방지)
     cell.addEventListener("mousedown", e => {
+      if ((window.innerWidth || document.documentElement.clientWidth) <= 768) return;
       if (e.button !== 0) return;
       e.preventDefault();
 
@@ -1996,27 +2011,14 @@ function bindFolderWindowEvents() {
   if (btnCloseRight) {
     btnCloseRight.addEventListener("click", closeFolderWindow);
   }
-
-  // 모바일 등에서 폴더 창 바깥 배경을 터치/클릭하면 폴더 창 닫기 (다른 모달이 열려 있을 때는 제외)
-  function handleOutsideFolderTap(e) {
-    if (folderWindow.classList.contains("hidden")) return;
-    if (
-      e.target.closest("#folderWindow") ||
-      e.target.closest("#mdViewerModal") ||
-      e.target.closest("#fileActionModal") ||
-      e.target.closest("#editModal") ||
-      e.target.closest("#customDialogModal") ||
-      e.target.closest(".mob-file-card") ||
-      e.target.closest('.asset-item[data-type="folder"]')
-    ) {
-      return;
-    }
-    if ((window.innerWidth || document.documentElement.clientWidth) <= 768) {
-      closeFolderWindow();
-    }
+  const btnCloseBottom = document.getElementById("btnCloseFolderWinBottom");
+  if (btnCloseBottom) {
+    btnCloseBottom.addEventListener("click", closeFolderWindow);
   }
-  window.addEventListener("mousedown", handleOutsideFolderTap);
-  window.addEventListener("touchstart", handleOutsideFolderTap, { passive: true });
+  const folderBackdrop = document.getElementById("folderBackdrop");
+  if (folderBackdrop) {
+    folderBackdrop.addEventListener("click", closeFolderWindow);
+  }
 
   document.getElementById("btnFolderNewMd").addEventListener("click", () => {
     if (!activeFolderId) return;
@@ -2034,6 +2036,7 @@ function bindFolderWindowEvents() {
   });
 
   folderWindowHeader.addEventListener("mousedown", e => {
+    if ((window.innerWidth || document.documentElement.clientWidth) <= 768) return;
     if (e.target.closest("button")) return;
     e.preventDefault();
 
@@ -2043,9 +2046,13 @@ function bindFolderWindowEvents() {
     const origLeft = rect.left;
     const origTop = rect.top;
 
+    folderWindow.style.transform = "none";
+    folderWindow.style.left = `${origLeft}px`;
+    folderWindow.style.top = `${origTop}px`;
+
     function onMove(mv) {
       const nx = Math.max(10, origLeft + (mv.clientX - startX));
-      const ny = Math.max(64, origTop + (mv.clientY - startY));
+      const ny = Math.max(54, origTop + (mv.clientY - startY));
       folderWindow.style.left = `${nx}px`;
       folderWindow.style.top = `${ny}px`;
     }

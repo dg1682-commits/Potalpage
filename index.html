@@ -149,7 +149,8 @@
     <section id="mobileSyncView" class="mobile-sync-view hidden" aria-label="모바일 연동 뷰"></section>
   </div>
 
-  <!-- 1. 실제 OS 스타일 폴더 탐색기 팝업 창 -->
+  <!-- 1. 실제 OS 스타일 폴더 탐색기 팝업 창 (화면 정중앙 배치 + 내부 전용 스크롤) -->
+  <div id="folderBackdrop" class="folder-backdrop hidden"></div>
   <div id="folderWindow" class="os-window hidden">
     <div id="folderWindowHeader" class="os-window-header">
       <div class="os-window-controls">
@@ -162,7 +163,7 @@
         <span id="folderWinTitleText">안티그래비티 문서함</span>
       </div>
       <div class="os-window-actions">
-        <button type="button" id="btnFolderNewMd" class="win-action-btn primary">+ MD 메모</button>
+        <button type="button" id="btnFolderNewMd" class="win-action-btn primary">+ MD</button>
         <button type="button" id="btnFolderUploadFile" class="win-action-btn">📥 업로드</button>
         <button type="button" id="btnFolderEditInfo" class="win-action-btn" title="폴더 이름/색상 변경">⚙️</button>
         <button type="button" id="btnCloseFolderWinRight" class="win-action-btn close-win-btn" title="폴더 창 닫기">✕ 닫기</button>
@@ -179,7 +180,9 @@
     </div>
 
     <div class="os-window-statusbar">
-      <span>💡 파일을 <b>더블클릭</b>하면 열립니다. 파일을 잡고 <b>창 바깥(믹스보드)으로 드래그</b>하면 보드로 꺼낼 수 있습니다.</span>
+      <span class="pc-only-tool">💡 파일을 <b>더블클릭</b>하면 열립니다. 파일을 잡고 <b>창 바깥으로 드래그</b>하면 보드로 꺼낼 수 있습니다.</span>
+      <span class="mob-only-status">💡 파일을 터치하면 열립니다.</span>
+      <button type="button" id="btnCloseFolderWinBottom" class="win-action-btn close-win-btn">닫기</button>
     </div>
   </div>
 

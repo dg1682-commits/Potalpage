@@ -79,13 +79,17 @@ body {
   user-select: none;
 }
 
-/* 상단 고정 영역 (창 크기 줄여도 절대 찌그러지거나 겹치지 않음) */
+body.folder-modal-open {
+  overflow: hidden !important;
+}
+
+/* 상단 고정 영역 (폴더 팝업이나 모달을 절대 가리지 않도록 z-index 900 설정) */
 .top-chrome {
   position: sticky;
   top: 0;
   left: 0;
   right: 0;
-  z-index: 9999;
+  z-index: 900;
   background: var(--toolbar-bg);
   backdrop-filter: blur(12px);
 }
@@ -617,7 +621,7 @@ body.global-locked .resize-handle {
   display: none;
 }
 
-/* 모달 스타일 */
+/* 모달 스타일 (폴더 창 위에도 뜰 수 있도록 최상위 z-index 10100 부여) */
 .modal-backdrop {
   position: fixed;
   inset: 0;
@@ -626,7 +630,7 @@ body.global-locked .resize-handle {
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 10000;
+  z-index: 10100;
 }
 
 .modal-backdrop.hidden {
@@ -968,25 +972,39 @@ body.global-locked .resize-handle {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
 }
 
-/* 실제 OS 폴더 팝업 윈도우 (Finder / Explorer 스타일) */
+/* 폴더 팝업 배경 딤(Backdrop) & 화면 정중앙 OS 폴더 팝업 윈도우 */
+.folder-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.42);
+  backdrop-filter: blur(2px);
+  z-index: 10040;
+}
+
+.folder-backdrop.hidden {
+  display: none;
+}
+
 .os-window {
   position: fixed;
-  top: 120px;
-  left: 240px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   width: 640px;
   height: 440px;
-  min-width: 360px;
-  min-height: 260px;
+  max-width: 94vw;
+  max-height: 80vh;
+  min-width: 320px;
+  min-height: 240px;
   background: var(--modal-bg);
   border: 1px solid var(--card-border);
   border-radius: 14px;
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35), 0 4px 16px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.38), 0 4px 16px rgba(0, 0, 0, 0.18);
   display: flex;
   flex-direction: column;
-  z-index: 9990;
+  z-index: 10050;
   overflow: hidden;
   resize: both;
-  animation: folderPopIn 0.18s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .os-window.hidden {
@@ -1127,8 +1145,12 @@ body.global-locked .resize-handle {
 
 .os-folder-grid {
   flex: 1;
+  min-height: 0;
   padding: 12px;
   overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-y;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(92px, 1fr));
   grid-auto-rows: 102px;
@@ -1182,14 +1204,21 @@ body.global-locked .resize-handle {
 }
 
 .os-window-statusbar {
-  height: 26px;
-  padding: 0 12px;
+  min-height: 34px;
+  padding: 4px 12px;
   background: var(--btn-bg);
   border-top: 1px solid var(--toolbar-border);
   display: flex;
   align-items: center;
+  justify-content: space-between;
+  gap: 8px;
   font-size: 0.68rem;
   color: var(--text-sub);
+  flex-shrink: 0;
+}
+
+.mob-only-status {
+  display: none;
 }
 
 /* 드래그 고스트 (폴더 안 MD를 보드로 꺼낼 때) */
@@ -2315,6 +2344,10 @@ body.global-locked .resize-handle {
     display: none !important;
   }
 
+  .mob-only-status {
+    display: inline !important;
+  }
+
   #board {
     display: none !important;
   }
@@ -2328,43 +2361,76 @@ body.global-locked .resize-handle {
     overflow: visible !important;
   }
 
+  /* 모바일 상단 헤더: 4줄로 두꺼워지지 않도록 한 줄 슬림 바(가로 스크롤 지원)로 압축 */
   .toolbar {
-    padding: 6px 8px;
-    gap: 5px;
-    min-height: 42px;
+    padding: 5px 8px;
+    gap: 6px;
+    min-height: 38px;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
   }
 
-  .toolbar-brand h1 {
-    font-size: 0.82rem;
-  }
-
-  .toolbar-brand .badge {
+  .toolbar::-webkit-scrollbar {
     display: none;
   }
 
+  .toolbar-brand {
+    flex-shrink: 0;
+    gap: 5px;
+  }
+
+  .toolbar-brand h1 {
+    font-size: 0.78rem;
+  }
+
+  .toolbar-brand .badge,
+  .toolbar .divider {
+    display: none !important;
+  }
+
+  .toolbar-actions {
+    flex-wrap: nowrap;
+    gap: 4px;
+    flex-shrink: 0;
+  }
+
   .tool-btn {
-    height: 27px;
+    height: 26px;
     padding: 0 7px;
     font-size: 0.68rem;
+     gap: 3px;
+    flex-shrink: 0;
+  }
+
+  .cloud-sync-pill {
+    height: 24px;
+    padding: 0 6px;
+    font-size: 0.64rem;
+    flex-shrink: 0;
   }
 
   .quick-site-popover {
     position: fixed;
-    top: 52px;
-    right: 10px;
+    top: 44px;
+    right: 8px;
     left: auto;
     width: min(240px, 88vw);
     z-index: 10020;
   }
 
-  /* 모바일에서 폴더 창 / 메모장 모달 / 미디어 모달이 잘리지 않고 닫기 버튼이 항상 보이도록 고정 */
+  /* 모바일에서 폴더 창이 항상 화면 정중앙에 뜨고 내부만 스크롤되도록 고정 */
   .os-window {
     min-width: 0 !important;
-    left: 3vw !important;
-    right: 3vw !important;
-    top: 7vh !important;
-    width: 94vw !important;
-    height: 80vh !important;
+    left: 50% !important;
+    top: 50% !important;
+    right: auto !important;
+    transform: translate(-50%, -50%) !important;
+    width: 92vw !important;
+    height: 68vh !important;
+    max-height: 68vh !important;
     resize: none !important;
   }
 
@@ -2374,14 +2440,29 @@ body.global-locked .resize-handle {
 
   .os-folder-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    grid-auto-rows: 94px;
-    gap: 8px;
+    grid-auto-rows: 86px;
+    gap: 6px;
     padding: 10px;
+  }
+
+  .os-file-cell {
+    height: 82px;
+    padding: 5px 3px;
+  }
+
+  .os-file-icon {
+    width: 34px;
+    height: 34px;
+    font-size: 18px;
+  }
+
+  .os-file-name {
+    font-size: 0.64rem;
   }
 
   .md-modal {
     width: 96vw !important;
-    height: 86vh !important;
+    height: 84vh !important;
   }
 
   .md-modal-header {
@@ -2398,7 +2479,7 @@ body.global-locked .resize-handle {
   .modal,
   .storage-modal {
     width: 94vw !important;
-    max-height: 88vh !important;
+    max-height: 86vh !important;
     padding: 14px !important;
   }
 }
