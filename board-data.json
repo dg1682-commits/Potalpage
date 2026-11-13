@@ -1037,5 +1037,18 @@
     "color": "default",
     "locked": false,
     "z": 340
+  },
+  {
+    "id": "asset-1794555485179",
+    "type": "folder",
+    "title": "새 폴더",
+    "subtitle": "파일 및 메모 보관함",
+    "x": 220,
+    "y": 460,
+    "w": 130,
+    "h": 100,
+    "color": "amber",
+    "locked": false,
+    "z": 374
   }
 ]
