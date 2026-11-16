@@ -571,12 +571,12 @@
     "dataUrl": "",
     "folderId": null,
     "x": 340,
-    "y": 720,
+    "y": 640,
     "w": 120,
     "h": 106,
     "color": "rose",
     "locked": false,
-    "z": 410
+    "z": 593
   },
   {
     "id": "file-1794449621035-944",
@@ -668,13 +668,13 @@
     "type": "text",
     "title": "타이틀",
     "subtitle": "",
-    "x": 340,
-    "y": 840,
+    "x": 80,
+    "y": 720,
     "w": 140,
     "h": 60,
     "color": "default",
     "locked": false,
-    "z": 588
+    "z": 594
   },
   {
     "id": "asset-1794449741360",
