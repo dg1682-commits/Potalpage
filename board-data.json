@@ -1548,12 +1548,12 @@
     "type": "shape",
     "title": "개인",
     "subtitle": "",
-    "x": 980,
+    "x": 1060,
     "y": 580,
     "w": 260,
     "h": 280,
     "color": "default",
     "locked": false,
-    "z": 67
+    "z": 68
   }
 ]
