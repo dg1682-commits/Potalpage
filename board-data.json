@@ -221,13 +221,13 @@
     "type": "folder",
     "title": "stems(MP3)",
     "subtitle": "10개 파일 업로드됨",
-    "x": 40,
-    "y": 880,
+    "x": 20,
+    "y": 820,
     "w": 130,
     "h": 100,
     "color": "amber",
     "locked": false,
-    "z": 602
+    "z": 616
   },
   {
     "id": "file-1794372633566-383",
@@ -547,7 +547,7 @@
     "dataUrl": "",
     "folderId": null,
     "x": 340,
-    "y": 780,
+    "y": 740,
     "w": 120,
     "h": 106,
     "color": "rose",
