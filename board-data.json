@@ -600,7 +600,7 @@
     "h": 106,
     "color": "rose",
     "locked": false,
-    "z": 408
+    "z": 590
   },
   {
     "id": "file-1794449625692-951",
@@ -643,12 +643,12 @@
     "dataUrl": "",
     "folderId": null,
     "x": 40,
-    "y": 720,
+    "y": 640,
     "w": 120,
     "h": 106,
     "color": "rose",
     "locked": false,
-    "z": 407
+    "z": 589
   },
   {
     "id": "asset-1794449669591",
@@ -668,13 +668,13 @@
     "type": "text",
     "title": "타이틀",
     "subtitle": "",
-    "x": 60,
-    "y": 680,
+    "x": 340,
+    "y": 840,
     "w": 140,
     "h": 60,
     "color": "default",
     "locked": false,
-    "z": 336
+    "z": 588
   },
   {
     "id": "asset-1794449741360",
