@@ -209,12 +209,12 @@
     "content": "가장 빛나는 쪽으로\nhttps://youtu.be/EWgWIdbYCQ0\n",
     "folderId": null,
     "x": 40,
-    "y": 780,
+    "y": 740,
     "w": 120,
     "h": 100,
     "color": "indigo",
     "locked": false,
-    "z": 598
+    "z": 604
   },
   {
     "id": "folder-1794372632133-650",
@@ -668,13 +668,13 @@
     "type": "text",
     "title": "타이틀",
     "subtitle": "",
-    "x": 60,
-    "y": 740,
+    "x": 20,
+    "y": 660,
     "w": 140,
     "h": 60,
     "color": "default",
     "locked": false,
-    "z": 594
+    "z": 603
   },
   {
     "id": "asset-1794449741360",
