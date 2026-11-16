@@ -669,12 +669,12 @@
     "title": "타이틀",
     "subtitle": "",
     "x": 20,
-    "y": 660,
+    "y": 640,
     "w": 140,
     "h": 60,
     "color": "default",
     "locked": false,
-    "z": 603
+    "z": 607
   },
   {
     "id": "asset-1794449741360",
