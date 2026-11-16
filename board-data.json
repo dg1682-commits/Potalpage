@@ -1535,13 +1535,13 @@
     "ghSha": "",
     "dataUrl": "",
     "folderId": null,
-    "x": 1100,
-    "y": 660,
+    "x": 1080,
+    "y": 640,
     "w": 120,
     "h": 106,
     "color": "blue",
     "locked": false,
-    "z": 628
+    "z": 629
   },
   {
     "id": "asset-1794873380650",
