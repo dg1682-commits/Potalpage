@@ -818,13 +818,13 @@
     "type": "folder",
     "title": "음악왕 - Google Play package",
     "subtitle": "6개 파일 업로드됨",
-    "x": 1060,
-    "y": 740,
+    "x": 580,
+    "y": 720,
     "w": 130,
     "h": 100,
     "color": "emerald",
     "locked": false,
-    "z": 553
+    "z": 622
   },
   {
     "id": "file-1794816372487-950",
