@@ -668,8 +668,8 @@
     "type": "text",
     "title": "타이틀",
     "subtitle": "",
-    "x": 80,
-    "y": 720,
+    "x": 60,
+    "y": 740,
     "w": 140,
     "h": 60,
     "color": "default",
@@ -681,13 +681,13 @@
     "type": "text",
     "title": "마지막",
     "subtitle": "",
-    "x": 440,
-    "y": 840,
+    "x": 400,
+    "y": 800,
     "w": 140,
     "h": 45,
     "color": "default",
     "locked": false,
-    "z": 592
+    "z": 595
   },
   {
     "id": "file-1794555544665-772",
