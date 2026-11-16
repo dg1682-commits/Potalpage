@@ -552,7 +552,7 @@
     "h": 106,
     "color": "rose",
     "locked": false,
-    "z": 601
+    "z": 615
   },
   {
     "id": "file-1794449614703-122",
@@ -595,12 +595,12 @@
     "dataUrl": "",
     "folderId": null,
     "x": 140,
-    "y": 640,
+    "y": 620,
     "w": 120,
     "h": 106,
     "color": "rose",
     "locked": false,
-    "z": 590
+    "z": 614
   },
   {
     "id": "file-1794449625692-951",
@@ -619,7 +619,7 @@
     "dataUrl": "",
     "folderId": null,
     "x": 240,
-    "y": 640,
+    "y": 620,
     "w": 120,
     "h": 106,
     "color": "rose",
