@@ -214,7 +214,7 @@
     "h": 100,
     "color": "indigo",
     "locked": false,
-    "z": 596
+    "z": 598
   },
   {
     "id": "folder-1794372632133-650",
@@ -658,7 +658,7 @@
     "x": 40,
     "y": 600,
     "w": 440,
-    "h": 240,
+    "h": 320,
     "color": "emerald",
     "locked": false,
     "z": 47
