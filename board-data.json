@@ -476,7 +476,7 @@
     "subtitle": "",
     "x": 500,
     "y": 580,
-    "w": 440,
+    "w": 260,
     "h": 260,
     "color": "amber",
     "locked": false,
@@ -766,13 +766,13 @@
     "type": "shape",
     "title": "백업",
     "subtitle": "개발 백업본",
-    "x": 960,
-    "y": 580,
+    "x": 780,
+    "y": 600,
     "w": 440,
     "h": 240,
     "color": "slate",
     "locked": false,
-    "z": 63
+    "z": 66
   },
   {
     "id": "asset-1794559105720",
