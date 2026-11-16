@@ -643,12 +643,12 @@
     "dataUrl": "",
     "folderId": null,
     "x": 40,
-    "y": 640,
+    "y": 620,
     "w": 120,
     "h": 106,
     "color": "rose",
     "locked": false,
-    "z": 589
+    "z": 610
   },
   {
     "id": "asset-1794449669591",
@@ -669,12 +669,12 @@
     "title": "타이틀",
     "subtitle": "",
     "x": 60,
-    "y": 620,
+    "y": 720,
     "w": 140,
     "h": 60,
     "color": "default",
     "locked": false,
-    "z": 607
+    "z": 609
   },
   {
     "id": "asset-1794449741360",
@@ -682,12 +682,12 @@
     "title": "마지막",
     "subtitle": "",
     "x": 360,
-    "y": 620,
+    "y": 720,
     "w": 140,
     "h": 45,
     "color": "default",
     "locked": false,
-    "z": 608
+    "z": 611
   },
   {
     "id": "file-1794555544665-772",
