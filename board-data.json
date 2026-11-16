@@ -1518,5 +1518,29 @@
     "color": "indigo",
     "locked": false,
     "z": 576
+  },
+  {
+    "id": "file-1794873234436-252",
+    "type": "file",
+    "fileCategory": "other",
+    "ext": "xlsx",
+    "fileSize": 16029,
+    "mimeType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+    "title": "장효성 한유진 사회자 대본(최종).xlsx",
+    "subtitle": "15.7 KB",
+    "fileUrl": "https://xgcgfmcwcrnanflbveup.supabase.co/storage/v1/object/public/Potal/uploads/1794873233133_tgewl_item.xlsx",
+    "sbPath": "uploads/1794873233133_tgewl_item.xlsx",
+    "sbBucket": "Potal",
+    "ghPath": "",
+    "ghSha": "",
+    "dataUrl": "",
+    "folderId": null,
+    "x": 1280,
+    "y": 620,
+    "w": 120,
+    "h": 106,
+    "color": "blue",
+    "locked": false,
+    "z": 584
   }
 ]
