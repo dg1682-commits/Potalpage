@@ -1546,13 +1546,13 @@
   {
     "id": "asset-1794873380650",
     "type": "shape",
-    "title": "NEW GROUP ZONE",
-    "subtitle": "이 구역 위에 버튼들을 올려놓으세요",
+    "title": "개인",
+    "subtitle": "",
     "x": 220,
     "y": 380,
     "w": 440,
     "h": 280,
-    "color": "slate",
+    "color": "default",
     "locked": false,
     "z": 20
   }
