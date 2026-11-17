@@ -105,7 +105,7 @@
     "subtitle": "월찍가 어플",
     "url": "https://github.com/dg1682-commits/dnjfrmq",
     "pagesUrl": "https://dg1682-commits.github.io/dnjfrmq/",
-    "x": 440,
+    "x": 420,
     "y": 260,
     "w": 240,
     "h": 80,
@@ -180,13 +180,13 @@
     "subtitle": "음악 퀴즈",
     "url": "https://github.com/dg1682-commits/MUSICKING",
     "pagesUrl": "https://dg1682-commits.github.io/MUSICKING/",
-    "x": 520,
-    "y": 460,
+    "x": 420,
+    "y": 360,
     "w": 380,
     "h": 80,
     "color": "indigo",
     "locked": false,
-    "z": 414
+    "z": 639
   },
   {
     "id": "asset-1794267008928",
