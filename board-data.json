@@ -7,10 +7,10 @@
     "x": 40,
     "y": 80,
     "w": 340,
-    "h": 480,
+    "h": 400,
     "color": "blue",
     "locked": false,
-    "z": 72
+    "z": 76
   },
   {
     "id": "shape-zone-2",
