@@ -105,13 +105,13 @@
     "subtitle": "월찍가 어플",
     "url": "https://github.com/dg1682-commits/dnjfrmq",
     "pagesUrl": "https://dg1682-commits.github.io/dnjfrmq/",
-    "x": 520,
-    "y": 360,
+    "x": 440,
+    "y": 260,
     "w": 240,
     "h": 80,
     "color": "violet",
     "locked": false,
-    "z": 88
+    "z": 638
   },
   {
     "id": "repo-goongdyplay",
@@ -150,7 +150,7 @@
     "subtitle": "음원 AI마스터링",
     "url": "https://github.com/dg1682-commits/gymmusic",
     "pagesUrl": "https://dg1682-commits.github.io/gymmusic/",
-    "x": 660,
+    "x": 680,
     "y": 160,
     "w": 240,
     "h": 80,
