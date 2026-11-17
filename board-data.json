@@ -1563,12 +1563,12 @@
     "subtitle": "음악왕 관리자 페이지",
     "url": "https://dg1682-commits.github.io/MUSICKING",
     "pagesUrl": "https://dg1682-commits.github.io/MUSICKING/admin.html",
-    "x": 540,
+    "x": 680,
     "y": 360,
-    "w": 380,
+    "w": 260,
     "h": 80,
     "color": "blue",
     "locked": false,
-    "z": 641
+    "z": 642
   }
 ]
