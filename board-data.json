@@ -150,13 +150,13 @@
     "subtitle": "음원 AI마스터링",
     "url": "https://github.com/dg1682-commits/gymmusic",
     "pagesUrl": "https://dg1682-commits.github.io/gymmusic/",
-    "x": 520,
+    "x": 420,
     "y": 260,
     "w": 240,
     "h": 80,
     "color": "slate",
     "locked": false,
-    "z": 86
+    "z": 636
   },
   {
     "id": "repo-tape",
