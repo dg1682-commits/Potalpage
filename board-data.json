@@ -186,7 +186,7 @@
     "h": 80,
     "color": "indigo",
     "locked": false,
-    "z": 639
+    "z": 643
   },
   {
     "id": "asset-1794267008928",
@@ -1563,7 +1563,7 @@
     "subtitle": "음악왕 관리자 페이지",
     "url": "https://dg1682-commits.github.io/MUSICKING",
     "pagesUrl": "https://dg1682-commits.github.io/MUSICKING/admin.html",
-    "x": 680,
+    "x": 660,
     "y": 360,
     "w": 260,
     "h": 80,
