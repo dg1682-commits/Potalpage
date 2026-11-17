@@ -19,11 +19,11 @@
     "subtitle": "미디어, 음악, 플레이어 및 소셜 레포지토리",
     "x": 400,
     "y": 80,
-    "w": 440,
+    "w": 540,
     "h": 480,
     "color": "violet",
     "locked": false,
-    "z": 73
+    "z": 74
   },
   {
     "id": "text-welcome",
@@ -182,7 +182,7 @@
     "pagesUrl": "https://dg1682-commits.github.io/MUSICKING/",
     "x": 420,
     "y": 360,
-    "w": 380,
+    "w": 240,
     "h": 80,
     "color": "indigo",
     "locked": false,
