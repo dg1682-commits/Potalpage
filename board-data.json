@@ -93,7 +93,7 @@
     "x": 60,
     "y": 260,
     "w": 280,
-    "h": 100,
+    "h": 80,
     "color": "amber",
     "locked": false,
     "z": 633
@@ -137,7 +137,7 @@
     "pagesUrl": "https://dg1682-commits.github.io/Potalpage/",
     "x": 60,
     "y": 360,
-    "w": 380,
+    "w": 280,
     "h": 80,
     "color": "violet",
     "locked": false,
