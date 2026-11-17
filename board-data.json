@@ -122,11 +122,11 @@
     "pagesUrl": "https://dg1682-commits.github.io/goongdyplay/",
     "x": 520,
     "y": 160,
-    "w": 380,
+    "w": 280,
     "h": 80,
     "color": "rose",
     "locked": false,
-    "z": 157
+    "z": 634
   },
   {
     "id": "repo-isvmliveshow",
