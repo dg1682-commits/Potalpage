@@ -4,13 +4,13 @@
     "type": "shape",
     "title": "WORKSPACE & TOOLS",
     "subtitle": "주요 업무 및 유틸리티 프로젝트",
-    "x": 140,
+    "x": 20,
     "y": 80,
     "w": 440,
     "h": 480,
     "color": "blue",
     "locked": false,
-    "z": 71
+    "z": 72
   },
   {
     "id": "shape-zone-2",
@@ -81,7 +81,7 @@
     "h": 80,
     "color": "emerald",
     "locked": false,
-    "z": 62
+    "z": 632
   },
   {
     "id": "repo-pa",
@@ -96,7 +96,7 @@
     "h": 80,
     "color": "amber",
     "locked": false,
-    "z": 64
+    "z": 633
   },
   {
     "id": "repo-dnjfrmq",
