@@ -1570,29 +1570,5 @@
     "color": "blue",
     "locked": false,
     "z": 649
-  },
-  {
-    "id": "file-1794899416129-775",
-    "type": "file",
-    "fileCategory": "image",
-    "ext": "png",
-    "fileSize": 930003,
-    "mimeType": "image/png",
-    "title": "음악왕 가로.png",
-    "subtitle": "908.2 KB",
-    "fileUrl": "https://xgcgfmcwcrnanflbveup.supabase.co/storage/v1/object/public/Potal/uploads/1794899414839_zrt13_item.png",
-    "sbPath": "uploads/1794899414839_zrt13_item.png",
-    "sbBucket": "Potal",
-    "ghPath": "",
-    "ghSha": "",
-    "dataUrl": "",
-    "folderId": null,
-    "x": 500,
-    "y": 820,
-    "w": 120,
-    "h": 106,
-    "color": "emerald",
-    "locked": false,
-    "z": 650
   }
 ]
