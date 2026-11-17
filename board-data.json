@@ -17,13 +17,13 @@
     "type": "shape",
     "title": "MEDIA · LIVE · PLAY",
     "subtitle": "미디어, 음악, 플레이어 및 소셜 레포지토리",
-    "x": 500,
+    "x": 400,
     "y": 80,
     "w": 440,
     "h": 480,
     "color": "violet",
     "locked": false,
-    "z": 42
+    "z": 73
   },
   {
     "id": "text-welcome",
@@ -120,13 +120,13 @@
     "subtitle": "음악 플레이어(AI추가)",
     "url": "https://github.com/dg1682-commits/goongdyplay",
     "pagesUrl": "https://dg1682-commits.github.io/goongdyplay/",
-    "x": 520,
+    "x": 420,
     "y": 160,
     "w": 240,
     "h": 80,
     "color": "rose",
     "locked": false,
-    "z": 634
+    "z": 635
   },
   {
     "id": "repo-isvmliveshow",
