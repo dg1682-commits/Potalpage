@@ -4,13 +4,13 @@
     "type": "shape",
     "title": "WORKSPACE & TOOLS",
     "subtitle": "주요 업무 및 유틸리티 프로젝트",
-    "x": 40,
+    "x": 140,
     "y": 80,
     "w": 440,
     "h": 480,
     "color": "blue",
     "locked": false,
-    "z": 69
+    "z": 71
   },
   {
     "id": "shape-zone-2",
