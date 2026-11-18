@@ -1867,5 +1867,20 @@
     "color": "indigo",
     "locked": false,
     "z": 736
+  },
+  {
+    "id": "asset-1795010677679",
+    "type": "link",
+    "title": "새 링크 버튼",
+    "subtitle": "dg1682-commits/repo",
+    "url": "https://github.com/dg1682-commits",
+    "pagesUrl": "",
+    "x": 200,
+    "y": 240,
+    "w": 380,
+    "h": 80,
+    "color": "blue",
+    "locked": false,
+    "z": 739
   }
 ]
