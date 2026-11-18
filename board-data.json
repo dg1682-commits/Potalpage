@@ -185,8 +185,8 @@
     "url": "https://github.com/dg1682-commits/MUSICKING",
     "w": 220,
     "x": 420,
-    "y": 280,
-    "z": 746
+    "y": 260,
+    "z": 754
   },
   {
     "color": "rose",
@@ -930,8 +930,8 @@
     "url": "https://github.com/dg1682-commits/MUSICKING",
     "w": 260,
     "x": 660,
-    "y": 280,
-    "z": 747
+    "y": 260,
+    "z": 755
   },
   {
     "id": "folder-1794978493783-132",
@@ -1876,12 +1876,12 @@
     "url": "https://dev.onestore.net/dev/apps/product",
     "pagesUrl": "https://dev.onestore.net/dev/apps/product",
     "x": 420,
-    "y": 380,
+    "y": 360,
     "w": 380,
     "h": 80,
     "color": "blue",
     "locked": false,
-    "z": 748
+    "z": 756
   },
   {
     "id": "asset-1795012886997",
