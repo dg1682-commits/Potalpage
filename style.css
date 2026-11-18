@@ -1245,42 +1245,44 @@ body.global-locked .resize-handle {
 }
 
 .md-modal-header {
-  padding: 14px 20px;
+  padding: 10px 14px;
   background: var(--btn-bg);
   border-bottom: 1px solid var(--toolbar-border);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 12px;
+  gap: 8px;
   flex-wrap: wrap;
 }
 
 .md-modal-title-group {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
   flex: 1;
-  min-width: 200px;
+  min-width: 160px;
 }
 
 .md-doc-badge {
   background: var(--accent);
   color: #fff;
-  font-size: 0.72rem;
+  font-size: 0.65rem;
   font-weight: 800;
-  padding: 4px 8px;
-  border-radius: 6px;
+  padding: 3px 6px;
+  border-radius: 5px;
+  flex-shrink: 0;
 }
 
 .md-title-input {
   flex: 1;
-  font-size: 1.05rem;
+  min-width: 0;
+  font-size: 0.86rem;
   font-weight: 700;
   color: var(--text-main);
   background: var(--card-bg);
   border: 1px solid var(--card-border);
-  border-radius: 8px;
-  padding: 6px 12px;
+  border-radius: 7px;
+  padding: 5px 10px;
   outline: none;
 }
 
@@ -1291,25 +1293,28 @@ body.global-locked .resize-handle {
 .md-modal-toolbar {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
+  flex-wrap: nowrap;
 }
 
 .md-tab-group {
   display: flex;
   background: var(--card-bg);
   border: 1px solid var(--card-border);
-  border-radius: 8px;
+  border-radius: 7px;
   overflow: hidden;
+  flex-shrink: 0;
 }
 
 .md-tab {
-  padding: 6px 12px;
+  padding: 5px 9px;
   border: none;
   background: transparent;
   color: var(--text-sub);
-  font-size: 0.8rem;
+  font-size: 0.72rem;
   font-weight: 700;
   cursor: pointer;
+  white-space: nowrap;
 }
 
 .md-tab.active {
@@ -1318,14 +1323,16 @@ body.global-locked .resize-handle {
 }
 
 .md-action-btn {
-  padding: 7px 12px;
-  border-radius: 8px;
+  padding: 5px 9px;
+  border-radius: 7px;
   border: 1px solid var(--card-border);
   background: var(--card-bg);
   color: var(--text-main);
-  font-size: 0.8rem;
+  font-size: 0.72rem;
   font-weight: 700;
   cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
   transition: all 0.12s ease;
 }
 
@@ -1345,6 +1352,7 @@ body.global-locked .resize-handle {
 
 .md-modal-body {
   flex: 1;
+  min-height: 0;
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -1353,10 +1361,13 @@ body.global-locked .resize-handle {
 
 .md-preview-content {
   flex: 1;
-  padding: 24px 28px;
+  min-height: 0;
+  padding: 16px 20px;
   overflow-y: auto;
-  line-height: 1.68;
-  font-size: 0.95rem;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+  line-height: 1.62;
+  font-size: 0.82rem;
   color: var(--text-main);
   user-select: text;
 }
@@ -1369,46 +1380,51 @@ body.global-locked .resize-handle {
 .md-preview-content h1,
 .md-preview-content h2,
 .md-preview-content h3 {
-  margin-top: 1.1em;
-  margin-bottom: 0.45em;
+  margin-top: 1em;
+  margin-bottom: 0.4em;
   font-weight: 800;
   line-height: 1.3;
 }
 
 .md-preview-content h1 {
-  font-size: 1.5rem;
+  font-size: 1.15rem;
   border-bottom: 1px solid var(--toolbar-border);
-  padding-bottom: 8px;
+  padding-bottom: 6px;
 }
 
 .md-preview-content h2 {
-  font-size: 1.22rem;
+  font-size: 1rem;
+}
+
+.md-preview-content h3 {
+  font-size: 0.9rem;
 }
 
 .md-preview-content p {
-  margin-bottom: 0.85em;
+  margin-bottom: 0.75em;
 }
 
 .md-preview-content ul,
 .md-preview-content ol {
-  margin: 0.5em 0 1em 1.5em;
+  margin: 0.4em 0 0.85em 1.35em;
 }
 
 .md-preview-content code {
   font-family: Consolas, Monaco, 'Courier New', monospace;
   background: var(--btn-bg);
-  padding: 2px 6px;
-  border-radius: 5px;
-  font-size: 0.86em;
+  padding: 2px 5px;
+  border-radius: 4px;
+  font-size: 0.84em;
 }
 
 .md-preview-content pre {
   background: #0f172a;
   color: #e2e8f0;
-  padding: 14px 16px;
-  border-radius: 10px;
+  padding: 12px 14px;
+  border-radius: 8px;
   overflow-x: auto;
-  margin: 0.9em 0;
+  margin: 0.75em 0;
+  font-size: 0.78rem;
 }
 
 .md-preview-content pre code {
@@ -1418,53 +1434,79 @@ body.global-locked .resize-handle {
 }
 
 .md-preview-content blockquote {
-  border-left: 4px solid var(--accent);
-  padding-left: 14px;
+  border-left: 3px solid var(--accent);
+  padding-left: 12px;
   color: var(--text-sub);
-  margin: 0.8em 0;
+  margin: 0.7em 0;
 }
 
 .md-editor-textarea {
   flex: 1;
+  min-height: 0;
   width: 100%;
-  padding: 20px 24px;
+  padding: 16px 20px;
   border: none;
   outline: none;
   resize: none;
   background: var(--bg-canvas);
   color: var(--text-main);
   font-family: Consolas, 'Pretendard', monospace;
-  font-size: 0.94rem;
-  line-height: 1.65;
+  font-size: 0.82rem;
+  line-height: 1.6;
   user-select: text;
 }
 
 .md-modal-footer {
-  padding: 12px 20px;
+  padding: 9px 14px;
   background: var(--btn-bg);
   border-top: 1px solid var(--toolbar-border);
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 8px;
+  flex-wrap: nowrap;
 }
 
 .md-footer-left,
 .md-footer-right {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 6px;
+  min-width: 0;
+}
+
+.md-footer-left {
+  flex: 1;
+  overflow: hidden;
+}
+
+.md-footer-right {
+  flex-shrink: 0;
+}
+
+.md-modal-footer button,
+.file-modal-footer button {
+  white-space: nowrap;
+  flex-shrink: 0;
+  padding: 6px 11px;
+  font-size: 0.74rem;
 }
 
 .md-location-tag {
-  font-size: 0.78rem;
+  font-size: 0.7rem;
   color: var(--text-sub);
   font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
 }
 
 .md-toast {
-  font-size: 0.8rem;
+  font-size: 0.72rem;
   font-weight: 700;
   color: #059669;
+  white-space: nowrap;
 }
 
 /* GitHub 동기화 버튼 및 모달 스타일 */
@@ -2461,18 +2503,63 @@ body.global-locked .resize-handle {
   }
 
   .md-modal {
-    width: 96vw !important;
-    height: 84vh !important;
+    width: 95vw !important;
+    height: 80vh !important;
   }
 
   .md-modal-header {
     flex-direction: column;
     align-items: stretch;
+    padding: 8px 12px;
+    gap: 6px;
   }
 
   .md-modal-toolbar {
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     justify-content: space-between;
+    overflow-x: auto;
+    gap: 4px;
+  }
+
+  .md-tab,
+  .md-action-btn {
+    padding: 4px 8px;
+    font-size: 0.68rem;
+  }
+
+  .md-preview-content,
+  .md-editor-textarea {
+    padding: 12px 14px;
+    font-size: 0.78rem;
+    line-height: 1.55;
+  }
+
+  .md-preview-content h1 {
+    font-size: 1.02rem;
+  }
+
+  .md-preview-content h2 {
+    font-size: 0.9rem;
+  }
+
+  .md-preview-content h3 {
+    font-size: 0.82rem;
+  }
+
+  .md-modal-footer {
+    padding: 8px 12px;
+    gap: 6px;
+  }
+
+  .md-modal-footer button,
+  .file-modal-footer button {
+    padding: 5px 9px;
+    font-size: 0.7rem;
+  }
+
+  .md-location-tag {
+    font-size: 0.66rem;
+    max-width: 110px;
   }
 
   .file-modal,

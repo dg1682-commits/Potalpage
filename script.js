@@ -1065,6 +1065,10 @@ let activeFolderId = null;
 let activeMdId = null;
 let activeFileId = null;
 
+// 초기 폴백/원격 동기화 보호 플래그 (빈 localStorage/오프라인 기기에서 원격 board-data.json 덮어쓰기 방지)
+let isUsingDefaultFallback = false;
+let initialRemotePullDone = false;
+
 const boardViewport = document.getElementById("boardViewport");
 const boardEl = document.getElementById("board");
 const editModal = document.getElementById("editModal");
@@ -1216,6 +1220,7 @@ function loadState() {
       const parsed = JSON.parse(raw);
       if (Array.isArray(parsed) && parsed.length > 0) {
         assets = parsed;
+        isUsingDefaultFallback = false;
         return;
       }
     }
@@ -1231,13 +1236,16 @@ function loadState() {
       }
     }
     assets = defaults;
-    saveState();
+    isUsingDefaultFallback = true;
+    // 초기 폴백 로드 시에는 절대 GitHub에 자동 푸시하지 않음 (원격 최신 board-data.json 덮어쓰기 방지)
+    saveState(true);
     return;
   } catch (e) {
     console.warn("저장된 보드 데이터를 불러오지 못해 기본값을 사용합니다.", e);
   }
   assets = getDefaultAssets();
-  saveState();
+  isUsingDefaultFallback = true;
+  saveState(true);
 }
 
 function saveState(skipCloudSync = false) {
@@ -3144,6 +3152,8 @@ function bindToolbarEvents() {
     });
     if (ok) {
       assets = getDefaultAssets();
+      isUsingDefaultFallback = false;
+      initialRemotePullDone = true;
       saveState();
       renderBoard();
     }
@@ -3168,6 +3178,8 @@ function bindToolbarEvents() {
         const imported = JSON.parse(evt.target.result);
         if (Array.isArray(imported)) {
           assets = imported;
+          isUsingDefaultFallback = false;
+          initialRemotePullDone = true;
           saveState();
           renderBoard();
           showUploadToast("✓ 백업 JSON을 성공적으로 불러왔습니다!");
@@ -3533,6 +3545,8 @@ async function autoPullFromGithubOnStart() {
       const data = await res.json();
       if (Array.isArray(data) && data.length > 0) {
         assets = data;
+        isUsingDefaultFallback = false;
+        initialRemotePullDone = true;
         saveState(true);
         renderBoard();
       }
@@ -3555,7 +3569,8 @@ async function pullFromGithubApi(showAlert = false) {
 
     if (res.status === 404) {
       if (cfg.token) {
-        await pushToGithubNow();
+        initialRemotePullDone = true;
+        await pushToGithubNow(true);
         return true;
       }
       setGhSyncIndicator("offline", "☁️ GitHub 연동");
@@ -3572,7 +3587,14 @@ async function pullFromGithubApi(showAlert = false) {
     const parsed = JSON.parse(decoded);
 
     if (Array.isArray(parsed) && parsed.length > 0) {
+      // 원격 데이터를 성공적으로 받아왔으므로 대기 중인 자동저장 타이머가 있으면 취소해 덮어쓰기 방지
+      if (ghSyncTimer) {
+        clearTimeout(ghSyncTimer);
+        ghSyncTimer = null;
+      }
       assets = parsed;
+      isUsingDefaultFallback = false;
+      initialRemotePullDone = true;
       saveState(true);
       renderBoard();
     }
@@ -3597,11 +3619,15 @@ async function pullFromGithubApi(showAlert = false) {
 function scheduleGithubAutoSave() {
   const cfg = getGhConfig();
   if (!cfg.token || !cfg.repo) return;
+  if (isUsingDefaultFallback || !initialRemotePullDone) {
+    setGhSyncIndicator("offline", "☁️ 원격 동기화 대기");
+    return;
+  }
 
   setGhSyncIndicator("syncing", "☁️ 자동저장 대기...");
   if (ghSyncTimer) clearTimeout(ghSyncTimer);
   ghSyncTimer = setTimeout(() => {
-    pushToGithubNow();
+    pushToGithubNow(false);
   }, 900);
 }
 
@@ -3609,6 +3635,11 @@ async function pushToGithubNow(showStatusInModal = false) {
   const cfg = getGhConfig();
   const statusEl = document.getElementById("ghStatusMsg");
   if (!cfg.token || !cfg.repo) return false;
+  if (!showStatusInModal && (isUsingDefaultFallback || !initialRemotePullDone)) {
+    console.warn("초기 원격 불러오기 완료 전/기본 폴백 상태에서는 GitHub 자동 덮어쓰기를 차단했습니다.");
+    return false;
+  }
+  if (!Array.isArray(assets) || assets.length === 0) return false;
 
   setGhSyncIndicator("syncing", "☁️ 저장 중...");
   try {
@@ -3651,6 +3682,8 @@ async function pushToGithubNow(showStatusInModal = false) {
       ghFileSha = putData.content.sha;
     }
 
+    isUsingDefaultFallback = false;
+    initialRemotePullDone = true;
     setGhSyncIndicator("synced", "☁️ 자동저장 완료");
     if (statusEl && showStatusInModal) {
       statusEl.style.color = "#10b981";
