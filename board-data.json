@@ -1876,11 +1876,11 @@
     "url": "https://dev.onestore.net/dev/apps/product",
     "pagesUrl": "https://dev.onestore.net/dev/apps/product",
     "x": 420,
-    "y": 460,
+    "y": 380,
     "w": 380,
     "h": 80,
     "color": "blue",
     "locked": false,
-    "z": 740
+    "z": 748
   }
 ]
