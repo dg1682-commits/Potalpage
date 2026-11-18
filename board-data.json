@@ -1886,16 +1886,16 @@
   {
     "id": "asset-1795012886997",
     "type": "link",
-    "title": "새 링크 버튼",
-    "subtitle": "dg1682-commits/repo",
-    "url": "https://github.com/dg1682-commits",
-    "pagesUrl": "",
-    "x": 200,
-    "y": 220,
+    "title": "음악왕 테스트서버",
+    "subtitle": "음악왕 테스트서버",
+    "url": "https://github.com/dg1682-commits/MUSICKING-TEST/",
+    "pagesUrl": "https://dg1682-commits.github.io/MUSICKING-TEST/",
+    "x": 440,
+    "y": 460,
     "w": 380,
     "h": 80,
-    "color": "blue",
+    "color": "rose",
     "locked": false,
-    "z": 749
+    "z": 750
   }
 ]
