@@ -1211,13 +1211,13 @@
     "ghSha": "",
     "fileUrl": "",
     "folderId": null,
-    "x": 620,
+    "x": 900,
     "y": 620,
     "w": 120,
     "h": 100,
     "color": "indigo",
     "locked": false,
-    "z": 775
+    "z": 823
   },
   {
     "id": "asset-1795010677679",
