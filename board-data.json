@@ -1970,13 +1970,13 @@
     "ghSha": "",
     "fileUrl": "",
     "folderId": null,
-    "x": 740,
-    "y": 620,
+    "x": 880,
+    "y": 840,
     "w": 120,
     "h": 100,
     "color": "indigo",
     "locked": false,
-    "z": 817
+    "z": 820
   },
   {
     "id": "md-1795078148029-515",
@@ -1990,8 +1990,8 @@
     "ghSha": "",
     "fileUrl": "",
     "folderId": null,
-    "x": 880,
-    "y": 740,
+    "x": 760,
+    "y": 840,
     "w": 120,
     "h": 100,
     "color": "indigo",
