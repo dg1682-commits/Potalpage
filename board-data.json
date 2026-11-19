@@ -1886,12 +1886,12 @@
     "ghSha": "",
     "dataUrl": "",
     "folderId": null,
-    "x": 1200,
-    "y": 460,
+    "x": 1180,
+    "y": 620,
     "w": 120,
     "h": 106,
     "color": "blue",
     "locked": false,
-    "z": 779
+    "z": 780
   }
 ]
