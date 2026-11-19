@@ -1261,13 +1261,13 @@
     "ghSha": "",
     "fileUrl": "",
     "folderId": null,
-    "x": 900,
-    "y": 620,
+    "x": 640,
+    "y": 840,
     "w": 120,
     "h": 100,
     "color": "indigo",
     "locked": false,
-    "z": 776
+    "z": 822
   },
   {
     "id": "file-1795060427644-405",
