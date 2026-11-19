@@ -1897,5 +1897,25 @@
     "color": "rose",
     "locked": false,
     "z": 760
+  },
+  {
+    "id": "md-1795046980067-117",
+    "type": "md",
+    "title": "구글플레이_출시_가이드.md",
+    "subtitle": "",
+    "content": "# 📱 음악왕 Google Play 출시 & `.aab` 빌드 가이드\n\n> **기준:** 2026년 하반기 Google Play Console 최신 정책 (Target API 36 / 개인 계정 비공개 테스트 12명 × 14일)  \n> **패키징 방식:** Capacitor + Android Studio + Google AdMob\n\n---\n\n## 1단계: Android Studio에서 `.aab` 파일 추출하기\n\nPWABuilder가 아닌 **PC에 설치한 Android Studio**에서 직접 서명된 `.aab` 파일을 빌드합니다.\n\n### 1) 사전 설치 프로그램\n- **Node.js** (LTS 버전)\n- **Android Studio** (최신 버전)\n  - 설치 후 `SDK Manager` → **Android 16 (API Level 36)** 체크 및 설치 필수\n\n### 2) Capacitor 프로젝트 세팅\n작업 폴더에서 아래 순서대로 세팅합니다.\n1. Capacitor 및 AdMob 플러그인 설치:\n   - `@capacitor/core`, `@capacitor/cli`, `@capacitor/android`, `@capacitor-community/admob`\n2. 웹 빌드 폴더(예: `www/`)에 최신 게임 파일 복사:\n   - `index.html`, `style.css`, `app.js`, `data.js`, `pixel_avatar.js`, `online.js`, `fishing.js`, `icons/` 등\n3. 안드로이드 프로젝트 생성 및 동기화:\n   - `npx cap add android`\n   - `npx cap sync`\n   - `npx cap open android` (실행 시 Android Studio가 자동으로 열림)\n\n### 3) Android Studio 내부 필수 설정 확인\n- `variables.gradle` (또는 `build.gradle`):\n  - **`compileSdkVersion = 36`**\n  - **`targetSdkVersion = 36`** *(2026년 8월 31일 이후 신규 앱 필수 기준)*\n- `AndroidManifest.xml`:\n  - AdMob App ID (`com.google.android.gms.ads.APPLICATION_ID`) 입력 확인\n\n### 4) `.aab` 추출 메뉴 위치\n1. Android Studio 상단 메뉴 **`Build` → `Generate Signed Bundle / APK...`** 클릭\n2. **`Android App Bundle`** 선택 → `Next`\n3. **`Create new...`** 클릭하여 서명용 **Keystore(`.jks`) 파일** 생성\n   - ⚠️ **주의:** 이 `.jks` 파일과 비밀번호는 절대 분실하면 안 됩니다! (분실 시 추후 앱 업데이트 영구 불가 → 구글 드라이브/이메일 등에 반드시 백업)\n4. Build Variant에서 **`release`** 선택 → `Finish`\n5. 추출 완료 경로: **`android/app/release/app-release.aab`**\n\n---\n\n## 2단계: 구글 플레이 & 애드몹 사전 준비물\n\n### 1) Google Play Console 계정\n- 개인 개발자 계정 가입 (등록비 **$25 일회성** 결제 + 신분증 본인 인증 완료)\n\n### 2) GitHub Pages 추가 파일 2개\n1. **`privacy.html`** (개인정보처리방침 단독 웹페이지)\n   - 경로 예: `https://dg1682-commits.github.io/MUSICKING/privacy.html`\n   - 로그인이나 버튼 클릭 없이 접속 즉시 본문이 보여야 함\n   - 기존 개인정보처리방침 내용에 **Google AdMob 광고 식별자 수집 안내 문구 1줄** 추가\n2. **`app-ads.txt`** (애드몹 승인 필수 파일)\n   - 깃허브 **루트 도메인**(`https://dg1682-commits.github.io/app-ads.txt`)에 업로드\n   - 내용: `google.com, pub-XXXXXXXXXXXXXXXX, DIRECT, f08c47fec0942fa0` (본인 Publisher ID 입력)\n\n### 3) AdMob 테스트 광고 ID 주의 (계정 정지 방지)\n- **비공개 테스트(14일) 및 심사 기간 중** 올리는 `.aab`에는 반드시 **구글 공식 테스트 광고 ID**를 사용하거나 테스트 기기 등록을 해두어야 무효 트래픽 정지를 피할 수 있습니다.\n- 정식 프로덕션 출시 직전 빌드에서 실제 광고 단위 ID로 교체합니다.\n\n### 4) 스토어 등록 그래픽 에셋\n- **앱 아이콘:** `512 × 512 px` (PNG)\n- **그래픽 이미지(피처 그래픽):** `1024 × 500 px` (PNG 또는 JPG)\n- **휴대전화 스크린샷:** 최소 2장 이상 (홈, 퀴즈 인게임, 낚시터, 상점 등 4~6장 권장)\n\n---\n\n## 3단계: Google Play Console 심사 제출 순서\n\n1. **앱 만들기**\n   - 앱 이름(`음악왕`), 기본 언어(`한국어`), `게임`, `무료` 선택\n\n2. **좌측 [정책] > [앱 콘텐츠] 항목 전부 완료**\n   - **개인정보처리방침:** `privacy.html` URL 입력\n   - **광고:** *\"예, 앱에 광고가 포함되어 있습니다\"* 선택\n   - **앱 액세스 권한:** 로그인이 필수이므로 **심사관용 테스트 계정(닉네임 / 비밀번호)** 입력 필수 *(누락 시 로그인 불가로 거절됨)*\n   - **콘텐츠 등급(IARC):** 원스토어와 동일 기준으로 설문 재작성 (무료 자동 발급)\n   - **타겟 연령층:** 만 13세 미만 타겟 체크 시 아동 보호 정책으로 심사가 매우 까다로워지므로 일반 게임 기준(**만 13세 이상** 또는 **18세 이상**) 설정 권장\n   - **데이터 보안(Data Safety):**\n     - *\"데이터 수집함\"* 선택 후 아래 4가지 항목 체크:\n       1. 사용자 ID (닉네임)\n       2. 앱 활동 (게임 기록 / 랭킹)\n       3. 사용자 생성 콘텐츠 (채팅 / 프로필)\n       4. 기기 또는 기타 ID (AdMob 광고 ID)\n     - **계정 삭제 URL:** `https://dg1682-commits.github.io/MUSICKING/` 입력\n\n3. **비공개 테스트(Closed Testing) 출시 (개인 계정 필수 절차)**\n   - 처음에는 '프로덕션'이 잠겨 있으므로, **[테스트] > [비공개 테스트]** 트랙에 `app-release.aab` 업로드 및 심사 제출\n   - 비공개 테스트 승인 후 테스트 링크를 공유하여 **테스터 최소 12명(이탈 대비 15~20명 권장)**이 **14일 연속** 옵트인 상태를 유지\n   - 14일 완료 후 콘솔에서 **[프로덕션 액세스 신청]** 설문 제출 → 승인 완료되면 **프로덕션(정식 출시)** 진행!\n",
+    "sbPath": "",
+    "sbBucket": "",
+    "ghPath": "",
+    "ghSha": "",
+    "fileUrl": "",
+    "folderId": null,
+    "x": 740,
+    "y": 860,
+    "w": 120,
+    "h": 100,
+    "color": "indigo",
+    "locked": false,
+    "z": 762
   }
 ]
