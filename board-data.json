@@ -1270,30 +1270,6 @@
     "z": 826
   },
   {
-    "id": "file-1795060427644-405",
-    "type": "file",
-    "fileCategory": "other",
-    "ext": "json",
-    "fileSize": 119876,
-    "mimeType": "application/json",
-    "title": "mixboard-portal-backup (10).json",
-    "subtitle": "117.1 KB",
-    "fileUrl": "https://xgcgfmcwcrnanflbveup.supabase.co/storage/v1/object/public/Potal/uploads/1795060427361_n9zbd_mixboard-portal-backup10.json",
-    "sbPath": "uploads/1795060427361_n9zbd_mixboard-portal-backup10.json",
-    "sbBucket": "Potal",
-    "ghPath": "",
-    "ghSha": "",
-    "dataUrl": "",
-    "folderId": null,
-    "x": 1180,
-    "y": 620,
-    "w": 120,
-    "h": 106,
-    "color": "blue",
-    "locked": false,
-    "z": 780
-  },
-  {
     "id": "folder-1795069306429-117",
     "type": "folder",
     "title": "음악왕",
@@ -2014,12 +1990,12 @@
     "ghSha": "",
     "dataUrl": "",
     "folderId": null,
-    "x": 1107.764447695684,
-    "y": 737.0256035113387,
+    "x": 1167.0826627651793,
+    "y": 623.6854425749817,
     "w": 120,
     "h": 106,
     "color": "blue",
     "locked": false,
-    "z": 828
+    "z": 829
   }
 ]
