@@ -1910,12 +1910,12 @@
     "ghSha": "",
     "fileUrl": "",
     "folderId": null,
-    "x": 780,
-    "y": 860,
+    "x": 520,
+    "y": 880,
     "w": 120,
     "h": 100,
     "color": "indigo",
     "locked": false,
-    "z": 762
+    "z": 763
   }
 ]
