@@ -1847,13 +1847,13 @@
     "ghSha": "",
     "fileUrl": "",
     "folderId": null,
-    "x": 620,
-    "y": 840,
+    "x": 840,
+    "y": 640,
     "w": 120,
     "h": 100,
     "color": "indigo",
     "locked": false,
-    "z": 736
+    "z": 774
   },
   {
     "id": "asset-1795010677679",
@@ -1897,7 +1897,7 @@
     "ghSha": "",
     "fileUrl": "",
     "folderId": null,
-    "x": 860,
+    "x": 900,
     "y": 840,
     "w": 120,
     "h": 100,
