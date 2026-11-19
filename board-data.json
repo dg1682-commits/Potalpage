@@ -471,7 +471,7 @@
   },
   {
     "color": "amber",
-    "h": 400,
+    "h": 460,
     "id": "asset-1794373333445",
     "locked": false,
     "subtitle": "",
@@ -1910,12 +1910,12 @@
     "ghSha": "",
     "fileUrl": "",
     "folderId": null,
-    "x": 520,
+    "x": 500,
     "y": 920,
     "w": 120,
     "h": 100,
     "color": "indigo",
     "locked": false,
-    "z": 763
+    "z": 764
   }
 ]
