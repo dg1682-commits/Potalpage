@@ -471,13 +471,13 @@
   },
   {
     "color": "amber",
-    "h": 460,
+    "h": 360,
     "id": "asset-1794373333445",
     "locked": false,
     "subtitle": "",
     "title": "음악왕",
     "type": "shape",
-    "w": 260,
+    "w": 540,
     "x": 500,
     "y": 580,
     "z": 75
