@@ -1997,5 +1997,29 @@
     "color": "blue",
     "locked": false,
     "z": 831
+  },
+  {
+    "id": "file-1795184002957-223",
+    "type": "file",
+    "fileCategory": "audio",
+    "ext": "mp3",
+    "fileSize": 9122865,
+    "mimeType": "audio/mpeg",
+    "title": "(행진편집2)Lady Gaga, Bruno Mars - Die With A Smile.mp3",
+    "subtitle": "8.70 MB",
+    "fileUrl": "https://xgcgfmcwcrnanflbveup.supabase.co/storage/v1/object/public/Potal/uploads/1795184001099_show9_2LadyGagaBrunoMars-DieWithASmile.mp3",
+    "sbPath": "uploads/1795184001099_show9_2LadyGagaBrunoMars-DieWithASmile.mp3",
+    "sbBucket": "Potal",
+    "ghPath": "",
+    "ghSha": "",
+    "dataUrl": "",
+    "folderId": null,
+    "x": 1160,
+    "y": 800,
+    "w": 120,
+    "h": 106,
+    "color": "rose",
+    "locked": false,
+    "z": 835
   }
 ]
