@@ -2020,7 +2020,7 @@
     "h": 106,
     "color": "rose",
     "locked": false,
-    "z": 837
+    "z": 840
   },
   {
     "id": "file-1795184009854-561",
@@ -2039,11 +2039,11 @@
     "dataUrl": "",
     "folderId": null,
     "x": 1060,
-    "y": 780,
+    "y": 820,
     "w": 120,
     "h": 106,
     "color": "rose",
     "locked": false,
-    "z": 836
+    "z": 839
   }
 ]
