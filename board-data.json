@@ -2058,12 +2058,12 @@
     "ghSha": "",
     "fileUrl": "",
     "folderId": null,
-    "x": 800,
-    "y": 440,
+    "x": 700,
+    "y": 740,
     "w": 120,
     "h": 100,
     "color": "indigo",
     "locked": false,
-    "z": 842
+    "z": 844
   }
 ]
