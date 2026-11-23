@@ -2215,5 +2215,29 @@
     "color": "indigo",
     "locked": false,
     "z": 913
+  },
+  {
+    "id": "file-1795448368100-324",
+    "type": "file",
+    "fileCategory": "other",
+    "ext": "zip",
+    "fileSize": 29936579,
+    "mimeType": "application/x-zip-compressed",
+    "title": "musicking-release-apk (1).zip",
+    "subtitle": "28.55 MB",
+    "fileUrl": "https://xgcgfmcwcrnanflbveup.supabase.co/storage/v1/object/public/Potal/uploads/1795448366501_nv346_musicking-release-apk1.zip",
+    "sbPath": "uploads/1795448366501_nv346_musicking-release-apk1.zip",
+    "sbBucket": "Potal",
+    "ghPath": "",
+    "ghSha": "",
+    "dataUrl": "",
+    "folderId": null,
+    "x": 760,
+    "y": 580,
+    "w": 120,
+    "h": 106,
+    "color": "blue",
+    "locked": false,
+    "z": 929
   }
 ]
