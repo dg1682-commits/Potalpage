@@ -1261,13 +1261,13 @@
     "ghSha": "",
     "fileUrl": "",
     "folderId": null,
-    "x": 900,
-    "y": 740,
+    "x": 920,
+    "y": 720,
     "w": 120,
     "h": 100,
     "color": "indigo",
     "locked": false,
-    "z": 878
+    "z": 880
   },
   {
     "id": "folder-1795069306429-117",
@@ -1967,7 +1967,7 @@
     "fileUrl": "",
     "folderId": null,
     "x": 920,
-    "y": 580,
+    "y": 600,
     "w": 120,
     "h": 100,
     "color": "indigo",
@@ -2064,7 +2064,7 @@
     "h": 100,
     "color": "indigo",
     "locked": false,
-    "z": 877
+    "z": 881
   },
   {
     "id": "md-1795406299611-152",
