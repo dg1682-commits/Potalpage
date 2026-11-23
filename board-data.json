@@ -2239,5 +2239,29 @@
     "color": "blue",
     "locked": false,
     "z": 929
+  },
+  {
+    "id": "file-1795448369770-889",
+    "type": "file",
+    "fileCategory": "other",
+    "ext": "zip",
+    "fileSize": 30037772,
+    "mimeType": "application/x-zip-compressed",
+    "title": "musicking-release-aab (1).zip",
+    "subtitle": "28.65 MB",
+    "fileUrl": "https://xgcgfmcwcrnanflbveup.supabase.co/storage/v1/object/public/Potal/uploads/1795448368110_ckexh_musicking-release-aab1.zip",
+    "sbPath": "uploads/1795448368110_ckexh_musicking-release-aab1.zip",
+    "sbBucket": "Potal",
+    "ghPath": "",
+    "ghSha": "",
+    "dataUrl": "",
+    "folderId": null,
+    "x": 780,
+    "y": 600,
+    "w": 120,
+    "h": 106,
+    "color": "blue",
+    "locked": false,
+    "z": 930
   }
 ]
