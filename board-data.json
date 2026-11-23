@@ -2098,13 +2098,13 @@
     "ghSha": "",
     "fileUrl": "",
     "folderId": null,
-    "x": 500,
-    "y": 820,
+    "x": 780,
+    "y": 700,
     "w": 120,
     "h": 100,
     "color": "indigo",
     "locked": false,
-    "z": 915
+    "z": 923
   },
   {
     "id": "asset-1795406307957",
@@ -2163,13 +2163,13 @@
     "type": "folder",
     "title": "구글플레이 출시 중요한거",
     "subtitle": "파일 및 메모 보관함",
-    "x": 740,
-    "y": 620,
+    "x": 500,
+    "y": 820,
     "w": 130,
     "h": 100,
     "color": "violet",
     "locked": false,
-    "z": 922
+    "z": 924
   },
   {
     "id": "asset-1795446452726",
