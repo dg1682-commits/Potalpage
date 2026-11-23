@@ -1966,13 +1966,13 @@
     "ghSha": "",
     "fileUrl": "",
     "folderId": null,
-    "x": 800,
-    "y": 840,
+    "x": 640,
+    "y": 600,
     "w": 120,
     "h": 100,
     "color": "indigo",
     "locked": false,
-    "z": 825
+    "z": 855
   },
   {
     "id": "file-1795078179332-584",
