@@ -2097,14 +2097,14 @@
     "ghPath": "",
     "ghSha": "",
     "fileUrl": "",
-    "folderId": null,
-    "x": 1040,
+    "folderId": "asset-1795406307957",
+    "x": 800,
     "y": 720,
     "w": 120,
     "h": 100,
     "color": "indigo",
     "locked": false,
-    "z": 866
+    "z": 870
   },
   {
     "id": "asset-1795406307957",
@@ -2117,6 +2117,6 @@
     "h": 100,
     "color": "slate",
     "locked": false,
-    "z": 862
+    "z": 872
   }
 ]
