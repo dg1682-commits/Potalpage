@@ -2232,12 +2232,36 @@
     "ghSha": "",
     "dataUrl": "",
     "folderId": null,
-    "x": 740,
+    "x": 660,
     "y": 820,
     "w": 120,
     "h": 106,
     "color": "blue",
     "locked": false,
-    "z": 916
+    "z": 919
+  },
+  {
+    "id": "file-1795446678802-520",
+    "type": "file",
+    "fileCategory": "other",
+    "ext": "zip",
+    "fileSize": 30037831,
+    "mimeType": "application/x-zip-compressed",
+    "title": "musicking-release-aab.zip",
+    "subtitle": "28.65 MB",
+    "fileUrl": "https://xgcgfmcwcrnanflbveup.supabase.co/storage/v1/object/public/Potal/uploads/1795446677135_px70e_musicking-release-aab.zip",
+    "sbPath": "uploads/1795446677135_px70e_musicking-release-aab.zip",
+    "sbBucket": "Potal",
+    "ghPath": "",
+    "ghSha": "",
+    "dataUrl": "",
+    "folderId": null,
+    "x": 860,
+    "y": 840,
+    "w": 120,
+    "h": 106,
+    "color": "blue",
+    "locked": false,
+    "z": 918
   }
 ]
