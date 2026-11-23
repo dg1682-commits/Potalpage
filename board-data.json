@@ -2109,13 +2109,13 @@
   {
     "id": "asset-1795406307957",
     "type": "folder",
-    "title": "새 폴더",
+    "title": "업데이트 내역",
     "subtitle": "파일 및 메모 보관함",
     "x": 160,
     "y": 540,
     "w": 130,
     "h": 100,
-    "color": "amber",
+    "color": "slate",
     "locked": false,
     "z": 849
   }
