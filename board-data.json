@@ -2118,5 +2118,29 @@
     "color": "slate",
     "locked": false,
     "z": 890
+  },
+  {
+    "id": "file-1795446355634-777",
+    "type": "file",
+    "fileCategory": "other",
+    "ext": "jks",
+    "fileSize": 2798,
+    "mimeType": "application/octet-stream",
+    "title": "musicking-release.jks",
+    "subtitle": "2.7 KB",
+    "fileUrl": "https://xgcgfmcwcrnanflbveup.supabase.co/storage/v1/object/public/Potal/uploads/1795446354550_vy4w1_musicking-release.jks",
+    "sbPath": "uploads/1795446354550_vy4w1_musicking-release.jks",
+    "sbBucket": "Potal",
+    "ghPath": "",
+    "ghSha": "",
+    "dataUrl": "",
+    "folderId": null,
+    "x": 780,
+    "y": 820,
+    "w": 120,
+    "h": 106,
+    "color": "blue",
+    "locked": false,
+    "z": 896
   }
 ]
