@@ -1262,12 +1262,12 @@
     "fileUrl": "",
     "folderId": null,
     "x": 920,
-    "y": 720,
+    "y": 700,
     "w": 120,
     "h": 100,
     "color": "indigo",
     "locked": false,
-    "z": 880
+    "z": 894
   },
   {
     "id": "folder-1795069306429-117",
@@ -2059,12 +2059,12 @@
     "fileUrl": "",
     "folderId": null,
     "x": 920,
-    "y": 840,
+    "y": 820,
     "w": 120,
     "h": 100,
     "color": "indigo",
     "locked": false,
-    "z": 881
+    "z": 893
   },
   {
     "id": "md-1795406299611-152",
