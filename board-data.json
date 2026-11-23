@@ -2263,5 +2263,29 @@
     "color": "blue",
     "locked": false,
     "z": 931
+  },
+  {
+    "id": "file-1795476027806-326",
+    "type": "file",
+    "fileCategory": "image",
+    "ext": "png",
+    "fileSize": 924551,
+    "mimeType": "image/png",
+    "title": "1024 500.png",
+    "subtitle": "902.9 KB",
+    "fileUrl": "https://xgcgfmcwcrnanflbveup.supabase.co/storage/v1/object/public/Potal/uploads/1795476026775_73v8n_1024500.png",
+    "sbPath": "uploads/1795476026775_73v8n_1024500.png",
+    "sbBucket": "Potal",
+    "ghPath": "",
+    "ghSha": "",
+    "dataUrl": "",
+    "folderId": null,
+    "x": 740,
+    "y": 820,
+    "w": 120,
+    "h": 106,
+    "color": "emerald",
+    "locked": false,
+    "z": 934
   }
 ]
