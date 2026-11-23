@@ -2169,7 +2169,7 @@
     "h": 100,
     "color": "violet",
     "locked": false,
-    "z": 904
+    "z": 910
   },
   {
     "id": "asset-1795446452726",
@@ -2177,13 +2177,13 @@
     "title": "KEYSTORE_PASSWORD.md",
     "subtitle": "",
     "content": "wognsl90!",
-    "folderId": null,
-    "x": 180,
-    "y": 500,
+    "folderId": "asset-1795446427594",
+    "x": 740,
+    "y": 620,
     "w": 120,
     "h": 100,
     "color": "indigo",
     "locked": false,
-    "z": 908
+    "z": 909
   }
 ]
