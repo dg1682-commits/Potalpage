@@ -2098,8 +2098,8 @@
     "ghSha": "",
     "fileUrl": "",
     "folderId": null,
-    "x": 780,
-    "y": 620,
+    "x": 620,
+    "y": 820,
     "w": 120,
     "h": 100,
     "color": "indigo",
@@ -2232,13 +2232,13 @@
     "ghSha": "",
     "dataUrl": "",
     "folderId": null,
-    "x": 700,
-    "y": 820,
+    "x": 740,
+    "y": 620,
     "w": 120,
     "h": 106,
     "color": "blue",
     "locked": false,
-    "z": 921
+    "z": 926
   },
   {
     "id": "file-1795446678802-520",
