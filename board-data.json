@@ -2232,13 +2232,13 @@
     "ghSha": "",
     "dataUrl": "",
     "folderId": null,
-    "x": 760,
-    "y": 580,
+    "x": 820,
+    "y": 600,
     "w": 120,
     "h": 106,
     "color": "blue",
     "locked": false,
-    "z": 929
+    "z": 932
   },
   {
     "id": "file-1795448369770-889",
@@ -2256,12 +2256,12 @@
     "ghSha": "",
     "dataUrl": "",
     "folderId": null,
-    "x": 780,
-    "y": 600,
+    "x": 820,
+    "y": 720,
     "w": 120,
     "h": 106,
     "color": "blue",
     "locked": false,
-    "z": 930
+    "z": 931
   }
 ]
