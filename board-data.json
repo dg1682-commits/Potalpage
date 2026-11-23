@@ -2134,14 +2134,14 @@
     "ghPath": "",
     "ghSha": "",
     "dataUrl": "",
-    "folderId": null,
-    "x": 820,
-    "y": 820,
+    "folderId": "asset-1795446427594",
+    "x": 740,
+    "y": 600,
     "w": 120,
     "h": 106,
     "color": "blue",
     "locked": false,
-    "z": 897
+    "z": 906
   },
   {
     "id": "asset-1795446399800",
