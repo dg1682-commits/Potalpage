@@ -2169,7 +2169,7 @@
     "h": 100,
     "color": "violet",
     "locked": false,
-    "z": 910
+    "z": 911
   },
   {
     "id": "asset-1795446452726",
@@ -2185,5 +2185,20 @@
     "color": "indigo",
     "locked": false,
     "z": 909
+  },
+  {
+    "id": "asset-1795446491378",
+    "type": "md",
+    "title": "새_메모장.md",
+    "subtitle": "",
+    "content": "# 새 메모\n\n여기에 자유롭게 메모나 안티그래비티 내용을 기록하세요.\n",
+    "folderId": "asset-1795446427594",
+    "x": 140,
+    "y": 540,
+    "w": 120,
+    "h": 100,
+    "color": "indigo",
+    "locked": false,
+    "z": 912
   }
 ]
