@@ -2256,12 +2256,12 @@
     "ghSha": "",
     "dataUrl": "",
     "folderId": null,
-    "x": 860,
-    "y": 840,
+    "x": 800,
+    "y": 820,
     "w": 120,
     "h": 106,
     "color": "blue",
     "locked": false,
-    "z": 918
+    "z": 920
   }
 ]
