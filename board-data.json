@@ -2157,5 +2157,18 @@
     "color": "indigo",
     "locked": false,
     "z": 900
+  },
+  {
+    "id": "asset-1795446427594",
+    "type": "folder",
+    "title": "새 폴더",
+    "subtitle": "파일 및 메모 보관함",
+    "x": 140,
+    "y": 500,
+    "w": 130,
+    "h": 100,
+    "color": "amber",
+    "locked": false,
+    "z": 902
   }
 ]
