@@ -2161,14 +2161,14 @@
   {
     "id": "asset-1795446427594",
     "type": "folder",
-    "title": "새 폴더",
+    "title": "구글플레이 출시 중요한거",
     "subtitle": "파일 및 메모 보관함",
-    "x": 140,
-    "y": 500,
+    "x": 740,
+    "y": 620,
     "w": 130,
     "h": 100,
-    "color": "amber",
+    "color": "default",
     "locked": false,
-    "z": 902
+    "z": 903
   }
 ]
