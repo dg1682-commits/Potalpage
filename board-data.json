@@ -2078,13 +2078,13 @@
     "ghSha": "",
     "fileUrl": "",
     "folderId": null,
-    "x": 1160,
-    "y": 960,
+    "x": 800,
+    "y": 760,
     "w": 120,
     "h": 100,
     "color": "indigo",
     "locked": false,
-    "z": 845
+    "z": 848
   },
   {
     "id": "md-1795406299641-955",
@@ -2098,8 +2098,8 @@
     "ghSha": "",
     "fileUrl": "",
     "folderId": null,
-    "x": 1160,
-    "y": 960,
+    "x": 920,
+    "y": 760,
     "w": 120,
     "h": 100,
     "color": "indigo",
