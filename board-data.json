@@ -1210,14 +1210,14 @@
     "ghPath": "",
     "ghSha": "",
     "fileUrl": "",
-    "folderId": null,
-    "x": 900,
-    "y": 620,
+    "folderId": "asset-1795406307957",
+    "x": 800,
+    "y": 740,
     "w": 120,
     "h": 100,
     "color": "indigo",
     "locked": false,
-    "z": 823
+    "z": 867
   },
   {
     "id": "asset-1795010677679",
@@ -2098,13 +2098,13 @@
     "ghSha": "",
     "fileUrl": "",
     "folderId": null,
-    "x": 1080,
+    "x": 1040,
     "y": 720,
     "w": 120,
     "h": 100,
     "color": "indigo",
     "locked": false,
-    "z": 865
+    "z": 866
   },
   {
     "id": "asset-1795406307957",
